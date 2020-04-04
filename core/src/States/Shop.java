@@ -23,9 +23,6 @@ import java.util.ArrayList;
 public class Shop extends State {
     static final String COINS = "coins";
     public static final String DIAMONDS = "ruby";
-    private static final int ABILITIES_BACKGROUND = 5;
-    private static final int COSTUMES_BACKGROUND = 6;
-    private static final int UPGRADE_SHIELD_BUTTON = 7;
 
     private static final String ABILITY_SHIELD_COST = "abilityShieldCost";
     private static final String ABILITY_MAGNET_COST = "abilityMagnetCost";
@@ -112,7 +109,7 @@ public class Shop extends State {
     private int spawnRateUpgraded;
     private Stage stage;
     private BitmapFont textFont;
-
+    private Achievements achievementsObject;
     private TextureAtlas.AtlasRegion xNotEnoughMoneyButton;
 
     Shop(final GameStateManager gsm, final AdsController adsController, final AssetManager manager) {
@@ -121,13 +118,12 @@ public class Shop extends State {
         Gdx.input.setInputProcessor(this.stage);
         prefs = Gdx.app.getPreferences("prefs");
 
-        //Achievements achievementsObject = new Achievements();
         TextureAtlas sharedAtlas = manager.get("shared/shared.atlas", TextureAtlas.class);
         TextureAtlas mainGameAtlas = manager.get("main_game/main_game.atlas", TextureAtlas.class);
         shopAtlas = manager.get("shop/shop.atlas", TextureAtlas.class);
         musicSoundsObject = new MusicSounds(manager);
 
-
+        achievementsObject = new Achievements();
 
         quitWindowTexture = sharedAtlas.findRegion("sure_quit_window");
         notQuitButtonTexture = sharedAtlas.findRegion("congratulations_window_x_button_unpressed");
@@ -279,10 +275,9 @@ public class Shop extends State {
                     stage.getActors().get(20).setVisible(true);
                     disableButtonsWindow();
                 }
-                if (prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) < 12) {
-                    //achievementsObject.checkPowerUpsUpgraded(prefs.getInteger("powerUpsUpgradedTimes", 0));
-                }
 
+                if (prefs.getInteger(Achievements.POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) < 12)
+                    achievementsObject.checkPowerUpsUpgraded(prefs.getInteger(POWER_UPS_UPGRADED_TIMES, 0));
             }
         });
 
@@ -319,10 +314,8 @@ public class Shop extends State {
                     stage.getActors().get(20).setVisible(true);
                     disableButtonsWindow();
                 }
-                if (prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) < 12) {
-                    //achievementsObject.checkPowerUpsUpgraded(Shop.this.prefs.getInteger("powerUpsUpgradedTimes", 0));
-                }
-
+                if (prefs.getInteger(Achievements.POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) < 12)
+                    achievementsObject.checkPowerUpsUpgraded(prefs.getInteger(POWER_UPS_UPGRADED_TIMES, 0));
             }
         });
 
@@ -358,9 +351,8 @@ public class Shop extends State {
                     stage.getActors().get(20).setVisible(true);
                     disableButtonsWindow();
                 }
-                if (prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) < 12) {
-                    // achievementsObject.checkPowerUpsUpgraded(prefs.getInteger("powerUpsUpgradedTimes", 0));
-                }
+                if (prefs.getInteger(Achievements.POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) < 12)
+                    achievementsObject.checkPowerUpsUpgraded(prefs.getInteger(POWER_UPS_UPGRADED_TIMES, 0));
             }
         });
 
@@ -396,9 +388,8 @@ public class Shop extends State {
                     stage.getActors().get(20).setVisible(true);
                     disableButtonsWindow();
                 }
-                if (prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) < 12) {
-                    //achievementsObject.checkPowerUpsUpgraded(Shop.this.prefs.getInteger("powerUpsUpgradedTimes", 0));
-                }
+                if (prefs.getInteger(Achievements.POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) < 12)
+                    achievementsObject.checkPowerUpsUpgraded(prefs.getInteger(POWER_UPS_UPGRADED_TIMES, 0));
             }
         });
 
@@ -434,9 +425,8 @@ public class Shop extends State {
                     stage.getActors().get(20).setVisible(true);
                     disableButtonsWindow();
                 }
-                if (prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) < 12) {
-                    // achievementsObject.checkPowerUpsUpgraded(prefs.getInteger("powerUpsUpgradedTimes", 0));
-                }
+                if (prefs.getInteger(Achievements.POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) < 12)
+                    achievementsObject.checkPowerUpsUpgraded(prefs.getInteger(POWER_UPS_UPGRADED_TIMES, 0));
             }
         });
 

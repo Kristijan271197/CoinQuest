@@ -65,7 +65,7 @@ public class SpinningWheel extends State {
         super(paramGameStateManager);
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        //Achievements achievements = new Achievements();
+        Achievements achievements = new Achievements();
 
         Date date = new Date();
         calendarG = new GregorianCalendar();
@@ -94,9 +94,9 @@ public class SpinningWheel extends State {
         wheelSpinMultiplier = prefs.getInteger(WHEEL_SPIN_MULTIPLIER, 0);
         wheelMultiplierWeek = prefs.getInteger(WHEEL_MULTIPLIER_WEEK, 1);
         firstSpin = true;
-        if (prefs.getInteger("wheelsSpunAtmAchievement", 0) < 7) {
-            //achievements.checkWheelsSpun(prefs.getInteger("wheelSpunTimes", 0));
-        }
+        if (prefs.getInteger(Achievements.WHEELS_SPUN_ATM_ACHIEVEMENT, 0) < 7)
+            achievements.checkWheelsSpun(prefs.getInteger(WHEEL_SPUN_TIMES, 0));
+
 
         coin = sharedAtlas.findRegion("coin");
         ruby = sharedAtlas.findRegion("diamond");
@@ -436,7 +436,7 @@ public class SpinningWheel extends State {
         if (prefs.getInteger(WHEEL_SPIN_MULTIPLIER) != 26)
             prefs.putInteger(WHEEL_SPIN_MULTIPLIER, prefs.getInteger(WHEEL_SPIN_MULTIPLIER) + 1);
         prefs.flush();
-        wheelMultiplier = prefs.getInteger("wheelMultiplier");
+        wheelMultiplier = prefs.getInteger(WHEEL_MULTIPLIER);
 
         if (wheelChance >= 1 && wheelChance <= 5) {
             prefs.putInteger(Shop.DIAMONDS, wheelMultiplier * 10 + prefs.getInteger(Shop.DIAMONDS));

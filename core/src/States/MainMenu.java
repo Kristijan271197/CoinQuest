@@ -42,12 +42,12 @@ public class MainMenu extends State {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         random = new Random(System.currentTimeMillis());
-        //Achievements achievements = new Achievements();
+        Achievements achievements = new Achievements();
         TextureAtlas mainMenuAtlas = manager.get("main_menu/main_menu.atlas", TextureAtlas.class);
         TextureAtlas sharedAtlas = manager.get("shared/shared.atlas", TextureAtlas.class);
         TextureAtlas mainGameAtlas = manager.get("main_game/main_game.atlas", TextureAtlas.class);
-        prefs = Gdx.app.getPreferences("prefs");
 
+        prefs = Gdx.app.getPreferences("prefs");
         prefs.putInteger("coins", 10000000);
         prefs.putInteger("ruby", 10000000);
         prefs.flush();
@@ -55,8 +55,8 @@ public class MainMenu extends State {
         musicSoundsObject = musicSounds;
         musicSounds.playBackgroundMusic();
 
-        if (this.prefs.getInteger("adsWatchedAtmAchievement", 0) < 5)
-            //achievements.checkAdsWatched(prefs.getInteger("adsWatched", 0));
+        if (prefs.getInteger(Achievements.ADS_WATCHED_ATM_ACHIEVEMENT, 0) < 5)
+            achievements.checkAdsWatched(prefs.getInteger("adsWatched", 0));
 
         coinGlobal = prefs.getInteger("coins");
         rubyGlobal = prefs.getInteger("ruby");
@@ -139,7 +139,7 @@ public class MainMenu extends State {
         xButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                // MainMenu.access$202(MainMenu.this, false);
+                freeCoinsWindowShow = false;
                 stage.getActors().get(5).setVisible(false);
                 stage.getActors().get(6).setVisible(false);
                 stage.getActors().get(1).setTouchable(Touchable.enabled);
@@ -270,13 +270,13 @@ public class MainMenu extends State {
     }
 
     public void render(SpriteBatch batch) {
-        this.stage.act(Gdx.graphics.getDeltaTime());
-        this.stage.draw();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
         Gdx.input.setCatchKey(4, true);
         if (Gdx.input.isKeyPressed(4)) {
-            this.stage.getActors().get(10).setVisible(true);
-            this.stage.getActors().get(11).setVisible(true);
-            this.stage.getActors().get(12).setVisible(true);
+            stage.getActors().get(10).setVisible(true);
+            stage.getActors().get(11).setVisible(true);
+            stage.getActors().get(12).setVisible(true);
         }
 //        boolean adLoaded = this.mAdsController.getAdLoaded();
 //        boolean rewardReceived = this.mAdsController.getRewardReceived();
