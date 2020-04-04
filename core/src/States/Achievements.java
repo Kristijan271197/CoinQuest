@@ -461,6 +461,9 @@ public class Achievements extends State {
         stage.getActors().get(7).setVisible(false);
         stage.getActors().get(8).setVisible(false);
         stage.getActors().get(9).setVisible(false);
+        stage.getActors().get(10).setVisible(false);
+        stage.getActors().get(11).setVisible(false);
+        stage.getActors().get(12).setVisible(false);
     }
 
 
@@ -473,15 +476,16 @@ public class Achievements extends State {
 
     public void render(SpriteBatch batch) {
 
+
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+
         Gdx.input.setCatchKey(4, true);
         if (Gdx.input.isKeyPressed(4)) {
             stage.getActors().get(10).setVisible(true);
             stage.getActors().get(11).setVisible(true);
             stage.getActors().get(12).setVisible(true);
         }
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-
 
         if (achievementsPageNumber == 1) {
             stage.getActors().get(2).setVisible(false);

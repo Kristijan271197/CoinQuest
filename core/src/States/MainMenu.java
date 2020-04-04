@@ -175,9 +175,9 @@ public class MainMenu extends State {
         objectivesButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                //gsm.set(new Achievements(gsm, adsController, manager));
+                gsm.set(new Achievements(gsm, adsController, manager));
                 musicSoundsObject.playButtonClick();
-                //dispose();
+                dispose();
             }
         });
 
@@ -192,8 +192,8 @@ public class MainMenu extends State {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
                 musicSoundsObject.playButtonClick();
-                //gsm.set(new Settings(MainMenu.this.gsm, adsController, manager));
-                //dispose();
+                gsm.set(new Settings(MainMenu.this.gsm, adsController, manager));
+                dispose();
             }
         });
 
@@ -263,7 +263,7 @@ public class MainMenu extends State {
     }
 
     public void dispose() {
-        this.stage.dispose();
+        stage.dispose();
     }
 
     public void handleInput() {
@@ -272,6 +272,7 @@ public class MainMenu extends State {
     public void render(SpriteBatch batch) {
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
         Gdx.input.setCatchKey(4, true);
         if (Gdx.input.isKeyPressed(4)) {
             stage.getActors().get(10).setVisible(true);

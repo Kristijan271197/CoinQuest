@@ -153,6 +153,9 @@ public class Settings extends State {
         stage.addActor(sureQuitWindow);
         stage.addActor(notQuitButton);
         stage.addActor(quitButton);
+        stage.getActors().get(5).setVisible(false);
+        stage.getActors().get(6).setVisible(false);
+        stage.getActors().get(7).setVisible(false);
     }
 
     private float worldXToScreenX(float paramFloat) {
