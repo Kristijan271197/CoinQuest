@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.ArrayList;
@@ -126,6 +127,8 @@ public class Shop extends State {
         shopAtlas = manager.get("shop/shop.atlas", TextureAtlas.class);
         musicSoundsObject = new MusicSounds(manager);
 
+
+
         quitWindowTexture = sharedAtlas.findRegion("sure_quit_window");
         notQuitButtonTexture = sharedAtlas.findRegion("congratulations_window_x_button_unpressed");
         quitButtonTexture = mainGameAtlas.findRegion("story_continue_button_unpressed");
@@ -177,8 +180,8 @@ public class Shop extends State {
         prefs.putBoolean(PLAYER_BOUGHT, true);
         prefs.flush();
 
-        coin = sharedAtlas.findRegion(COINS);
-        diamond = sharedAtlas.findRegion(DIAMONDS);
+        coin = sharedAtlas.findRegion("coin");
+        diamond = sharedAtlas.findRegion("diamond");
 
 
         coinAndDiamondFont = manager.get("font/font_scale_07.fnt", BitmapFont.class);
@@ -524,385 +527,420 @@ public class Shop extends State {
                     }
                 } else if (prefs.getInteger(COSTUME_SELECTED) == ROBOT_NUMBER)
                     costumeBuySelectButton(ROBOT_BOUGHT, ROBOT_NUMBER, DIAMONDS, 500);
-                 else if (prefs.getInteger(COSTUME_SELECTED) == KNIGHT_NUMBER)
+                else if (prefs.getInteger(COSTUME_SELECTED) == KNIGHT_NUMBER)
                     costumeBuySelectButton(KNIGHT_BOUGHT, KNIGHT_NUMBER, DIAMONDS, 500);
-                 else if (prefs.getInteger(COSTUME_SELECTED) == COWBOY_NUMBER)
+                else if (prefs.getInteger(COSTUME_SELECTED) == COWBOY_NUMBER)
                     costumeBuySelectButton(COWBOY_BOUGHT, COWBOY_NUMBER, COINS, 1000);
-                 else if (prefs.getInteger(COSTUME_SELECTED) == COWGIRL_NUMBER) {
+                else if (prefs.getInteger(COSTUME_SELECTED) == COWGIRL_NUMBER) {
                     costumeBuySelectButton(COWGIRL_BOUGHT, COWGIRL_NUMBER, COINS, 1000);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_MALE_NUMBER) {
-                    costumeBuySelectButton(NINJA_MALE_BOUGHT, 5, "ruby", 500);
-                } else if (Shop.this.prefs.getInteger("costumeSelected") == 6) {
-                    Shop.this.costumeBuySelectButton("ninjaFemaleBought", 6, "ruby", 500);
-                } else {
-                    Shop.this.prefs.getInteger("costumeSelected");
+                    costumeBuySelectButton(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER, DIAMONDS, 500);
+                } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
+                    costumeBuySelectButton(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER, DIAMONDS, 500);
+                } else if (prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
+
                 }
             }
         });
-        Image image7 = new Image(new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("costume_selected"))));
-        image7.setSize(worldXToScreenX(425.0F), worldYToScreenY(125.0F));
-        image7.setPosition(worldXToScreenX(35.5F), worldYToScreenY(150.0F));
-        Image image8 = new Image(new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("costume_buy_sure_window"))));
-        image8.setSize(worldXToScreenX(480.0F), worldYToScreenY(180.0F));
-        image8.setPosition(worldXToScreenX(10.0F), worldYToScreenY(410.0F));
-        imageButton14 = new ImageButton(xButtonStyle);
-        imageButton14.setPosition(worldXToScreenX(120.0F), worldYToScreenY(420.0F));
-        imageButton14.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-        imageButton14.addListener(new ClickListener() {
+
+        Image costumeSelected = new Image(new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("costume_selected"))));
+        costumeSelected.setSize(worldXToScreenX(425.0F), worldYToScreenY(125.0F));
+        costumeSelected.setPosition(worldXToScreenX(35.5F), worldYToScreenY(150.0F));
+
+        Image costumeBuySureWindow = new Image(new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("costume_buy_sure_window"))));
+        costumeBuySureWindow.setSize(worldXToScreenX(480.0F), worldYToScreenY(180.0F));
+        costumeBuySureWindow.setPosition(worldXToScreenX(10.0F), worldYToScreenY(410.0F));
+
+        ImageButton notBuyCostumeButton = new ImageButton(xButtonStyle);
+        notBuyCostumeButton.setPosition(worldXToScreenX(120.0F), worldYToScreenY(420.0F));
+        notBuyCostumeButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+        notBuyCostumeButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.stage.getActors().get(21).setVisible(false);
-                Shop.this.stage.getActors().get(22).setVisible(false);
-                Shop.this.stage.getActors().get(23).setVisible(false);
-                Shop.this.enableButtonsWindow();
-                Shop.this.musicSoundsObject.playButtonClick();
+                stage.getActors().get(21).setVisible(false);
+                stage.getActors().get(22).setVisible(false);
+                stage.getActors().get(23).setVisible(false);
+                enableButtonsWindow();
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton.ImageButtonStyle imageButtonStyle10 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle10.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_unpressed")));
-        imageButtonStyle10.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_pressed")));
-        ImageButton imageButton16 = new ImageButton(imageButtonStyle10);
-        imageButton16.setPosition(worldXToScreenX(305.0F), worldYToScreenY(420.0F));
-        imageButton16.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-        imageButton16.addListener(new ClickListener() {
+        ImageButton.ImageButtonStyle buyCostumeButtonStyle = new ImageButton.ImageButtonStyle();
+        buyCostumeButtonStyle.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_unpressed")));
+        buyCostumeButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_pressed")));
+
+        ImageButton buyCostumeButton = new ImageButton(buyCostumeButtonStyle);
+        buyCostumeButton.setPosition(worldXToScreenX(305.0F), worldYToScreenY(420.0F));
+        buyCostumeButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+        buyCostumeButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.musicSoundsObject.playButtonBuy();
-                if (Shop.this.prefs.getInteger("costumeSelected") == 1) {
-                    Shop.this.costumeBuyButton("robotBought", 1, "ruby", 500);
-                } else if (Shop.this.prefs.getInteger("costumeSelected") == 2) {
-                    Shop.this.costumeBuyButton("knightBought", 2, "ruby", 500);
-                } else if (Shop.this.prefs.getInteger("costumeSelected") == 3) {
-                    Shop.this.costumeBuyButton("cowboyBought", 3, "coins", 1000);
-                } else if (Shop.this.prefs.getInteger("costumeSelected") == 4) {
-                    Shop.this.costumeBuyButton("cowgirlBought", 4, "coins", 1000);
-                } else if (Shop.this.prefs.getInteger("costumeSelected") == 5) {
-                    Shop.this.costumeBuyButton("ninjaMaleBought", 5, "ruby", 500);
-                } else if (Shop.this.prefs.getInteger("costumeSelected") == 6) {
-                    Shop.this.costumeBuyButton("ninjaFemaleBought", 6, "ruby", 500);
-                } else {
-                    Shop.this.prefs.getInteger("costumeSelected");
+                musicSoundsObject.playButtonBuy();
+                if (prefs.getInteger(COSTUME_SELECTED) == ROBOT_NUMBER)
+                    costumeBuyButton(ROBOT_BOUGHT, ROBOT_NUMBER, DIAMONDS, 500);
+                else if (prefs.getInteger(COSTUME_SELECTED) == KNIGHT_NUMBER)
+                    costumeBuyButton(KNIGHT_BOUGHT, KNIGHT_NUMBER, DIAMONDS, 500);
+                else if (prefs.getInteger(COSTUME_SELECTED) == COWBOY_NUMBER)
+                    costumeBuyButton(COWBOY_BOUGHT, COWBOY_NUMBER, COINS, 1000);
+                else if (prefs.getInteger(COSTUME_SELECTED) == COWGIRL_NUMBER) {
+                    costumeBuyButton(COWGIRL_BOUGHT, COWGIRL_NUMBER, COINS, 1000);
+                } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_MALE_NUMBER) {
+                    costumeBuyButton(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER, DIAMONDS, 500);
+                } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
+                    costumeBuyButton(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER, DIAMONDS, 500);
+                } else if (prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
+
                 }
-                Shop.this.stage.getActors().get(21).setVisible(false);
-                Shop.this.stage.getActors().get(22).setVisible(false);
-                Shop.this.stage.getActors().get(23).setVisible(false);
-                Shop.this.enableButtonsWindow();
+                stage.getActors().get(21).setVisible(false);
+                stage.getActors().get(22).setVisible(false);
+                stage.getActors().get(23).setVisible(false);
+                enableButtonsWindow();
             }
         });
-        Image image9 = new Image(this.shopAtlas.findRegion("currency_window"));
-        image9.setSize(worldXToScreenX(480.0F), worldYToScreenY(700.0F));
-        image9.setPosition(worldXToScreenX(10.0F), worldYToScreenY(100.0F));
-        ImageButton.ImageButtonStyle imageButtonStyle11 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle11.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("currency_button")));
-        imageButtonStyle11.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("currency_button")));
-        ImageButton imageButton17 = new ImageButton(imageButtonStyle11);
-        imageButton17.setPosition(worldXToScreenX(320.0F), worldYToScreenY(790.0F));
-        imageButton17.setSize(worldXToScreenX(120.0F), worldYToScreenY(120.0F));
-        imageButton17.addListener(new ClickListener() {
+
+        Image currencyWindow = new Image(shopAtlas.findRegion("currency_window"));
+        currencyWindow.setSize(worldXToScreenX(480.0F), worldYToScreenY(700.0F));
+        currencyWindow.setPosition(worldXToScreenX(10.0F), worldYToScreenY(100.0F));
+
+        ImageButton.ImageButtonStyle currencyButtonStyle = new ImageButton.ImageButtonStyle();
+        currencyButtonStyle.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("currency_button")));
+        currencyButtonStyle.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("currency_button")));
+
+        ImageButton currencyButton = new ImageButton(currencyButtonStyle);
+        currencyButton.setPosition(worldXToScreenX(320.0F), worldYToScreenY(790.0F));
+        currencyButton.setSize(worldXToScreenX(120.0F), worldYToScreenY(120.0F));
+        currencyButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.access$002(Shop.this, false);
-                Shop.access$102(Shop.this, true);
-                Shop.this.drawAbilityElements();
-                Shop.this.musicSoundsObject.playButtonClick();
+                drawAbilities = false;
+                drawCurrency = true;
+                drawAbilityElements();
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton.ImageButtonStyle imageButtonStyle12 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle12.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("100_diamonds_button_unpressed")));
-        imageButtonStyle12.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("100_diamonds_button_pressed")));
-        ImageButton.ImageButtonStyle imageButtonStyle13 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle13.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("300_diamonds_button_unpressed")));
-        imageButtonStyle13.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("300_diamonds_button_pressed")));
-        ImageButton.ImageButtonStyle imageButtonStyle14 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle14.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("500_diamonds_button_unpressed")));
-        imageButtonStyle14.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("500_diamonds_button_pressed")));
-        ImageButton.ImageButtonStyle imageButtonStyle15 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle15.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("1500_diamonds_button_unpressed")));
-        imageButtonStyle15.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("1500_diamonds_button_pressed")));
-        ImageButton.ImageButtonStyle imageButtonStyle16 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle16.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("099_button_unpressed")));
-        imageButtonStyle16.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("099_button_pressed")));
-        ImageButton.ImageButtonStyle imageButtonStyle17 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle17.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("249_button_unpressed")));
-        imageButtonStyle17.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("249_button_pressed")));
-        ImageButton.ImageButtonStyle imageButtonStyle18 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle18.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("399_button_unpressed")));
-        imageButtonStyle18.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("399_button_pressed")));
-        ImageButton.ImageButtonStyle imageButtonStyle19 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle19.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("1499_button_unpressed")));
-        imageButtonStyle19.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("1499_button_pressed")));
-        ImageButton.ImageButtonStyle imageButtonStyle20 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle20.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("2499_button_unpressed")));
-        imageButtonStyle20.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("2499_button_pressed")));
-        ImageButton imageButton18 = new ImageButton(imageButtonStyle12);
-        imageButton18.setPosition(worldXToScreenX(350.0F), worldYToScreenY(737.0F));
-        imageButton18.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton18.addListener(new ClickListener() {
+
+        ImageButton.ImageButtonStyle buy1000CoinsStyle = new ImageButton.ImageButtonStyle();
+        buy1000CoinsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("100_diamonds_button_unpressed")));
+        buy1000CoinsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("100_diamonds_button_pressed")));
+
+        ImageButton.ImageButtonStyle buy5000CoinsStyle = new ImageButton.ImageButtonStyle();
+        buy5000CoinsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("300_diamonds_button_unpressed")));
+        buy5000CoinsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("300_diamonds_button_pressed")));
+
+        ImageButton.ImageButtonStyle buy10000CoinsStyle = new ImageButton.ImageButtonStyle();
+        buy10000CoinsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("500_diamonds_button_unpressed")));
+        buy10000CoinsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("500_diamonds_button_pressed")));
+
+        ImageButton.ImageButtonStyle buy50000CoinsStyle = new ImageButton.ImageButtonStyle();
+        buy50000CoinsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("1500_diamonds_button_unpressed")));
+        buy50000CoinsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("1500_diamonds_button_pressed")));
+
+        ImageButton.ImageButtonStyle removeAds10DiamondsStyle = new ImageButton.ImageButtonStyle();
+        removeAds10DiamondsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("099_button_unpressed")));
+        removeAds10DiamondsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("099_button_pressed")));
+
+        ImageButton.ImageButtonStyle buy50DiamondsStyle = new ImageButton.ImageButtonStyle();
+        buy50DiamondsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("249_button_unpressed")));
+        buy50DiamondsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("249_button_pressed")));
+
+        ImageButton.ImageButtonStyle buy100DiamondsStyle = new ImageButton.ImageButtonStyle();
+        buy100DiamondsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("399_button_unpressed")));
+        buy100DiamondsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("399_button_pressed")));
+
+        ImageButton.ImageButtonStyle buy500DiamondsStyle = new ImageButton.ImageButtonStyle();
+        buy500DiamondsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("1499_button_unpressed")));
+        buy500DiamondsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("1499_button_pressed")));
+
+        ImageButton.ImageButtonStyle buy1000DiamondsStyle = new ImageButton.ImageButtonStyle();
+        buy1000DiamondsStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("2499_button_unpressed")));
+        buy1000DiamondsStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("2499_button_pressed")));
+
+        ImageButton buy1000Coins = new ImageButton(buy1000CoinsStyle);
+        buy1000Coins.setPosition(worldXToScreenX(350.0F), worldYToScreenY(737.0F));
+        buy1000Coins.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buy1000Coins.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.checkBuyCoins(100, 0);
-                Shop.this.musicSoundsObject.playButtonClick();
+                checkBuyCoins(100, 0);
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton imageButton19 = new ImageButton(imageButtonStyle13);
-        imageButton19.setPosition(worldXToScreenX(350.0F), worldYToScreenY(669.0F));
-        imageButton19.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton19.addListener(new ClickListener() {
+        ImageButton buy5000Coins = new ImageButton(buy5000CoinsStyle);
+        buy5000Coins.setPosition(worldXToScreenX(350.0F), worldYToScreenY(669.0F));
+        buy5000Coins.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buy5000Coins.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.checkBuyCoins(300, 1);
-                Shop.this.musicSoundsObject.playButtonClick();
+                checkBuyCoins(300, 1);
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton imageButton27 = new ImageButton(imageButtonStyle14);
-        imageButton27.setPosition(worldXToScreenX(350.0F), worldYToScreenY(599.0F));
-        imageButton27.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton27.addListener(new ClickListener() {
+        ImageButton buy10000Coins = new ImageButton(buy10000CoinsStyle);
+        buy10000Coins.setPosition(worldXToScreenX(350.0F), worldYToScreenY(599.0F));
+        buy10000Coins.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buy10000Coins.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.checkBuyCoins(500, 2);
-                Shop.this.musicSoundsObject.playButtonClick();
+                checkBuyCoins(500, 2);
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton imageButton21 = new ImageButton(imageButtonStyle15);
-        imageButton21.setPosition(worldXToScreenX(350.0F), worldYToScreenY(529.0F));
-        imageButton21.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton21.addListener(new ClickListener() {
+        ImageButton buy50000Coins = new ImageButton(buy50000CoinsStyle);
+        buy50000Coins.setPosition(worldXToScreenX(350.0F), worldYToScreenY(529.0F));
+        buy50000Coins.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buy50000Coins.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.checkBuyCoins(1500, 3);
-                Shop.this.musicSoundsObject.playButtonClick();
+                checkBuyCoins(1500, 3);
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton imageButton20 = new ImageButton(imageButtonStyle14);
-        imageButton20.setPosition(worldXToScreenX(350.0F), worldYToScreenY(459.0F));
-        imageButton20.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton20.addListener(new ClickListener() {
+
+        ImageButton buyDoubleCoins = new ImageButton(buy10000CoinsStyle);
+        buyDoubleCoins.setPosition(worldXToScreenX(350.0F), worldYToScreenY(459.0F));
+        buyDoubleCoins.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buyDoubleCoins.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.checkBuyCoins(500, 4);
-                Shop.this.musicSoundsObject.playButtonClick();
+                checkBuyCoins(500, 4);
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton imageButton22 = new ImageButton(imageButtonStyle16);
-        imageButton22.setPosition(worldXToScreenX(350.0F), worldYToScreenY(388.0F));
-        imageButton22.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton22.addListener(new ClickListener() {
-            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
-                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-            }
-        });
-        ImageButton imageButton23 = new ImageButton(imageButtonStyle17);
-        imageButton23.setPosition(worldXToScreenX(350.0F), worldYToScreenY(321.0F));
-        imageButton23.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton23.addListener(new ClickListener() {
-            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
-                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-            }
-        });
-        ImageButton imageButton24 = new ImageButton(imageButtonStyle18);
-        imageButton24.setPosition(worldXToScreenX(350.0F), worldYToScreenY(251.0F));
-        imageButton24.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton24.addListener(new ClickListener() {
-            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
-                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-            }
-        });
-        ImageButton imageButton25 = new ImageButton(imageButtonStyle19);
-        imageButton25.setPosition(worldXToScreenX(350.0F), worldYToScreenY(181.0F));
-        imageButton25.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton25.addListener(new ClickListener() {
+
+        ImageButton removeAdsButton = new ImageButton(removeAds10DiamondsStyle);
+        removeAdsButton.setPosition(worldXToScreenX(350.0F), worldYToScreenY(388.0F));
+        removeAdsButton.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        removeAdsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
             }
         });
-        ImageButton imageButton26 = new ImageButton(imageButtonStyle20);
-        imageButton26.setPosition(worldXToScreenX(350.0F), worldYToScreenY(114.0F));
-        imageButton26.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
-        imageButton26.addListener(new ClickListener() {
+
+        ImageButton buy50DiamondsButton = new ImageButton(buy50DiamondsStyle);
+        buy50DiamondsButton.setPosition(worldXToScreenX(350.0F), worldYToScreenY(321.0F));
+        buy50DiamondsButton.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buy50DiamondsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
             }
         });
-        Image image10 = new Image(new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("costume_buy_sure_window"))));
-        image10.setSize(worldXToScreenX(480.0F), worldYToScreenY(180.0F));
-        image10.setPosition(worldXToScreenX(10.0F), worldYToScreenY(410.0F));
-        ImageButton imageButton28 = new ImageButton(xButtonStyle);
-        imageButton28.setPosition(worldXToScreenX(120.0F), worldYToScreenY(420.0F));
-        imageButton28.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-        imageButton28.addListener(new ClickListener() {
+
+        ImageButton buy100DiamondsButton = new ImageButton(buy100DiamondsStyle);
+        buy100DiamondsButton.setPosition(worldXToScreenX(350.0F), worldYToScreenY(251.0F));
+        buy100DiamondsButton.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buy100DiamondsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.stage.getActors().get(35).setVisible(false);
-                Shop.this.stage.getActors().get(36).setVisible(false);
-                Shop.this.stage.getActors().get(37).setVisible(false);
-                Shop.this.enableButtonsWindow();
-                Shop.this.musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton imageButton15 = new ImageButton(imageButtonStyle10);
-        imageButton15.setPosition(worldXToScreenX(305.0F), worldYToScreenY(420.0F));
-        imageButton15.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-        imageButton15.addListener(new ClickListener() {
+
+        ImageButton buy500DiamondsButton = new ImageButton(buy500DiamondsStyle);
+        buy500DiamondsButton.setPosition(worldXToScreenX(350.0F), worldYToScreenY(181.0F));
+        buy500DiamondsButton.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buy500DiamondsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.musicSoundsObject.playButtonBuy();
-                if (Shop.this.currencySelected == 0) {
-                    Shop.this.buyCoins(1000, 100);
-                } else if (Shop.this.currencySelected == 1) {
-                    Shop.this.buyCoins(5000, 300);
-                } else if (Shop.this.currencySelected == 2) {
-                    Shop.this.buyCoins(10000, 500);
-                } else if (Shop.this.currencySelected == 3) {
-                    Shop.this.buyCoins(50000, 1500);
-                } else if (Shop.this.currencySelected == 4) {
-                    Shop.this.prefs.putInteger("ruby", Shop.this.prefs.getInteger("ruby") - 500);
-                    Shop.this.prefs.putBoolean("doubleCoins", true);
-                    Shop.this.prefs.flush();
-                    Shop.this.drawAbilityElements();
+            }
+        });
+
+        ImageButton buy1000DiamondsButton = new ImageButton(buy1000DiamondsStyle);
+        buy1000DiamondsButton.setPosition(worldXToScreenX(350.0F), worldYToScreenY(114.0F));
+        buy1000DiamondsButton.setSize(worldXToScreenX(110.0F), worldYToScreenY(45.0F));
+        buy1000DiamondsButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
+                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+            }
+        });
+
+        Image diamondsBuySureWindow = new Image(new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("costume_buy_sure_window"))));
+        diamondsBuySureWindow.setSize(worldXToScreenX(480.0F), worldYToScreenY(180.0F));
+        diamondsBuySureWindow.setPosition(worldXToScreenX(10.0F), worldYToScreenY(410.0F));
+
+        ImageButton diamondsNotBuyButton = new ImageButton(xButtonStyle);
+        diamondsNotBuyButton.setPosition(worldXToScreenX(120.0F), worldYToScreenY(420.0F));
+        diamondsNotBuyButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+        diamondsNotBuyButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
+                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                stage.getActors().get(35).setVisible(false);
+                stage.getActors().get(36).setVisible(false);
+                stage.getActors().get(37).setVisible(false);
+                enableButtonsWindow();
+                musicSoundsObject.playButtonClick();
+            }
+        });
+
+        ImageButton diamondsBuyButton = new ImageButton(buyCostumeButtonStyle);
+        diamondsBuyButton.setPosition(worldXToScreenX(305.0F), worldYToScreenY(420.0F));
+        diamondsBuyButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+        diamondsBuyButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
+                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                musicSoundsObject.playButtonBuy();
+                if (currencySelected == 0) {
+                    buyCoins(1000, 100);
+                } else if (currencySelected == 1) {
+                    buyCoins(5000, 300);
+                } else if (currencySelected == 2) {
+                    buyCoins(10000, 500);
+                } else if (currencySelected == 3) {
+                    buyCoins(50000, 1500);
+                } else if (currencySelected == 4) {
+                    prefs.putInteger(DIAMONDS, prefs.getInteger(DIAMONDS) - 500);
+                    prefs.putBoolean(DOUBLE_COINS, true);
+                    prefs.flush();
+                    drawAbilityElements();
                 }
-                Shop.this.stage.getActors().get(35).setVisible(false);
-                Shop.this.stage.getActors().get(36).setVisible(false);
-                Shop.this.stage.getActors().get(37).setVisible(false);
-                Shop.this.enableButtonsWindow();
+                stage.getActors().get(35).setVisible(false);
+                stage.getActors().get(36).setVisible(false);
+                stage.getActors().get(37).setVisible(false);
+                enableButtonsWindow();
             }
         });
-        Image image11 = new Image(new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("not_enough_diamonds_window"))));
-        image11.setSize(worldXToScreenX(480.0F), worldYToScreenY(180.0F));
-        image11.setPosition(worldXToScreenX(10.0F), worldYToScreenY(410.0F));
-        ImageButton imageButton5 = new ImageButton(xButtonStyle);
-        imageButton5.setPosition(worldXToScreenX(420.0F), worldYToScreenY(525.0F));
-        imageButton5.setSize(worldXToScreenX(50.0F), worldYToScreenY(50.0F));
-        imageButton5.addListener(new ClickListener() {
+
+        Image notEnoughDiamondsWindow = new Image(new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("not_enough_diamonds_window"))));
+        notEnoughDiamondsWindow.setSize(worldXToScreenX(480.0F), worldYToScreenY(180.0F));
+        notEnoughDiamondsWindow.setPosition(worldXToScreenX(10.0F), worldYToScreenY(410.0F));
+
+        ImageButton xButtonDiamondsWindow = new ImageButton(xButtonStyle);
+        xButtonDiamondsWindow.setPosition(worldXToScreenX(420.0F), worldYToScreenY(525.0F));
+        xButtonDiamondsWindow.setSize(worldXToScreenX(50.0F), worldYToScreenY(50.0F));
+        xButtonDiamondsWindow.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.stage.getActors().get(38).setVisible(false);
-                Shop.this.stage.getActors().get(39).setVisible(false);
-                Shop.this.enableButtonsWindow();
-                Shop.this.musicSoundsObject.playButtonClick();
+                stage.getActors().get(38).setVisible(false);
+                stage.getActors().get(39).setVisible(false);
+                enableButtonsWindow();
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton.ImageButtonStyle imageButtonStyle21 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle21.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_unpressed")));
-        imageButtonStyle21.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_pressed")));
-        ImageButton imageButton29 = new ImageButton(imageButtonStyle21);
-        imageButton29.setPosition(worldXToScreenX(20.0F), worldYToScreenY(20.0F));
-        imageButton29.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-        imageButton29.addListener(new ClickListener() {
+
+        ImageButton.ImageButtonStyle backButtonStyle = new ImageButton.ImageButtonStyle();
+        backButtonStyle.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_unpressed")));
+        backButtonStyle.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_pressed")));
+
+        ImageButton backButton = new ImageButton(backButtonStyle);
+        backButton.setPosition(worldXToScreenX(20.0F), worldYToScreenY(20.0F));
+        backButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+        backButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.musicSoundsObject.playButtonClick();
-                Shop.this.prefs.putInteger("costumeSelected", Shop.this.prefs.getInteger("costumeSelectedGame"));
-                Shop.this.prefs.flush();
-                GameStateManager gameStateManager = gsm;
-                gameStateManager.set(new MainMenu(gameStateManager, adsController, manager));
-                Shop.this.dispose();
+                musicSoundsObject.playButtonClick();
+                prefs.putInteger(COSTUME_SELECTED, prefs.getInteger(COSTUME_SELECTED_GAME));
+                prefs.flush();
+                gsm.set(new MainMenu(gsm, adsController, manager));
+                dispose();
             }
         });
-        Image image1 = new Image(sharedAtlas.findRegion("sure_quit_window"));
-        image1.setSize(worldXToScreenX(480.0F), worldYToScreenY(210.0F));
-        image1.setPosition(worldXToScreenX(10.0F), worldYToScreenY(395.0F));
-        ImageButton.ImageButtonStyle imageButtonStyle1 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle1.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_unpressed")));
-        imageButtonStyle1.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_pressed")));
-        ImageButton imageButton1 = new ImageButton(imageButtonStyle1);
-        imageButton1.setPosition(worldXToScreenX(116.0F), worldYToScreenY(405.0F));
-        imageButton1.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-        imageButton1.addListener(new ClickListener() {
+
+        Image sureQuitWindow = new Image(sharedAtlas.findRegion("sure_quit_window"));
+        sureQuitWindow.setSize(worldXToScreenX(480.0F), worldYToScreenY(210.0F));
+        sureQuitWindow.setPosition(worldXToScreenX(10.0F), worldYToScreenY(395.0F));
+
+        ImageButton.ImageButtonStyle notQuitButtonStyle = new ImageButton.ImageButtonStyle();
+        notQuitButtonStyle.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_unpressed")));
+        notQuitButtonStyle.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_pressed")));
+
+        ImageButton notQuitButton = new ImageButton(notQuitButtonStyle);
+        notQuitButton.setPosition(worldXToScreenX(116.0F), worldYToScreenY(405.0F));
+        notQuitButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+        notQuitButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.stage.getActors().get(40).setVisible(false);
-                Shop.this.stage.getActors().get(41).setVisible(false);
-                Shop.this.stage.getActors().get(42).setVisible(false);
-                Shop.access$3002(Shop.this, false);
-                Shop.this.musicSoundsObject.playButtonClick();
+                stage.getActors().get(40).setVisible(false);
+                stage.getActors().get(41).setVisible(false);
+                stage.getActors().get(42).setVisible(false);
+                drawQuitGame = false;
+                musicSoundsObject.playButtonClick();
             }
         });
-        ImageButton.ImageButtonStyle imageButtonStyle2 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle2.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_unpressed")));
-        imageButtonStyle2.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_pressed")));
-        ImageButton imageButton2 = new ImageButton(imageButtonStyle2);
-        imageButton2.setPosition(worldXToScreenX(307.0F), worldYToScreenY(405.0F));
-        imageButton2.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-        imageButton2.addListener(new ClickListener() {
+
+        ImageButton.ImageButtonStyle quitButtonStyle = new ImageButton.ImageButtonStyle();
+        quitButtonStyle.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_unpressed")));
+        quitButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_pressed")));
+
+        ImageButton quitButton = new ImageButton(quitButtonStyle);
+        quitButton.setPosition(worldXToScreenX(307.0F), worldYToScreenY(405.0F));
+        quitButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+        quitButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Shop.this.musicSoundsObject.playButtonClick();
+                musicSoundsObject.playButtonClick();
                 Gdx.app.exit();
             }
         });
-        this.stage.addActor(bg);
-        this.stage.addActor(powerUpsButton);
-        this.stage.addActor(costumesButton);
-        this.stage.addActor(imageButton29);
-        this.stage.addActor(imageButton17);
-        this.stage.addActor(powerUpsWindow);
-        this.stage.addActor(costumesWindow);
-        this.stage.addActor(buyShieldButton);
-        this.stage.addActor(buyMagnetButton);
-        this.stage.addActor(buyCoinRushButton);
-        this.stage.addActor(buySpawnRateButton);
-        this.stage.addActor(buySpawnRateCoinsButton);
-        this.stage.addActor(this.costumeName);
-        this.stage.addActor(this.costumeCost);
-        this.stage.addActor(this.costumeImage);
-        this.stage.addActor(costumeLeftButton);
-        this.stage.addActor(costumeRigthButton);
-        this.stage.addActor(this.costumeBuySelectButton);
-        this.stage.addActor(image7);
-        this.stage.addActor(this.notEnoughCoinsDiamondsWindow);
-        this.stage.addActor(xButtonNotEnoughMoney);
-        this.stage.addActor(image8);
-        this.stage.addActor(imageButton14);
-        this.stage.addActor(imageButton16);
-        this.stage.addActor(image9);
-        this.stage.addActor(imageButton18);
-        this.stage.addActor(imageButton19);
-        this.stage.addActor(imageButton27);
-        this.stage.addActor(imageButton21);
-        this.stage.addActor(imageButton22);
-        this.stage.addActor(imageButton23);
-        this.stage.addActor(imageButton24);
-        this.stage.addActor(imageButton25);
-        this.stage.addActor(imageButton26);
-        this.stage.addActor(imageButton20);
-        this.stage.addActor(image10);
-        this.stage.addActor(imageButton15);
-        this.stage.addActor(imageButton28);
-        this.stage.addActor(image11);
-        this.stage.addActor(imageButton5);
-        this.stage.addActor(image1);
-        this.stage.addActor(imageButton1);
-        this.stage.addActor(imageButton2);
-        this.stage.getActors().get(15).setVisible(false);
-        this.stage.getActors().get(16).setVisible(false);
-        this.stage.getActors().get(17).setVisible(false);
-        this.stage.getActors().get(18).setVisible(false);
-        this.stage.getActors().get(19).setVisible(false);
-        this.stage.getActors().get(20).setVisible(false);
-        this.stage.getActors().get(21).setVisible(false);
-        this.stage.getActors().get(22).setVisible(false);
-        this.stage.getActors().get(23).setVisible(false);
-        this.stage.getActors().get(24).setVisible(false);
-        this.stage.getActors().get(25).setVisible(false);
-        this.stage.getActors().get(26).setVisible(false);
-        this.stage.getActors().get(27).setVisible(false);
-        this.stage.getActors().get(28).setVisible(false);
-        this.stage.getActors().get(29).setVisible(false);
-        this.stage.getActors().get(30).setVisible(false);
-        this.stage.getActors().get(31).setVisible(false);
-        this.stage.getActors().get(32).setVisible(false);
-        this.stage.getActors().get(33).setVisible(false);
-        this.stage.getActors().get(34).setVisible(false);
-        this.stage.getActors().get(35).setVisible(false);
-        this.stage.getActors().get(36).setVisible(false);
-        this.stage.getActors().get(37).setVisible(false);
-        this.stage.getActors().get(38).setVisible(false);
-        this.stage.getActors().get(39).setVisible(false);
-        this.stage.getActors().get(40).setVisible(false);
-        this.stage.getActors().get(41).setVisible(false);
-        this.stage.getActors().get(42).setVisible(false);
-        this.drawAbilities = true;
+
+        stage.addActor(bg);
+        stage.addActor(powerUpsButton);
+        stage.addActor(costumesButton);
+        stage.addActor(backButton);
+        stage.addActor(currencyButton);
+        stage.addActor(powerUpsWindow);
+        stage.addActor(costumesWindow);
+        stage.addActor(buyShieldButton);
+        stage.addActor(buyMagnetButton);
+        stage.addActor(buyCoinRushButton);
+        stage.addActor(buySpawnRateButton);
+        stage.addActor(buySpawnRateCoinsButton);
+        stage.addActor(costumeName);
+        stage.addActor(costumeCost);
+        stage.addActor(costumeImage);
+        stage.addActor(costumeLeftButton);
+        stage.addActor(costumeRigthButton);
+        stage.addActor(costumeBuySelectButton);
+        stage.addActor(costumeSelected);
+        stage.addActor(notEnoughCoinsDiamondsWindow);
+        stage.addActor(xButtonNotEnoughMoney);
+        stage.addActor(costumeBuySureWindow);
+        stage.addActor(notBuyCostumeButton);
+        stage.addActor(buyCostumeButton);
+        stage.addActor(currencyWindow);
+        stage.addActor(buy1000Coins);
+        stage.addActor(buy5000Coins);
+        stage.addActor(buy10000Coins);
+        stage.addActor(buy50000Coins);
+        stage.addActor(removeAdsButton);
+        stage.addActor(buy50DiamondsButton);
+        stage.addActor(buy100DiamondsButton);
+        stage.addActor(buy500DiamondsButton);
+        stage.addActor(buy1000DiamondsButton);
+        stage.addActor(buyDoubleCoins);
+        stage.addActor(diamondsBuySureWindow);
+        stage.addActor(diamondsBuyButton);
+        stage.addActor(diamondsNotBuyButton);
+        stage.addActor(notEnoughDiamondsWindow);
+        stage.addActor(xButtonDiamondsWindow);
+        stage.addActor(sureQuitWindow);
+        stage.addActor(notQuitButton);
+        stage.addActor(quitButton);
+        stage.getActors().get(15).setVisible(false);
+        stage.getActors().get(16).setVisible(false);
+        stage.getActors().get(17).setVisible(false);
+        stage.getActors().get(18).setVisible(false);
+        stage.getActors().get(19).setVisible(false);
+        stage.getActors().get(20).setVisible(false);
+        stage.getActors().get(21).setVisible(false);
+        stage.getActors().get(22).setVisible(false);
+        stage.getActors().get(23).setVisible(false);
+        stage.getActors().get(24).setVisible(false);
+        stage.getActors().get(25).setVisible(false);
+        stage.getActors().get(26).setVisible(false);
+        stage.getActors().get(27).setVisible(false);
+        stage.getActors().get(28).setVisible(false);
+        stage.getActors().get(29).setVisible(false);
+        stage.getActors().get(30).setVisible(false);
+        stage.getActors().get(31).setVisible(false);
+        stage.getActors().get(32).setVisible(false);
+        stage.getActors().get(33).setVisible(false);
+        stage.getActors().get(34).setVisible(false);
+        stage.getActors().get(35).setVisible(false);
+        stage.getActors().get(36).setVisible(false);
+        stage.getActors().get(37).setVisible(false);
+        stage.getActors().get(38).setVisible(false);
+        stage.getActors().get(39).setVisible(false);
+        stage.getActors().get(40).setVisible(false);
+        stage.getActors().get(41).setVisible(false);
+        stage.getActors().get(42).setVisible(false);
+        drawAbilities = true;
         drawAbilityElements();
     }
 
@@ -922,301 +960,272 @@ public class Shop extends State {
     public void handleInput() {
     }
 
-    public void render(SpriteBatch paramSpriteBatch) {
-        this.stage.act(Gdx.graphics.getDeltaTime());
-        this.stage.draw();
+    public void render(SpriteBatch batch) {
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+
         Gdx.input.setCatchKey(4, true);
         if (Gdx.input.isKeyPressed(4)) {
-            this.stage.getActors().get(40).setVisible(true);
-            this.stage.getActors().get(41).setVisible(true);
-            this.stage.getActors().get(42).setVisible(true);
-            this.drawQuitGame = true;
+            stage.getActors().get(40).setVisible(true);
+            stage.getActors().get(41).setVisible(true);
+            stage.getActors().get(42).setVisible(true);
+            drawQuitGame = true;
         }
-        if (!this.drawAbilities) {
-            if (this.prefs.getInteger("costumeSelected", 0) == 0) {
-                this.stage.getActors().get(15).setVisible(false);
+
+        if (!drawAbilities) {
+            if (prefs.getInteger(COSTUME_SELECTED, 0) == PLAYER_NUMBER) {
+                stage.getActors().get(15).setVisible(false);
                 setCostumeParameters(0, 210, 145, 120, 190, 120, 190);
-                costumeSelected("playerBought", 0);
-            } else {
+                costumeSelected(PLAYER_BOUGHT, PLAYER_NUMBER);
+            } else
                 this.stage.getActors().get(15).setVisible(true);
-            }
-            if (this.prefs.getInteger("costumeSelected") == 1) {
+
+            if (prefs.getInteger(COSTUME_SELECTED) == ROBOT_NUMBER) {
                 setCostumeParameters(1, 175, 162, 130, 185, 206, 147);
-                costumeSelected("robotBought", 1);
+                costumeSelected(ROBOT_BOUGHT, ROBOT_NUMBER);
             }
-            if (this.prefs.getInteger("costumeSelected") == 2) {
+
+            if (this.prefs.getInteger(COSTUME_SELECTED) == KNIGHT_NUMBER) {
                 setCostumeParameters(2, 255, 123, 130, 185, 196, 152);
-                costumeSelected("knightBought", 2);
+                costumeSelected(KNIGHT_BOUGHT, KNIGHT_NUMBER);
             }
-            if (this.prefs.getInteger("costumeSelected") == 3) {
+
+            if (this.prefs.getInteger(COSTUME_SELECTED) == COWBOY_NUMBER) {
                 setCostumeParameters(3, 123, 188, 135, 182, 130, 185);
-                costumeSelected("cowboyBought", 3);
+                costumeSelected(COWBOY_BOUGHT, COWBOY_NUMBER);
             }
-            if (this.prefs.getInteger("costumeSelected") == 4) {
+
+            if (this.prefs.getInteger(COSTUME_SELECTED) == COWGIRL_NUMBER) {
                 setCostumeParameters(4, 213, 143, 135, 182, 124, 188);
-                costumeSelected("cowgirlBought", 4);
+                costumeSelected(COWGIRL_BOUGHT, COWGIRL_NUMBER);
             }
-            if (this.prefs.getInteger("costumeSelected") == 5) {
+
+            if (this.prefs.getInteger(COSTUME_SELECTED) == NINJA_MALE_NUMBER) {
                 setCostumeParameters(5, 160, 170, 130, 185, 193, 153);
-                costumeSelected("ninjaMaleBought", 5);
+                costumeSelected(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER);
             }
-            if (this.prefs.getInteger("costumeSelected") == 6) {
+
+            if (this.prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
                 setCostumeParameters(6, 150, 185, 130, 185, 198, 151);
-                costumeSelected("ninjaFemaleBought", 6);
+                costumeSelected(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER);
             }
-            if (this.prefs.getInteger("costumeSelected") == 7) {
+
+            if (this.prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
                 this.stage.getActors().get(16).setVisible(false);
                 setCostumeParameters(7, 155, 172, 114, 193, 289, 105);
-                costumeSelected("dinoBought", 7);
-            } else {
+                costumeSelected(DINO_BOUGHT, DINO_NUMBER);
+            } else
                 this.stage.getActors().get(16).setVisible(true);
+
+        }
+        batch.begin();
+        batch.draw(coin, worldXToScreenX(10.0F), worldYToScreenY(960.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
+        coinAndDiamondFont.draw(batch, String.valueOf(this.coinGlobal), worldXToScreenX(40.0F), worldYToScreenY(980.0F));
+        batch.draw(diamond, worldXToScreenX(10.0F), worldYToScreenY(930.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
+        coinAndDiamondFont.draw(batch, String.valueOf(this.rubyGlobal), worldXToScreenX(40.0F), worldYToScreenY(950.0F));
+
+        if (drawAbilities) {
+            batch.draw(shield, worldXToScreenX(50.0F), worldYToScreenY(672.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
+            if (shieldUpgraded != 10)
+                buyButtonTextFont.draw(batch, String.valueOf(abilityShieldCost), worldXToScreenX(380.0F), worldYToScreenY(695.0F), worldXToScreenX(30.0F), Align.left, false);
+            textFont.draw(batch, "Shield Duration", worldXToScreenX(150.0F), worldYToScreenY(775.0F));
+            smallerTextFont.draw(batch, "Increase duration by " + shieldUpgraded * 10 + "%", worldXToScreenX(150.0F), worldYToScreenY(735.0F));
+
+            batch.draw(magnet, worldXToScreenX(50.0F), worldYToScreenY(537.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
+            if (magnetUpgraded != 10)
+                buyButtonTextFont.draw(batch, String.valueOf(abilityMagnetCost), worldXToScreenX(380.0F), worldYToScreenY(560.0F), worldXToScreenX(30.0F), Align.left, false);
+            textFont.draw(batch, "Magnet Duration", worldXToScreenX(150.0F), worldYToScreenY(640.0F));
+            smallerTextFont.draw(batch, "Increase duration by " + magnetUpgraded * 10 + "%", worldXToScreenX(150.0F), worldYToScreenY(600.0F));
+
+            batch.draw(coinRush, worldXToScreenX(50.0F), worldYToScreenY(402.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
+            if (coinRushUpgraded != 10)
+                buyButtonTextFont.draw(batch, String.valueOf(abilityCoinRushCost), worldXToScreenX(380.0F), worldYToScreenY(425.0F), worldXToScreenX(30.0F), Align.left, false);
+            textFont.draw(batch, "Coin Rush Duration", worldXToScreenX(150.0F), worldYToScreenY(505.0F));
+            smallerTextFont.draw(batch, "Increase duration by " + coinRushUpgraded * 10 + "%", worldXToScreenX(150.0F), worldYToScreenY(465.0F));
+
+            batch.draw(spawnRate, worldXToScreenX(50.0F), worldYToScreenY(267.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
+            if (spawnRateUpgraded != 10)
+                buyButtonTextFont.draw(batch, String.valueOf(abilitySpawnRateCost), worldXToScreenX(380.0F), worldYToScreenY(290.0F), worldXToScreenX(30.0F), Align.left, false);
+            textFont.draw(batch, "Pickup Spawn", worldXToScreenX(150.0F), worldYToScreenY(370.0F));
+            smallerTextFont.draw(batch, "Spawn " + spawnRateUpgraded * 10 + "% more frequently", worldXToScreenX(150.0F), worldYToScreenY(330.0F));
+
+            batch.draw(spawnRateCoins, worldXToScreenX(50.0F), worldYToScreenY(132.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
+            if (spawnRateCoinsUpgraded != 10)
+                buyButtonTextFont.draw(batch, String.valueOf(abilitySpawnRateCoinsCost), worldXToScreenX(380.0F), worldYToScreenY(155.0F), worldXToScreenX(30.0F), Align.left, false);
+            textFont.draw(batch, "Coin Spawn", worldXToScreenX(150.0F), worldYToScreenY(235.0F));
+            smallerTextFont.draw(batch, "Spawn " + spawnRateCoinsUpgraded * 10 + "% more frequently", worldXToScreenX(150.0F), worldYToScreenY(195.0F));
+            drawAllAbilities(batch);
+
+            if (drawNotEnoughMoneyWindow) {
+                batch.draw(notEnoughMoneyWindow, worldXToScreenX(10.0F), worldYToScreenY(410.0F), worldXToScreenX(480.0F), worldYToScreenY(180.0F));
+                batch.draw(xNotEnoughMoneyButton, worldXToScreenX(420.0F), worldYToScreenY(525.0F), worldXToScreenX(50.0F), worldYToScreenY(50.0F));
+            }
+            if (drawQuitGame) {
+                batch.draw(quitWindowTexture, worldXToScreenX(10.0F), worldYToScreenY(395.0F), worldXToScreenX(480.0F), worldYToScreenY(210.0F));
+                batch.draw(notQuitButtonTexture, worldXToScreenX(116.0F), worldYToScreenY(405.0F), worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+                batch.draw(quitButtonTexture, worldXToScreenX(307.0F), worldYToScreenY(405.0F), worldXToScreenX(75.0F), worldYToScreenY(75.0F));
             }
         }
-        paramSpriteBatch.begin();
-        paramSpriteBatch.draw(this.coin, worldXToScreenX(10.0F), worldYToScreenY(960.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
-        this.coinAndDiamondFont.draw(paramSpriteBatch, String.valueOf(this.coinGlobal), worldXToScreenX(40.0F), worldYToScreenY(980.0F));
-        paramSpriteBatch.draw(this.diamond, worldXToScreenX(10.0F), worldYToScreenY(930.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
-        this.coinAndDiamondFont.draw(paramSpriteBatch, String.valueOf(this.rubyGlobal), worldXToScreenX(40.0F), worldYToScreenY(950.0F));
-        if (this.drawAbilities) {
-            paramSpriteBatch.draw(this.shield, worldXToScreenX(50.0F), worldYToScreenY(672.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
-            if (this.shieldUpgraded != 10)
-                this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.abilityShieldCost), worldXToScreenX(380.0F), worldYToScreenY(695.0F), worldXToScreenX(30.0F), 8, false);
-            this.textFont.draw(paramSpriteBatch, "Shield Duration", worldXToScreenX(150.0F), worldYToScreenY(775.0F));
-            BitmapFont bitmapFont1 = this.smallerTextFont;
-            StringBuilder stringBuilder2 = new StringBuilder();
-            stringBuilder2.append("Increase duration by ");
-            int i = this.shieldUpgraded;
-            if (i != 10)
-                i++;
-            stringBuilder2.append(i * 10);
-            stringBuilder2.append("%");
-            bitmapFont1.draw(paramSpriteBatch, stringBuilder2.toString(), worldXToScreenX(150.0F), worldYToScreenY(735.0F));
-            paramSpriteBatch.draw(this.magnet, worldXToScreenX(50.0F), worldYToScreenY(537.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
-            if (this.magnetUpgraded != 10)
-                this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.abilityMagnetCost), worldXToScreenX(380.0F), worldYToScreenY(560.0F), worldXToScreenX(30.0F), 8, false);
-            this.textFont.draw(paramSpriteBatch, "Magnet Duration", worldXToScreenX(150.0F), worldYToScreenY(640.0F));
-            bitmapFont1 = this.smallerTextFont;
-            stringBuilder2 = new StringBuilder();
-            stringBuilder2.append("Increase duration by ");
-            i = this.magnetUpgraded;
-            if (i != 10)
-                i++;
-            stringBuilder2.append(i * 10);
-            stringBuilder2.append("%");
-            bitmapFont1.draw(paramSpriteBatch, stringBuilder2.toString(), worldXToScreenX(150.0F), worldYToScreenY(600.0F));
-            paramSpriteBatch.draw(this.coinRush, worldXToScreenX(50.0F), worldYToScreenY(402.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
-            if (this.coinRushUpgraded != 10)
-                this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.abilityCoinRushCost), worldXToScreenX(380.0F), worldYToScreenY(425.0F), worldXToScreenX(30.0F), 8, false);
-            this.textFont.draw(paramSpriteBatch, "Coin Rush Duration", worldXToScreenX(150.0F), worldYToScreenY(505.0F));
-            BitmapFont bitmapFont2 = this.smallerTextFont;
-            StringBuilder stringBuilder1 = new StringBuilder();
-            stringBuilder1.append("Increase duration by ");
-            i = this.coinRushUpgraded;
-            if (i != 10)
-                i++;
-            stringBuilder1.append(i * 10);
-            stringBuilder1.append("%");
-            bitmapFont2.draw(paramSpriteBatch, stringBuilder1.toString(), worldXToScreenX(150.0F), worldYToScreenY(465.0F));
-            paramSpriteBatch.draw(this.spawnRate, worldXToScreenX(50.0F), worldYToScreenY(267.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
-            if (this.spawnRateUpgraded != 10)
-                this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.abilitySpawnRateCost), worldXToScreenX(380.0F), worldYToScreenY(290.0F), worldXToScreenX(30.0F), 8, false);
-            this.textFont.draw(paramSpriteBatch, "Pickup Spawn", worldXToScreenX(150.0F), worldYToScreenY(370.0F));
-            bitmapFont2 = this.smallerTextFont;
-            stringBuilder1 = new StringBuilder();
-            stringBuilder1.append("Spawn ");
-            i = this.spawnRateUpgraded;
-            if (i != 10)
-                i++;
-            stringBuilder1.append(i * 10);
-            stringBuilder1.append("% more frequently");
-            bitmapFont2.draw(paramSpriteBatch, stringBuilder1.toString(), worldXToScreenX(150.0F), worldYToScreenY(330.0F));
-            paramSpriteBatch.draw(this.spawnRateCoins, worldXToScreenX(50.0F), worldYToScreenY(132.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
-            if (this.spawnRateCoinsUpgraded != 10)
-                this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.abilitySpawnRateCoinsCost), worldXToScreenX(380.0F), worldYToScreenY(155.0F), worldXToScreenX(30.0F), 8, false);
-            this.textFont.draw(paramSpriteBatch, "Coin Spawn", worldXToScreenX(150.0F), worldYToScreenY(235.0F));
-            bitmapFont2 = this.smallerTextFont;
-            stringBuilder1 = new StringBuilder();
-            stringBuilder1.append("Spawn ");
-            i = this.spawnRateCoinsUpgraded;
-            if (i != 10)
-                i++;
-            stringBuilder1.append(i * 10);
-            stringBuilder1.append("% more frequently");
-            bitmapFont2.draw(paramSpriteBatch, stringBuilder1.toString(), worldXToScreenX(150.0F), worldYToScreenY(195.0F));
-            drawAllAbilities(paramSpriteBatch);
-            if (this.drawNotEnoughMoneyWindow) {
-                paramSpriteBatch.draw(this.notEnoughMoneyWindow, worldXToScreenX(10.0F), worldYToScreenY(410.0F), worldXToScreenX(480.0F), worldYToScreenY(180.0F));
-                paramSpriteBatch.draw(this.xNotEnoughMoneyButton, worldXToScreenX(420.0F), worldYToScreenY(525.0F), worldXToScreenX(50.0F), worldYToScreenY(50.0F));
-            }
-            if (this.drawQuitGame) {
-                paramSpriteBatch.draw(this.quitWindowTexture, worldXToScreenX(10.0F), worldYToScreenY(395.0F), worldXToScreenX(480.0F), worldYToScreenY(210.0F));
-                paramSpriteBatch.draw(this.notQuitButtonTexture, worldXToScreenX(116.0F), worldYToScreenY(405.0F), worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-                paramSpriteBatch.draw(this.quitButtonTexture, worldXToScreenX(307.0F), worldYToScreenY(405.0F), worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-            }
-        }
-        paramSpriteBatch.end();
+        batch.end();
     }
 
-    private void drawAllAbilities(SpriteBatch paramSpriteBatch) {
-        for (byte b = 0; b < 10; b++) {
-            float f = (b * 20 + 150);
-            drawShieldAbility(paramSpriteBatch, f, b);
-            drawMagnetAbility(paramSpriteBatch, f, b);
-            drawCoinRushAbility(paramSpriteBatch, f, b);
-            drawSpawnRateAbility(paramSpriteBatch, f, b);
-            drawSpawnRateCoinsAbility(paramSpriteBatch, f, b);
+    private void drawAllAbilities(SpriteBatch batch) {
+        for (int i = 0; i < 10; i++) {
+            float f = (i * 20 + 150);
+            drawShieldAbility(batch, f, i);
+            drawMagnetAbility(batch, f, i);
+            drawCoinRushAbility(batch, f, i);
+            drawSpawnRateAbility(batch, f, i);
+            drawSpawnRateCoinsAbility(batch, f, i);
         }
     }
 
-    private void drawCoinRushAbility(SpriteBatch paramSpriteBatch, float paramFloat, int paramInt) {
-        if (this.abilityPointsCoinRush.get(paramInt).isFilled()) {
-            paramSpriteBatch.draw(this.abilityPointsCoinRush.get(paramInt).getAbilityPoint(1), worldXToScreenX(paramFloat), worldYToScreenY(395.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+    private void drawShieldAbility(SpriteBatch batch, float xCoordinate, int abilityIndex) {
+        if (abilityPointsShield.get(abilityIndex).isFilled()) {
+            batch.draw(abilityPointsShield.get(abilityIndex).getAbilityPoint(1), worldXToScreenX(xCoordinate), worldYToScreenY(665.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         } else {
-            paramSpriteBatch.draw(this.abilityPointsCoinRush.get(paramInt).getAbilityPoint(0), worldXToScreenX(paramFloat), worldYToScreenY(395.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+            batch.draw(abilityPointsShield.get(abilityIndex).getAbilityPoint(0), worldXToScreenX(xCoordinate), worldYToScreenY(665.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         }
     }
 
-    private void drawMagnetAbility(SpriteBatch paramSpriteBatch, float paramFloat, int paramInt) {
-        if (this.abilityPointsMagnet.get(paramInt).isFilled()) {
-            paramSpriteBatch.draw(this.abilityPointsMagnet.get(paramInt).getAbilityPoint(1), worldXToScreenX(paramFloat), worldYToScreenY(530.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+    private void drawMagnetAbility(SpriteBatch batch, float xCoordinate, int abilityIndex) {
+        if (abilityPointsMagnet.get(abilityIndex).isFilled()) {
+            batch.draw(abilityPointsMagnet.get(abilityIndex).getAbilityPoint(1), worldXToScreenX(xCoordinate), worldYToScreenY(530.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         } else {
-            paramSpriteBatch.draw(this.abilityPointsMagnet.get(paramInt).getAbilityPoint(0), worldXToScreenX(paramFloat), worldYToScreenY(530.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+            batch.draw(abilityPointsMagnet.get(abilityIndex).getAbilityPoint(0), worldXToScreenX(xCoordinate), worldYToScreenY(530.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         }
     }
 
-    private void drawShieldAbility(SpriteBatch paramSpriteBatch, float paramFloat, int paramInt) {
-        if (this.abilityPointsShield.get(paramInt).isFilled()) {
-            paramSpriteBatch.draw(this.abilityPointsShield.get(paramInt).getAbilityPoint(1), worldXToScreenX(paramFloat), worldYToScreenY(665.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+    private void drawCoinRushAbility(SpriteBatch batch, float xCoordinate, int abilityIndex) {
+        if (abilityPointsCoinRush.get(abilityIndex).isFilled()) {
+            batch.draw(abilityPointsCoinRush.get(abilityIndex).getAbilityPoint(1), worldXToScreenX(xCoordinate), worldYToScreenY(395.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         } else {
-            paramSpriteBatch.draw(this.abilityPointsShield.get(paramInt).getAbilityPoint(0), worldXToScreenX(paramFloat), worldYToScreenY(665.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+            batch.draw(abilityPointsCoinRush.get(abilityIndex).getAbilityPoint(0), worldXToScreenX(xCoordinate), worldYToScreenY(395.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         }
     }
 
-    private void drawSpawnRateAbility(SpriteBatch paramSpriteBatch, float paramFloat, int paramInt) {
-        if (this.abilityPointsSpawnRate.get(paramInt).isFilled()) {
-            paramSpriteBatch.draw(this.abilityPointsSpawnRate.get(paramInt).getAbilityPoint(1), worldXToScreenX(paramFloat), worldYToScreenY(260.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+    private void drawSpawnRateAbility(SpriteBatch batch, float xCoordinate, int abilityIndex) {
+        if (abilityPointsSpawnRate.get(abilityIndex).isFilled()) {
+            batch.draw(abilityPointsSpawnRate.get(abilityIndex).getAbilityPoint(1), worldXToScreenX(xCoordinate), worldYToScreenY(260.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         } else {
-            paramSpriteBatch.draw(this.abilityPointsSpawnRate.get(paramInt).getAbilityPoint(0), worldXToScreenX(paramFloat), worldYToScreenY(260.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+            batch.draw(abilityPointsSpawnRate.get(abilityIndex).getAbilityPoint(0), worldXToScreenX(xCoordinate), worldYToScreenY(260.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         }
     }
 
-    private void drawSpawnRateCoinsAbility(SpriteBatch paramSpriteBatch, float paramFloat, int paramInt) {
-        if (this.abilityPointsSpawnRateCoins.get(paramInt).isFilled()) {
-            paramSpriteBatch.draw(this.abilityPointsSpawnRateCoins.get(paramInt).getAbilityPoint(1), worldXToScreenX(paramFloat), worldYToScreenY(125.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+    private void drawSpawnRateCoinsAbility(SpriteBatch batch, float xCoordinate, int abilityIndex) {
+        if (abilityPointsSpawnRateCoins.get(abilityIndex).isFilled()) {
+            batch.draw(abilityPointsSpawnRateCoins.get(abilityIndex).getAbilityPoint(1), worldXToScreenX(xCoordinate), worldYToScreenY(125.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         } else {
-            paramSpriteBatch.draw(this.abilityPointsSpawnRateCoins.get(paramInt).getAbilityPoint(0), worldXToScreenX(paramFloat), worldYToScreenY(125.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
+            batch.draw(abilityPointsSpawnRateCoins.get(abilityIndex).getAbilityPoint(0), worldXToScreenX(xCoordinate), worldYToScreenY(125.0F), worldXToScreenX(10.0F), worldYToScreenY(40.0F));
         }
     }
 
 
     private void drawAbilityElements() {
-        if (this.drawAbilities) {
-            this.stage.getActors().get(5).setVisible(true);
-            if (this.shieldUpgraded != 10) {
-                this.stage.getActors().get(7).setVisible(true);
-            } else {
-                this.stage.getActors().get(7).setVisible(false);
-            }
-            if (this.magnetUpgraded != 10) {
-                this.stage.getActors().get(8).setVisible(true);
-            } else {
-                this.stage.getActors().get(8).setVisible(false);
-            }
-            if (this.coinRushUpgraded != 10) {
-                this.stage.getActors().get(9).setVisible(true);
-            } else {
-                this.stage.getActors().get(9).setVisible(false);
-            }
-            if (this.spawnRateUpgraded != 10) {
-                this.stage.getActors().get(10).setVisible(true);
-            } else {
-                this.stage.getActors().get(10).setVisible(false);
-            }
-            if (this.spawnRateCoinsUpgraded != 10) {
-                this.stage.getActors().get(11).setVisible(true);
-            } else {
-                this.stage.getActors().get(11).setVisible(false);
-            }
-            this.stage.getActors().get(6).setVisible(false);
-            this.stage.getActors().get(12).setVisible(false);
-            this.stage.getActors().get(13).setVisible(false);
-            this.stage.getActors().get(14).setVisible(false);
-            this.stage.getActors().get(15).setVisible(false);
-            this.stage.getActors().get(16).setVisible(false);
-            this.stage.getActors().get(17).setVisible(false);
-            this.stage.getActors().get(18).setVisible(false);
-            this.stage.getActors().get(24).setVisible(false);
-            this.stage.getActors().get(25).setVisible(false);
-            this.stage.getActors().get(26).setVisible(false);
-            this.stage.getActors().get(27).setVisible(false);
-            this.stage.getActors().get(28).setVisible(false);
-            this.stage.getActors().get(29).setVisible(false);
-            this.stage.getActors().get(30).setVisible(false);
-            this.stage.getActors().get(31).setVisible(false);
-            this.stage.getActors().get(32).setVisible(false);
-            this.stage.getActors().get(33).setVisible(false);
-            this.stage.getActors().get(34).setVisible(false);
-        } else if (this.drawCurrency) {
-            this.stage.getActors().get(24).setVisible(true);
-            this.stage.getActors().get(25).setVisible(true);
-            this.stage.getActors().get(26).setVisible(true);
-            this.stage.getActors().get(27).setVisible(true);
-            this.stage.getActors().get(28).setVisible(true);
-            this.stage.getActors().get(29).setVisible(true);
-            this.stage.getActors().get(30).setVisible(true);
-            this.stage.getActors().get(31).setVisible(true);
-            this.stage.getActors().get(32).setVisible(true);
-            this.stage.getActors().get(33).setVisible(true);
-            if (this.prefs.getBoolean("doubleCoins", false)) {
-                this.stage.getActors().get(34).setVisible(false);
-            } else {
-                this.stage.getActors().get(34).setVisible(true);
-            }
+        if (drawAbilities) {
+            stage.getActors().get(5).setVisible(true);
+            if (shieldUpgraded != 10)
+                stage.getActors().get(7).setVisible(true);
+            else
+                stage.getActors().get(7).setVisible(false);
+
+            if (magnetUpgraded != 10)
+                stage.getActors().get(8).setVisible(true);
+            else
+                stage.getActors().get(8).setVisible(false);
+
+            if (coinRushUpgraded != 10)
+                stage.getActors().get(9).setVisible(true);
+            else
+                stage.getActors().get(9).setVisible(false);
+
+            if (spawnRateUpgraded != 10)
+                stage.getActors().get(10).setVisible(true);
+            else
+                stage.getActors().get(10).setVisible(false);
+
+            if (this.spawnRateCoinsUpgraded != 10)
+                stage.getActors().get(11).setVisible(true);
+            else
+                stage.getActors().get(11).setVisible(false);
+
+            stage.getActors().get(6).setVisible(false);
+            stage.getActors().get(12).setVisible(false);
+            stage.getActors().get(13).setVisible(false);
+            stage.getActors().get(14).setVisible(false);
+            stage.getActors().get(15).setVisible(false);
+            stage.getActors().get(16).setVisible(false);
+            stage.getActors().get(17).setVisible(false);
+            stage.getActors().get(18).setVisible(false);
+            stage.getActors().get(24).setVisible(false);
+            stage.getActors().get(25).setVisible(false);
+            stage.getActors().get(26).setVisible(false);
+            stage.getActors().get(27).setVisible(false);
+            stage.getActors().get(28).setVisible(false);
+            stage.getActors().get(29).setVisible(false);
+            stage.getActors().get(30).setVisible(false);
+            stage.getActors().get(31).setVisible(false);
+            stage.getActors().get(32).setVisible(false);
+            stage.getActors().get(33).setVisible(false);
+            stage.getActors().get(34).setVisible(false);
+        } else if (drawCurrency) {
+            stage.getActors().get(24).setVisible(true);
+            stage.getActors().get(25).setVisible(true);
+            stage.getActors().get(26).setVisible(true);
+            stage.getActors().get(27).setVisible(true);
+            stage.getActors().get(28).setVisible(true);
+            stage.getActors().get(29).setVisible(true);
+            stage.getActors().get(30).setVisible(true);
+            stage.getActors().get(31).setVisible(true);
+            stage.getActors().get(32).setVisible(true);
+            stage.getActors().get(33).setVisible(true);
+            if (prefs.getBoolean(DOUBLE_COINS, false))
+                stage.getActors().get(34).setVisible(false);
+             else
+                stage.getActors().get(34).setVisible(true);
         } else {
-            this.stage.getActors().get(5).setVisible(false);
-            this.stage.getActors().get(6).setVisible(true);
-            this.stage.getActors().get(7).setVisible(false);
-            this.stage.getActors().get(8).setVisible(false);
-            this.stage.getActors().get(9).setVisible(false);
-            this.stage.getActors().get(10).setVisible(false);
-            this.stage.getActors().get(11).setVisible(false);
-            this.stage.getActors().get(12).setVisible(true);
-            this.stage.getActors().get(13).setVisible(true);
-            this.stage.getActors().get(14).setVisible(true);
-            this.stage.getActors().get(24).setVisible(false);
-            this.stage.getActors().get(25).setVisible(false);
-            this.stage.getActors().get(26).setVisible(false);
-            this.stage.getActors().get(27).setVisible(false);
-            this.stage.getActors().get(28).setVisible(false);
-            this.stage.getActors().get(29).setVisible(false);
-            this.stage.getActors().get(30).setVisible(false);
-            this.stage.getActors().get(31).setVisible(false);
-            this.stage.getActors().get(32).setVisible(false);
-            this.stage.getActors().get(33).setVisible(false);
-            this.stage.getActors().get(34).setVisible(false);
+            stage.getActors().get(5).setVisible(false);
+            stage.getActors().get(6).setVisible(true);
+            stage.getActors().get(7).setVisible(false);
+            stage.getActors().get(8).setVisible(false);
+            stage.getActors().get(9).setVisible(false);
+            stage.getActors().get(10).setVisible(false);
+            stage.getActors().get(11).setVisible(false);
+            stage.getActors().get(12).setVisible(true);
+            stage.getActors().get(13).setVisible(true);
+            stage.getActors().get(14).setVisible(true);
+            stage.getActors().get(24).setVisible(false);
+            stage.getActors().get(25).setVisible(false);
+            stage.getActors().get(26).setVisible(false);
+            stage.getActors().get(27).setVisible(false);
+            stage.getActors().get(28).setVisible(false);
+            stage.getActors().get(29).setVisible(false);
+            stage.getActors().get(30).setVisible(false);
+            stage.getActors().get(31).setVisible(false);
+            stage.getActors().get(32).setVisible(false);
+            stage.getActors().get(33).setVisible(false);
+            stage.getActors().get(34).setVisible(false);
         }
     }
 
     public void update(float paramFloat) {
     }
 
-    private void buyCoins(int paramInt1, int paramInt2) {
-        Preferences preferences = this.prefs;
-        preferences.putInteger("ruby", preferences.getInteger("ruby") - paramInt2);
-        preferences = this.prefs;
-        preferences.putInteger("coins", preferences.getInteger("coins") + paramInt1);
-        this.prefs.flush();
-        this.coinGlobal = this.prefs.getInteger("coins");
-        this.rubyGlobal = this.prefs.getInteger("ruby");
+    private void buyCoins(int coins, int diamonds) {
+        prefs.putInteger(DIAMONDS, prefs.getInteger(DIAMONDS) - diamonds);
+        prefs.putInteger(COINS, prefs.getInteger(COINS) + coins);
+        prefs.flush();
+        coinGlobal = this.prefs.getInteger(COINS);
+        rubyGlobal = this.prefs.getInteger(DIAMONDS);
         disableButtonsWindow();
     }
 
-    private void checkBuyCoins(int paramInt1, int paramInt2) {
-        if (this.prefs.getInteger("ruby") >= paramInt1) {
-            this.stage.getActors().get(35).setVisible(true);
-            this.stage.getActors().get(36).setVisible(true);
-            this.stage.getActors().get(37).setVisible(true);
-            this.currencySelected = paramInt2;
+    private void checkBuyCoins(int cost, int currency) {
+        if (prefs.getInteger(DIAMONDS) >= cost) {
+            stage.getActors().get(35).setVisible(true);
+            stage.getActors().get(36).setVisible(true);
+            stage.getActors().get(37).setVisible(true);
+            currencySelected = currency;
         } else {
             this.notEnoughCoinsDiamondsWindow.setDrawable(new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("not_enough_diamonds_window"))));
             this.stage.getActors().get(38).setVisible(true);
@@ -1225,14 +1234,13 @@ public class Shop extends State {
         disableButtonsWindow();
     }
 
-    private void costumeBuyButton(String paramString1, int paramInt1, String paramString2, int paramInt2) {
-        this.prefs.putBoolean(paramString1, true);
-        this.prefs.putInteger("costumeSelectedGame", paramInt1);
-        Preferences preferences = this.prefs;
-        preferences.putInteger(paramString2, preferences.getInteger(paramString2) - paramInt2);
-        this.prefs.flush();
-        this.coinGlobal = this.prefs.getInteger("coins");
-        this.rubyGlobal = this.prefs.getInteger("ruby");
+    private void costumeBuyButton(String characterBought, int characterNumber, String coinsRubies, int cost) {
+        prefs.putBoolean(characterBought, true);
+        prefs.putInteger(COSTUME_SELECTED_GAME, characterNumber);
+        prefs.putInteger(coinsRubies, prefs.getInteger(coinsRubies) - cost);
+        prefs.flush();
+        coinGlobal = this.prefs.getInteger("coins");
+        rubyGlobal = this.prefs.getInteger("ruby");
     }
 
     private void costumeBuySelectButton(String characterBought, int characterNumber, String coinsRubies, int cost) {
@@ -1256,92 +1264,87 @@ public class Shop extends State {
         }
     }
 
-    private void costumeSelected(String paramString, int paramInt) {
-        if (this.prefs.getBoolean(paramString, false)) {
-            this.costumeBuySelectButton.setStyle(this.costumeSelectButtonStyle);
-            this.stage.getActors().get(13).setVisible(false);
+    private void costumeSelected(String characterBought, int characterNumber) {
+        if (prefs.getBoolean(characterBought, false)) {
+            costumeBuySelectButton.setStyle(costumeSelectButtonStyle);
+            stage.getActors().get(13).setVisible(false);
         } else {
-            this.costumeBuySelectButton.setStyle(this.costumeBuyButtonStyle);
-            this.stage.getActors().get(13).setVisible(true);
+            costumeBuySelectButton.setStyle(costumeBuyButtonStyle);
+            stage.getActors().get(13).setVisible(true);
         }
-        if (this.prefs.getInteger("costumeSelectedGame", 0) == paramInt) {
-            this.stage.getActors().get(17).setVisible(false);
-            this.stage.getActors().get(18).setVisible(true);
+
+        if (prefs.getInteger(COSTUME_SELECTED_GAME, 0) == characterNumber) {
+            stage.getActors().get(17).setVisible(false);
+            stage.getActors().get(18).setVisible(true);
         } else {
-            this.stage.getActors().get(17).setVisible(true);
-            this.stage.getActors().get(18).setVisible(false);
+            stage.getActors().get(17).setVisible(true);
+            stage.getActors().get(18).setVisible(false);
         }
     }
 
-    private void setCostumeParameters(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6, int paramInt7) {
-        this.costumeName.setDrawable(new TextureRegionDrawable(new TextureRegion(this.costumeNames[paramInt1])));
-        this.costumeName.setSize(worldXToScreenX(paramInt2), worldYToScreenY(75.0F));
-        this.costumeName.setPosition(worldXToScreenX(paramInt3), worldYToScreenY(675.0F));
-        this.costumeCost.setDrawable(new TextureRegionDrawable(new TextureRegion(this.costumeCosts[paramInt1])));
-        this.costumeCost.setSize(worldXToScreenX(paramInt4), worldYToScreenY(50.0F));
-        this.costumeCost.setPosition(worldXToScreenX(paramInt5), worldYToScreenY(575.0F));
-        this.costumeImage.setDrawable(new TextureRegionDrawable(new TextureRegion(this.costumeImages[paramInt1])));
-        this.costumeImage.setSize(worldXToScreenX(paramInt6), worldYToScreenY(200.0F));
-        this.costumeImage.setPosition(worldXToScreenX(paramInt7), worldYToScreenY(325.0F));
+    private void setCostumeParameters(int characterNumber, int xNameSize, int xNamePosition, int xCostSize, int xCostPosition, int xImageSize, int xImagePosition) {
+        costumeName.setDrawable(new TextureRegionDrawable(new TextureRegion(costumeNames[characterNumber])));
+        costumeName.setSize(worldXToScreenX(xNameSize), worldYToScreenY(75.0F));
+        costumeName.setPosition(worldXToScreenX(xNamePosition), worldYToScreenY(675.0F));
+        costumeCost.setDrawable(new TextureRegionDrawable(new TextureRegion(costumeCosts[characterNumber])));
+        costumeCost.setSize(worldXToScreenX(xCostSize), worldYToScreenY(50.0F));
+        costumeCost.setPosition(worldXToScreenX(xCostPosition), worldYToScreenY(575.0F));
+        costumeImage.setDrawable(new TextureRegionDrawable(new TextureRegion(costumeImages[characterNumber])));
+        costumeImage.setSize(worldXToScreenX(xImageSize), worldYToScreenY(200.0F));
+        costumeImage.setPosition(worldXToScreenX(xImagePosition), worldYToScreenY(325.0F));
     }
 
     private void enableButtonsWindow() {
-        this.stage.getActors().get(1).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(2).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(3).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(4).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(7).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(8).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(9).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(10).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(11).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(15).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(16).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(17).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(25).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(26).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(27).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(28).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(29).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(30).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(31).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(32).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(33).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(34).setTouchable(Touchable.enabled);
-        this.stage.getActors().get(35).setTouchable(Touchable.enabled);
+        stage.getActors().get(1).setTouchable(Touchable.enabled);
+        stage.getActors().get(2).setTouchable(Touchable.enabled);
+        stage.getActors().get(3).setTouchable(Touchable.enabled);
+        stage.getActors().get(4).setTouchable(Touchable.enabled);
+        stage.getActors().get(7).setTouchable(Touchable.enabled);
+        stage.getActors().get(8).setTouchable(Touchable.enabled);
+        stage.getActors().get(9).setTouchable(Touchable.enabled);
+        stage.getActors().get(10).setTouchable(Touchable.enabled);
+        stage.getActors().get(11).setTouchable(Touchable.enabled);
+        stage.getActors().get(15).setTouchable(Touchable.enabled);
+        stage.getActors().get(16).setTouchable(Touchable.enabled);
+        stage.getActors().get(17).setTouchable(Touchable.enabled);
+        stage.getActors().get(25).setTouchable(Touchable.enabled);
+        stage.getActors().get(26).setTouchable(Touchable.enabled);
+        stage.getActors().get(27).setTouchable(Touchable.enabled);
+        stage.getActors().get(28).setTouchable(Touchable.enabled);
+        stage.getActors().get(29).setTouchable(Touchable.enabled);
+        stage.getActors().get(30).setTouchable(Touchable.enabled);
+        stage.getActors().get(31).setTouchable(Touchable.enabled);
+        stage.getActors().get(32).setTouchable(Touchable.enabled);
+        stage.getActors().get(33).setTouchable(Touchable.enabled);
+        stage.getActors().get(34).setTouchable(Touchable.enabled);
+        stage.getActors().get(35).setTouchable(Touchable.enabled);
     }
 
 
     private void disableButtonsWindow() {
-        this.stage.getActors().get(1).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(2).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(3).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(4).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(7).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(8).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(9).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(10).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(11).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(15).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(16).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(17).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(25).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(26).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(27).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(28).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(29).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(30).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(31).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(32).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(33).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(34).setTouchable(Touchable.disabled);
-        this.stage.getActors().get(35).setTouchable(Touchable.disabled);
+        stage.getActors().get(1).setTouchable(Touchable.disabled);
+        stage.getActors().get(2).setTouchable(Touchable.disabled);
+        stage.getActors().get(3).setTouchable(Touchable.disabled);
+        stage.getActors().get(4).setTouchable(Touchable.disabled);
+        stage.getActors().get(7).setTouchable(Touchable.disabled);
+        stage.getActors().get(8).setTouchable(Touchable.disabled);
+        stage.getActors().get(9).setTouchable(Touchable.disabled);
+        stage.getActors().get(10).setTouchable(Touchable.disabled);
+        stage.getActors().get(11).setTouchable(Touchable.disabled);
+        stage.getActors().get(15).setTouchable(Touchable.disabled);
+        stage.getActors().get(16).setTouchable(Touchable.disabled);
+        stage.getActors().get(17).setTouchable(Touchable.disabled);
+        stage.getActors().get(25).setTouchable(Touchable.disabled);
+        stage.getActors().get(26).setTouchable(Touchable.disabled);
+        stage.getActors().get(27).setTouchable(Touchable.disabled);
+        stage.getActors().get(28).setTouchable(Touchable.disabled);
+        stage.getActors().get(29).setTouchable(Touchable.disabled);
+        stage.getActors().get(30).setTouchable(Touchable.disabled);
+        stage.getActors().get(31).setTouchable(Touchable.disabled);
+        stage.getActors().get(32).setTouchable(Touchable.disabled);
+        stage.getActors().get(33).setTouchable(Touchable.disabled);
+        stage.getActors().get(34).setTouchable(Touchable.disabled);
+        stage.getActors().get(35).setTouchable(Touchable.disabled);
     }
 
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\States\Shop.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */
