@@ -1,0 +1,55 @@
+
+loading_screen.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+green_bar
+  rotate: false
+  xy: 901, 296
+  size: 835, 209
+  orig: 835, 209
+  offset: 0, 0
+  index: -1
+loading_bar
+  rotate: false
+  xy: 2, 2
+  size: 855, 230
+  orig: 855, 230
+  offset: 0, 0
+  index: -1
+loading_bar_outline
+  rotate: false
+  xy: 2, 234
+  size: 897, 271
+  orig: 897, 271
+  offset: 0, 0
+  index: -1
+loading_screen_background
+  rotate: false
+  xy: 816, 507
+  size: 500, 1000
+  orig: 500, 1000
+  offset: 0, 0
+  index: -1
+loading_text
+  rotate: false
+  xy: 2, 1509
+  size: 1294, 344
+  orig: 1294, 344
+  offset: 0, 0
+  index: -1
+navitas_logo
+  rotate: false
+  xy: 2, 695
+  size: 812, 812
+  orig: 812, 812
+  offset: 0, 0
+  index: -1
+white_bar
+  rotate: false
+  xy: 901, 85
+  size: 835, 209
+  orig: 835, 209
+  offset: 0, 0
+  index: -1

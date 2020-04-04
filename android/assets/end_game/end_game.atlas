@@ -1,0 +1,89 @@
+
+end_game.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cowgirl_image
+  rotate: false
+  xy: 1625, 44
+  size: 310, 500
+  orig: 310, 500
+  offset: 0, 0
+  index: -1
+knight_image
+  rotate: false
+  xy: 1595, 546
+  size: 326, 466
+  orig: 326, 466
+  offset: 0, 0
+  index: -1
+ninja_male_image
+  rotate: false
+  xy: 2, 2
+  size: 1109, 2039
+  orig: 1109, 2039
+  offset: 0, 0
+  index: -1
+player_image
+  rotate: false
+  xy: 1113, 192
+  size: 480, 820
+  orig: 480, 820
+  offset: 0, 0
+  index: -1
+score_table
+  rotate: false
+  xy: 1113, 1014
+  size: 845, 1027
+  orig: 845, 1027
+  offset: 0, 0
+  index: -1
+triple_coins_ad_button_pressed
+  rotate: false
+  xy: 1113, 90
+  size: 254, 100
+  orig: 254, 100
+  offset: 0, 0
+  index: -1
+triple_coins_ad_button_unpressed
+  rotate: false
+  xy: 1369, 90
+  size: 254, 100
+  orig: 254, 100
+  offset: 0, 0
+  index: -1
+
+end_game2.png
+size: 2048,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cowboy_image
+  rotate: false
+  xy: 2, 2
+  size: 319, 486
+  orig: 319, 486
+  offset: 0, 0
+  index: -1
+dino_image
+  rotate: false
+  xy: 550, 187
+  size: 282, 301
+  orig: 282, 301
+  offset: 0, 0
+  index: -1
+ninja_female_image
+  rotate: false
+  xy: 323, 112
+  size: 225, 376
+  orig: 225, 376
+  offset: 0, 0
+  index: -1
+robot_image
+  rotate: false
+  xy: 834, 135
+  size: 210, 353
+  orig: 210, 353
+  offset: 0, 0
+  index: -1

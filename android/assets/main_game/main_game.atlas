@@ -1,0 +1,1326 @@
+
+main_game.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bomb
+  rotate: false
+  xy: 1822, 19
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+city_background
+  rotate: false
+  xy: 2, 2
+  size: 908, 2043
+  orig: 908, 2043
+  offset: 0, 0
+  index: 2
+city_background
+  rotate: false
+  xy: 912, 2
+  size: 908, 2043
+  orig: 908, 2043
+  offset: 0, 0
+  index: 3
+main_game_menu_button_unpressed
+  rotate: false
+  xy: 1822, 336
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+main_game_music_button_pressed
+  rotate: false
+  xy: 1822, 149
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+main_game_no_music_button_pressed
+  rotate: false
+  xy: 1822, 1465
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+main_game_no_music_button_unpressed
+  rotate: false
+  xy: 1822, 1271
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+main_game_no_sound_button_pressed
+  rotate: false
+  xy: 1822, 1659
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+main_game_no_sound_button_unpressed
+  rotate: false
+  xy: 1822, 1853
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+main_game_pause_button_pressed
+  rotate: false
+  xy: 1822, 1084
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+main_game_pause_button_unpressed
+  rotate: false
+  xy: 1822, 710
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+main_game_restart_button_pressed
+  rotate: false
+  xy: 1822, 897
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+main_game_sound_button_unpressed
+  rotate: false
+  xy: 1822, 523
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+
+main_game2.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+city_background
+  rotate: false
+  xy: 2, 2
+  size: 908, 2043
+  orig: 908, 2043
+  offset: 0, 0
+  index: 4
+city_background
+  rotate: false
+  xy: 912, 3
+  size: 907, 2042
+  orig: 907, 2042
+  offset: 0, 0
+  index: 1
+main_game_menu_button_pressed
+  rotate: false
+  xy: 1821, 925
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+main_game_music_button_unpressed
+  rotate: false
+  xy: 1821, 1112
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+main_game_restart_button_unpressed
+  rotate: false
+  xy: 1821, 1299
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+main_game_sound_button_pressed
+  rotate: false
+  xy: 1821, 1486
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+player_hurt
+  rotate: false
+  xy: 1821, 367
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 15
+player_hurt
+  rotate: false
+  xy: 1821, 190
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 20
+player_hurt
+  rotate: false
+  xy: 1821, 13
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 22
+player_run
+  rotate: false
+  xy: 1821, 544
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 30
+story_continue_button_pressed
+  rotate: false
+  xy: 1821, 1860
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+story_continue_button_unpressed
+  rotate: false
+  xy: 1821, 1673
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+villain
+  rotate: false
+  xy: 1821, 721
+  size: 129, 202
+  orig: 129, 202
+  offset: 0, 0
+  index: -1
+
+main_game3.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+desert_background
+  rotate: false
+  xy: 2, 2
+  size: 1000, 1938
+  orig: 1000, 1938
+  offset: 0, 0
+  index: 4
+desert_background
+  rotate: false
+  xy: 1004, 2
+  size: 1000, 1938
+  orig: 1000, 1938
+  offset: 0, 0
+  index: 1
+
+main_game4.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+desert_background
+  rotate: false
+  xy: 2, 2
+  size: 1000, 1938
+  orig: 1000, 1938
+  offset: 0, 0
+  index: 2
+desert_background
+  rotate: false
+  xy: 1004, 2
+  size: 1000, 1938
+  orig: 1000, 1938
+  offset: 0, 0
+  index: 3
+
+main_game5.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+congratulations_story_window
+  rotate: false
+  xy: 2, 1109
+  size: 1765, 931
+  orig: 1765, 931
+  offset: 0, 0
+  index: -1
+not_enough_diamonds_window
+  rotate: false
+  xy: 2, 384
+  size: 1765, 723
+  orig: 1765, 723
+  offset: 0, 0
+  index: -1
+player_faint
+  rotate: false
+  xy: 1769, 1837
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 6
+player_faint
+  rotate: false
+  xy: 1769, 1632
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 29
+player_faint
+  rotate: false
+  xy: 1769, 1427
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 0
+player_faint
+  rotate: false
+  xy: 1769, 1222
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 22
+player_faint
+  rotate: false
+  xy: 1769, 1017
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 7
+player_faint
+  rotate: false
+  xy: 1769, 812
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 23
+player_faint
+  rotate: false
+  xy: 1769, 607
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 8
+player_faint
+  rotate: false
+  xy: 1769, 402
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 27
+player_faint
+  rotate: false
+  xy: 1769, 197
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 10
+player_faint
+  rotate: false
+  xy: 926, 2
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 11
+player_faint
+  rotate: false
+  xy: 1162, 2
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 12
+player_faint
+  rotate: false
+  xy: 1398, 2
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 13
+player_hurt
+  rotate: false
+  xy: 470, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 23
+player_hurt
+  rotate: false
+  xy: 585, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 24
+player_hurt
+  rotate: false
+  xy: 700, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 25
+player_hurt
+  rotate: false
+  xy: 815, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 26
+player_hurt
+  rotate: false
+  xy: 930, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 27
+player_hurt
+  rotate: false
+  xy: 1045, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 28
+player_hurt
+  rotate: false
+  xy: 1160, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 29
+player_hurt
+  rotate: false
+  xy: 1275, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 0
+player_hurt
+  rotate: false
+  xy: 1390, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 1
+player_hurt
+  rotate: false
+  xy: 1505, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 33
+player_hurt
+  rotate: false
+  xy: 1620, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 4
+player_hurt
+  rotate: false
+  xy: 1749, 20
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 8
+player_hurt
+  rotate: false
+  xy: 1864, 20
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 9
+player_run
+  rotate: false
+  xy: 1634, 30
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 31
+score_coin_background
+  rotate: false
+  xy: 470, 5
+  size: 454, 190
+  orig: 454, 190
+  offset: 0, 0
+  index: -1
+transparent
+  rotate: false
+  xy: 2, 33
+  size: 466, 349
+  orig: 466, 349
+  offset: 0, 0
+  index: -1
+
+main_game6.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ad_wait_button
+  rotate: false
+  xy: 1605, 555
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+cactus
+  rotate: false
+  xy: 1202, 338
+  size: 401, 893
+  orig: 401, 893
+  offset: 0, 0
+  index: -1
+coin_rush
+  rotate: false
+  xy: 1202, 1233
+  size: 751, 798
+  orig: 751, 798
+  offset: 0, 0
+  index: -1
+continue_ad_button_pressed
+  rotate: false
+  xy: 1605, 724
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+continue_ad_button_unpressed
+  rotate: false
+  xy: 1515, 48
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+continue_diamond_button_pressed
+  rotate: false
+  xy: 1605, 893
+  size: 424, 168
+  orig: 424, 168
+  offset: 0, 0
+  index: -1
+continue_diamond_button_unpressed
+  rotate: false
+  xy: 1605, 1063
+  size: 424, 168
+  orig: 424, 168
+  offset: 0, 0
+  index: -1
+end_game_button_pressed
+  rotate: false
+  xy: 1605, 217
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+end_game_button_unpressed
+  rotate: false
+  xy: 1605, 386
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+main_game_tutorial
+  rotate: false
+  xy: 2, 362
+  size: 1198, 1669
+  orig: 1198, 1669
+  offset: 0, 0
+  index: -1
+rocket
+  rotate: false
+  xy: 2, 63
+  size: 855, 297
+  orig: 855, 297
+  offset: 0, 0
+  index: -1
+rocket_arrow
+  rotate: false
+  xy: 859, 2
+  size: 654, 334
+  orig: 654, 334
+  offset: 0, 0
+  index: 3
+
+main_game7.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+main_game_pause_dark_background
+  rotate: false
+  xy: 2, 207
+  size: 1350, 629
+  orig: 1350, 629
+  offset: 0, 0
+  index: -1
+player_faint
+  rotate: false
+  xy: 1666, 1838
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 14
+player_faint
+  rotate: false
+  xy: 1666, 1633
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 15
+player_faint
+  rotate: false
+  xy: 1666, 1428
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 16
+player_faint
+  rotate: false
+  xy: 1666, 1223
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 17
+player_faint
+  rotate: false
+  xy: 1666, 1018
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 18
+player_faint
+  rotate: false
+  xy: 1666, 813
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 19
+player_faint
+  rotate: false
+  xy: 1354, 633
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 5
+player_faint
+  rotate: false
+  xy: 1354, 428
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 20
+player_faint
+  rotate: false
+  xy: 1354, 223
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 1
+player_faint
+  rotate: false
+  xy: 1590, 85
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 2
+player_faint
+  rotate: false
+  xy: 1354, 18
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 3
+player_faint
+  rotate: false
+  xy: 2, 2
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 24
+player_faint
+  rotate: false
+  xy: 238, 2
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 25
+player_faint
+  rotate: false
+  xy: 474, 2
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 26
+player_faint
+  rotate: false
+  xy: 710, 2
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 21
+player_faint
+  rotate: false
+  xy: 946, 2
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 28
+player_hurt
+  rotate: false
+  xy: 1902, 1866
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 38
+player_hurt
+  rotate: false
+  xy: 1902, 1689
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 30
+player_hurt
+  rotate: false
+  xy: 1902, 1512
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 31
+player_hurt
+  rotate: false
+  xy: 1902, 1335
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 32
+player_hurt
+  rotate: false
+  xy: 1902, 1158
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 35
+player_hurt
+  rotate: false
+  xy: 1902, 981
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 36
+player_hurt
+  rotate: false
+  xy: 1902, 804
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 39
+player_run
+  rotate: false
+  xy: 1826, 113
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 36
+player_run
+  rotate: false
+  xy: 1182, 30
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 4
+shield_collectible
+  rotate: false
+  xy: 1590, 290
+  size: 448, 512
+  orig: 448, 512
+  offset: 0, 0
+  index: -1
+stone
+  rotate: false
+  xy: 2, 838
+  size: 1662, 1203
+  orig: 1662, 1203
+  offset: 0, 0
+  index: -1
+
+main_game8.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player_faint
+  rotate: false
+  xy: 1666, 1828
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 9
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 39
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 40
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 38
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 32
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 36
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 33
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 37
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 34
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 35
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 42
+player_faint
+  rotate: false
+  xy: 657, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 41
+player_faint
+  rotate: false
+  xy: 1666, 1623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 30
+player_faint
+  rotate: false
+  xy: 893, 623
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 31
+player_faint
+  rotate: false
+  xy: 1666, 1418
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 4
+player_hurt
+  rotate: false
+  xy: 1902, 1856
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 16
+player_hurt
+  rotate: false
+  xy: 1666, 1241
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 41
+player_hurt
+  rotate: false
+  xy: 1902, 1679
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 42
+player_hurt
+  rotate: false
+  xy: 1244, 651
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 37
+player_hurt
+  rotate: false
+  xy: 1781, 1241
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 5
+player_hurt
+  rotate: false
+  xy: 1902, 1502
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 7
+player_hurt
+  rotate: false
+  xy: 1781, 1064
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 40
+player_hurt
+  rotate: false
+  xy: 657, 446
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 2
+player_hurt
+  rotate: false
+  xy: 1462, 474
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 21
+player_hurt
+  rotate: false
+  xy: 1575, 297
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 3
+player_hurt
+  rotate: false
+  xy: 1575, 120
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 10
+player_hurt
+  rotate: false
+  xy: 1690, 297
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 11
+player_hurt
+  rotate: false
+  xy: 1690, 120
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 12
+player_hurt
+  rotate: false
+  xy: 1805, 297
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 13
+player_hurt
+  rotate: false
+  xy: 1805, 120
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 14
+player_hurt
+  rotate: false
+  xy: 1920, 356
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 17
+player_hurt
+  rotate: false
+  xy: 1920, 179
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 18
+player_hurt
+  rotate: false
+  xy: 1920, 2
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 19
+player_run
+  rotate: false
+  xy: 1129, 651
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 9
+player_run
+  rotate: false
+  xy: 1666, 1064
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 7
+player_run
+  rotate: false
+  xy: 1359, 651
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 37
+player_run
+  rotate: false
+  xy: 1666, 887
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 40
+player_run
+  rotate: false
+  xy: 1474, 651
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 25
+player_run
+  rotate: false
+  xy: 1781, 887
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 20
+player_run
+  rotate: false
+  xy: 1589, 651
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 10
+player_run
+  rotate: false
+  xy: 772, 446
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 14
+player_run
+  rotate: false
+  xy: 887, 446
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 15
+player_run
+  rotate: false
+  xy: 1002, 446
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 16
+player_run
+  rotate: false
+  xy: 655, 269
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 17
+player_run
+  rotate: false
+  xy: 770, 269
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 18
+player_run
+  rotate: false
+  xy: 885, 269
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 19
+player_run
+  rotate: false
+  xy: 1000, 269
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 13
+player_run
+  rotate: false
+  xy: 1704, 710
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 8
+player_run
+  rotate: false
+  xy: 1819, 710
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 0
+player_run
+  rotate: false
+  xy: 655, 92
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 26
+player_run
+  rotate: false
+  xy: 770, 92
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 22
+player_run
+  rotate: false
+  xy: 885, 92
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 23
+player_run
+  rotate: false
+  xy: 1000, 92
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 24
+player_run
+  rotate: false
+  xy: 1902, 1325
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 11
+player_run
+  rotate: false
+  xy: 1896, 1148
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 27
+player_run
+  rotate: false
+  xy: 1896, 971
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 28
+player_run
+  rotate: false
+  xy: 1117, 446
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 29
+player_run
+  rotate: false
+  xy: 1115, 269
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 1
+player_run
+  rotate: false
+  xy: 1115, 92
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 3
+player_run
+  rotate: false
+  xy: 1232, 474
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 5
+player_run
+  rotate: false
+  xy: 1347, 474
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 6
+player_run
+  rotate: false
+  xy: 1577, 474
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 32
+player_run
+  rotate: false
+  xy: 1692, 474
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 33
+player_run
+  rotate: false
+  xy: 1807, 533
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 34
+player_run
+  rotate: false
+  xy: 1922, 533
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 39
+player_run
+  rotate: false
+  xy: 1230, 269
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 35
+player_run
+  rotate: false
+  xy: 1230, 92
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 41
+player_run
+  rotate: false
+  xy: 1345, 297
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 42
+player_run
+  rotate: false
+  xy: 1345, 120
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 21
+player_run
+  rotate: false
+  xy: 1460, 297
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 12
+player_run
+  rotate: false
+  xy: 1460, 120
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 2
+rocket_arrow
+  rotate: false
+  xy: 2, 490
+  size: 653, 336
+  orig: 653, 336
+  offset: 0, 0
+  index: 2
+rocket_arrow
+  rotate: false
+  xy: 2, 152
+  size: 651, 336
+  orig: 651, 336
+  offset: 0, 0
+  index: 1
+stone_desert
+  rotate: false
+  xy: 2, 828
+  size: 1662, 1203
+  orig: 1662, 1203
+  offset: 0, 0
+  index: -1
+
+main_game9.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+coin_magnet
+  rotate: false
+  xy: 2, 356
+  size: 1409, 1419
+  orig: 1409, 1419
+  offset: 0, 0
+  index: -1
+player_hurt
+  rotate: false
+  xy: 2, 179
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 34
+player_hurt
+  rotate: false
+  xy: 2, 2
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 6
+player_run
+  rotate: false
+  xy: 1413, 1600
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 38
+
+main_game10.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+shield
+  rotate: false
+  xy: 2, 2
+  size: 1389, 1390
+  orig: 1389, 1390
+  offset: 0, 0
+  index: -1
+
+main_game11.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tap_to_start_finger
+  rotate: false
+  xy: 2, 2
+  size: 1259, 1167
+  orig: 1259, 1167
+  offset: 0, 0
+  index: -1

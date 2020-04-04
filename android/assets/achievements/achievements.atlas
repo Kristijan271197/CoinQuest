@@ -1,0 +1,74 @@
+
+achievements.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievement_completed
+  rotate: false
+  xy: 1068, 1640
+  size: 114, 90
+  orig: 114, 90
+  offset: 0, 0
+  index: -1
+achievements_coin_button_pressed
+  rotate: false
+  xy: 2, 2
+  size: 254, 100
+  orig: 254, 100
+  offset: 0, 0
+  index: -1
+achievements_coin_button_unpressed
+  rotate: false
+  xy: 259, 105
+  size: 254, 100
+  orig: 254, 100
+  offset: 0, 0
+  index: -1
+achievements_diamonds_button_pressed
+  rotate: false
+  xy: 2, 104
+  size: 255, 101
+  orig: 255, 101
+  offset: 0, 0
+  index: -1
+achievements_diamonds_button_unpressed
+  rotate: false
+  xy: 1068, 1732
+  size: 255, 101
+  orig: 255, 101
+  offset: 0, 0
+  index: -1
+achievements_second_page
+  rotate: false
+  xy: 2, 207
+  size: 1064, 1626
+  orig: 1064, 1626
+  offset: 0, 0
+  index: -1
+
+achievements2.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements_third_page
+  rotate: false
+  xy: 2, 2
+  size: 1064, 1626
+  orig: 1064, 1626
+  offset: 0, 0
+  index: -1
+
+achievements3.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements_first_page
+  rotate: false
+  xy: 2, 2
+  size: 1064, 1626
+  orig: 1064, 1626
+  offset: 0, 0
+  index: -1

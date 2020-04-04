@@ -1,0 +1,89 @@
+
+shared.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+back_button_pressed
+  rotate: false
+  xy: 1562, 1535
+  size: 186, 186
+  orig: 186, 186
+  offset: 0, 0
+  index: -1
+back_button_unpressed
+  rotate: false
+  xy: 1562, 1347
+  size: 186, 186
+  orig: 186, 186
+  offset: 0, 0
+  index: -1
+coin
+  rotate: false
+  xy: 995, 174
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+congratulations_window
+  rotate: false
+  xy: 995, 256
+  size: 932, 342
+  orig: 932, 342
+  offset: 0, 0
+  index: -1
+congratulations_window_x_button_pressed
+  rotate: false
+  xy: 1750, 1536
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+congratulations_window_x_button_unpressed
+  rotate: false
+  xy: 1562, 1160
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
+diamond
+  rotate: false
+  xy: 2, 600
+  size: 1558, 1283
+  orig: 1558, 1283
+  offset: 0, 0
+  index: -1
+long_button_pressed
+  rotate: false
+  xy: 2, 2
+  size: 405, 160
+  orig: 405, 160
+  offset: 0, 0
+  index: -1
+long_button_unpressed
+  rotate: false
+  xy: 1562, 1723
+  size: 405, 160
+  orig: 405, 160
+  offset: 0, 0
+  index: -1
+sure_quit_window
+  rotate: false
+  xy: 2, 164
+  size: 991, 434
+  orig: 991, 434
+  offset: 0, 0
+  index: -1
+
+shared2.png
+size: 512,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+menu_background
+  rotate: false
+  xy: 2, 2
+  size: 500, 1000
+  orig: 500, 1000
+  offset: 0, 0
+  index: -1
