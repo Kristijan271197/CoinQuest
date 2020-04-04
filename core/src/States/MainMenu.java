@@ -159,9 +159,9 @@ public class MainMenu extends State {
         spinningWheelButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                // gsm.set(new SpinningWheel(gsm, adsController, manager));
+                gsm.set(new SpinningWheel(gsm, adsController, manager));
                 musicSoundsObject.playButtonClick();
-                //dispose();
+                dispose();
             }
         });
 
