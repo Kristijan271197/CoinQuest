@@ -420,7 +420,7 @@ public class SpinningWheel extends State {
         for (int i = 0; i < 5; i++)
             stage.getActors().get(i + 18).setVisible(false);
         for (int i = 0; i < wheelMultiplier; i++)
-            stage.getActors().get(i + 18 ).setVisible(true);
+            stage.getActors().get(i + 18).setVisible(true);
     }
 
     private void spinWheel() {
