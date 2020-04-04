@@ -18,8 +18,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class Achievements extends State {
     private static final String ACHIEVEMENTS_PASSED = "achievementsPassed";
-    private static final String ACHIEVEMENTS_PASSED_ACHIEVEMENT_PASSED = "lifetimeMetresAchievementPassed";
-    private static final String ACHIEVEMENTS_PASSED_ATM_ACHIEVEMENT = "lifetimeMetresAtmAchievement";
+    private static final String ACHIEVEMENTS_PASSED_ACHIEVEMENT_PASSED = "achievementsPassedAchievementPassed";
+    private static final String ACHIEVEMENTS_PASSED_ATM_ACHIEVEMENT = "achievementsPassedAtmAchievement";
     private static final String ADS_WATCHED_ACHIEVEMENT_PASSED = "adsWatchedAchievementPassed";
     public static final String ADS_WATCHED_ATM_ACHIEVEMENT = "adsWatchedAtmAchievement";
     private static final String CITY_ACHIEVEMENT_PASSED = "cityAchievementPassed";
@@ -217,7 +217,7 @@ public class Achievements extends State {
                 } else if (achievementsPageNumber == 3) {
                     if (prefs.getInteger(STAGES_PLAYED_ATM_ACHIEVEMENT, 0) == 3)
                         prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + stagesPlayedRewards[prefs.getInteger(STAGES_PLAYED_ATM_ACHIEVEMENT, 0)]);
-                     else
+                    else
                         prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + stagesPlayedRewards[prefs.getInteger(STAGES_PLAYED_ATM_ACHIEVEMENT, 0)]);
                     prefs.putInteger(STAGES_PLAYED_ATM_ACHIEVEMENT, prefs.getInteger(STAGES_PLAYED_ATM_ACHIEVEMENT) + 1);
                     prefs.putBoolean(STAGES_PLAYED_ACHIEVEMENT_PASSED, false);
@@ -231,7 +231,7 @@ public class Achievements extends State {
             }
         });
 
-        secondAchievementButton = new ImageButton(this.coinsAchievementButtonStyle);
+        secondAchievementButton = new ImageButton(coinsAchievementButtonStyle);
         secondAchievementButton.setPosition(worldXToScreenX(360.0F), worldYToScreenY(620.0F));
         secondAchievementButton.setSize(worldXToScreenX(120.0F), worldYToScreenY(50.0F));
         secondAchievementButton.addListener(new ClickListener() {
@@ -241,7 +241,7 @@ public class Achievements extends State {
                 if (achievementsPageNumber == 1) {
                     if (prefs.getInteger(DESERT_ATM_ACHIEVEMENT, 0) == 3)
                         prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + desertMetresPassedRewards[prefs.getInteger(DESERT_ATM_ACHIEVEMENT, 0)]);
-                     else
+                    else
                         prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + desertMetresPassedRewards[prefs.getInteger(DESERT_ATM_ACHIEVEMENT, 0)]);
                     prefs.putInteger(DESERT_ATM_ACHIEVEMENT, prefs.getInteger(DESERT_ATM_ACHIEVEMENT) + 1);
                     prefs.putBoolean(DESERT_ACHIEVEMENT_PASSED, false);
@@ -258,7 +258,7 @@ public class Achievements extends State {
                 } else if (achievementsPageNumber == 3) {
                     if (prefs.getInteger(POWER_UPS_COLLECTED_ATM_ACHIEVEMENT, 0) == 3)
                         prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + powerUpsCollectedRewards[prefs.getInteger(POWER_UPS_COLLECTED_ATM_ACHIEVEMENT, 0)]);
-                     else
+                    else
                         prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + powerUpsCollectedRewards[prefs.getInteger(POWER_UPS_COLLECTED_ATM_ACHIEVEMENT, 0)]);
                     prefs.putInteger(POWER_UPS_COLLECTED_ATM_ACHIEVEMENT, prefs.getInteger(POWER_UPS_COLLECTED_ATM_ACHIEVEMENT) + 1);
                     prefs.putBoolean(POWER_UPS_COLLECTED_ACHIEVEMENT_PASSED, false);
@@ -272,155 +272,459 @@ public class Achievements extends State {
             }
         });
 
-        imageButton4 = new ImageButton(this.coinsAchievementButtonStyle);
-        this.thirdAchievementButton = imageButton4;
-        imageButton4.setPosition(worldXToScreenX(360.0F), worldYToScreenY(470.0F));
-        this.thirdAchievementButton.setSize(worldXToScreenX(120.0F), worldYToScreenY(50.0F));
-        this.thirdAchievementButton.addListener(new ClickListener() {
+        thirdAchievementButton = new ImageButton(coinsAchievementButtonStyle);
+        thirdAchievementButton.setPosition(worldXToScreenX(360.0F), worldYToScreenY(470.0F));
+        thirdAchievementButton.setSize(worldXToScreenX(120.0F), worldYToScreenY(50.0F));
+        thirdAchievementButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Achievements.this.musicSoundsObject.playButtonReceiveCoins();
-                if (Achievements.this.achievementsPageNumber == 1) {
-                    if (Achievements.this.prefs.getInteger("coinsOneGameAtmAchievement", 0) == 3) {
-                        Achievements.this.prefs.putInteger("ruby", Achievements.this.prefs.getInteger("ruby") + Achievements.this.coinsCollectedOneGameRewards[Achievements.this.prefs.getInteger("coinsOneGameAtmAchievement", 0)]);
-                    } else {
-                        Achievements.this.prefs.putInteger("coins", Achievements.this.prefs.getInteger("coins") + Achievements.this.coinsCollectedOneGameRewards[Achievements.this.prefs.getInteger("coinsOneGameAtmAchievement", 0)]);
-                    }
-                    Achievements.this.prefs.putInteger("coinsOneGameAtmAchievement", Achievements.this.prefs.getInteger("coinsOneGameAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("coinsOneGameAchievementPassed", false);
-                    Achievements.this.prefs.putInteger("achievementsPassed", Achievements.this.prefs.getInteger("achievementsPassed", 0) + 1);
-                    Achievements.this.prefs.flush();
+                musicSoundsObject.playButtonReceiveCoins();
+                if (achievementsPageNumber == 1) {
+                    if (prefs.getInteger(COINS_ONE_GAME_ATM_ACHIEVEMENT, 0) == 3)
+                        prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + coinsCollectedOneGameRewards[prefs.getInteger(COINS_ONE_GAME_ATM_ACHIEVEMENT, 0)]);
+                    else
+                        prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + coinsCollectedOneGameRewards[prefs.getInteger(COINS_ONE_GAME_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(COINS_ONE_GAME_ATM_ACHIEVEMENT, prefs.getInteger(COINS_ONE_GAME_ATM_ACHIEVEMENT) + 1);
+                    prefs.putBoolean(COINS_ONE_GAME_ACHIEVEMENT_PASSED, false);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
-                } else if (Achievements.this.achievementsPageNumber == 2) {
-                    Achievements.this.prefs.putInteger("ruby", Achievements.this.prefs.getInteger("ruby") + Achievements.this.stageCompletedRewards[Achievements.this.prefs.getInteger("stageCompletedAtmAchievement", 0)]);
-                    Achievements.this.prefs.putInteger("stageCompletedAtmAchievement", Achievements.this.prefs.getInteger("stageCompletedAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("stageCompletedAchievementPassed", false);
-                    Achievements.this.prefs.putInteger("achievementsPassed", Achievements.this.prefs.getInteger("achievementsPassed", 0) + 1);
-                    Achievements.this.prefs.flush();
-                    Achievements achievements1 = Achievements.this;
+                } else if (achievementsPageNumber == 2) {
+                    prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + stageCompletedRewards[prefs.getInteger(STAGE_COMPLETED_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(STAGE_COMPLETED_ATM_ACHIEVEMENT, prefs.getInteger(STAGE_COMPLETED_ATM_ACHIEVEMENT) + 1);
+                    prefs.putBoolean(STAGE_COMPLETED_ACHIEVEMENT_PASSED, false);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
-                } else if (Achievements.this.achievementsPageNumber == 3) {
-                    Achievements.this.prefs.putInteger("coins", Achievements.this.prefs.getInteger("coins") + Achievements.this.adsWatchedRewards[Achievements.this.prefs.getInteger("adsWatchedAtmAchievement", 0)]);
-                    Achievements.this.prefs.putInteger("adsWatchedAtmAchievement", Achievements.this.prefs.getInteger("adsWatchedAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("adsWatchedAchievementPassed", false);
-                    Achievements.this.prefs.flush();
-                    Achievements achievements1 = Achievements.this;
+                } else if (achievementsPageNumber == 3) {
+                    prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + adsWatchedRewards[prefs.getInteger(ADS_WATCHED_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(ADS_WATCHED_ATM_ACHIEVEMENT, prefs.getInteger(ADS_WATCHED_ATM_ACHIEVEMENT) + 1);
+                    prefs.putBoolean(ADS_WATCHED_ACHIEVEMENT_PASSED, false);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
                 }
-                Achievements achievements = Achievements.this;
-                achievements.checkAchievementsPassed(achievements.prefs.getInteger("achievementsPassed", 0));
+                prefs.putInteger(ACHIEVEMENTS_PASSED, prefs.getInteger(ACHIEVEMENTS_PASSED, 0) + 1);
+                prefs.flush();
+                checkAchievementsPassed(prefs.getInteger(ACHIEVEMENTS_PASSED, 0));
             }
         });
-        imageButton4 = new ImageButton(this.coinsAchievementButtonStyle);
-        this.fourthAchievementButton = imageButton4;
-        imageButton4.setPosition(worldXToScreenX(360.0F), worldYToScreenY(320.0F));
-        this.fourthAchievementButton.setSize(worldXToScreenX(120.0F), worldYToScreenY(50.0F));
-        this.fourthAchievementButton.addListener(new ClickListener() {
+
+        fourthAchievementButton = new ImageButton(coinsAchievementButtonStyle);
+        fourthAchievementButton.setPosition(worldXToScreenX(360.0F), worldYToScreenY(320.0F));
+        fourthAchievementButton.setSize(worldXToScreenX(120.0F), worldYToScreenY(50.0F));
+        fourthAchievementButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Achievements.this.musicSoundsObject.playButtonReceiveCoins();
-                if (Achievements.this.achievementsPageNumber == 1) {
-                    if (Achievements.this.prefs.getInteger("wheelsSpunAtmAchievement", 0) == 3) {
-                        Achievements.this.prefs.putInteger("ruby", Achievements.this.prefs.getInteger("ruby") + Achievements.this.wheelsSpunRewards[Achievements.this.prefs.getInteger("wheelsSpunAtmAchievement", 0)]);
-                    } else {
-                        Achievements.this.prefs.putInteger("coins", Achievements.this.prefs.getInteger("coins") + Achievements.this.wheelsSpunRewards[Achievements.this.prefs.getInteger("wheelsSpunAtmAchievement", 0)]);
-                    }
-                    Achievements.this.prefs.putInteger("wheelsSpunAtmAchievement", Achievements.this.prefs.getInteger("wheelsSpunAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("wheelsSpunAchievementPassed", false);
-                    Achievements.this.prefs.flush();
+                musicSoundsObject.playButtonReceiveCoins();
+                if (achievementsPageNumber == 1) {
+                    if (prefs.getInteger(WHEELS_SPUN_ATM_ACHIEVEMENT, 0) == 3)
+                        prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + wheelsSpunRewards[prefs.getInteger(WHEELS_SPUN_ATM_ACHIEVEMENT, 0)]);
+                    else
+                        prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + wheelsSpunRewards[prefs.getInteger(WHEELS_SPUN_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(WHEELS_SPUN_ATM_ACHIEVEMENT, Achievements.this.prefs.getInteger(WHEELS_SPUN_ATM_ACHIEVEMENT) + 1);
+                    prefs.putBoolean(WHEELS_SPUN_ACHIEVEMENT_PASSED, false);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
-                } else if (Achievements.this.achievementsPageNumber == 2) {
-                    if (Achievements.this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0) == 3) {
-                        Achievements.this.prefs.putInteger("ruby", Achievements.this.prefs.getInteger("ruby") + Achievements.this.reviveAfterDeathRewards[Achievements.this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0)]);
-                    } else {
-                        Achievements.this.prefs.putInteger("coins", Achievements.this.prefs.getInteger("coins") + Achievements.this.reviveAfterDeathRewards[Achievements.this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0)]);
-                    }
-                    Achievements.this.prefs.putInteger("revivedAfterDeathAtmAchievement", Achievements.this.prefs.getInteger("revivedAfterDeathAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("revivedAfterDeathAchievementPassed", false);
-                    Achievements.this.prefs.flush();
+                } else if (achievementsPageNumber == 2) {
+                    if (prefs.getInteger(REVIVED_AFTER_DEATH_ATM_ACHIEVEMENT, 0) == 3)
+                        prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + reviveAfterDeathRewards[prefs.getInteger(REVIVED_AFTER_DEATH_ATM_ACHIEVEMENT, 0)]);
+                    else
+                        prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + reviveAfterDeathRewards[prefs.getInteger(REVIVED_AFTER_DEATH_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(REVIVED_AFTER_DEATH_ATM_ACHIEVEMENT, prefs.getInteger(REVIVED_AFTER_DEATH_ATM_ACHIEVEMENT) + 1);
+                    prefs.putBoolean(REVIVED_AFTER_DEATH_ACHIEVEMENT_PASSED, false);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
-                } else if (Achievements.this.achievementsPageNumber == 3) {
-                    Achievements.this.prefs.putInteger("coins", Achievements.this.prefs.getInteger("coins") + Achievements.this.lifeTimeMetresRewards[Achievements.this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]);
-                    Achievements.this.prefs.putInteger("lifetimeMetresAtmAchievement", Achievements.this.prefs.getInteger("lifetimeMetresAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("lifetimeMetresAchievementPassed", false);
-                    Achievements.this.prefs.flush();
+                } else if (achievementsPageNumber == 3) {
+                    prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + lifeTimeMetresRewards[prefs.getInteger(LIFETIME_METRES_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(LIFETIME_METRES_ATM_ACHIEVEMENT, prefs.getInteger(LIFETIME_METRES_ATM_ACHIEVEMENT) + 1);
+                    prefs.putBoolean(LIFETIME_METRES_ACHIEVEMENT_PASSED, false);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
                 }
+                prefs.putInteger(ACHIEVEMENTS_PASSED, prefs.getInteger(ACHIEVEMENTS_PASSED, 0) + 1);
+                prefs.flush();
+                checkAchievementsPassed(prefs.getInteger(ACHIEVEMENTS_PASSED, 0));
             }
         });
-        imageButton4 = new ImageButton(this.coinsAchievementButtonStyle);
-        this.fifthAchievementButton = imageButton4;
-        imageButton4.setPosition(worldXToScreenX(360.0F), worldYToScreenY(170.0F));
-        this.fifthAchievementButton.setSize(worldXToScreenX(120.0F), worldYToScreenY(50.0F));
-        this.fifthAchievementButton.addListener(new ClickListener() {
+
+        fifthAchievementButton = new ImageButton(coinsAchievementButtonStyle);
+        fifthAchievementButton.setPosition(worldXToScreenX(360.0F), worldYToScreenY(170.0F));
+        fifthAchievementButton.setSize(worldXToScreenX(120.0F), worldYToScreenY(50.0F));
+        fifthAchievementButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Achievements.this.musicSoundsObject.playButtonReceiveCoins();
-                if (Achievements.this.achievementsPageNumber == 1) {
-                    if (Achievements.this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) == 3 || Achievements.this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) == 7) {
-                        Achievements.this.prefs.putInteger("ruby", Achievements.this.prefs.getInteger("ruby") + Achievements.this.powerUpsUpgradedRewards[Achievements.this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0)]);
-                    } else {
-                        Achievements.this.prefs.putInteger("coins", Achievements.this.prefs.getInteger("coins") + Achievements.this.powerUpsUpgradedRewards[Achievements.this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0)]);
-                    }
-                    Achievements.this.prefs.putInteger("powerUpsUpgradedAtmAchievement", Achievements.this.prefs.getInteger("powerUpsUpgradedAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("powerUpsUpgradedAchievementPassed", false);
-                    Achievements.this.prefs.flush();
+                musicSoundsObject.playButtonReceiveCoins();
+                if (achievementsPageNumber == 1) {
+                    if (prefs.getInteger(POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) == 3 || prefs.getInteger(POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) == 7)
+                        prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + powerUpsUpgradedRewards[prefs.getInteger(POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0)]);
+                    else
+                        prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + powerUpsUpgradedRewards[prefs.getInteger(POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, prefs.getInteger(POWER_UPS_UPGRADED_ATM_ACHIEVEMENT) + 1);
+                    prefs.putInteger(ACHIEVEMENTS_PASSED, prefs.getInteger(ACHIEVEMENTS_PASSED, 0) + 1);
+                    prefs.putBoolean(POWER_UPS_UPGRADED_ACHIEVEMENT_PASSED, false);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
-                } else if (Achievements.this.achievementsPageNumber == 2) {
-                    Achievements.this.prefs.putInteger("coins", Achievements.this.prefs.getInteger("coins") + Achievements.this.metresWithoutCoinsRewards[Achievements.this.prefs.getInteger("metresWithoutCoinsAtmAchievement", 0)]);
-                    Achievements.this.prefs.putInteger("metresWithoutCoinsAtmAchievement", Achievements.this.prefs.getInteger("metresWithoutCoinsAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("metresWithoutCoinsAchievementPassed", false);
-                    Achievements.this.prefs.flush();
+                } else if (achievementsPageNumber == 2) {
+                    prefs.putInteger(Shop.COINS, prefs.getInteger(Shop.COINS) + metresWithoutCoinsRewards[prefs.getInteger(METRES_WITHOUT_COINS_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(METRES_WITHOUT_COINS_ATM_ACHIEVEMENT, prefs.getInteger(METRES_WITHOUT_COINS_ATM_ACHIEVEMENT) + 1);
+                    prefs.putBoolean(METRES_WITHOUT_COINS_ACHIEVEMENT_PASSED, false);
+                    prefs.putInteger(ACHIEVEMENTS_PASSED, prefs.getInteger(ACHIEVEMENTS_PASSED, 0) + 1);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
-                } else if (Achievements.this.achievementsPageNumber == 3) {
-                    Achievements.this.prefs.putInteger("ruby", Achievements.this.prefs.getInteger("ruby") + Achievements.this.achievementsPassedRewards[Achievements.this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]);
-                    Achievements.this.prefs.putInteger("lifetimeMetresAtmAchievement", Achievements.this.prefs.getInteger("lifetimeMetresAtmAchievement") + 1);
-                    Achievements.this.prefs.putBoolean("lifetimeMetresAchievementPassed", false);
-                    Achievements.this.prefs.flush();
+                } else if (achievementsPageNumber == 3) {
+                    prefs.putInteger(Shop.DIAMONDS, prefs.getInteger(Shop.DIAMONDS) + achievementsPassedRewards[prefs.getInteger(ACHIEVEMENTS_PASSED_ATM_ACHIEVEMENT, 0)]);
+                    prefs.putInteger(ACHIEVEMENTS_PASSED_ATM_ACHIEVEMENT, prefs.getInteger(ACHIEVEMENTS_PASSED_ATM_ACHIEVEMENT) + 1);
+                    prefs.putBoolean(ACHIEVEMENTS_PASSED_ACHIEVEMENT_PASSED, false);
+                    prefs.flush();
                     coinsGlobal = prefs.getInteger(Shop.COINS);
                     diamondsGlobal = prefs.getInteger(Shop.DIAMONDS);
                 }
+                checkAchievementsPassed(prefs.getInteger(ACHIEVEMENTS_PASSED, 0));
             }
         });
-        ImageButton.ImageButtonStyle imageButtonStyle2 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle2.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_unpressed")));
-        imageButtonStyle2.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_pressed")));
-        ImageButton imageButton1 = new ImageButton(imageButtonStyle2);
-        imageButton1.setPosition(worldXToScreenX(20.0F), worldYToScreenY(20.0F));
-        imageButton1.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
-        imageButton1.addListener(new ClickListener() {
+
+        ImageButton.ImageButtonStyle backButtonStyle = new ImageButton.ImageButtonStyle();
+        backButtonStyle.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_unpressed")));
+        backButtonStyle.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_pressed")));
+
+        ImageButton backButton = new ImageButton(backButtonStyle);
+        backButton.setPosition(worldXToScreenX(20.0F), worldYToScreenY(20.0F));
+        backButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
+        backButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                Achievements.this.musicSoundsObject.playButtonClick();
-                GameStateManager gameStateManager = gsm;
-                gameStateManager.set(new MainMenu(gameStateManager, adsController, manager));
-                Achievements.this.dispose();
+                musicSoundsObject.playButtonClick();
+                gsm.set(new MainMenu(gsm, adsController, manager));
+                dispose();
             }
         });
+
         this.stage.addActor(bg);
-        this.stage.addActor(this.achievementsPage);
+        this.stage.addActor(achievementsPage);
         this.stage.addActor(achievementsUpButton);
         this.stage.addActor(achievementsDownButton);
-        this.stage.addActor(imageButton1);
-        this.stage.addActor(this.firstAchievementButton);
-        this.stage.addActor(this.secondAchievementButton);
-        this.stage.addActor(this.thirdAchievementButton);
-        this.stage.addActor(this.fourthAchievementButton);
-        this.stage.addActor(this.fifthAchievementButton);
+        this.stage.addActor(backButton);
+        this.stage.addActor(firstAchievementButton);
+        this.stage.addActor(secondAchievementButton);
+        this.stage.addActor(thirdAchievementButton);
+        this.stage.addActor(fourthAchievementButton);
+        this.stage.addActor(fifthAchievementButton);
         this.stage.getActors().get(2).setVisible(false);
         this.stage.getActors().get(5).setVisible(false);
         this.stage.getActors().get(6).setVisible(false);
         this.stage.getActors().get(7).setVisible(false);
         this.stage.getActors().get(8).setVisible(false);
         this.stage.getActors().get(9).setVisible(false);
+    }
+
+
+    public void dispose() {
+        stage.dispose();
+    }
+
+    public void handleInput() {
+    }
+
+    public void render(SpriteBatch barch) {
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+
+
+        if (achievementsPageNumber == 1) {
+            stage.getActors().get(2).setVisible(false);
+            achievementsPage.setDrawable(new TextureRegionDrawable(new TextureRegion(achievementsAtlas.findRegion("achievements_first_page"))));
+        } else if (achievementsPageNumber == 2) {
+            stage.getActors().get(2).setVisible(true);
+            stage.getActors().get(3).setVisible(true);
+            achievementsPage.setDrawable(new TextureRegionDrawable(new TextureRegion(achievementsAtlas.findRegion("achievements_second_page"))));
+        } else if (achievementsPageNumber == 3) {
+            stage.getActors().get(3).setVisible(false);
+            achievementsPage.setDrawable(new TextureRegionDrawable(new TextureRegion(achievementsAtlas.findRegion("achievements_third_page"))));
+        }
+        barch.begin();
+        barch.draw(coin, worldXToScreenX(10.0F), worldYToScreenY(960.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
+        coinAndDiamondFont.draw(barch, String.valueOf(coinsGlobal), worldXToScreenX(40.0F), worldYToScreenY(980.0F));
+        barch.draw(ruby, worldXToScreenX(10.0F), worldYToScreenY(930.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
+        coinAndDiamondFont.draw(barch, String.valueOf(diamondsGlobal), worldXToScreenX(40.0F), worldYToScreenY(950.0F));
+
+        // first Button
+        if (achievementsPageNumber == 1) {
+            if (prefs.getBoolean(CITY_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(5).setVisible(true);
+            else
+                stage.getActors().get(5).setVisible(false);
+        } else if (achievementsPageNumber == 2) {
+            if (prefs.getBoolean(HEAL_STONES_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(5).setVisible(true);
+            else
+                stage.getActors().get(5).setVisible(false);
+        } else if (achievementsPageNumber == 3) {
+            if (prefs.getBoolean(STAGES_PLAYED_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(5).setVisible(true);
+            else
+                stage.getActors().get(5).setVisible(false);
+        }
+
+        if (achievementsPageNumber == 1) {
+            if (prefs.getInteger(CITY_ATM_ACHIEVEMENT, 0) == 3)
+                firstAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                firstAchievementButton.setStyle(coinsAchievementButtonStyle);
+
+        } else if (achievementsPageNumber == 2) {
+            if (prefs.getInteger(HEAL_STONES_ATM_ACHIEVEMENT, 0) == 3)
+                firstAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                firstAchievementButton.setStyle(coinsAchievementButtonStyle);
+        } else if (achievementsPageNumber == 3) {
+            if (prefs.getInteger(STAGES_PLAYED_ATM_ACHIEVEMENT, 0) == 3)
+                firstAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                firstAchievementButton.setStyle(coinsAchievementButtonStyle);
+
+        }
+
+        //second Button
+        if (achievementsPageNumber == 1) {
+            if (prefs.getBoolean(DESERT_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(6).setVisible(true);
+            else
+                stage.getActors().get(6).setVisible(false);
+        } else if (achievementsPageNumber == 2) {
+            if (prefs.getBoolean(LIFETIME_COINS_COLLECTED_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(6).setVisible(true);
+            else
+                stage.getActors().get(6).setVisible(false);
+        } else if (achievementsPageNumber == 3) {
+            if (prefs.getBoolean(POWER_UPS_COLLECTED_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(6).setVisible(true);
+            else
+                stage.getActors().get(6).setVisible(false);
+        }
+
+        if (achievementsPageNumber == 1) {
+            if (prefs.getInteger(DESERT_ATM_ACHIEVEMENT, 0) == 3)
+                secondAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                secondAchievementButton.setStyle(coinsAchievementButtonStyle);
+        } else if (achievementsPageNumber == 2)
+            secondAchievementButton.setStyle(diamondsAchievementButtonStyle);
+        else if (achievementsPageNumber == 3) {
+            if (prefs.getInteger(POWER_UPS_COLLECTED_ATM_ACHIEVEMENT, 0) == 3)
+                secondAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                secondAchievementButton.setStyle(coinsAchievementButtonStyle);
+        }
+
+        //third Button
+        if (achievementsPageNumber == 1) {
+            if (prefs.getBoolean(COINS_ONE_GAME_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(7).setVisible(true);
+            else
+                stage.getActors().get(7).setVisible(false);
+
+        } else if (achievementsPageNumber == 2) {
+            if (prefs.getBoolean(STAGE_COMPLETED_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(7).setVisible(true);
+            else
+                stage.getActors().get(7).setVisible(false);
+        } else if (achievementsPageNumber == 3) {
+            if (prefs.getBoolean(ADS_WATCHED_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(7).setVisible(true);
+            else
+                stage.getActors().get(7).setVisible(false);
+        }
+
+        if (achievementsPageNumber == 1) {
+            if (prefs.getInteger(COINS_ONE_GAME_ATM_ACHIEVEMENT, 0) == 3)
+                thirdAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                thirdAchievementButton.setStyle(coinsAchievementButtonStyle);
+        } else if (achievementsPageNumber == 2)
+            thirdAchievementButton.setStyle(diamondsAchievementButtonStyle);
+        else if (achievementsPageNumber == 3)
+            thirdAchievementButton.setStyle(coinsAchievementButtonStyle);
+
+        // fourth Button
+        if (achievementsPageNumber == 1) {
+            if (prefs.getBoolean(WHEELS_SPUN_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(8).setVisible(true);
+            else
+                stage.getActors().get(8).setVisible(false);
+        } else if (achievementsPageNumber == 2) {
+            if (prefs.getBoolean(REVIVED_AFTER_DEATH_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(8).setVisible(true);
+            else
+                stage.getActors().get(8).setVisible(false);
+        } else if (achievementsPageNumber == 3) {
+            if (prefs.getBoolean(LIFETIME_METRES_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(8).setVisible(true);
+            else
+                stage.getActors().get(8).setVisible(false);
+        }
+
+        if (achievementsPageNumber == 1) {
+            if (prefs.getInteger(WHEELS_SPUN_ATM_ACHIEVEMENT, 0) == 3)
+                fourthAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                fourthAchievementButton.setStyle(coinsAchievementButtonStyle);
+        } else if (achievementsPageNumber == 2) {
+            if (prefs.getInteger(REVIVED_AFTER_DEATH_ATM_ACHIEVEMENT, 0) == 3)
+                fourthAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                fourthAchievementButton.setStyle(coinsAchievementButtonStyle);
+        } else if (achievementsPageNumber == 3)
+            fourthAchievementButton.setStyle(coinsAchievementButtonStyle);
+
+        //fifthButton
+
+        if (achievementsPageNumber == 1) {
+            if (prefs.getBoolean(POWER_UPS_UPGRADED_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(9).setVisible(true);
+            else
+                stage.getActors().get(9).setVisible(false);
+        } else if (achievementsPageNumber == 2) {
+            if (prefs.getBoolean(METRES_WITHOUT_COINS_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(9).setVisible(true);
+            else
+                stage.getActors().get(9).setVisible(false);
+        } else if (achievementsPageNumber == 3) {
+            if (prefs.getBoolean(LIFETIME_METRES_ACHIEVEMENT_PASSED, false))
+                stage.getActors().get(9).setVisible(true);
+            else
+                stage.getActors().get(9).setVisible(false);
+        }
+
+        if (achievementsPageNumber == 1) {
+            if (prefs.getInteger(POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) == 3 || prefs.getInteger(POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) == 7)
+                fifthAchievementButton.setStyle(diamondsAchievementButtonStyle);
+            else
+                fifthAchievementButton.setStyle(coinsAchievementButtonStyle);
+        } else if (achievementsPageNumber == 2)
+            fifthAchievementButton.setStyle(coinsAchievementButtonStyle);
+        else if (achievementsPageNumber == 3)
+            fifthAchievementButton.setStyle(diamondsAchievementButtonStyle);
+
+
+        if (achievementsPageNumber == 1) {
+            if (this.prefs.getInteger("cityAtmAchievement", 0) < 7) {
+                this.achievementsFont.draw(barch, String.valueOf(this.cityMetresPassed[this.prefs.getInteger("cityAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(815.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("cityAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.cityMetresPassedRewards[this.prefs.getInteger("cityAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(810.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(795.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("desertAtmAchievement", 0) < 7) {
+                this.achievementsFont.draw(barch, String.valueOf(this.desertMetresPassed[this.prefs.getInteger("desertAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(660.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("desertAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.desertMetresPassedRewards[this.prefs.getInteger("desertAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(655.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(640.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("coinsOneGameAtmAchievement", 0) < 6) {
+                this.achievementsFont.draw(barch, String.valueOf(this.coinsCollectedOneGame[this.prefs.getInteger("coinsOneGameAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(510.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("coinsOneGameAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.coinsCollectedOneGameRewards[this.prefs.getInteger("coinsOneGameAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(505.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(490.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("wheelsSpunAtmAchievement", 0) < 7) {
+                this.achievementsFont.draw(barch, String.valueOf(this.wheelsSpun[this.prefs.getInteger("wheelsSpunAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(360.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("wheelsSpunAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.wheelsSpunRewards[this.prefs.getInteger("wheelsSpunAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(355.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(340.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) < 12) {
+                this.achievementsFont.draw(barch, String.valueOf(this.powerUpsUpgraded[this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(210.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("powerUpsUpgradedAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.powerUpsUpgradedRewards[this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(205.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(190.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+        } else if (achievementsPageNumber == 2) {
+            if (this.prefs.getInteger("healStonesAtmAchievement", 0) < 7) {
+                this.achievementsFont.draw(barch, String.valueOf(this.healStones[this.prefs.getInteger("healStonesAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(815.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("healStonesAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.healStonesRewards[this.prefs.getInteger("healStonesAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(810.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(795.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("lifetimeCoinsCollectedAtmAchievement", 0) < 8) {
+                this.achievementsFont.draw(barch, String.valueOf(this.lifetimeCoinsCollected[this.prefs.getInteger("lifetimeCoinsCollectedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(660.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("lifetimeCoinsCollectedAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.lifetimeCoinsCollectedRewards[this.prefs.getInteger("lifetimeCoinsCollectedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(655.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(640.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("stageCompletedAtmAchievement", 0) < 2) {
+                this.achievementsFont.draw(barch, String.valueOf(this.stageCompleted[this.prefs.getInteger("stageCompletedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(510.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("stageCompletedAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.stageCompletedRewards[this.prefs.getInteger("stageCompletedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(505.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(490.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0) < 6) {
+                this.achievementsFont.draw(barch, String.valueOf(this.reviveAfterDeath[this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(360.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("revivedAfterDeathAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.reviveAfterDeathRewards[this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(355.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(340.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("metresWithoutCoinsAtmAchievement", 0) < 6) {
+                this.achievementsFont.draw(barch, String.valueOf(this.metresWithoutCoins[this.prefs.getInteger("metresWithoutCoinsAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(210.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("metresWithoutCoinsAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.metresWithoutCoinsRewards[this.prefs.getInteger("metresWithoutCoinsAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(205.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(190.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+        } else if (achievementsPageNumber == 3) {
+            if (this.prefs.getInteger("stagesPlayedAtmAchievement", 0) < 8) {
+                this.achievementsFont.draw(barch, String.valueOf(this.stagesPlayed[this.prefs.getInteger("stagesPlayedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(815.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("stagesPlayedAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.stagesPlayedRewards[this.prefs.getInteger("stagesPlayedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(810.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(795.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("powerUpsCollectedAtmAchievement", 0) < 7) {
+                this.achievementsFont.draw(barch, String.valueOf(this.powerUpsCollected[this.prefs.getInteger("powerUpsCollectedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(660.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("powerUpsCollectedAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.powerUpsCollectedRewards[this.prefs.getInteger("powerUpsCollectedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(655.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(640.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("adsWatchedAtmAchievement", 0) < 5) {
+                this.achievementsFont.draw(barch, String.valueOf(this.adsWatched[this.prefs.getInteger("adsWatchedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(510.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("adsWatchedAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.adsWatchedRewards[this.prefs.getInteger("adsWatchedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(505.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(490.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("lifetimeMetresAtmAchievement", 0) < 6) {
+                this.achievementsFont.draw(barch, String.valueOf(this.lifeTimeMetres[this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(360.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("lifetimeMetresAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.lifeTimeMetresRewards[this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(355.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(340.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+            if (this.prefs.getInteger("lifetimeMetresAtmAchievement", 0) < 4) {
+                this.achievementsFont.draw(barch, String.valueOf(this.achievementsPassed[this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(210.0F), worldXToScreenX(30.0F), 1, false);
+                if (this.prefs.getBoolean("lifetimeMetresAchievementPassed", false))
+                    this.buyButtonTextFont.draw(barch, String.valueOf(this.achievementsPassedRewards[this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(205.0F), worldXToScreenX(30.0F), 8, false);
+            } else {
+                barch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(190.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
+            }
+        }
+        barch.end();
+    }
+
+    public void update(float paramFloat) {
     }
 
     private void checkAchievementsPassed(int paramInt) {
@@ -535,329 +839,4 @@ public class Achievements extends State {
             this.prefs.flush();
         }
     }
-
-    public void dispose() {
-        this.stage.dispose();
-    }
-
-    public void handleInput() {
-    }
-
-    public void render(SpriteBatch paramSpriteBatch) {
-        this.stage.act(Gdx.graphics.getDeltaTime());
-        this.stage.draw();
-        int i = this.achievementsPageNumber;
-        if (i == 1) {
-            this.stage.getActors().get(2).setVisible(false);
-            this.achievementsPage.setDrawable(new TextureRegionDrawable(new TextureRegion(this.achievementsAtlas.findRegion("achievements_first_page"))));
-        } else if (i == 2) {
-            this.stage.getActors().get(2).setVisible(true);
-            this.stage.getActors().get(3).setVisible(true);
-            this.achievementsPage.setDrawable(new TextureRegionDrawable(new TextureRegion(this.achievementsAtlas.findRegion("achievements_second_page"))));
-        } else if (i == 3) {
-            this.stage.getActors().get(3).setVisible(false);
-            this.achievementsPage.setDrawable(new TextureRegionDrawable(new TextureRegion(this.achievementsAtlas.findRegion("achievements_third_page"))));
-        }
-        paramSpriteBatch.begin();
-        paramSpriteBatch.draw(this.coin, worldXToScreenX(10.0F), worldYToScreenY(960.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
-        this.coinAndDiamondFont.draw(paramSpriteBatch, String.valueOf(this.coinsGlobal), worldXToScreenX(40.0F), worldYToScreenY(980.0F));
-        paramSpriteBatch.draw(this.ruby, worldXToScreenX(10.0F), worldYToScreenY(930.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
-        this.coinAndDiamondFont.draw(paramSpriteBatch, String.valueOf(this.diamondsGlobal), worldXToScreenX(40.0F), worldYToScreenY(950.0F));
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getBoolean("cityAchievementPassed", false)) {
-                this.stage.getActors().get(5).setVisible(true);
-            } else {
-                this.stage.getActors().get(5).setVisible(false);
-            }
-        } else if (i == 2) {
-            if (this.prefs.getBoolean("healStonesAchievementPassed", false)) {
-                this.stage.getActors().get(5).setVisible(true);
-            } else {
-                this.stage.getActors().get(5).setVisible(false);
-            }
-        } else if (i == 3) {
-            if (this.prefs.getBoolean("stagesPlayedAchievementPassed", false)) {
-                this.stage.getActors().get(5).setVisible(true);
-            } else {
-                this.stage.getActors().get(5).setVisible(false);
-            }
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getInteger("cityAtmAchievement", 0) == 3) {
-                this.firstAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.firstAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        } else if (i == 2) {
-            if (this.prefs.getInteger("healStonesAtmAchievement", 0) == 3) {
-                this.firstAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.firstAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        } else if (i == 3) {
-            if (this.prefs.getInteger("stagesPlayedAtmAchievement", 0) == 3) {
-                this.firstAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.firstAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getBoolean("desertAchievementPassed", false)) {
-                this.stage.getActors().get(6).setVisible(true);
-            } else {
-                this.stage.getActors().get(6).setVisible(false);
-            }
-        } else if (i == 2) {
-            if (this.prefs.getBoolean("lifetimeCoinsCollectedAchievementPassed", false)) {
-                this.stage.getActors().get(6).setVisible(true);
-            } else {
-                this.stage.getActors().get(6).setVisible(false);
-            }
-        } else if (i == 3) {
-            if (this.prefs.getBoolean("powerUpsCollectedAchievementPassed", false)) {
-                this.stage.getActors().get(6).setVisible(true);
-            } else {
-                this.stage.getActors().get(6).setVisible(false);
-            }
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getInteger("desertAtmAchievement", 0) == 3) {
-                this.secondAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.secondAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        } else if (i == 2) {
-            this.secondAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-        } else if (i == 3) {
-            if (this.prefs.getInteger("powerUpsCollectedAtmAchievement", 0) == 3) {
-                this.secondAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.secondAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getBoolean("coinsOneGameAchievementPassed", false)) {
-                this.stage.getActors().get(7).setVisible(true);
-            } else {
-                this.stage.getActors().get(7).setVisible(false);
-            }
-        } else if (i == 2) {
-            if (this.prefs.getBoolean("stageCompletedAchievementPassed", false)) {
-                this.stage.getActors().get(7).setVisible(true);
-            } else {
-                this.stage.getActors().get(7).setVisible(false);
-            }
-        } else if (i == 3) {
-            if (this.prefs.getBoolean("adsWatchedAchievementPassed", false)) {
-                this.stage.getActors().get(7).setVisible(true);
-            } else {
-                this.stage.getActors().get(7).setVisible(false);
-            }
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getInteger("coinsOneGameAtmAchievement", 0) == 3) {
-                this.thirdAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.thirdAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        } else if (i == 2) {
-            this.thirdAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-        } else if (i == 3) {
-            this.thirdAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getBoolean("wheelsSpunAchievementPassed", false)) {
-                this.stage.getActors().get(8).setVisible(true);
-            } else {
-                this.stage.getActors().get(8).setVisible(false);
-            }
-        } else if (i == 2) {
-            if (this.prefs.getBoolean("revivedAfterDeathAchievementPassed", false)) {
-                this.stage.getActors().get(8).setVisible(true);
-            } else {
-                this.stage.getActors().get(8).setVisible(false);
-            }
-        } else if (i == 3) {
-            if (this.prefs.getBoolean("lifetimeMetresAchievementPassed", false)) {
-                this.stage.getActors().get(8).setVisible(true);
-            } else {
-                this.stage.getActors().get(8).setVisible(false);
-            }
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getInteger("wheelsSpunAtmAchievement", 0) == 3) {
-                this.fourthAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.fourthAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        } else if (i == 2) {
-            if (this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0) == 3) {
-                this.fourthAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.fourthAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        } else if (i == 3) {
-            this.fourthAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getBoolean("powerUpsUpgradedAchievementPassed", false)) {
-                this.stage.getActors().get(9).setVisible(true);
-            } else {
-                this.stage.getActors().get(9).setVisible(false);
-            }
-        } else if (i == 2) {
-            if (this.prefs.getBoolean("metresWithoutCoinsAchievementPassed", false)) {
-                this.stage.getActors().get(9).setVisible(true);
-            } else {
-                this.stage.getActors().get(9).setVisible(false);
-            }
-        } else if (i == 3) {
-            if (this.prefs.getBoolean("lifetimeMetresAchievementPassed", false)) {
-                this.stage.getActors().get(9).setVisible(true);
-            } else {
-                this.stage.getActors().get(9).setVisible(false);
-            }
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) == 3 || this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) == 7) {
-                this.fifthAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-            } else {
-                this.fifthAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-            }
-        } else if (i == 2) {
-            this.fifthAchievementButton.setStyle(this.coinsAchievementButtonStyle);
-        } else if (i == 3) {
-            this.fifthAchievementButton.setStyle(this.diamondsAchievementButtonStyle);
-        }
-        i = this.achievementsPageNumber;
-        if (i == 1) {
-            if (this.prefs.getInteger("cityAtmAchievement", 0) < 7) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.cityMetresPassed[this.prefs.getInteger("cityAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(815.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("cityAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.cityMetresPassedRewards[this.prefs.getInteger("cityAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(810.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(795.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("desertAtmAchievement", 0) < 7) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.desertMetresPassed[this.prefs.getInteger("desertAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(660.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("desertAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.desertMetresPassedRewards[this.prefs.getInteger("desertAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(655.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(640.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("coinsOneGameAtmAchievement", 0) < 6) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.coinsCollectedOneGame[this.prefs.getInteger("coinsOneGameAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(510.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("coinsOneGameAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.coinsCollectedOneGameRewards[this.prefs.getInteger("coinsOneGameAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(505.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(490.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("wheelsSpunAtmAchievement", 0) < 7) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.wheelsSpun[this.prefs.getInteger("wheelsSpunAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(360.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("wheelsSpunAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.wheelsSpunRewards[this.prefs.getInteger("wheelsSpunAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(355.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(340.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0) < 12) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.powerUpsUpgraded[this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(210.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("powerUpsUpgradedAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.powerUpsUpgradedRewards[this.prefs.getInteger("powerUpsUpgradedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(205.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(190.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-        } else if (i == 2) {
-            if (this.prefs.getInteger("healStonesAtmAchievement", 0) < 7) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.healStones[this.prefs.getInteger("healStonesAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(815.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("healStonesAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.healStonesRewards[this.prefs.getInteger("healStonesAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(810.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(795.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("lifetimeCoinsCollectedAtmAchievement", 0) < 8) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.lifetimeCoinsCollected[this.prefs.getInteger("lifetimeCoinsCollectedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(660.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("lifetimeCoinsCollectedAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.lifetimeCoinsCollectedRewards[this.prefs.getInteger("lifetimeCoinsCollectedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(655.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(640.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("stageCompletedAtmAchievement", 0) < 2) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.stageCompleted[this.prefs.getInteger("stageCompletedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(510.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("stageCompletedAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.stageCompletedRewards[this.prefs.getInteger("stageCompletedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(505.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(490.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0) < 6) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.reviveAfterDeath[this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(360.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("revivedAfterDeathAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.reviveAfterDeathRewards[this.prefs.getInteger("revivedAfterDeathAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(355.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(340.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("metresWithoutCoinsAtmAchievement", 0) < 6) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.metresWithoutCoins[this.prefs.getInteger("metresWithoutCoinsAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(210.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("metresWithoutCoinsAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.metresWithoutCoinsRewards[this.prefs.getInteger("metresWithoutCoinsAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(205.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(190.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-        } else if (i == 3) {
-            if (this.prefs.getInteger("stagesPlayedAtmAchievement", 0) < 8) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.stagesPlayed[this.prefs.getInteger("stagesPlayedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(815.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("stagesPlayedAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.stagesPlayedRewards[this.prefs.getInteger("stagesPlayedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(810.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(795.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("powerUpsCollectedAtmAchievement", 0) < 7) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.powerUpsCollected[this.prefs.getInteger("powerUpsCollectedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(660.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("powerUpsCollectedAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.powerUpsCollectedRewards[this.prefs.getInteger("powerUpsCollectedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(655.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(640.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("adsWatchedAtmAchievement", 0) < 5) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.adsWatched[this.prefs.getInteger("adsWatchedAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(510.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("adsWatchedAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.adsWatchedRewards[this.prefs.getInteger("adsWatchedAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(505.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(490.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("lifetimeMetresAtmAchievement", 0) < 6) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.lifeTimeMetres[this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(360.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("lifetimeMetresAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.lifeTimeMetresRewards[this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(355.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(340.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-            if (this.prefs.getInteger("lifetimeMetresAtmAchievement", 0) < 4) {
-                this.achievementsFont.draw(paramSpriteBatch, String.valueOf(this.achievementsPassed[this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]), worldXToScreenX(295.0F), worldYToScreenY(210.0F), worldXToScreenX(30.0F), 1, false);
-                if (this.prefs.getBoolean("lifetimeMetresAchievementPassed", false))
-                    this.buyButtonTextFont.draw(paramSpriteBatch, String.valueOf(this.achievementsPassedRewards[this.prefs.getInteger("lifetimeMetresAtmAchievement", 0)]), worldXToScreenX(395.0F), worldYToScreenY(205.0F), worldXToScreenX(30.0F), 8, false);
-            } else {
-                paramSpriteBatch.draw(this.achievementCompleted, worldXToScreenX(295.0F), worldYToScreenY(190.0F), worldXToScreenX(50.0F), worldYToScreenY(40.0F));
-            }
-        }
-        paramSpriteBatch.end();
-    }
-
-    public void update(float paramFloat) {
-    }
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\States\Achievements.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */
