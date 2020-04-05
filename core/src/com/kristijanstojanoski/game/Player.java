@@ -6,14 +6,13 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 import States.MusicSounds;
 import States.Shop;
 
 class Player {
-    public static final String PLAYER_GROUND = "playerGround";
+    static final String PLAYER_GROUND = "playerGround";
     private MusicSounds musicSoundsObject;
     private int pause = 0;
     private AtlasRegion[] playerFaint;
@@ -22,7 +21,6 @@ class Player {
     private float playerHeightRect = 0.0f;
     private AtlasRegion[] playerHurt;
     private Rectangle playerRectangle;
-    private Rectangle playerRectangle2;
     private AtlasRegion[] playerRun;
     private int playerState = 0;
     private float playerWidth = 0.0f;
@@ -46,7 +44,7 @@ class Player {
                 playerFaint[i] = mainGameAtlas.findRegion("player_faint", i);
                 playerHurt[i] = mainGameAtlas.findRegion("player_hurt", i);
             }
-            setParameters(100, 600, 100, 155, 25, 60, 0);
+            setParameters(100, 100, 155, 25, 60, 0);
         } else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.ROBOT_NUMBER) {
             playerRun = new AtlasRegion[8];
             playerFaint = new AtlasRegion[10];
@@ -57,7 +55,7 @@ class Player {
             }
             for (int i = 0; i < 10; i++)
                 playerFaint[i] = shopAtlas.findRegion("robot_faint", i);
-            setParameters(65, 600, 170, 170, 50, 60, 15);
+            setParameters(65, 170, 170, 50, 60, 15);
         } else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.KNIGHT_NUMBER) {
             playerRun = new AtlasRegion[10];
             playerFaint = new AtlasRegion[10];
@@ -67,7 +65,7 @@ class Player {
                 playerHurt[i] = shopAtlas.findRegion("knight_hurt", i);
                 playerFaint[i] = shopAtlas.findRegion("knight_faint", i);
             }
-            setParameters(85, 600, 140, 170, 35, 60, 30);
+            setParameters(85, 140, 170, 35, 60, 30);
         } else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.COWBOY_NUMBER) {
             playerRun = new AtlasRegion[10];
             playerFaint = new AtlasRegion[10];
@@ -77,7 +75,7 @@ class Player {
                 playerHurt[i] = shopAtlas.findRegion("cowboy_hurt", i);
                 playerFaint[i] = shopAtlas.findRegion("cowboy_faint", i);
             }
-            setParameters(85, 600, 120, 145, 35, 60, 30);
+            setParameters(85, 120, 145, 35, 60, 30);
         } else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.COWGIRL_NUMBER) {
             playerRun = new AtlasRegion[8];
             playerFaint = new AtlasRegion[10];
@@ -89,7 +87,7 @@ class Player {
                 playerRun[i] = shopAtlas.findRegion("cowgirl_run", i);
                 playerHurt[i] = shopAtlas.findRegion("cowgirl_hurt", i);
             }
-            setParameters(60, 600, 170, 145, 35, 60, 30);
+            setParameters(60, 170, 145, 35, 60, 30);
         } else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.NINJA_MALE_NUMBER) {
             playerRun = new AtlasRegion[10];
             playerFaint = new AtlasRegion[10];
@@ -99,7 +97,7 @@ class Player {
                 playerRun[i] = shopAtlas.findRegion("ninja_male_run", i);
                 playerHurt[i] = shopAtlas.findRegion("ninja_male_hurt", i);
             }
-            setParameters(90, 600, 110, 140, 35, 60, 30);
+            setParameters(90, 110, 140, 35, 60, 30);
         } else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.NINJA_FEMALE_NUMBER) {
             playerRun = new AtlasRegion[10];
             playerFaint = new AtlasRegion[10];
@@ -109,7 +107,7 @@ class Player {
                 playerRun[i] = shopAtlas.findRegion("ninja_female_run", i);
                 playerHurt[i] = shopAtlas.findRegion("ninja_female_hurt", i);
             }
-            setParameters(90, 600, 110, 150, 35, 60, 30);
+            setParameters(90, 110, 150, 35, 60, 30);
         } else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.DINO_NUMBER) {
             playerRun = new AtlasRegion[10];
             playerFaint = new AtlasRegion[10];
@@ -119,16 +117,14 @@ class Player {
                 playerRun[i] = shopAtlas.findRegion("dino_run", i);
                 playerHurt[i] = shopAtlas.findRegion("dino_hurt", i);
             }
-            setParameters(80, 600, 190, 130, 35, 70, 30);
+            setParameters(80, 190, 130, 35, 70, 30);
         }
         tapToStart = mainGameAtlas.findRegion("tap_to_start_finger");
     }
 
 
-    public void drawPlayerFaint(SpriteBatch batch, boolean pause, Preferences prefs) {
+    void drawPlayerFaint(SpriteBatch batch, boolean pause, Preferences prefs) {
         if (!pause) {
-
-
             velocity = (worldYToScreenY(0.5f) * Gdx.graphics.getDeltaTime() * 60.0f) + velocity;
             playerY = playerY - velocity;
 
@@ -186,7 +182,7 @@ class Player {
 
     }
 
-    void drawPlayerRun(SpriteBatch batch, Shield shieldObject, Rock rockObject, boolean pause, ShapeRenderer var5, Preferences prefs) {
+    void drawPlayerRun(SpriteBatch batch, Shield shieldObject, Rock rockObject, boolean pause, Preferences prefs) {
         if (shieldObject.isHasShield())
             shieldObject.drawShield(batch, playerX, playerY, pause, prefs);
 
@@ -194,7 +190,6 @@ class Player {
             batch.draw(playerHurt[playerState], playerX, playerY, playerWidth, playerHeight);
         else
             batch.draw(playerRun[playerState], playerX, playerY, playerWidth, playerHeight);
-
 
         if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.PLAYER_NUMBER)
             playerRectangle = new Rectangle(playerX + worldXToScreenX(25.0F), playerY, worldXToScreenX(60.0F), playerHeight);
@@ -214,8 +209,6 @@ class Player {
             playerRectangle = new Rectangle(playerX + worldXToScreenX(35.0F), playerY, worldXToScreenX(70.0F), playerHeight);
 
 
-        playerRectangle2 = new Rectangle(playerX, playerY, playerWidth, playerHeight);
-
         if (!pause) {
             if (Gdx.input.justTouched()) {
                 if (!(Gdx.input.getX() < 0 || (float) Gdx.input.getX() > Gdx.graphics.getWidth() || Gdx.input.getY() < 0 || (float) Gdx.input.getY() >= Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 15.0F)) {
@@ -224,14 +217,14 @@ class Player {
                 }
             }
 
+            if (playerY + playerHeight >= (float) Gdx.graphics.getHeight())
+                velocity = Gdx.graphics.getDeltaTime() * 1.0F * 60.0F;
+
             if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.PLAYER_NUMBER) {
                 if (playerState < 42)
                     playerState = playerState + 1;
                 else
                     playerState = 0;
-
-                if (playerY + playerHeight >= (float) Gdx.graphics.getHeight())
-                    velocity = Gdx.graphics.getDeltaTime() * 1.0F * 60.0F;
 
             } else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.ROBOT_NUMBER)
                 playerRunState(3, 7, 15);
@@ -256,7 +249,7 @@ class Player {
         }
     }
 
-    public void drawPlayerStart(SpriteBatch batch, Preferences prefs) {
+    void drawPlayerStart(SpriteBatch batch, Preferences prefs) {
         if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.PLAYER_NUMBER) {
             playerX = worldXToScreenX(100.0f);
             playerY = worldYToScreenY(600.0f);
@@ -287,7 +280,7 @@ class Player {
         batch.draw(tapToStart, worldXToScreenX(250.0f), worldYToScreenY(425.0f), worldXToScreenX(150.0f), worldYToScreenY(150.0f));
     }
 
-    public void drawPlayerWin(SpriteBatch batch) {
+    void drawPlayerWin(SpriteBatch batch) {
         velocity = (worldYToScreenY(0.5f) * Gdx.graphics.getDeltaTime() * 60.0f) + velocity;
         playerY = playerY - velocity;
 
@@ -303,7 +296,7 @@ class Player {
 
 
 
-    public void resetPlayerStats(Preferences prefs) {
+    void resetPlayerStats(Preferences prefs) {
         if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.PLAYER_NUMBER) {
             playerX = worldXToScreenX(100.0f);
             playerY = worldYToScreenY(600.0f);
@@ -362,9 +355,9 @@ class Player {
 
     }
 
-    private void setParameters(int X, int Y, int width, int height, int xRect, int widthRect, int heightRect) {
+    private void setParameters(int X, int width, int height, int xRect, int widthRect, int heightRect) {
         playerX = worldXToScreenX((float) X);
-        playerY = worldYToScreenY((float) Y);
+        playerY = worldYToScreenY((float) 600);
         playerWidth = worldXToScreenX((float) width);
         playerHeight = worldYToScreenY((float) height);
         playerXRect = playerX + worldXToScreenX((float) xRect);
@@ -384,27 +377,27 @@ class Player {
     }
 
 
-    public float getPlayerHeightRect() {
+    float getPlayerHeightRect() {
         return this.playerHeightRect;
     }
 
 
-    public Rectangle getPlayerRectangle() {
+    Rectangle getPlayerRectangle() {
         return this.playerRectangle;
     }
 
 
-    public float getPlayerWidthRect() {
+    float getPlayerWidthRect() {
         return this.playerWidthRect;
     }
 
 
-    public float getPlayerXRect() {
+    float getPlayerXRect() {
         return this.playerXRect;
     }
 
 
-    public float getPlayerY() {
+    float getPlayerY() {
         return this.playerY;
     }
 

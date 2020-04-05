@@ -34,9 +34,9 @@ public class Shop extends State {
     public static final String COIN_RUSH_UPGRADED = "coinRushUpgraded";
     public static final String SPAWN_RATE_UPGRADED = "spawnRateUpgraded";
     public static final String SPAWN_RATE_COINS_UPGRADED = "spawnRateCoinsUpgraded";
-
     private static final String COSTUME_SELECTED = "costumeSelected";
     public static final String COSTUME_SELECTED_GAME = "costumeSelectedGame";
+
     public static final int PLAYER_NUMBER = 0;
     public static final int ROBOT_NUMBER = 1;
     public static final int KNIGHT_NUMBER = 2;
@@ -1171,7 +1171,7 @@ public class Shop extends State {
             stage.getActors().get(33).setVisible(true);
             if (prefs.getBoolean(DOUBLE_COINS, false))
                 stage.getActors().get(34).setVisible(false);
-             else
+            else
                 stage.getActors().get(34).setVisible(true);
         } else {
             stage.getActors().get(5).setVisible(false);

@@ -73,7 +73,7 @@ class Shield {
         }
     }
 
-    void drawShieldCollectible(SpriteBatch batch, boolean pause, ShapeRenderer paramShapeRenderer) {
+    void drawShieldCollectible(SpriteBatch batch, boolean pause) {
         shieldCollectibleRectangles.clear();
         for (int i = 0; i < shieldCollectibleXs.size(); i++) {
             batch.draw(shieldCollectible, shieldCollectibleXs.get(i), shieldCollectibleYs.get(i), worldXToScreenX(62.0F), worldYToScreenY(70.0F));

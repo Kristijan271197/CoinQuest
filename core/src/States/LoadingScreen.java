@@ -86,7 +86,7 @@ public class LoadingScreen extends State {
             batch.draw(greenBar, worldXToScreenX(105.0F), worldYToScreenY(206.0F), worldXToScreenX((int) (manager.getProgress() * 290.0F)), worldYToScreenY(66.0F));
             batch.draw(loadingBar, worldXToScreenX(100.0F), worldYToScreenY(200.0F), worldXToScreenX(300.0F), worldYToScreenY(80.0F));
             batch.draw(loadingBarOutline, worldXToScreenX(93.0F), worldYToScreenY(192.0F), worldXToScreenX(315.0F), worldYToScreenY(96.0F));
-            coinAndDiamondFont.draw(batch, (int) (this.manager.getProgress() * 100.0F) +"%", worldXToScreenX(235.0F), worldYToScreenY(255.0F), worldXToScreenX(30.0F), Align.center, true);
+            coinAndDiamondFont.draw(batch, (int) (this.manager.getProgress() * 100.0F) + "%", worldXToScreenX(235.0F), worldYToScreenY(255.0F), worldXToScreenX(30.0F), Align.center, true);
             batch.end();
         }
     }

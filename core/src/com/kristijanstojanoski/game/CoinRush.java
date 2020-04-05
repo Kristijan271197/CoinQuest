@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -35,7 +34,7 @@ class CoinRush {
         for (int i = 0; i < speedCoinCollectibleXs.size(); i++) {
             batch.draw(speedCoinCollectible, speedCoinCollectibleXs.get(i), speedCoinCollectibleYs.get(i), coinRushWidth, coinRushHeight);
             if (!pause)
-              speedCoinCollectibleXs.set(i, (int) (speedCoinCollectibleXs.get(i) - worldXToScreenX(5.0F) * Gdx.graphics.getDeltaTime() * 60.0F));
+                speedCoinCollectibleXs.set(i, (int) (speedCoinCollectibleXs.get(i) - worldXToScreenX(5.0F) * Gdx.graphics.getDeltaTime() * 60.0F));
             speedCoinCollectibleRectangles.add(new Rectangle(speedCoinCollectibleXs.get(i), speedCoinCollectibleYs.get(i), coinRushWidth, coinRushHeight));
         }
     }
@@ -60,9 +59,9 @@ class CoinRush {
         float height = random.nextFloat() * Gdx.graphics.getHeight();
         if (coinRushHeight + height >= Gdx.graphics.getHeight())
             speedCoinCollectibleYs.add((int) (height - coinRushHeight));
-         else if (height <= worldYToScreenY())
+        else if (height <= worldYToScreenY())
             speedCoinCollectibleYs.add((int) worldYToScreenY());
-         else
+        else
             speedCoinCollectibleYs.add((int) height);
         speedCoinCollectibleXs.add(Gdx.graphics.getWidth());
     }
@@ -107,9 +106,3 @@ class CoinRush {
     public void dispose() {
     }
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\com\zappycode\coinman\game\CoinRush.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */

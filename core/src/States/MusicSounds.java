@@ -37,7 +37,7 @@ public class MusicSounds {
 
 
     public void playBackgroundMusic() {
-        if (this.prefs.getBoolean("music")) {
+        if (this.prefs.getBoolean(Settings.MUSIC)) {
             this.backgroundMusic.setVolume(0.2F);
             this.backgroundMusic.play();
             this.backgroundMusic.setLooping(true);
@@ -47,58 +47,58 @@ public class MusicSounds {
     }
 
     public void playBombSound() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.bombSound.play(1.0F);
     }
 
     void playButtonBuy() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.buttonBuy.play(0.5F);
     }
 
     public void playButtonClick() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.buttonClick.play(0.5F);
     }
 
     void playButtonReceiveCoins() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.buttonReceiveCoins.play(0.5F);
     }
 
     public void playCoinCollect() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.coinCollect.play(0.2F);
     }
 
     public void playJump() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.jump.play(0.25F);
     }
 
     public void playPlayerGround() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.playerGround.play(0.5F);
     }
 
     public void playRockHit() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.rockHit.play(0.5F);
     }
 
     void playWheelReward() {
-        if (this.prefs.getBoolean("sound"))
+        if (this.prefs.getBoolean(Settings.SOUND))
             this.wheelReward.play(0.15F);
     }
 
     void playWheelSpin() {
-        if (this.prefs.getBoolean("sound")) {
+        if (this.prefs.getBoolean(Settings.SOUND)) {
             this.wheelSpin.setVolume(0.15F);
             this.wheelSpin.play();
         }
     }
 
-    public Music getBackgroundMusic() {
+    Music getBackgroundMusic() {
         return this.backgroundMusic;
     }
 

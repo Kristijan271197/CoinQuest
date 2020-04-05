@@ -57,7 +57,7 @@ class Rocket {
             batch.draw(rocketArrowGreen[arrowStateGreen], rocketsArrowX, rocketsArrowYGreen, worldXToScreenX(96.0F), worldYToScreenY(50.0F));
     }
 
-    void drawRocket(SpriteBatch batch, boolean pause, ShapeRenderer paramShapeRenderer, float rocketSpeed) {
+    void drawRocket(SpriteBatch batch, boolean pause, float rocketSpeed) {
         rocketsRectangles.clear();
         for (int i = 0; i < rocketsXs.size(); i++) {
             batch.draw(rocket, rocketsXs.get(i), rocketsYs.get(i), worldXToScreenX(145.0F), worldYToScreenY(50.0F));

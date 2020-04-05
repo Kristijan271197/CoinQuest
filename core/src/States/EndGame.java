@@ -21,8 +21,8 @@ import com.kristijanstojanoski.game.MainGame;
 
 public class EndGame extends State {
     public static final String ADS_WATCHED = "adsWatched";
-    static final String HIGH_SCORE_CITY = "highScoreCity";
-    static final String HIGH_SCORE_DESERT = "highScoreDesert";
+    private static final String HIGH_SCORE_CITY = "highScoreCity";
+    private static final String HIGH_SCORE_DESERT = "highScoreDesert";
     private static final String LIFETIME_COINS_COLLECTED = "lifetimeCoinsCollected";
     private static final String LIFETIME_METRES = "lifetimeMetres";
     public static final String POWER_UPS_COLLECTED = "powerUpsCollected";
@@ -196,7 +196,7 @@ public class EndGame extends State {
         tripleCoinsAdButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                //adsController.showRewardedVideo();
+                adsController.showRewardedVideo();
                 musicSoundsObject.playButtonClick();
             }
         });
@@ -326,6 +326,9 @@ public class EndGame extends State {
         stage.getActors().get(9).setVisible(false);
         stage.getActors().get(10).setVisible(false);
         stage.getActors().get(11).setVisible(false);
+
+        adsController.showInterstitialAd();
+
     }
 
     public void render(SpriteBatch batch) {
@@ -335,26 +338,41 @@ public class EndGame extends State {
             stage.getActors().get(10).setVisible(true);
             stage.getActors().get(11).setVisible(true);
         }
-//        boolean adLoaded = this.mAdsController.getAdLoaded();
-//        boolean rewardReceived = this.mAdsController.getRewardReceived();
-//
-//        if (adLoaded) {
-//            tripleCoinsAdButton.setStyle(this.tripleCoinsAdButtonTexture);
-//            stage.getActors().get(3).setTouchable(Touchable.enabled);
-//        } else {
-//            tripleCoinsAdButton.setStyle(this.tripleCoinsAdWaitButtonTexture);
-//            stage.getActors().get(3).setTouchable(Touchable.disabled);
-//        }
-//        if (rewardReceived) {
-//            stage.getActors().get(3).setVisible(false);
-//            stage.getActors().get(4).setVisible(true);
-//            stage.getActors().get(5).setVisible(true);
-//            showTripleCoinsText = true;
-//            prefs.putInteger(Shop.COINS, coinCount + prefs.getInteger(Shop.COINS));
-//            prefs.putInteger(ADS_WATCHED, prefs.getInteger(ADS_WATCHED, 0) + 1);
-//            prefs.flush();
-//            mAdsController.setRewardReceived(false);
-//        }
+
+        if(mAdsController.getInterstitialAdClosed()){
+            stage.getActors().get(3).setTouchable(Touchable.enabled);
+            stage.getActors().get(6).setTouchable(Touchable.enabled);
+            stage.getActors().get(7).setTouchable(Touchable.enabled);
+            stage.getActors().get(8).setTouchable(Touchable.enabled);
+        } else{
+            stage.getActors().get(3).setTouchable(Touchable.disabled);
+            stage.getActors().get(6).setTouchable(Touchable.disabled);
+            stage.getActors().get(7).setTouchable(Touchable.disabled);
+            stage.getActors().get(8).setTouchable(Touchable.disabled);
+        }
+
+
+        boolean adLoaded = mAdsController.getAdLoaded();
+        boolean rewardReceived = mAdsController.getRewardReceived();
+
+        if (adLoaded) {
+            tripleCoinsAdButton.setStyle(tripleCoinsAdButtonTexture);
+            stage.getActors().get(3).setTouchable(Touchable.enabled);
+        } else {
+            tripleCoinsAdButton.setStyle(tripleCoinsAdWaitButtonTexture);
+            stage.getActors().get(3).setTouchable(Touchable.disabled);
+        }
+
+        if (rewardReceived) {
+            stage.getActors().get(3).setVisible(false);
+            stage.getActors().get(4).setVisible(true);
+            stage.getActors().get(5).setVisible(true);
+            showTripleCoinsText = true;
+            prefs.putInteger(Shop.COINS, coinCount + prefs.getInteger(Shop.COINS));
+            prefs.putInteger(ADS_WATCHED, prefs.getInteger(ADS_WATCHED, 0) + 1);
+            prefs.flush();
+            mAdsController.setRewardReceived(false);
+        }
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

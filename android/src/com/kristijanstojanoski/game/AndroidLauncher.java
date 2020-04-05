@@ -1,107 +1,156 @@
 package com.kristijanstojanoski.game;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import com.badlogic.gdx.ApplicationListener;
+import androidx.annotation.NonNull;
+
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
+import States.AdsController;
 import States.MainClass;
 
-public class AndroidLauncher extends AndroidApplication {
-//  RewardedAd ad;
-  
-  boolean adLoaded = false;
-  
-  boolean rewardReceived = false;
-  
-//  private boolean haveNetworkConnection() {
-//    ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService("connectivity");
-//    boolean bool1 = false;
-//    NetworkInfo[] arrayOfNetworkInfo = new NetworkInfo[0];
-//    if (connectivityManager != null)
-//      arrayOfNetworkInfo = connectivityManager.getAllNetworkInfo();
-//    int i = arrayOfNetworkInfo.length;
-//    byte b = 0;
-//    boolean bool2 = false;
-//    boolean bool3;
-//    for (bool3 = false; b < i; bool3 = bool5) {
-//      NetworkInfo networkInfo = arrayOfNetworkInfo[b];
-//      boolean bool4 = bool2;
-//      if (networkInfo.getTypeName().equalsIgnoreCase("WIFI")) {
-//        bool4 = bool2;
-//        if (networkInfo.isConnected())
-//          bool4 = true;
-//      }
-//      boolean bool5 = bool3;
-//      if (networkInfo.getTypeName().equalsIgnoreCase("MOBILE")) {
-//        bool5 = bool3;
-//        if (networkInfo.isConnected())
-//          bool5 = true;
-//      }
-//      b++;
-//      bool2 = bool4;
-//    }
-//    if (bool2 || bool3)
-//      bool1 = true;
-//    return bool1;
-//  }
-//
-//  public boolean getAdLoaded() {
-//    return this.adLoaded;
-//  }
-//
-//  public boolean getRewardReceived() {
-//    return this.rewardReceived;
-//  }
-//
-//  public void loadRewardedVideoAd() {
-//    this.ad = new RewardedAd((Context)this, "ca-app-pub-7630597585185906/4388758184");
-//    RewardedAdLoadCallback rewardedAdLoadCallback = new RewardedAdLoadCallback() {
-//        public void onRewardedAdFailedToLoad(int param1Int) {
-//          super.onRewardedAdFailedToLoad(param1Int);
-//          AndroidLauncher androidLauncher = AndroidLauncher.this;
-//          StringBuilder stringBuilder = new StringBuilder();
-//          stringBuilder.append("Ad Failed to Load ");
-//          stringBuilder.append(param1Int);
-//          Toast.makeText((Context)androidLauncher, stringBuilder.toString(), 0).show();
-//          AndroidLauncher.this.setAdLoaded(false);
-//          if (AndroidLauncher.this.haveNetworkConnection())
-//            AndroidLauncher.this.loadRewardedVideoAd();
-//        }
-//
-//        public void onRewardedAdLoaded() {
-//          super.onRewardedAdLoaded();
-//          Toast.makeText((Context)AndroidLauncher.this, "Ad Loaded ", 0).show();
-//          AndroidLauncher.this.setAdLoaded(true);
-//        }
-//      };
-//    this.ad.loadAd((new AdRequest.Builder()).build(), rewardedAdLoadCallback);
-//  }
-  
-  protected void onCreate(Bundle paramBundle) {
-    super.onCreate(paramBundle);
-    AndroidApplicationConfiguration androidApplicationConfiguration = new AndroidApplicationConfiguration();
-    initialize(new MainClass(null), androidApplicationConfiguration);
-//    MobileAds.initialize((Context)this, " ca-app-pub-3940256099942544~3347511713");
-//    loadRewardedVideoAd();
-  }
-  
-//  public void setAdLoaded(boolean paramBoolean) {
-//    this.adLoaded = paramBoolean;
-//  }
-//
-//  public void setRewardReceived(boolean paramBoolean) {
-//    this.rewardReceived = paramBoolean;
-//  }
-//
-//  public void showRewardedVideo() {
-//    runOnUiThread(new _$$Lambda$AndroidLauncher$kgDJShkE8_vC5WpiC7y6Muth4MI(this));
-//  }
+public class AndroidLauncher extends AndroidApplication implements AdsController {
+    RewardedAd ad;
+    InterstitialAd iAd;
+    boolean adLoaded = false;
+    boolean rewardReceived = false;
+    boolean iAdClosed = false;
+
+    protected void onCreate(Bundle paramBundle) {
+        super.onCreate(paramBundle);
+        AndroidApplicationConfiguration androidApplicationConfiguration = new AndroidApplicationConfiguration();
+        initialize(new MainClass(this), androidApplicationConfiguration);
+        MobileAds.initialize(this, "ca-app-pub-4701446273186664~4690368835");
+        loadRewardedVideoAd();
+        loadInterstitialAd();
+    }
+
+    public void loadRewardedVideoAd() {
+        ad = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
+        RewardedAdLoadCallback rewardedAdLoadCallback = new RewardedAdLoadCallback() {
+            public void onRewardedAdFailedToLoad(int i) {
+                super.onRewardedAdFailedToLoad(i);
+                Toast.makeText(AndroidLauncher.this, "Ad Failed to Load " + i, Toast.LENGTH_SHORT).show();
+                setAdLoaded(false);
+                if (haveNetworkConnection())
+                    loadRewardedVideoAd();
+            }
+
+            public void onRewardedAdLoaded() {
+                super.onRewardedAdLoaded();
+                Toast.makeText(AndroidLauncher.this, "Ad Loaded ", Toast.LENGTH_SHORT).show();
+                setAdLoaded(true);
+            }
+        };
+
+        ad.loadAd((new AdRequest.Builder()).build(), rewardedAdLoadCallback);
+    }
+
+    public void showRewardedVideo() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (ad.isLoaded()) {
+                    RewardedAdCallback adCallback = new RewardedAdCallback() {
+                        @Override
+                        public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                            setRewardReceived(true);
+                            setAdLoaded(false);
+                            Toast.makeText(AndroidLauncher.this, "Reward" + rewardItem, Toast.LENGTH_SHORT).show();
+                        }
+                    };
+                    ad.show(AndroidLauncher.this, adCallback);
+                    loadRewardedVideoAd();
+                } else
+                    loadRewardedVideoAd();
+            }
+        });
+    }
+
+    @Override
+    public void loadInterstitialAd() {
+        iAd = new InterstitialAd(this);
+        iAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        iAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                loadInterstitialAd();
+            }
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+
+            }
+        });
+        iAd.loadAd(new AdRequest.Builder().build());
+    }
+
+    @Override
+    public void showInterstitialAd() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (iAd.isLoaded()) {
+                    iAd.show();
+                    loadInterstitialAd();
+                } else
+                    loadInterstitialAd();
+            }
+        });
+    }
+
+    @Override
+    public boolean getInterstitialAdClosed() {
+        return iAdClosed;
+    }
+
+    public boolean getAdLoaded() {
+        return this.adLoaded;
+    }
+
+    public boolean getRewardReceived() {
+        return this.rewardReceived;
+    }
+
+    public void setAdLoaded(boolean paramBoolean) {
+        this.adLoaded = paramBoolean;
+    }
+
+    public void setRewardReceived(boolean paramBoolean) {
+        this.rewardReceived = paramBoolean;
+    }
+
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\com\zappycode\coinman\game\AndroidLauncher.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */

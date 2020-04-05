@@ -5,7 +5,6 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
@@ -17,7 +16,7 @@ import States.MusicSounds;
 
 class Bomb {
     private TextureAtlas.AtlasRegion bomb;
-    private ArrayList<Circle> bombCircles = new ArrayList<Circle>();
+    private ArrayList<Circle> bombCircles = new ArrayList<>();
     private float bombHeight = worldYToScreenY(75.0F);
     private float bombWidth = worldXToScreenX(75.0F);
     private ArrayList<Integer> bombXs = new ArrayList<>();
@@ -43,13 +42,12 @@ class Bomb {
         bombXs.add(Gdx.graphics.getWidth());
     }
 
-    void drawBomb(SpriteBatch batch, boolean pause, ShapeRenderer paramShapeRenderer, float bombSpeed) {
+    void drawBomb(SpriteBatch batch, boolean pause, float bombSpeed) {
         bombCircles.clear();
         for (int i = 0; i < bombXs.size(); i++) {
             batch.draw(bomb, bombXs.get(i), bombYs.get(i), bombWidth, bombHeight);
             if (!pause)
                 bombXs.set(i, (int) (bombXs.get(i) - worldXToScreenX(bombSpeed) * Gdx.graphics.getDeltaTime() * 60.0F));
-
             bombCircles.add(new Circle(bombXs.get(i) + bombHeight / 2.2F, bombYs.get(i) + bombHeight / 2.5F, bombHeight / 2.4F));
         }
     }

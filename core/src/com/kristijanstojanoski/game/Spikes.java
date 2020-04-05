@@ -33,7 +33,7 @@ class Spikes {
         spikesDownYs.add((int) worldYToScreenY(85.0F));
     }
 
-    void drawSpikeDown(SpriteBatch batch, boolean pause, ShapeRenderer paramShapeRenderer) {
+    void drawSpikeDown(SpriteBatch batch, boolean pause) {
         spikesDownRectanglesFirst.clear();
         spikesDownRectanglesSecond.clear();
         spikesDownRectanglesThird.clear();

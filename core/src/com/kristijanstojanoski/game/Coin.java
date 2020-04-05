@@ -2,7 +2,6 @@ package com.kristijanstojanoski.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Intersector;
@@ -151,9 +150,3 @@ class Coin {
         return Gdx.graphics.getHeight() / 1000.0F * 70.0F;
     }
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\com\zappycode\coinman\game\Coin.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */

@@ -315,7 +315,6 @@ public class SpinningWheel extends State {
     }
 
 
-
     public void dispose() {
         stage.dispose();
     }

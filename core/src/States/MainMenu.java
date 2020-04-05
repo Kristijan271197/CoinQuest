@@ -4,12 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -120,7 +118,7 @@ public class MainMenu extends State {
         freeCoinsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                //adsController.showRewardedVideo();
+                adsController.showRewardedVideo();
                 musicSoundsObject.playButtonClick();
             }
         });
@@ -279,32 +277,35 @@ public class MainMenu extends State {
             stage.getActors().get(11).setVisible(true);
             stage.getActors().get(12).setVisible(true);
         }
-//        boolean adLoaded = this.mAdsController.getAdLoaded();
-//        boolean rewardReceived = this.mAdsController.getRewardReceived();
+        boolean adLoaded = mAdsController.getAdLoaded();
+        boolean rewardReceived = mAdsController.getRewardReceived();
 
         batch.begin();
         batch.draw(coin, worldXToScreenX(10.0F), worldYToScreenY(960.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
         coinAndDiamondFont.draw(batch, String.valueOf(coinGlobal), worldXToScreenX(40.0F), worldYToScreenY(980.0F));
         batch.draw(ruby, worldXToScreenX(10.0F), worldYToScreenY(930.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
         coinAndDiamondFont.draw(batch, String.valueOf(rubyGlobal), worldXToScreenX(40.0F), worldYToScreenY(950.0F));
-//        if (adLoaded)
-//            this.stage.getActors().get(4).setVisible(true);
-//
-//        if (rewardReceived) {
-//            freeCoins = (random.nextInt(9) + 2) * 10;
-//            prefs.putInteger("coins", freeCoins + prefs.getInteger("coins"));
-//            prefs.putInteger("adsWatched", prefs.getInteger("adsWatched", 0) + 1);
-//            prefs.flush();
-//            coinGlobal = prefs.getInteger("coins");
-//            mAdsController.setRewardReceived(false);
-//            stage.getActors().get(5).setVisible(true);
-//            stage.getActors().get(6).setVisible(true);
-//            stage.getActors().get(1).setTouchable(Touchable.disabled);
-//            stage.getActors().get(2).setTouchable(Touchable.disabled);
-//            stage.getActors().get(3).setTouchable(Touchable.disabled);
-//            stage.getActors().get(4).setTouchable(Touchable.disabled);
-//            freeCoinsWindowShow = true;
-//        }
+
+        if (adLoaded)
+            stage.getActors().get(4).setVisible(true);
+        else
+            stage.getActors().get(4).setVisible(false);
+
+        if (rewardReceived) {
+            freeCoins = (random.nextInt(9) + 2) * 10;
+            prefs.putInteger(Shop.COINS, freeCoins + prefs.getInteger(Shop.COINS));
+            prefs.putInteger(EndGame.ADS_WATCHED, prefs.getInteger(EndGame.ADS_WATCHED, 0) + 1);
+            prefs.flush();
+            coinGlobal = prefs.getInteger(Shop.COINS);
+            mAdsController.setRewardReceived(false);
+            stage.getActors().get(5).setVisible(true);
+            stage.getActors().get(6).setVisible(true);
+            stage.getActors().get(1).setTouchable(Touchable.disabled);
+            stage.getActors().get(2).setTouchable(Touchable.disabled);
+            stage.getActors().get(3).setTouchable(Touchable.disabled);
+            stage.getActors().get(4).setTouchable(Touchable.disabled);
+            freeCoinsWindowShow = true;
+        }
         if (freeCoinsWindowShow)
             windowText.draw(batch, "You received " + freeCoins + " coins", worldXToScreenX(90.0F), worldYToScreenY(500.0F));
 
@@ -315,9 +316,3 @@ public class MainMenu extends State {
         handleInput();
     }
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\States\MainMenu.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */

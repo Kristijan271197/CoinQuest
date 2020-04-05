@@ -17,8 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kristijanstojanoski.game.MainGame;
-//import com.kristijanstojanoski.game.MainGame;
-
 
 public class ChooseStageMenu extends State {
     private boolean arcticInfoShow = false;
@@ -476,9 +474,3 @@ public class ChooseStageMenu extends State {
     }
 
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\States\ChooseStageMenu.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */

@@ -28,6 +28,7 @@ import States.ChooseStageMenu;
 import States.EndGame;
 import States.GameStateManager;
 import States.MusicSounds;
+import States.Settings;
 import States.Shop;
 import States.State;
 
@@ -418,11 +419,11 @@ public class MainGame extends State {
         soundButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                if (prefs.getBoolean("sound", true)) {
-                    prefs.putBoolean("sound", false);
+                if (prefs.getBoolean(Settings.SOUND, true)) {
+                    prefs.putBoolean(Settings.SOUND, false);
                     prefs.flush();
                 } else {
-                    prefs.putBoolean("sound", true);
+                    prefs.putBoolean(Settings.SOUND, true);
                     prefs.flush();
                     musicSoundsObject.playButtonClick();
                 }
@@ -443,12 +444,12 @@ public class MainGame extends State {
         musicButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                if (prefs.getBoolean("music", true)) {
-                    prefs.putBoolean("music", false);
+                if (prefs.getBoolean(Settings.MUSIC, true)) {
+                    prefs.putBoolean(Settings.MUSIC, false);
                     prefs.flush();
                     musicSoundsObject.playButtonClick();
                 } else {
-                    prefs.putBoolean("music", true);
+                    prefs.putBoolean(Settings.MUSIC, true);
                     prefs.flush();
                     musicSoundsObject.playButtonClick();
                 }
@@ -469,7 +470,7 @@ public class MainGame extends State {
         continueWithAdsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                //adsController.showRewardedVideo();
+                adsController.showRewardedVideo();
                 musicSoundsObject.playButtonClick();
             }
         });
@@ -599,9 +600,9 @@ public class MainGame extends State {
                 resetAfterRevive();
                 gameState = 0;
                 if (stageNumber == 1)
-                    MainGame.this.prefs.putFloat("storyModeCity", MainGame.this.timerGame);
+                    MainGame.this.prefs.putFloat(EndGame.STORY_MODE_CITY, MainGame.this.timerGame);
                 else if (stageNumber == 2)
-                    MainGame.this.prefs.putFloat("storyModeDesert", MainGame.this.timerGame);
+                    MainGame.this.prefs.putFloat(EndGame.STORY_MODE_DESERT, MainGame.this.timerGame);
                 prefs.flush();
             }
         });
@@ -785,7 +786,7 @@ public class MainGame extends State {
 
         if (prefs.getBoolean(FIRST_TIME_TUTORIAL, true)) {
             batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0]) + 1], bgCords[getActiveBackgroundIdx(bgCords[0]) + 1] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
         }
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -866,7 +867,7 @@ public class MainGame extends State {
                 collectiblesChance = random.nextFloat() * 99.0F + 1.0F;
                 collectiblesTimer = timerObjects;
             }
-            if (collectiblesChance <= 100 + prefs.getInteger("spawnRateUpgraded")) {
+            if (collectiblesChance <= normalChance + prefs.getInteger(Shop.SPAWN_RATE_UPGRADED)) {
                 if (collectiblesChoice == 1 && !shieldObject.isHasShield())
                     shieldObject.makeShield();
                 else if (collectiblesChoice == 2 && !coinMagnetObject.isHasCoinMagnet())
@@ -941,12 +942,12 @@ public class MainGame extends State {
             coinObject.removeCoin();
 
             if (stageNumber == 1) {
-                rockObject.drawRock(batch, pauseGame, shapeRenderer, 6.6F);
-                bombObject.drawBomb(batch, pauseGame, shapeRenderer, 6.6F);
+                rockObject.drawRock(batch, pauseGame, 6.6F);
+                bombObject.drawBomb(batch, pauseGame, 6.6F);
             } else if (stageNumber == 2) {
-                rockObject.drawRock(batch, pauseGame, shapeRenderer, 8.6F);
-                bombObject.drawBomb(batch, pauseGame, shapeRenderer, 8.6F);
-                spikesObject.drawSpikeDown(batch, pauseGame, shapeRenderer);
+                rockObject.drawRock(batch, pauseGame, 8.6F);
+                bombObject.drawBomb(batch, pauseGame, 8.6F);
+                spikesObject.drawSpikeDown(batch, pauseGame);
             }
 
             if (rocketsGo) {
@@ -955,15 +956,15 @@ public class MainGame extends State {
                 rocketObject.greenArrowState(timerObjects);
                 rocketObject.drawArrows(firstArrowsAppearanceRed, firstArrowsAppearanceYellow, firstArrowsAppearanceGreen, batch);
                 if (stageNumber == 1)
-                    rocketObject.drawRocket(batch, pauseGame, shapeRenderer, 12.45F);
+                    rocketObject.drawRocket(batch, pauseGame, 12.45F);
                 else if (stageNumber == 2)
-                    rocketObject.drawRocket(batch, pauseGame, shapeRenderer, 15.0F);
+                    rocketObject.drawRocket(batch, pauseGame, 15.0F);
             }
 
-            shieldObject.drawShieldCollectible(batch, pauseGame, shapeRenderer);
+            shieldObject.drawShieldCollectible(batch, pauseGame);
             coinRushObject.drawSpeedCoinCollectible(batch, pauseGame);
             coinMagnetObject.drawCoinMagnetCollectible(batch, pauseGame);
-            playerObject.drawPlayerRun(batch, shieldObject, rockObject, pauseGame, shapeRenderer, prefs);
+            playerObject.drawPlayerRun(batch, shieldObject, rockObject, pauseGame, prefs);
 
             if (timerGame >= 30.0F && timerGame < 60.0F) {
                 rocksGo = false;
@@ -981,9 +982,9 @@ public class MainGame extends State {
             }
 
             if (stageNumber == 1)
-                timingStory("storyModeCity");
+                timingStory(EndGame.STORY_MODE_CITY);
             else if (stageNumber == 2)
-                timingStory("storyModeDesert");
+                timingStory(EndGame.STORY_MODE_DESERT);
 
 
             if ((timerGame - scoreTimer) >= 0.3D) {
@@ -993,7 +994,7 @@ public class MainGame extends State {
 
         } else if (gameState == 0) {
             batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0]) + 1], bgCords[getActiveBackgroundIdx(bgCords[0]) + 1] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
             playerObject.drawPlayerStart(batch, prefs);
             stage.getActors().get(1).setVisible(false);
             showScoreAndCoinLabel = false;
@@ -1006,38 +1007,38 @@ public class MainGame extends State {
             batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
             batch.draw(background[getActiveBackgroundIdx(bgCords[0]) + 1], bgCords[getActiveBackgroundIdx(bgCords[0]) + 1] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
             playerObject.drawPlayerFaint(batch, pauseGame, prefs);
-//            boolean adLoaded = mAdsController.getAdLoaded();
-//            boolean rewardReceived = mAdsController.getRewardReceived();
+            boolean adLoaded = mAdsController.getAdLoaded();
+            boolean rewardReceived = mAdsController.getRewardReceived();
             stage.getActors().get(1).setVisible(false);
             stage.getActors().get(6).setVisible(true);
             showScoreAndCoinLabel = false;
 
-//            if (twoTimesAd < 2 && adLoaded) {
-//                stage.getActors().get(6).setTouchable(Touchable.enabled);
-//                continueWithAdsButton.setStyle(continueWithAdsButtonStyle);
-//            } else if (twoTimesAd < 2) {
-//                stage.getActors().get(6).setTouchable(Touchable.disabled);
-//                continueWithAdsButton.setStyle(continueWithAdsWaitButtonStyle);
-//            }
-//            if (rewardReceived) {
-//                twoTimesAd++;
-//                gameState = 0;
-//                resetAfterRevive();
-//                stage.getActors().get(0).setVisible(false);
-//                stage.getActors().get(6).setVisible(false);
-//                stage.getActors().get(7).setVisible(false);
-//                stage.getActors().get(8).setVisible(false);
-//                mAdsController.setRewardReceived(false);
-//                stage.getActors().get(23).setVisible(false);
-//                prefs.putInteger(REVIVED_AFTER_DEATH, prefs.getInteger(REVIVED_AFTER_DEATH, 0) + 1);
-//                prefs.putInteger(EndGame.ADS_WATCHED, prefs.getInteger(EndGame.ADS_WATCHED, 0) + 1);
-//                prefs.flush();
-//            } else {
+            if (twoTimesAd < 2 && adLoaded) {
+                stage.getActors().get(6).setTouchable(Touchable.enabled);
+                continueWithAdsButton.setStyle(continueWithAdsButtonStyle);
+            } else if (twoTimesAd < 2) {
+                stage.getActors().get(6).setTouchable(Touchable.disabled);
+                continueWithAdsButton.setStyle(continueWithAdsWaitButtonStyle);
+            }
+            if (rewardReceived) {
+                twoTimesAd++;
+                gameState = 0;
+                resetAfterRevive();
+                stage.getActors().get(0).setVisible(false);
+                stage.getActors().get(6).setVisible(false);
+                stage.getActors().get(7).setVisible(false);
+                stage.getActors().get(8).setVisible(false);
+                mAdsController.setRewardReceived(false);
+                stage.getActors().get(23).setVisible(false);
+                prefs.putInteger(REVIVED_AFTER_DEATH, prefs.getInteger(REVIVED_AFTER_DEATH, 0) + 1);
+                prefs.putInteger(EndGame.ADS_WATCHED, prefs.getInteger(EndGame.ADS_WATCHED, 0) + 1);
+                prefs.flush();
+            } else {
             stage.getActors().get(8).setVisible(true);
             stage.getActors().get(7).setVisible(true);
             if (showDiamondsCount)
                 stage.getActors().get(23).setVisible(true);
-//            }
+            }
         } else if (gameState == 3) {
             if (timerGame <= 100.8F)
                 for (int i = 0; i < 5; i++)
@@ -1060,17 +1061,17 @@ public class MainGame extends State {
         }
 
         coinObject.coinCollision(playerObject.getPlayerRectangle(), prefs.getBoolean(Shop.DOUBLE_COINS, false));
-//
-//        if (!shieldObject.isHasShield()) {
-//            if (rockObject.isFirstRockHit())
-//                gameState = rockObject.rockCollisionSecond(playerObject.getPlayerRectangle(), gameState, prefs);
-//             else
-//                rockObject.rockCollisionFirst(playerObject.getPlayerRectangle(), timerObjects);
-//
-//            gameState = bombObject.bombCollision(playerObject.getPlayerRectangle(), gameState, prefs);
-//            gameState = spikesObject.spikeDownCollision(playerObject.getPlayerRectangle(), gameState, prefs);
-//            gameState = rocketObject.rocketCollision(playerObject.getPlayerRectangle(), gameState, prefs);
-//        }
+
+        if (!shieldObject.isHasShield()) {
+            if (rockObject.isFirstRockHit())
+                gameState = rockObject.rockCollisionSecond(playerObject.getPlayerRectangle(), gameState, prefs);
+             else
+                rockObject.rockCollisionFirst(playerObject.getPlayerRectangle(), timerObjects);
+
+            gameState = bombObject.bombCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+            gameState = spikesObject.spikeDownCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+            gameState = rocketObject.rocketCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+        }
 
         shieldObject.shieldCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
         coinRushObject.speedCoinCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);

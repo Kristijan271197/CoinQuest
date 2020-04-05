@@ -22,10 +22,10 @@ class Rock {
     private Random random = new Random(System.currentTimeMillis());
     private TextureAtlas.AtlasRegion rock;
     private float rockHeight = worldYToScreenY(50.0F);
-    private ArrayList<Rectangle> rockRectangles = new ArrayList<Rectangle>();
+    private ArrayList<Rectangle> rockRectangles = new ArrayList<>();
     private float rockWidth = worldXToScreenX(69.0F);
-    private ArrayList<Integer> rockXs = new ArrayList<Integer>();
-    private ArrayList<Integer> rockYs = new ArrayList<Integer>();
+    private ArrayList<Integer> rockXs = new ArrayList<>();
+    private ArrayList<Integer> rockYs = new ArrayList<>();
 
     void initializeValues(TextureAtlas mainGameAtlas, int stageNumber, AssetManager manager) {
         if (stageNumber == 1)
@@ -46,7 +46,7 @@ class Rock {
         rockXs.add(Gdx.graphics.getWidth());
     }
 
-    void drawRock(SpriteBatch batch, boolean pause, ShapeRenderer paramShapeRenderer, float rockSpeed) {
+    void drawRock(SpriteBatch batch, boolean pause, float rockSpeed) {
         rockRectangles.clear();
         for (int i = 0; i < rockXs.size(); i++) {
             batch.draw(rock, rockXs.get(i), rockYs.get(i), rockWidth, rockHeight);
