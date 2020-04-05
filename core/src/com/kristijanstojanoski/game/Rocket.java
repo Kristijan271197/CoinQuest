@@ -38,9 +38,9 @@ class Rocket {
     void initializeValues(TextureAtlas mainGameAtlas) {
         rocket = mainGameAtlas.findRegion("rocket");
         for (int i = 0; i < 3; i++) {
-            rocketArrowRed[i] = mainGameAtlas.findRegion("rocket_arrow", i);
-            rocketArrowYellow[i] = mainGameAtlas.findRegion("rocket_arrow", i);
-            rocketArrowGreen[i] = mainGameAtlas.findRegion("rocket_arrow", i);
+            rocketArrowRed[i] = mainGameAtlas.findRegion("rocket_arrow", 3 - i);
+            rocketArrowYellow[i] = mainGameAtlas.findRegion("rocket_arrow", 3 - i);
+            rocketArrowGreen[i] = mainGameAtlas.findRegion("rocket_arrow", 3 - i);
         }
         redHeight = makeRocketArrowRed();
         yellowHeight = makeRocketArrowYellow();

@@ -32,22 +32,9 @@ import States.Shop;
 import States.State;
 
 public class MainGame extends State {
-    private static final int BLURRY_BACKGROUND = 0;
-    private static final int CONTINUE_WITH_ADS_BUTTON = 6;
-    private static final int CONTINUE_WITH_DIAMONDS_BUTTON = 7;
-    private static final int END_GAME_BUTTON = 8;
-    private static final String FIRST_TIME_END_STORY_CITY = "firstTimeEndStoryCity";
-    private static final String FIRST_TIME_END_STORY_DESERT = "firstTimeEndStoryDesert";
-    private static final String FIRST_TIME_START_STORY_CITY = "firstTimeStartStoryCity";
-    private static final String FIRST_TIME_START_STORY_DESERT = "firstTimeStartStoryDesert";
     private static final String FIRST_TIME_TUTORIAL = "firstTimeTutorial";
     private static final String HEALED_FROM_STONES = "healedFromStones";
-    private static final int MENU_BUTTON = 5;
-    private static final int PAUSE_BUTTON = 1;
-    private static final int PLAY_BUTTON = 3;
-    private static final int RESTART_BUTTON = 4;
     public static final String REVIVED_AFTER_DEATH = "revivedAfterDeath";
-    private static final int SOUND_BUTTON = 2;
 
     private Achievements achievementsObject;
     private TextureAtlas.AtlasRegion[] background = new TextureAtlas.AtlasRegion[5];
@@ -390,6 +377,7 @@ public class MainGame extends State {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
                 gsm.set(new ChooseStageMenu(gsm, adsController, manager));
                 musicSoundsObject.playButtonClick();
+                musicSoundsObject.playBackgroundMusic();
                 dispose();
             }
         });
@@ -874,11 +862,11 @@ public class MainGame extends State {
                 }
             }
 
-            if (timerObjects >= 10.0F && this.timerObjects - this.collectiblesTimer >= 1.5F) {
-                this.collectiblesChance = this.random.nextFloat() * 99.0F + 1.0F;
-                this.collectiblesTimer = this.timerObjects;
+            if (timerObjects >= 10.0F && timerObjects - collectiblesTimer >= 1.5F) {
+                collectiblesChance = random.nextFloat() * 99.0F + 1.0F;
+                collectiblesTimer = timerObjects;
             }
-            if (this.collectiblesChance <= this.normalChance + this.prefs.getInteger("spawnRateUpgraded")) {
+            if (collectiblesChance <= 100 + prefs.getInteger("spawnRateUpgraded")) {
                 if (collectiblesChoice == 1 && !shieldObject.isHasShield())
                     shieldObject.makeShield();
                 else if (collectiblesChoice == 2 && !coinMagnetObject.isHasCoinMagnet())
@@ -1016,40 +1004,40 @@ public class MainGame extends State {
             }
         } else if (gameState == 2) {
             batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0]) + 1], bgCords[getActiveBackgroundIdx(bgCords[0]) + 1] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
             playerObject.drawPlayerFaint(batch, pauseGame, prefs);
-            boolean adLoaded = mAdsController.getAdLoaded();
-            boolean rewardReceived = mAdsController.getRewardReceived();
+//            boolean adLoaded = mAdsController.getAdLoaded();
+//            boolean rewardReceived = mAdsController.getRewardReceived();
             stage.getActors().get(1).setVisible(false);
             stage.getActors().get(6).setVisible(true);
             showScoreAndCoinLabel = false;
 
-            if (twoTimesAd < 2 && adLoaded) {
-                stage.getActors().get(6).setTouchable(Touchable.enabled);
-                continueWithAdsButton.setStyle(continueWithAdsButtonStyle);
-            } else if (twoTimesAd < 2) {
-                stage.getActors().get(6).setTouchable(Touchable.disabled);
-                continueWithAdsButton.setStyle(continueWithAdsWaitButtonStyle);
-            }
-            if (rewardReceived) {
-                twoTimesAd++;
-                gameState = 0;
-                resetAfterRevive();
-                stage.getActors().get(0).setVisible(false);
-                stage.getActors().get(6).setVisible(false);
-                stage.getActors().get(7).setVisible(false);
-                stage.getActors().get(8).setVisible(false);
-                mAdsController.setRewardReceived(false);
-                stage.getActors().get(23).setVisible(false);
-                prefs.putInteger(REVIVED_AFTER_DEATH, prefs.getInteger(REVIVED_AFTER_DEATH, 0) + 1);
-                prefs.putInteger(EndGame.ADS_WATCHED, prefs.getInteger(EndGame.ADS_WATCHED, 0) + 1);
-                prefs.flush();
-            } else {
-                stage.getActors().get(8).setVisible(true);
-                stage.getActors().get(7).setVisible(true);
-                if (showDiamondsCount)
-                    stage.getActors().get(23).setVisible(true);
-            }
+//            if (twoTimesAd < 2 && adLoaded) {
+//                stage.getActors().get(6).setTouchable(Touchable.enabled);
+//                continueWithAdsButton.setStyle(continueWithAdsButtonStyle);
+//            } else if (twoTimesAd < 2) {
+//                stage.getActors().get(6).setTouchable(Touchable.disabled);
+//                continueWithAdsButton.setStyle(continueWithAdsWaitButtonStyle);
+//            }
+//            if (rewardReceived) {
+//                twoTimesAd++;
+//                gameState = 0;
+//                resetAfterRevive();
+//                stage.getActors().get(0).setVisible(false);
+//                stage.getActors().get(6).setVisible(false);
+//                stage.getActors().get(7).setVisible(false);
+//                stage.getActors().get(8).setVisible(false);
+//                mAdsController.setRewardReceived(false);
+//                stage.getActors().get(23).setVisible(false);
+//                prefs.putInteger(REVIVED_AFTER_DEATH, prefs.getInteger(REVIVED_AFTER_DEATH, 0) + 1);
+//                prefs.putInteger(EndGame.ADS_WATCHED, prefs.getInteger(EndGame.ADS_WATCHED, 0) + 1);
+//                prefs.flush();
+//            } else {
+            stage.getActors().get(8).setVisible(true);
+            stage.getActors().get(7).setVisible(true);
+            if (showDiamondsCount)
+                stage.getActors().get(23).setVisible(true);
+//            }
         } else if (gameState == 3) {
             if (timerGame <= 100.8F)
                 for (int i = 0; i < 5; i++)
@@ -1072,17 +1060,17 @@ public class MainGame extends State {
         }
 
         coinObject.coinCollision(playerObject.getPlayerRectangle(), prefs.getBoolean(Shop.DOUBLE_COINS, false));
-
-        if (!shieldObject.isHasShield()) {
-            if (rockObject.isFirstRockHit())
-                gameState = rockObject.rockCollisionSecond(playerObject.getPlayerRectangle(), gameState, prefs);
-             else
-                rockObject.rockCollisionFirst(playerObject.getPlayerRectangle(), timerObjects);
-
-            gameState = bombObject.bombCollision(playerObject.getPlayerRectangle(), gameState, prefs);
-            gameState = spikesObject.spikeDownCollision(playerObject.getPlayerRectangle(), gameState, prefs);
-            gameState = rocketObject.rocketCollision(playerObject.getPlayerRectangle(), gameState, prefs);
-        }
+//
+//        if (!shieldObject.isHasShield()) {
+//            if (rockObject.isFirstRockHit())
+//                gameState = rockObject.rockCollisionSecond(playerObject.getPlayerRectangle(), gameState, prefs);
+//             else
+//                rockObject.rockCollisionFirst(playerObject.getPlayerRectangle(), timerObjects);
+//
+//            gameState = bombObject.bombCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+//            gameState = spikesObject.spikeDownCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+//            gameState = rocketObject.rocketCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+//        }
 
         shieldObject.shieldCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
         coinRushObject.speedCoinCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
@@ -1203,17 +1191,17 @@ public class MainGame extends State {
 
             if (storyPageNumber == 1)
                 storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_second.png", Texture.class))));
-             else if (storyPageNumber == 2)
+            else if (storyPageNumber == 2)
                 storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_second.png", Texture.class))));
         } else if (storyEndNumber == 2) {
             if (storyPageNumber == 1)
                 storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_third.png", Texture.class))));
-             else if (storyPageNumber == 2)
+            else if (storyPageNumber == 2)
                 storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_third.png", Texture.class))));
         } else if (storyEndNumber == 3) {
             if (storyPageNumber == 1)
                 storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_fourth.png", Texture.class))));
-             else if (storyPageNumber == 2)
+            else if (storyPageNumber == 2)
                 storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_fourth.png", Texture.class))));
         }
     }
@@ -1231,17 +1219,17 @@ public class MainGame extends State {
             stage.getActors().get(17).setVisible(true);
             if (storyPageNumber == 1)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
-             else if (storyPageNumber == 2)
+            else if (storyPageNumber == 2)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
         } else if (storyStartNumber == 2) {
             if (storyPageNumber == 1)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
-             else if (storyPageNumber == 2)
+            else if (storyPageNumber == 2)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
         } else if (storyStartNumber == 3) {
             if (storyPageNumber == 1)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
-             else if (storyPageNumber == 2)
+            else if (storyPageNumber == 2)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
         }
     }

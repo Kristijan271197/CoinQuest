@@ -646,7 +646,7 @@ public class Achievements extends State {
             else
                 stage.getActors().get(9).setVisible(false);
         } else if (achievementsPageNumber == 3) {
-            if (prefs.getBoolean(LIFETIME_METRES_ACHIEVEMENT_PASSED, false))
+            if (prefs.getBoolean(ACHIEVEMENTS_PASSED_ACHIEVEMENT_PASSED, false))
                 stage.getActors().get(9).setVisible(true);
             else
                 stage.getActors().get(9).setVisible(false);
