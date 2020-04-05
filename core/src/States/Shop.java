@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import java.util.ArrayList;
 
 public class Shop extends State {
-    static final String COINS = "coins";
+    public static final String COINS = "coins";
     public static final String DIAMONDS = "ruby";
 
     private static final String ABILITY_SHIELD_COST = "abilityShieldCost";
