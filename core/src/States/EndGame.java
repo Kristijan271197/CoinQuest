@@ -246,7 +246,7 @@ public class EndGame extends State {
             super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
             EndGame.this.stage.getActors().get(4).setVisible(false);
             EndGame.this.stage.getActors().get(5).setVisible(false);
-            EndGame.access$202(EndGame.this, false);
+            showTripleCoinsText = false;
             EndGame.this.musicSoundsObject.playButtonClick();
           }
         });

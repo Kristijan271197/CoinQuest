@@ -356,7 +356,8 @@ public class SpinningWheel extends State {
         int wheelSpinMultiplierNumber = 0;
         if (wheelSpinMultiplier < 5) {
             this.prefs.putInteger(WHEEL_MULTIPLIER, 1);
-            spinUntilNextMultiplier = wheelSpinMultiplier;
+            spinUntilNextMultiplier = 5;
+            wheelSpinMultiplierNumber = wheelSpinMultiplier;
         } else if (wheelSpinMultiplier < 11) {
             this.prefs.putInteger(WHEEL_MULTIPLIER, 2);
             spinUntilNextMultiplier = 6;

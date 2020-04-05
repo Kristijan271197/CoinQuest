@@ -668,7 +668,7 @@ public class MainGame extends State {
         stage.addActor(endGameButton);
         stage.addActor(notEnoughDiamondsWindow);
         stage.addActor(mainGameTutorial);
-        stage.addActor(storyContinueButton);
+        stage.addActor(tutorialContinueButton);
         stage.addActor(storyStartFirst);
         stage.addActor(storyStartSecond);
         stage.addActor(storyEndFirst);
@@ -760,517 +760,511 @@ public class MainGame extends State {
     }
 
 
-    public void render(SpriteBatch paramSpriteBatch) {
+    public void render(SpriteBatch batch) {
         Gdx.input.setCatchKey(4, true);
         if (Gdx.input.isKeyPressed(4)) {
-            this.pauseGame = true;
-            this.stage.getActors().get(0).setVisible(true);
-            this.stage.getActors().get(1).setVisible(false);
-            this.stage.getActors().get(24).setVisible(true);
-            this.stage.getActors().get(25).setVisible(true);
-            this.stage.getActors().get(26).setVisible(true);
+            pauseGame = true;
+            stage.getActors().get(0).setVisible(true);
+            stage.getActors().get(1).setVisible(false);
+            stage.getActors().get(24).setVisible(true);
+            stage.getActors().get(25).setVisible(true);
+            stage.getActors().get(26).setVisible(true);
         }
-        if (this.prefs.getBoolean("sound", true)) {
-            this.soundButton.setStyle(this.soundButtonStyle);
+
+        if (prefs.getBoolean("sound", true))
+            soundButton.setStyle(soundButtonStyle);
+        else
+            soundButton.setStyle(noSoundButtonStyle);
+
+        if (prefs.getBoolean("music", true))
+            musicButton.setStyle(musicButtonStyle);
+        else
+            musicButton.setStyle(noMusicButtonStyle);
+
+        batch.begin();
+
+        if (showEndStory) {
+            if (stageNumber == 1)
+                showEndStory(stageNumber);
+            else if (stageNumber == 2)
+                showEndStory(stageNumber);
         } else {
-            this.soundButton.setStyle(this.noSoundButtonStyle);
+            if (stageNumber == 1)
+                showStartStory(stageNumber);
+            else if (stageNumber == 2)
+                showStartStory(stageNumber);
         }
-        if (this.prefs.getBoolean("music", true)) {
-            this.musicButton.setStyle(this.musicButtonStyle);
-        } else {
-            this.musicButton.setStyle(this.noMusicButtonStyle);
+
+        if (prefs.getBoolean(FIRST_TIME_TUTORIAL, true)) {
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
         }
-        paramSpriteBatch.begin();
-        if (this.showEndStory) {
-            int j = this.stageNumber;
-            if (j == 1) {
-                showEndStory(j);
-            } else if (j == 2) {
-                showEndStory(j);
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.RED);
+
+        if (gameState == 1) {
+            if (!pauseGame)
+                for (int i = 0; i < 5; i++)
+                    bgCords[i] = bgCords[i] - (int) worldXToScreenX(3.0F) * dt * 60.0F;
+
+            if (bgCords[4] <= 0.0F)
+                for (int i = 0; i < 5; i++)
+                    bgCords[i] = (int) worldXToScreenX((i * 500));
+
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0]) + 1], bgCords[getActiveBackgroundIdx(bgCords[0]) + 1] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+
+            if (!pauseGame) {
+                timerObjects += Gdx.graphics.getDeltaTime();
+                timerGame += Gdx.graphics.getDeltaTime();
             }
-        } else {
-            int j = this.stageNumber;
-            if (j == 1) {
-                showStartStory(j);
-            } else if (j == 2) {
-                showStartStory(j);
+
+            if (prefs.getInteger(Achievements.METRES_WITHOUT_COINS_ATM_ACHIEVEMENT, 0) < 6)
+                achievementsObject.checkMetresWithoutCoins(timerGame, coinObject.getCoinCount());
+            if (coinRushObject.isCoinRushEnd() && timerObjects - coinObject.getLastCoinTimer() >= coinObject.getCoinTime() / 1000.0F) {
+                coinObject.makeCoin();
+                coinObject.setLastCoinTimer(timerObjects);
+                if (!coinRushObject.isCoinRush())
+                    coinObject.setCoinTime(random.nextInt(2001) + 1000 - (prefs.getInteger(Shop.SPAWN_RATE_COINS_UPGRADED) + coinSpawnUpgrade) * 50);
             }
-        }
-        if (this.prefs.getBoolean("firstTimeTutorial", true)) {
-            int j = getActiveBackgroundIdx(this.bgCords[0]);
-            paramSpriteBatch.draw(this.background[j], this.bgCords[j], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            TextureAtlas.AtlasRegion[] arrayOfAtlasRegion = this.background;
-            paramSpriteBatch.draw(arrayOfAtlasRegion[++j], this.bgCords[j] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-        }
-        this.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        this.shapeRenderer.setColor(Color.RED);
-        int i = this.gameState;
-        if (i == 1) {
-            if (!this.pauseGame)
-                for (i = 0; i < 5; i++) {
-                    float[] arrayOfFloat = this.bgCords;
-                    arrayOfFloat[i] = arrayOfFloat[i] - (int) worldXToScreenX(3.0F) * this.dt * 60.0F;
+
+            if (rocksGo) {
+                if (timerObjects - rockObject.getLastRockTimer() >= 2.0F) {
+                    rockObject.makeRock();
+                    rockObject.setLastRockTimer(timerObjects);
                 }
-            if (this.bgCords[4] <= 0.0F)
-                for (i = 0; i < 5; i++)
-                    this.bgCords[i] = (int) worldXToScreenX((i * 500));
-            i = getActiveBackgroundIdx(this.bgCords[0]);
-            paramSpriteBatch.draw(this.background[i], this.bgCords[i], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            TextureAtlas.AtlasRegion[] arrayOfAtlasRegion = this.background;
-            paramSpriteBatch.draw(arrayOfAtlasRegion[++i], this.bgCords[i] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            if (!this.pauseGame) {
-                this.timerObjects += Gdx.graphics.getDeltaTime();
-                this.timerGame += Gdx.graphics.getDeltaTime();
-            }
-            if (this.prefs.getInteger("metresWithoutCoinsAtmAchievement", 0) < 6)
-                this.achievementsObject.checkMetresWithoutCoins(this.timerGame, this.coinObject.getCoinCount());
-            if (this.coinRushObject.isCoinRushEnd() && this.timerObjects - this.coinObject.getLastCoinTimer() >= this.coinObject.getCoinTime() / 1000.0F) {
-                this.coinObject.makeCoin();
-                this.coinObject.setLastCoinTimer(this.timerObjects);
-                if (!this.coinRushObject.isCoinRush())
-                    this.coinObject.setCoinTime(this.random.nextInt(2001) + 1000 - (this.prefs.getInteger("spawnRateCoinsUpgraded") + this.coinSpawnUpgrade) * 50);
-            }
-            if (this.rocksGo) {
-                if (this.timerObjects - this.rockObject.getLastRockTimer() >= 2.0F) {
-                    this.rockObject.makeRock();
-                    this.rockObject.setLastRockTimer(this.timerObjects);
-                }
-                if (this.rockObject.isFirstRockHit() && this.timerObjects - this.rockObject.getFirstRockHitTimer() >= 5.0F) {
-                    this.rockObject.setFirstRockHitFalse();
-                    Preferences preferences = this.prefs;
-                    preferences.putInteger("healedFromStones", preferences.getInteger("healedFromStones", 0) + 1);
-                    this.prefs.flush();
-                    if (this.prefs.getInteger("healStonesAtmAchievement", 0) < 7)
-                        this.achievementsObject.checkHealStones(this.prefs.getInteger("healedFromStones", 0));
+                if (rockObject.isFirstRockHit() && timerObjects - rockObject.getFirstRockHitTimer() >= 5.0F) {
+                    rockObject.setFirstRockHitFalse();
+                    prefs.putInteger(HEALED_FROM_STONES, prefs.getInteger(HEALED_FROM_STONES, 0) + 1);
+                    prefs.flush();
+                    if (prefs.getInteger(Achievements.HEAL_STONES_ATM_ACHIEVEMENT, 0) < 7)
+                        achievementsObject.checkHealStones(prefs.getInteger(HEALED_FROM_STONES, 0));
                 }
             }
-            if (this.bombsGo && this.timerObjects - this.bombObject.getLastBombTimer() >= (this.random.nextInt(2001) + 5000) / 1000.0F) {
-                this.bombObject.makeBomb();
-                this.bombObject.setLastBombTimer(this.timerObjects);
+
+            if (bombsGo && timerObjects - bombObject.getLastBombTimer() >= (random.nextInt(2001) + 5000) / 1000.0F) {
+                bombObject.makeBomb();
+                bombObject.setLastBombTimer(timerObjects);
             }
-            if (this.spikesGo && this.timerObjects - this.spikesObject.getLastSpikeDownTimer() >= this.spikesObject.getSpikeDownTime() / 1000.0F) {
-                this.spikesObject.makeSpikeDown();
-                this.spikesObject.setSpikeDownTime(this.random.nextInt(6001) + 4000);
-                this.spikesObject.setLastSpikeDownTimer(this.timerObjects);
+
+            if (spikesGo && timerObjects - spikesObject.getLastSpikeDownTimer() >= spikesObject.getSpikeDownTime() / 1000.0F) {
+                spikesObject.makeSpikeDown();
+                spikesObject.setSpikeDownTime(random.nextInt(6001) + 4000);
+                spikesObject.setLastSpikeDownTimer(timerObjects);
             }
-            if (this.rocketsGo) {
-                if (this.timerObjects - this.rocketObject.getLastArrowRedTimer() >= 3.0F) {
-                    Rocket rocket = this.rocketObject;
-                    rocket.makeRocket(rocket.getRedHeight());
-                    rocket = this.rocketObject;
-                    rocket.setRedHeight(rocket.makeRocketArrowRed());
-                    this.rocketObject.setLastArrowRedTimer(this.timerObjects);
+
+            if (rocketsGo) {
+                if (timerObjects - rocketObject.getLastArrowRedTimer() >= 3.0F) {
+                    rocketObject.makeRocket(rocketObject.getRedHeight());
+                    rocketObject.setRedHeight(rocketObject.makeRocketArrowRed());
+                    rocketObject.setLastArrowRedTimer(timerObjects);
                 }
-                if (this.timerObjects - this.rocketObject.getLastArrowRedTimer() >= 2.0F && this.yellowGo && this.timerObjects - this.rocketObject.getLastArrowYellowTimer() >= 3.0F) {
-                    Rocket rocket = this.rocketObject;
-                    rocket.makeRocket(rocket.getYellowHeight());
-                    rocket = this.rocketObject;
-                    rocket.setYellowHeight(rocket.makeRocketArrowYellow());
-                    this.rocketObject.setLastArrowYellowTimer(this.timerObjects);
+
+                if (timerObjects - rocketObject.getLastArrowRedTimer() >= 2.0F && yellowGo && timerObjects - rocketObject.getLastArrowYellowTimer() >= 3.0F) {
+                    rocketObject.makeRocket(rocketObject.getYellowHeight());
+                    rocketObject.setYellowHeight(rocketObject.makeRocketArrowYellow());
+                    rocketObject.setLastArrowYellowTimer(timerObjects);
                 }
-                if (this.timerObjects - this.rocketObject.getLastArrowRedTimer() >= 1.0F && this.greenGo && this.timerObjects - this.rocketObject.getLastArrowGreenTimer() >= 3.0F) {
-                    Rocket rocket = this.rocketObject;
-                    rocket.makeRocket(rocket.getGreenHeight());
-                    rocket = this.rocketObject;
-                    rocket.setGreenHeight(rocket.makeRocketArrowGreen());
-                    this.rocketObject.setLastArrowGreenTimer(this.timerObjects);
+
+                if (timerObjects - rocketObject.getLastArrowRedTimer() >= 1.0F && greenGo && timerObjects - rocketObject.getLastArrowGreenTimer() >= 3.0F) {
+                    rocketObject.makeRocket(rocketObject.getGreenHeight());
+                    rocketObject.setGreenHeight(rocketObject.makeRocketArrowGreen());
+                    rocketObject.setLastArrowGreenTimer(timerObjects);
                 }
             }
-            float f = this.timerObjects;
-            if (f >= 10.0F && f - this.collectiblesTimer >= 1.5F) {
+
+            if (timerObjects >= 10.0F && this.timerObjects - this.collectiblesTimer >= 1.5F) {
                 this.collectiblesChance = this.random.nextFloat() * 99.0F + 1.0F;
                 this.collectiblesTimer = this.timerObjects;
             }
             if (this.collectiblesChance <= this.normalChance + this.prefs.getInteger("spawnRateUpgraded")) {
-                i = this.collectiblesChoice;
-                if (i != 1) {
-                    if (i != 2) {
-                        if (i == 3 && !this.coinMagnetObject.isHasCoinMagnet())
-                            this.coinMagnetObject.makeCoinMagnet();
-                    } else if (!this.coinRushObject.isCoinRush()) {
-                        this.coinRushObject.makeSpeedCoin();
-                    }
-                } else if (!this.shieldObject.isHasShield()) {
-                    this.shieldObject.makeShield();
-                }
-                this.collectiblesChance = 100.0F;
-                this.collectiblesChoice = this.random.nextInt(3) + 1;
+                if (collectiblesChoice == 1 && !shieldObject.isHasShield())
+                    shieldObject.makeShield();
+                else if (collectiblesChoice == 2 && !coinMagnetObject.isHasCoinMagnet())
+                    coinMagnetObject.makeCoinMagnet();
+                else if (collectiblesChoice == 3 && !coinRushObject.isCoinRush())
+                    coinRushObject.makeSpeedCoin();
+                collectiblesChance = 100.0F;
+                collectiblesChoice = random.nextInt(3) + 1;
             }
-            if (this.shieldObject.isHasShield()) {
-                if (!this.onceShield) {
-                    this.normalChance /= 2.0F;
-                    this.onceShield = true;
+
+            if (shieldObject.isHasShield()) {
+                if (!onceShield) {
+                    normalChance /= 2.0F;
+                    onceShield = true;
                 }
-                if (this.timerObjects - this.shieldObject.getShieldOnTimer() >= this.prefs.getInteger("shieldUpgraded") + 7.0F + this.shieldUpgrade && this.timerObjects - this.shieldObject.getShieldOnTimer() < this.prefs.getInteger("shieldUpgraded") + 10.0F + this.shieldUpgrade)
+
+                if (timerObjects - shieldObject.getShieldOnTimer() >= prefs.getInteger(Shop.SHIELD_UPGRADED) + 7.0F + shieldUpgrade && timerObjects - shieldObject.getShieldOnTimer() < prefs.getInteger(Shop.SHIELD_UPGRADED) + 10.0F + shieldUpgrade)
                     if (this.shieldObject.getShieldStatePause() < 5) {
                         Shield shield = this.shieldObject;
                         shield.setShieldStatePause(shield.getShieldStatePause() + 1);
                     } else {
-                        this.shieldObject.setShieldStatePause(0);
-                        Shield shield = this.shieldObject;
-                        shield.setShieldState(1 - shield.getShieldState());
+                        shieldObject.setShieldStatePause(0);
+                        shieldObject.setShieldState(1 - shieldObject.getShieldState());
                     }
-                if (this.timerObjects - this.shieldObject.getShieldOnTimer() >= this.prefs.getInteger("shieldUpgraded") + 10.0F + this.shieldUpgrade) {
-                    this.shieldObject.setHasShieldFalse();
-                    this.normalChance *= 2.0F;
-                    this.onceShield = false;
+
+                if (timerObjects - shieldObject.getShieldOnTimer() >= prefs.getInteger(Shop.SHIELD_UPGRADED) + 10.0F + shieldUpgrade) {
+                    shieldObject.setHasShieldFalse();
+                    normalChance *= 2.0F;
+                    onceShield = false;
                 }
             }
-            if (!this.coinRushObject.isCoinRush() && this.timerObjects - this.coinRushObject.getCoinRushOnTimer() >= this.prefs.getInteger("coinRushUpgraded") + 8.0F + this.coinRushUpgrade && this.timerObjects - this.coinRushObject.getCoinRushOnTimer() < this.prefs.getInteger("coinRushUpgraded") + 8.2F + this.coinRushUpgrade) {
-                Coin coin = this.coinObject;
-                coin.setCoinSpeed(coin.worldXToScreenX(5.0F));
-                this.coinRushObject.setCoinRushEnd(true);
+
+            if (!coinRushObject.isCoinRush() && timerObjects - coinRushObject.getCoinRushOnTimer() >= prefs.getInteger(Shop.COIN_RUSH_UPGRADED) + 8.0F + coinRushUpgrade && timerObjects - coinRushObject.getCoinRushOnTimer() < prefs.getInteger(Shop.COIN_RUSH_UPGRADED) + 8.2F + coinRushUpgrade) {
+                coinObject.setCoinSpeed(coinObject.worldXToScreenX(5.0F));
+                coinRushObject.setCoinRushEnd(true);
             }
-            if (this.coinRushObject.isCoinRush()) {
-                if (!this.onceCoinRush) {
-                    this.normalChance /= 2.0F;
-                    this.onceCoinRush = true;
+
+            if (coinRushObject.isCoinRush()) {
+                if (!onceCoinRush) {
+                    normalChance /= 2.0F;
+                    onceCoinRush = true;
                 }
-                this.coinObject.setCoinTime(100);
-                Coin coin = this.coinObject;
-                coin.setCoinSpeed(coin.worldXToScreenX(10.0F));
-                if (this.timerObjects - this.coinRushObject.getCoinRushOnTimer() >= this.prefs.getInteger("coinRushUpgraded") + 5.0F + this.coinRushUpgrade) {
-                    this.coinRushObject.setCoinRushFalse();
-                    this.coinRushObject.setCoinRushEnd(false);
-                    this.normalChance *= 2.0F;
-                    this.onceCoinRush = false;
-                }
-            }
-            if (this.coinMagnetObject.isHasCoinMagnet()) {
-                if (!this.onceMagnet) {
-                    this.normalChance /= 2.0F;
-                    this.onceMagnet = true;
-                }
-                if (this.timerObjects - this.coinMagnetObject.getCoinMagnetOnTimer() >= this.prefs.getInteger("magnetUpgraded") + 10.0F + this.magnetUpgrade) {
-                    this.coinMagnetObject.setHasCoinMagnet();
-                    this.normalChance *= 2.0F;
-                    this.onceMagnet = false;
+
+                coinObject.setCoinTime(100);
+                coinObject.setCoinSpeed(coinObject.worldXToScreenX(10.0F));
+                if (timerObjects - coinRushObject.getCoinRushOnTimer() >= prefs.getInteger(Shop.COIN_RUSH_UPGRADED) + 5.0F + coinRushUpgrade) {
+                    coinRushObject.setCoinRushFalse();
+                    coinRushObject.setCoinRushEnd(false);
+                    normalChance *= 2.0F;
+                    onceCoinRush = false;
                 }
             }
-            if (this.coinMagnetObject.isHasCoinMagnet()) {
-                this.coinObject.drawCoinMagnetized(paramSpriteBatch, this.playerObject.getPlayerXRect(), this.playerObject.getPlayerY(), this.playerObject.getPlayerWidthRect(), this.playerObject.getPlayerHeightRect(), this.pauseGame);
-            } else {
-                this.coinObject.drawCoin(paramSpriteBatch, this.pauseGame);
-            }
-            this.coinObject.removeCoin();
-            i = this.stageNumber;
-            if (i == 1) {
-                this.rockObject.drawRock(paramSpriteBatch, this.pauseGame, this.shapeRenderer, 6.6F);
-                this.bombObject.drawBomb(paramSpriteBatch, this.pauseGame, this.shapeRenderer, 6.6F);
-            } else if (i == 2) {
-                this.rockObject.drawRock(paramSpriteBatch, this.pauseGame, this.shapeRenderer, 8.6F);
-                this.bombObject.drawBomb(paramSpriteBatch, this.pauseGame, this.shapeRenderer, 8.6F);
-                this.spikesObject.drawSpikeDown(paramSpriteBatch, this.pauseGame, this.shapeRenderer);
-            }
-            if (this.rocketsGo) {
-                this.rocketObject.redArrowState(this.timerObjects);
-                this.rocketObject.yellowArrowState(this.timerObjects);
-                this.rocketObject.greenArrowState(this.timerObjects);
-                this.rocketObject.drawArrows(this.firstArrowsAppearanceRed, this.firstArrowsAppearanceYellow, this.firstArrowsAppearanceGreen, paramSpriteBatch);
-                i = this.stageNumber;
-                if (i == 1) {
-                    this.rocketObject.drawRocket(paramSpriteBatch, this.pauseGame, this.shapeRenderer, 12.45F);
-                } else if (i == 2) {
-                    this.rocketObject.drawRocket(paramSpriteBatch, this.pauseGame, this.shapeRenderer, 15.0F);
+
+            if (coinMagnetObject.isHasCoinMagnet()) {
+                if (!onceMagnet) {
+                    normalChance /= 2.0F;
+                    onceMagnet = true;
+                }
+
+                if (timerObjects - coinMagnetObject.getCoinMagnetOnTimer() >= prefs.getInteger(Shop.MAGNET_UPGRADED) + 10.0F + magnetUpgrade) {
+                    coinMagnetObject.setHasCoinMagnet();
+                    normalChance *= 2.0F;
+                    onceMagnet = false;
                 }
             }
-            this.shieldObject.drawShieldCollectible(paramSpriteBatch, this.pauseGame, this.shapeRenderer);
-            this.coinRushObject.drawSpeedCoinCollectible(paramSpriteBatch, this.pauseGame);
-            this.coinMagnetObject.drawCoinMagnetCollectible(paramSpriteBatch, this.pauseGame);
-            this.playerObject.drawPlayerRun(paramSpriteBatch, this.shieldObject, this.rockObject, this.pauseGame, this.shapeRenderer, this.prefs);
-            f = this.timerGame;
-            if (f >= 30.0F && f < 60.0F) {
-                this.rocksGo = false;
-                this.rockObject.setFirstRockHitFalse();
-                this.bombsGo = true;
+
+            if (coinMagnetObject.isHasCoinMagnet())
+                coinObject.drawCoinMagnetized(batch, playerObject.getPlayerXRect(), playerObject.getPlayerY(), playerObject.getPlayerWidthRect(), playerObject.getPlayerHeightRect(), pauseGame);
+            else
+                coinObject.drawCoin(batch, pauseGame);
+
+            coinObject.removeCoin();
+
+            if (stageNumber == 1) {
+                rockObject.drawRock(batch, pauseGame, shapeRenderer, 6.6F);
+                bombObject.drawBomb(batch, pauseGame, shapeRenderer, 6.6F);
+            } else if (stageNumber == 2) {
+                rockObject.drawRock(batch, pauseGame, shapeRenderer, 8.6F);
+                bombObject.drawBomb(batch, pauseGame, shapeRenderer, 8.6F);
+                spikesObject.drawSpikeDown(batch, pauseGame, shapeRenderer);
             }
-            if (this.stageNumber == 2)
-                this.spikesGo = true;
-            f = this.timerGame;
-            if (f >= 60.0F && f < 100.0F) {
-                this.bombsGo = false;
-                this.rocketsGo = true;
+
+            if (rocketsGo) {
+                rocketObject.redArrowState(timerObjects);
+                rocketObject.yellowArrowState(timerObjects);
+                rocketObject.greenArrowState(timerObjects);
+                rocketObject.drawArrows(firstArrowsAppearanceRed, firstArrowsAppearanceYellow, firstArrowsAppearanceGreen, batch);
+                if (stageNumber == 1)
+                    rocketObject.drawRocket(batch, pauseGame, shapeRenderer, 12.45F);
+                else if (stageNumber == 2)
+                    rocketObject.drawRocket(batch, pauseGame, shapeRenderer, 15.0F);
+            }
+
+            shieldObject.drawShieldCollectible(batch, pauseGame, shapeRenderer);
+            coinRushObject.drawSpeedCoinCollectible(batch, pauseGame);
+            coinMagnetObject.drawCoinMagnetCollectible(batch, pauseGame);
+            playerObject.drawPlayerRun(batch, shieldObject, rockObject, pauseGame, shapeRenderer, prefs);
+
+            if (timerGame >= 30.0F && timerGame < 60.0F) {
+                rocksGo = false;
+                rockObject.setFirstRockHitFalse();
+                bombsGo = true;
+            }
+
+            if (stageNumber == 2)
+                spikesGo = true;
+
+            if (timerGame >= 60.0F && timerGame < 100.0F) {
+                bombsGo = false;
+                rocketsGo = true;
                 rocketFirstTime();
             }
-            i = this.stageNumber;
-            if (i == 1) {
+
+            if (stageNumber == 1)
                 timingStory("storyModeCity");
-            } else if (i == 2) {
+            else if (stageNumber == 2)
                 timingStory("storyModeDesert");
+
+
+            if ((timerGame - scoreTimer) >= 0.3D) {
+                score++;
+                scoreTimer = timerGame;
             }
-            f = this.timerGame;
-            if ((f - this.scoreTimer) >= 0.3D) {
-                this.score++;
-                this.scoreTimer = f;
-            }
-        } else if (i == 0) {
-            i = getActiveBackgroundIdx(this.bgCords[0]);
-            paramSpriteBatch.draw(this.background[i], this.bgCords[i], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            TextureAtlas.AtlasRegion[] arrayOfAtlasRegion = this.background;
-            paramSpriteBatch.draw(arrayOfAtlasRegion[++i], this.bgCords[i] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            this.playerObject.drawPlayerStart(paramSpriteBatch, this.prefs);
-            this.stage.getActors().get(1).setVisible(false);
-            this.showScoreAndCoinLabel = false;
+
+        } else if (gameState == 0) {
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            playerObject.drawPlayerStart(batch, prefs);
+            stage.getActors().get(1).setVisible(false);
+            showScoreAndCoinLabel = false;
             if (Gdx.input.justTouched()) {
-                this.gameState = 1;
-                this.stage.getActors().get(1).setVisible(true);
-                this.showScoreAndCoinLabel = true;
+                gameState = 1;
+                stage.getActors().get(1).setVisible(true);
+                showScoreAndCoinLabel = true;
             }
-        } else if (i == 2) {
-            i = getActiveBackgroundIdx(this.bgCords[0]);
-            paramSpriteBatch.draw(this.background[i], this.bgCords[i], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            TextureAtlas.AtlasRegion[] arrayOfAtlasRegion = this.background;
-            paramSpriteBatch.draw(arrayOfAtlasRegion[++i], this.bgCords[i] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            this.playerObject.drawPlayerFaint(paramSpriteBatch, this.pauseGame, this.prefs);
-            boolean bool1 = this.mAdsController.getAdLoaded();
-            boolean bool2 = this.mAdsController.getRewardReceived();
-            this.stage.getActors().get(1).setVisible(false);
-            this.stage.getActors().get(6).setVisible(true);
-            this.showScoreAndCoinLabel = false;
-            if (this.twoTimesAd < 2 && bool1) {
-                this.stage.getActors().get(6).setTouchable(Touchable.enabled);
-                this.continueWithAdsButton.setStyle(this.continueWithAdsButtonStyle);
-            } else if (this.twoTimesAd < 2) {
-                this.stage.getActors().get(6).setTouchable(Touchable.disabled);
-                this.continueWithAdsButton.setStyle(this.continueWithAdsWaitButtonStyle);
+        } else if (gameState == 2) {
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            playerObject.drawPlayerFaint(batch, pauseGame, prefs);
+            boolean adLoaded = mAdsController.getAdLoaded();
+            boolean rewardReceived = mAdsController.getRewardReceived();
+            stage.getActors().get(1).setVisible(false);
+            stage.getActors().get(6).setVisible(true);
+            showScoreAndCoinLabel = false;
+
+            if (twoTimesAd < 2 && adLoaded) {
+                stage.getActors().get(6).setTouchable(Touchable.enabled);
+                continueWithAdsButton.setStyle(continueWithAdsButtonStyle);
+            } else if (twoTimesAd < 2) {
+                stage.getActors().get(6).setTouchable(Touchable.disabled);
+                continueWithAdsButton.setStyle(continueWithAdsWaitButtonStyle);
             }
-            if (bool2) {
-                this.twoTimesAd++;
-                this.gameState = 0;
+            if (rewardReceived) {
+                twoTimesAd++;
+                gameState = 0;
                 resetAfterRevive();
-                this.stage.getActors().get(0).setVisible(false);
-                this.stage.getActors().get(6).setVisible(false);
-                this.stage.getActors().get(7).setVisible(false);
-                this.stage.getActors().get(8).setVisible(false);
-                this.mAdsController.setRewardReceived(false);
-                this.stage.getActors().get(23).setVisible(false);
-                Preferences preferences = this.prefs;
-                preferences.putInteger("revivedAfterDeath", preferences.getInteger("revivedAfterDeath", 0) + 1);
-                preferences = this.prefs;
-                preferences.putInteger("adsWatched", preferences.getInteger("adsWatched", 0) + 1);
-                this.prefs.flush();
+                stage.getActors().get(0).setVisible(false);
+                stage.getActors().get(6).setVisible(false);
+                stage.getActors().get(7).setVisible(false);
+                stage.getActors().get(8).setVisible(false);
+                mAdsController.setRewardReceived(false);
+                stage.getActors().get(23).setVisible(false);
+                prefs.putInteger(REVIVED_AFTER_DEATH, prefs.getInteger(REVIVED_AFTER_DEATH, 0) + 1);
+                prefs.putInteger(EndGame.ADS_WATCHED, prefs.getInteger(EndGame.ADS_WATCHED, 0) + 1);
+                prefs.flush();
             } else {
-                this.stage.getActors().get(8).setVisible(true);
-                this.stage.getActors().get(7).setVisible(true);
-                if (this.showDiamondsCount)
-                    this.stage.getActors().get(23).setVisible(true);
+                stage.getActors().get(8).setVisible(true);
+                stage.getActors().get(7).setVisible(true);
+                if (showDiamondsCount)
+                    stage.getActors().get(23).setVisible(true);
             }
-        } else if (i == 3) {
-            if (this.timerGame <= 100.8F)
-                for (i = 0; i < 5; i++) {
-                    float[] arrayOfFloat = this.bgCords;
-                    arrayOfFloat[i] = arrayOfFloat[i] - (int) worldXToScreenX(3.0F) * this.dt * 60.0F;
-                }
-            if (this.bgCords[4] <= 0.0F)
-                for (i = 0; i < 5; i++)
-                    this.bgCords[i] = (int) worldXToScreenX((i * 500));
-            i = getActiveBackgroundIdx(this.bgCords[0]);
-            paramSpriteBatch.draw(this.background[i], this.bgCords[i], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            TextureAtlas.AtlasRegion[] arrayOfAtlasRegion = this.background;
-            paramSpriteBatch.draw(arrayOfAtlasRegion[++i], this.bgCords[i] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-            this.playerObject.drawPlayerWin(paramSpriteBatch);
-            this.villainObject.drawVillain(paramSpriteBatch, this.pauseGame);
-            float f = this.timerGame;
-            if (f >= 102.0F) {
-                this.showEndStory = true;
-            } else {
-                this.timerGame = f + Gdx.graphics.getDeltaTime();
-            }
+        } else if (gameState == 3) {
+            if (timerGame <= 100.8F)
+                for (int i = 0; i < 5; i++)
+                    bgCords[i] = bgCords[i] - (int) worldXToScreenX(3.0F) * dt * 60.0F;
+
+            if (bgCords[4] <= 0.0F)
+                for (int i = 0; i < 5; i++)
+                    bgCords[i] = (int) worldXToScreenX((i * 500));
+
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+            batch.draw(background[getActiveBackgroundIdx(bgCords[0]) + 1], bgCords[getActiveBackgroundIdx(bgCords[0]) + 1] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
+
+            playerObject.drawPlayerWin(batch);
+            villainObject.drawVillain(batch, pauseGame);
+
+            if (timerGame >= 102.0F)
+                showEndStory = true;
+            else
+                timerGame = timerGame + Gdx.graphics.getDeltaTime();
         }
-        this.coinObject.coinCollision(this.playerObject.getPlayerRectangle(), this.prefs.getBoolean("doubleCoins", false));
-        if (!this.shieldObject.isHasShield()) {
-            if (this.rockObject.isFirstRockHit()) {
-                this.gameState = this.rockObject.rockCollisionSecond(this.playerObject.getPlayerRectangle(), this.gameState, this.prefs);
-            } else {
-                this.rockObject.rockCollisionFirst(this.playerObject.getPlayerRectangle(), this.timerObjects);
-            }
-            this.gameState = this.bombObject.bombCollision(this.playerObject.getPlayerRectangle(), this.gameState, this.prefs);
-            this.gameState = this.spikesObject.spikeDownCollision(this.playerObject.getPlayerRectangle(), this.gameState, prefs);
-            this.gameState = this.rocketObject.rocketCollision(this.playerObject.getPlayerRectangle(), this.gameState, this.prefs);
+
+        coinObject.coinCollision(playerObject.getPlayerRectangle(), prefs.getBoolean(Shop.DOUBLE_COINS, false));
+
+        if (!shieldObject.isHasShield()) {
+            if (rockObject.isFirstRockHit())
+                gameState = rockObject.rockCollisionSecond(playerObject.getPlayerRectangle(), gameState, prefs);
+             else
+                rockObject.rockCollisionFirst(playerObject.getPlayerRectangle(), timerObjects);
+
+            gameState = bombObject.bombCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+            gameState = spikesObject.spikeDownCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+            gameState = rocketObject.rocketCollision(playerObject.getPlayerRectangle(), gameState, prefs);
         }
-        this.shieldObject.shieldCollision(this.playerObject.getPlayerRectangle(), this.timerObjects, this.prefs);
-        this.coinRushObject.speedCoinCollision(this.playerObject.getPlayerRectangle(), this.timerObjects, this.prefs);
-        this.coinMagnetObject.coinMagnetCollision(this.playerObject.getPlayerRectangle(), this.timerObjects, this.prefs);
-        if (this.showScoreAndCoinLabel) {
-            paramSpriteBatch.draw(this.scoreAndCoinBackground, worldXToScreenX(-25.0F), worldYToScreenY(950.0F), worldXToScreenX(125.0F), worldYToScreenY(50.0F));
-            paramSpriteBatch.draw(this.scoreAndCoinBackground, worldXToScreenX(-25.0F), worldYToScreenY(900.0F), worldXToScreenX(125.0F), worldYToScreenY(50.0F));
-            this.scoreAndCoinFont.draw(paramSpriteBatch, String.valueOf(this.score), worldXToScreenX(10.0F), worldYToScreenY(985.0F));
-            this.scoreAndCoinFont.draw(paramSpriteBatch, String.valueOf(this.coinObject.getCoinCount()), worldXToScreenX(30.0F), worldYToScreenY(935.0F));
-            paramSpriteBatch.draw(this.coin, worldXToScreenX(0.0F), worldYToScreenY(910.0F), worldXToScreenX(30.0F), worldYToScreenY(30.0F));
+
+        shieldObject.shieldCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
+        coinRushObject.speedCoinCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
+        coinMagnetObject.coinMagnetCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
+
+        if (showScoreAndCoinLabel) {
+            batch.draw(scoreAndCoinBackground, worldXToScreenX(-25.0F), worldYToScreenY(950.0F), worldXToScreenX(125.0F), worldYToScreenY(50.0F));
+            batch.draw(scoreAndCoinBackground, worldXToScreenX(-25.0F), worldYToScreenY(900.0F), worldXToScreenX(125.0F), worldYToScreenY(50.0F));
+            scoreAndCoinFont.draw(batch, String.valueOf(score), worldXToScreenX(10.0F), worldYToScreenY(985.0F));
+            scoreAndCoinFont.draw(batch, String.valueOf(coinObject.getCoinCount()), worldXToScreenX(30.0F), worldYToScreenY(935.0F));
+            batch.draw(coin, worldXToScreenX(0.0F), worldYToScreenY(910.0F), worldXToScreenX(30.0F), worldYToScreenY(30.0F));
         }
-        paramSpriteBatch.end();
-        this.shapeRenderer.end();
-        this.stage.act(Gdx.graphics.getDeltaTime());
-        this.stage.draw();
+
+        batch.end();
+        shapeRenderer.end();
+
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     public void update(float paramFloat) {
     }
 
     private int getActiveBackgroundIdx(float paramFloat) {
-        return (int) Math.floor(Math.abs(paramFloat / this.screenWidth));
+        return (int) Math.floor(Math.abs(paramFloat / screenWidth));
     }
 
     private void resetAfterRevive() {
-        this.playerObject.resetPlayerStats(this.prefs);
-        this.coinObject.resetCoinStats();
-        this.rockObject.resetRockStats();
-        this.bombObject.resetBombStats();
-        this.spikesObject.resetSpikeDownStats();
-        this.rocketObject.resetRocketStats();
-        this.shieldObject.resetShieldStats();
-        this.coinRushObject.resetCoinRushStats();
-        this.coinMagnetObject.resetCoinMagnetState();
-        this.timerObjects = 0.0F;
-        this.normalChance = 10.0F;
-        this.firstArrowsAppearanceRed = false;
-        this.firstArrowsAppearanceYellow = false;
-        this.firstArrowsAppearanceGreen = false;
-        this.firstTimeArrowsRed = true;
-        this.firstTimeArrowsYellow = true;
-        this.firstTimeArrowsGreen = true;
-        this.yellowGo = false;
-        this.greenGo = false;
+        playerObject.resetPlayerStats(this.prefs);
+        coinObject.resetCoinStats();
+        rockObject.resetRockStats();
+        bombObject.resetBombStats();
+        spikesObject.resetSpikeDownStats();
+        rocketObject.resetRocketStats();
+        shieldObject.resetShieldStats();
+        coinRushObject.resetCoinRushStats();
+        coinMagnetObject.resetCoinMagnetState();
+        timerObjects = 0.0F;
+        normalChance = 10.0F;
+        firstArrowsAppearanceRed = false;
+        firstArrowsAppearanceYellow = false;
+        firstArrowsAppearanceGreen = false;
+        firstTimeArrowsRed = true;
+        firstTimeArrowsYellow = true;
+        firstTimeArrowsGreen = true;
+        yellowGo = false;
+        greenGo = false;
     }
 
     private void resetStatsAndRestart() {
-        this.gameState = 0;
-        this.score = 0;
-        for (byte b = 0; b < 5; b++)
-            this.bgCords[b] = (int) worldXToScreenX((b * 500));
-        this.playerObject.resetPlayerStats(this.prefs);
-        this.coinObject.resetCoinStats();
-        this.rockObject.resetRockStats();
-        this.bombObject.resetBombStats();
-        this.spikesObject.resetSpikeDownStats();
-        this.rocketObject.resetRocketStats();
-        this.shieldObject.resetShieldStats();
-        this.coinRushObject.resetCoinRushStats();
-        this.coinMagnetObject.resetCoinMagnetState();
-        this.timerObjects = 0.0F;
-        this.timerGame = 0.0F;
-        this.collectiblesTimer = 0.0F;
-        this.normalChance = 10.0F;
-        this.rocksGo = true;
-        this.bombsGo = false;
-        this.spikesGo = false;
-        this.rocketsGo = false;
-        this.firstArrowsAppearanceRed = false;
-        this.firstArrowsAppearanceYellow = false;
-        this.firstArrowsAppearanceGreen = false;
-        this.firstTimeArrowsRed = true;
-        this.firstTimeArrowsYellow = true;
-        this.firstTimeArrowsGreen = true;
-        this.yellowGo = false;
-        this.greenGo = false;
-        this.scoreTimer = 0.0F;
-        this.twoTimesAd = 0;
+        gameState = 0;
+        score = 0;
+        for (int i = 0; i < 5; i++)
+            bgCords[i] = (int) worldXToScreenX((i * 500));
+
+        playerObject.resetPlayerStats(prefs);
+        coinObject.resetCoinStats();
+        rockObject.resetRockStats();
+        bombObject.resetBombStats();
+        spikesObject.resetSpikeDownStats();
+        rocketObject.resetRocketStats();
+        shieldObject.resetShieldStats();
+        coinRushObject.resetCoinRushStats();
+        coinMagnetObject.resetCoinMagnetState();
+        timerObjects = 0.0F;
+        timerGame = 0.0F;
+        collectiblesTimer = 0.0F;
+        normalChance = 10.0F;
+        rocksGo = true;
+        bombsGo = false;
+        spikesGo = false;
+        rocketsGo = false;
+        firstArrowsAppearanceRed = false;
+        firstArrowsAppearanceYellow = false;
+        firstArrowsAppearanceGreen = false;
+        firstTimeArrowsRed = true;
+        firstTimeArrowsYellow = true;
+        firstTimeArrowsGreen = true;
+        yellowGo = false;
+        greenGo = false;
+        scoreTimer = 0.0F;
+        twoTimesAd = 0;
     }
 
     private void rocketFirstTime() {
-        if (this.firstTimeArrowsRed) {
-            this.firstArrowsAppearanceRed = true;
-            this.rocketObject.setLastArrowRedTimer(this.timerObjects);
-            this.firstTimeArrowsRed = false;
+        if (firstTimeArrowsRed) {
+            firstArrowsAppearanceRed = true;
+            rocketObject.setLastArrowRedTimer(timerObjects);
+            firstTimeArrowsRed = false;
         }
-        if (this.firstTimeArrowsYellow && this.timerObjects - this.rocketObject.getLastArrowRedTimer() >= 2.0F) {
-            this.firstArrowsAppearanceYellow = true;
-            this.rocketObject.setLastArrowYellowTimer(this.timerObjects);
-            this.firstTimeArrowsYellow = false;
-            this.yellowGo = true;
+
+        if (firstTimeArrowsYellow && timerObjects - rocketObject.getLastArrowRedTimer() >= 2.0F) {
+            firstArrowsAppearanceYellow = true;
+            rocketObject.setLastArrowYellowTimer(timerObjects);
+            firstTimeArrowsYellow = false;
+            yellowGo = true;
         }
-        if (this.firstTimeArrowsGreen && this.timerObjects - this.rocketObject.getLastArrowRedTimer() >= 1.0F) {
-            this.firstArrowsAppearanceGreen = true;
-            this.rocketObject.setLastArrowGreenTimer(this.timerObjects);
-            this.firstTimeArrowsGreen = false;
-            this.greenGo = true;
+
+        if (firstTimeArrowsGreen && timerObjects - rocketObject.getLastArrowRedTimer() >= 1.0F) {
+            firstArrowsAppearanceGreen = true;
+            rocketObject.setLastArrowGreenTimer(timerObjects);
+            firstTimeArrowsGreen = false;
+            greenGo = true;
         }
     }
 
-    private void showEndStory(int paramInt) {
-        int i = this.storyEndNumber;
-        if (i == 0) {
-            this.stage.getActors().get(14).setVisible(true);
-            this.stage.getActors().get(15).setVisible(false);
-            this.stage.getActors().get(16).setVisible(true);
-            this.stage.getActors().get(17).setVisible(false);
-            this.stage.getActors().get(27).setVisible(true);
-        } else if (i == 1) {
-            this.stage.getActors().get(14).setVisible(false);
-            this.stage.getActors().get(15).setVisible(true);
-            this.stage.getActors().get(17).setVisible(true);
-            if (paramInt == 1) {
-                this.storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_second.png", Texture.class))));
-            } else if (paramInt == 2) {
-                this.storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_second.png", Texture.class))));
-            }
-        } else if (i == 2) {
-            if (paramInt == 1) {
-                this.storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_third.png", Texture.class))));
-            } else if (paramInt == 2) {
-                this.storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_third.png", Texture.class))));
-            }
-        } else if (i == 3) {
-            if (paramInt == 1) {
-                this.storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_fourth.png", Texture.class))));
-            } else if (paramInt == 2) {
-                this.storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_fourth.png", Texture.class))));
-            }
+    private void showEndStory(int storyPageNumber) {
+        if (storyEndNumber == 0) {
+            stage.getActors().get(14).setVisible(true);
+            stage.getActors().get(15).setVisible(false);
+            stage.getActors().get(16).setVisible(true);
+            stage.getActors().get(17).setVisible(false);
+            stage.getActors().get(27).setVisible(true);
+        } else if (storyEndNumber == 1) {
+            stage.getActors().get(14).setVisible(false);
+            stage.getActors().get(15).setVisible(true);
+            stage.getActors().get(17).setVisible(true);
+
+            if (storyPageNumber == 1)
+                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_second.png", Texture.class))));
+             else if (storyPageNumber == 2)
+                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_second.png", Texture.class))));
+        } else if (storyEndNumber == 2) {
+            if (storyPageNumber == 1)
+                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_third.png", Texture.class))));
+             else if (storyPageNumber == 2)
+                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_third.png", Texture.class))));
+        } else if (storyEndNumber == 3) {
+            if (storyPageNumber == 1)
+                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_fourth.png", Texture.class))));
+             else if (storyPageNumber == 2)
+                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_fourth.png", Texture.class))));
         }
     }
 
-    private void showStartStory(int paramInt) {
-        int i = this.storyStartNumber;
-        if (i == 0) {
-            this.stage.getActors().get(12).setVisible(true);
-            this.stage.getActors().get(13).setVisible(false);
-            this.stage.getActors().get(16).setVisible(true);
-            this.stage.getActors().get(17).setVisible(false);
-            this.stage.getActors().get(27).setVisible(true);
-        } else if (i == 1) {
-            this.stage.getActors().get(12).setVisible(false);
-            this.stage.getActors().get(13).setVisible(true);
-            this.stage.getActors().get(17).setVisible(true);
-            if (paramInt == 1) {
-                this.storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
-            } else if (paramInt == 2) {
-                this.storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
-            }
-        } else if (i == 2) {
-            if (paramInt == 1) {
-                this.storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
-            } else if (paramInt == 2) {
-                this.storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
-            }
-        } else if (i == 3) {
-            if (paramInt == 1) {
-                this.storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
-            } else if (paramInt == 2) {
-                this.storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
-            }
+    private void showStartStory(int storyPageNumber) {
+        if (storyStartNumber == 0) {
+            stage.getActors().get(12).setVisible(true);
+            stage.getActors().get(13).setVisible(false);
+            stage.getActors().get(16).setVisible(true);
+            stage.getActors().get(17).setVisible(false);
+            stage.getActors().get(27).setVisible(true);
+        } else if (storyStartNumber == 1) {
+            stage.getActors().get(12).setVisible(false);
+            stage.getActors().get(13).setVisible(true);
+            stage.getActors().get(17).setVisible(true);
+            if (storyPageNumber == 1)
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
+             else if (storyPageNumber == 2)
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
+        } else if (storyStartNumber == 2) {
+            if (storyPageNumber == 1)
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
+             else if (storyPageNumber == 2)
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
+        } else if (storyStartNumber == 3) {
+            if (storyPageNumber == 1)
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
+             else if (storyPageNumber == 2)
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
         }
     }
 
     private void timingStory(String paramString) {
-        if (this.prefs.getFloat(paramString) >= 100.0F) {
-            float f = this.timerGame;
-            if (f >= 100.0F && f < 160.0F) {
-                this.rocketsGo = false;
-                this.rocksGo = true;
-                this.bombsGo = true;
+        if (prefs.getFloat(paramString) >= 100.0F) {
+            if (timerGame >= 100.0F && timerGame < 160.0F) {
+                rocketsGo = false;
+                rocksGo = true;
+                bombsGo = true;
             }
-            f = this.timerGame;
-            if (f >= 160.0F && f < 240.0F) {
-                this.rocksGo = false;
-                this.rockObject.setFirstRockHitFalse();
-                this.rocketsGo = true;
+
+            if (timerGame >= 160.0F && timerGame < 240.0F) {
+                rocksGo = false;
+                rockObject.setFirstRockHitFalse();
+                rocketsGo = true;
                 rocketFirstTime();
             }
-            if (this.timerGame >= 240.0F)
-                this.rocksGo = true;
-        } else if (this.timerGame > 100.0F) {
-            this.gameState = 3;
-        }
+            if (timerGame >= 240.0F)
+                rocksGo = true;
+        } else if (timerGame > 100.0F)
+            gameState = 3;
+
     }
 
     private float worldXToScreenX(float paramFloat) {

@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.kristijanstojanoski.game.MainGame;
 //import com.kristijanstojanoski.game.MainGame;
 
 
@@ -66,10 +67,10 @@ public class ChooseStageMenu extends State {
         cityButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                //gsm.set(new MainGame(gsm, mAdsController, manager, 1));
+                gsm.set(new MainGame(gsm, mAdsController, manager, 1));
                 musicSoundsObject.playButtonClick();
                 musicSoundsObject.getBackgroundMusic().stop();
-                //dispose();
+                dispose();
             }
         });
 
@@ -83,10 +84,10 @@ public class ChooseStageMenu extends State {
         desertButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
-                //gsm.set(new MainGame(gsm, mAdsController, manager, 2));
+                gsm.set(new MainGame(gsm, mAdsController, manager, 2));
                 musicSoundsObject.playButtonClick();
                 musicSoundsObject.getBackgroundMusic().stop();
-                //dispose();
+                dispose();
             }
         });
 

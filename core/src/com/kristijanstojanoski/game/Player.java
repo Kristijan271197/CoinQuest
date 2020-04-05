@@ -127,6 +127,11 @@ class Player {
 
     public void drawPlayerFaint(SpriteBatch batch, boolean pause, Preferences prefs) {
         if (!pause) {
+
+
+            velocity = (worldYToScreenY(0.5f) * Gdx.graphics.getDeltaTime() * 60.0f) + velocity;
+            playerY = playerY - velocity;
+
             if (playerY <= worldYToScreenY(75.0f)) {
                 if (prefs.getBoolean(PLAYER_GROUND, false)) {
                     musicSoundsObject.playPlayerGround();
@@ -213,7 +218,7 @@ class Player {
 
         if (!pause) {
             if (Gdx.input.justTouched()) {
-                if (Gdx.input.getX() < 0 || (float) Gdx.input.getX() > Gdx.graphics.getWidth() || Gdx.input.getY() < 0 || (float) Gdx.input.getY() >= Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 15.0F) {
+                if (!(Gdx.input.getX() < 0 || (float) Gdx.input.getX() > Gdx.graphics.getWidth() || Gdx.input.getY() < 0 || (float) Gdx.input.getY() >= Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 15.0F)) {
                     velocity = -worldYToScreenY(12.5F) * Gdx.graphics.getDeltaTime() * 60.0F;
                     musicSoundsObject.playJump();
                 }
@@ -242,6 +247,9 @@ class Player {
                 playerRunState(2, 9, 5);
             else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.DINO_NUMBER)
                 playerRunState(3, 7, 0);
+
+            velocity = (worldYToScreenY(0.5f) * Gdx.graphics.getDeltaTime() * 60.0f) + velocity;
+            playerY = playerY - velocity;
 
             if (playerY <= worldYToScreenY(75.0F))
                 playerY = worldYToScreenY(75.0F);
@@ -280,6 +288,9 @@ class Player {
     }
 
     public void drawPlayerWin(SpriteBatch batch) {
+        velocity = (worldYToScreenY(0.5f) * Gdx.graphics.getDeltaTime() * 60.0f) + velocity;
+        playerY = playerY - velocity;
+
         if (playerY <= worldYToScreenY(75.0f)) {
             playerY = worldYToScreenY(75.0f);
             batch.draw(playerRun[playerState], playerX, playerY, playerWidth, playerHeight);
