@@ -5,7 +5,6 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
@@ -47,64 +46,54 @@ class Rock {
         rockXs.add(Gdx.graphics.getWidth());
     }
 
-    void drawRock(SpriteBatch paramSpriteBatch, boolean pause, ShapeRenderer paramShapeRenderer, float rockSpeed) {
-        this.rockRectangles.clear();
-        for (byte b = 0; b < this.rockXs.size(); b++) {
-            paramSpriteBatch.draw(this.rock, this.rockXs.get(b), this.rockYs.get(b), this.rockWidth, this.rockHeight);
-            if (!pause) {
-                ArrayList<Integer> arrayList = this.rockXs;
-                arrayList.set(b, (int) (arrayList.get(b) - worldXToScreenX(rockSpeed) * Gdx.graphics.getDeltaTime() * 60.0F));
-            }
-            this.rockRectangles.add(new Rectangle(this.rockXs.get(b), this.rockYs.get(b), this.rockWidth, this.rockHeight));
+    void drawRock(SpriteBatch batch, boolean pause, ShapeRenderer paramShapeRenderer, float rockSpeed) {
+        rockRectangles.clear();
+        for (int i = 0; i < rockXs.size(); i++) {
+            batch.draw(rock, rockXs.get(i), rockYs.get(i), rockWidth, rockHeight);
+            if (!pause)
+                rockXs.set(i, (int) (rockXs.get(i) - worldXToScreenX(rockSpeed) * Gdx.graphics.getDeltaTime() * 60.0F));
+            rockRectangles.add(new Rectangle(rockXs.get(i), rockYs.get(i), rockWidth, rockHeight));
         }
     }
 
 
     void resetRockStats() {
-        this.rockXs.clear();
-        this.rockYs.clear();
-        this.rockRectangles.clear();
-        this.lastRockTimer = 0.0F;
-        this.firstRockHitTimer = 0.0F;
-        this.firstRockHit = false;
+        rockXs.clear();
+        rockYs.clear();
+        rockRectangles.clear();
+        lastRockTimer = 0.0F;
+        firstRockHitTimer = 0.0F;
+        firstRockHit = false;
     }
 
     void rockCollisionFirst(Rectangle paramRectangle, float paramFloat) {
-        for (byte b = 0; b < this.rockRectangles.size(); b++) {
-            if (Intersector.overlaps(this.rockRectangles.get(b), paramRectangle)) {
-                this.musicSoundsObject.playRockHit();
-                this.firstRockHit = true;
-                this.firstRockHitTimer = paramFloat;
-                this.rockXs.remove(b);
-                this.rockYs.remove(b);
-                this.rockRectangles.remove(b);
+        for (int i = 0; i < rockRectangles.size(); i++) {
+            if (Intersector.overlaps(rockRectangles.get(i), paramRectangle)) {
+                musicSoundsObject.playRockHit();
+                firstRockHit = true;
+                firstRockHitTimer = paramFloat;
+                rockXs.remove(i);
+                rockYs.remove(i);
+                rockRectangles.remove(i);
                 break;
             }
         }
     }
 
-    int rockCollisionSecond(Rectangle paramRectangle, int paramInt, Preferences paramPreferences) {
-        int i;
-        byte b = 0;
-        while (true) {
-            i = paramInt;
-            if (b < this.rockRectangles.size()) {
-                if (Intersector.overlaps(this.rockRectangles.get(b), paramRectangle)) {
-                    this.musicSoundsObject.playRockHit();
-                    paramPreferences.putBoolean("playerGround", true);
-                    paramPreferences.flush();
-                    i = 2;
-                    this.rockXs.remove(b);
-                    this.rockYs.remove(b);
-                    this.rockRectangles.remove(b);
-                    break;
-                }
-                b++;
-                continue;
+    int rockCollisionSecond(Rectangle paramRectangle, int gameState, Preferences prefs) {
+        for (int i = 0; i < rockRectangles.size(); i++) {
+            if (Intersector.overlaps(this.rockRectangles.get(i), paramRectangle)) {
+                musicSoundsObject.playRockHit();
+                prefs.putBoolean(Player.PLAYER_GROUND, true);
+                prefs.flush();
+                gameState = 2;
+                rockXs.remove(i);
+                rockYs.remove(i);
+                rockRectangles.remove(i);
+                break;
             }
-            break;
         }
-        return i;
+        return gameState;
     }
 
     float getFirstRockHitTimer() {
@@ -139,9 +128,3 @@ class Rock {
     public void dispose() {
     }
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\com\zappycode\coinman\game\Rock.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */

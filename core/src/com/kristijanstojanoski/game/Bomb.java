@@ -59,7 +59,7 @@ class Bomb {
         for (int i = 0; i < bombCircles.size(); i++) {
             if (Intersector.overlaps(this.bombCircles.get(i), paramRectangle)) {
                 this.musicSoundsObject.playBombSound();
-                prefs.putBoolean("playerGround", true);
+                prefs.putBoolean(Player.PLAYER_GROUND, true);
                 prefs.flush();
                 gameState = 2;
                 bombXs.remove(i);

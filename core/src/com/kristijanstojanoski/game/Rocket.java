@@ -4,283 +4,232 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 class Rocket {
-  private int arrowStateGreen = 0;
-  
-  private int arrowStateRed = 0;
-  
-  private int arrowStateYellow = 0;
-  
-  private float greenHeight;
-  
-  private float lastArrowGreenTimer = 0.0F;
-  
-  private float lastArrowRedTimer = 0.0F;
-  
-  private float lastArrowYellowTimer = 0.0F;
-  
-  private Random random = new Random(System.currentTimeMillis());
-  
-  private float redHeight;
-  
-  private TextureAtlas.AtlasRegion rocket;
-  
-  private TextureAtlas.AtlasRegion[] rocketArrowGreen = new TextureAtlas.AtlasRegion[3];
-  
-  private TextureAtlas.AtlasRegion[] rocketArrowRed = new TextureAtlas.AtlasRegion[3];
-  
-  private TextureAtlas.AtlasRegion[] rocketArrowYellow = new TextureAtlas.AtlasRegion[3];
-  
-  private int rocketsArrowX;
-  
-  private int rocketsArrowYGreen;
-  
-  private int rocketsArrowYRed;
-  
-  private int rocketsArrowYYellow;
-  
-  private ArrayList<Rectangle> rocketsRectangles = new ArrayList<Rectangle>();
-  
-  private ArrayList<Integer> rocketsXs = new ArrayList<Integer>();
-  
-  private ArrayList<Integer> rocketsYs = new ArrayList<Integer>();
-  
-  private float yellowHeight;
-  
-  private float worldXToScreenX(float paramFloat) {
-    return Gdx.graphics.getWidth() / 500.0F * paramFloat;
-  }
-  
-  private float worldYToScreenY(float paramFloat) {
-    return Gdx.graphics.getHeight() / 1000.0F * paramFloat;
-  }
-  
-  public void dispose() {}
-  
-  void drawArrows(boolean paramBoolean1, boolean paramBoolean2, boolean paramBoolean3, SpriteBatch paramSpriteBatch) {
-    if (paramBoolean1)
-      paramSpriteBatch.draw((TextureRegion)this.rocketArrowRed[this.arrowStateRed], this.rocketsArrowX, this.rocketsArrowYRed, worldXToScreenX(96.0F), worldYToScreenY(50.0F)); 
-    if (paramBoolean2)
-      paramSpriteBatch.draw((TextureRegion)this.rocketArrowYellow[this.arrowStateYellow], this.rocketsArrowX, this.rocketsArrowYYellow, worldXToScreenX(96.0F), worldYToScreenY(50.0F)); 
-    if (paramBoolean3)
-      paramSpriteBatch.draw((TextureRegion)this.rocketArrowGreen[this.arrowStateGreen], this.rocketsArrowX, this.rocketsArrowYGreen, worldXToScreenX(96.0F), worldYToScreenY(50.0F)); 
-  }
-  
-  void drawRocket(SpriteBatch paramSpriteBatch, boolean paramBoolean, ShapeRenderer paramShapeRenderer, float paramFloat) {
-    this.rocketsRectangles.clear();
-    for (byte b = 0; b < this.rocketsXs.size(); b++) {
-      paramSpriteBatch.draw((TextureRegion)this.rocket, ((Integer)this.rocketsXs.get(b)).intValue(), ((Integer)this.rocketsYs.get(b)).intValue(), worldXToScreenX(145.0F), worldYToScreenY(50.0F));
-      if (!paramBoolean) {
-        ArrayList<Integer> arrayList = this.rocketsXs;
-        arrayList.set(b, Integer.valueOf((int)(((Integer)arrayList.get(b)).intValue() - worldXToScreenX(paramFloat) * Gdx.graphics.getDeltaTime() * 60.0F)));
-      } 
-      this.rocketsRectangles.add(new Rectangle(((Integer)this.rocketsXs.get(b)).intValue(), ((Integer)this.rocketsYs.get(b)).intValue(), worldXToScreenX(145.0F), worldYToScreenY(50.0F)));
-    } 
-  }
-  
-  float getGreenHeight() {
-    return this.greenHeight;
-  }
-  
-  float getLastArrowGreenTimer() {
-    return this.lastArrowGreenTimer;
-  }
-  
-  float getLastArrowRedTimer() {
-    return this.lastArrowRedTimer;
-  }
-  
-  float getLastArrowYellowTimer() {
-    return this.lastArrowYellowTimer;
-  }
-  
-  float getRedHeight() {
-    return this.redHeight;
-  }
-  
-  float getYellowHeight() {
-    return this.yellowHeight;
-  }
-  
-  void greenArrowState(float paramFloat) {
-    float f = this.lastArrowGreenTimer;
-    if (paramFloat - f >= 1.9F && paramFloat - f <= 2.0F) {
-      this.arrowStateGreen = 2;
-    } else {
-      f = this.lastArrowGreenTimer;
-      if (paramFloat - f >= 1.0F && paramFloat - f <= 1.1F) {
-        this.arrowStateGreen = 1;
-      } else {
-        f = this.lastArrowGreenTimer;
-        if (paramFloat - f >= 0.0F && paramFloat - f <= 0.2F)
-          this.arrowStateGreen = 0; 
-      } 
-    } 
-  }
-  
-  void initializeValues(TextureAtlas paramTextureAtlas) {
-    this.rocket = paramTextureAtlas.findRegion("rocket");
-    byte b1 = 0;
-    for (byte b2 = 3; b1 < 3; b2--) {
-      this.rocketArrowRed[b1] = paramTextureAtlas.findRegion("rocket_arrow", b2);
-      this.rocketArrowYellow[b1] = paramTextureAtlas.findRegion("rocket_arrow", b2);
-      this.rocketArrowGreen[b1] = paramTextureAtlas.findRegion("rocket_arrow", b2);
-      b1++;
-    } 
-    this.redHeight = makeRocketArrowRed();
-    this.yellowHeight = makeRocketArrowYellow();
-    this.greenHeight = makeRocketArrowGreen();
-  }
-  
-  void makeRocket(Float paramFloat) {
-    float f = paramFloat.floatValue();
-    if (worldYToScreenY(50.0F) + f >= Gdx.graphics.getHeight()) {
-      this.rocketsYs.add(Integer.valueOf((int)(f - worldXToScreenX(50.0F))));
-    } else if (f <= worldYToScreenY(70.0F)) {
-      this.rocketsYs.add(Integer.valueOf((int)worldYToScreenY(70.0F)));
-    } else {
-      this.rocketsYs.add(Integer.valueOf((int)f));
-    } 
-    this.rocketsXs.add(Integer.valueOf(Gdx.graphics.getWidth()));
-  }
-  
-  float makeRocketArrowGreen() {
-    float f = this.random.nextFloat() * Gdx.graphics.getHeight();
-    if (worldYToScreenY(50.0F) + f >= Gdx.graphics.getHeight()) {
-      this.rocketsArrowYGreen = (int)(f - worldXToScreenX(50.0F));
-    } else if (f <= worldYToScreenY(70.0F)) {
-      this.rocketsArrowYGreen = (int)worldYToScreenY(70.0F);
-    } else {
-      this.rocketsArrowYGreen = (int)f;
-    } 
-    this.rocketsArrowX = (int)(Gdx.graphics.getWidth() - worldXToScreenX(96.0F));
-    return f;
-  }
-  
-  float makeRocketArrowRed() {
-    float f = this.random.nextFloat() * Gdx.graphics.getHeight();
-    if (worldYToScreenY(50.0F) + f >= Gdx.graphics.getHeight()) {
-      this.rocketsArrowYRed = (int)(f - worldXToScreenX(50.0F));
-    } else if (f <= worldYToScreenY(70.0F)) {
-      this.rocketsArrowYRed = (int)worldYToScreenY(70.0F);
-    } else {
-      this.rocketsArrowYRed = (int)f;
-    } 
-    this.rocketsArrowX = (int)(Gdx.graphics.getWidth() - worldXToScreenX(96.0F));
-    return f;
-  }
-  
-  float makeRocketArrowYellow() {
-    float f = this.random.nextFloat() * Gdx.graphics.getHeight();
-    if (worldYToScreenY(50.0F) + f >= Gdx.graphics.getHeight()) {
-      this.rocketsArrowYYellow = (int)(f - worldXToScreenX(50.0F));
-    } else if (f <= worldYToScreenY(70.0F)) {
-      this.rocketsArrowYYellow = (int)worldYToScreenY(70.0F);
-    } else {
-      this.rocketsArrowYYellow = (int)f;
-    } 
-    this.rocketsArrowX = (int)(Gdx.graphics.getWidth() - worldXToScreenX(96.0F));
-    return f;
-  }
-  
-  void redArrowState(float paramFloat) {
-    float f = this.lastArrowRedTimer;
-    if (paramFloat - f >= 1.9F && paramFloat - f <= 2.0F) {
-      this.arrowStateRed = 2;
-    } else {
-      f = this.lastArrowRedTimer;
-      if (paramFloat - f >= 1.0F && paramFloat - f <= 1.1F) {
-        this.arrowStateRed = 1;
-      } else {
-        f = this.lastArrowRedTimer;
-        if (paramFloat - f >= 0.0F && paramFloat - f <= 0.1F)
-          this.arrowStateRed = 0; 
-      } 
-    } 
-  }
-  
-  void resetRocketStats() {
-    this.rocketsXs.clear();
-    this.rocketsYs.clear();
-    this.rocketsRectangles.clear();
-    this.lastArrowRedTimer = 0.0F;
-    this.lastArrowYellowTimer = 0.0F;
-    this.lastArrowGreenTimer = 0.0F;
-  }
-  
-  int rocketCollision(Rectangle paramRectangle, int paramInt, Preferences paramPreferences) {
-    int i;
-    byte b = 0;
-    while (true) {
-      i = paramInt;
-      if (b < this.rocketsRectangles.size()) {
-        if (Intersector.overlaps(paramRectangle, this.rocketsRectangles.get(b))) {
-          paramPreferences.putBoolean("playerGround", true);
-          paramPreferences.flush();
-          i = 2;
-          this.rocketsXs.remove(b);
-          this.rocketsYs.remove(b);
-          this.rocketsRectangles.remove(b);
-          break;
-        } 
-        b++;
-        continue;
-      } 
-      break;
-    } 
-    return i;
-  }
-  
-  void setGreenHeight(float paramFloat) {
-    this.greenHeight = paramFloat;
-  }
-  
-  void setLastArrowGreenTimer(float paramFloat) {
-    this.lastArrowGreenTimer = paramFloat;
-  }
-  
-  void setLastArrowRedTimer(float paramFloat) {
-    this.lastArrowRedTimer = paramFloat;
-  }
-  
-  void setLastArrowYellowTimer(float paramFloat) {
-    this.lastArrowYellowTimer = paramFloat;
-  }
-  
-  void setRedHeight(float paramFloat) {
-    this.redHeight = paramFloat;
-  }
-  
-  void setYellowHeight(float paramFloat) {
-    this.yellowHeight = paramFloat;
-  }
-  
-  void yellowArrowState(float paramFloat) {
-    float f = this.lastArrowYellowTimer;
-    if (paramFloat - f >= 1.9F && paramFloat - f <= 2.0F) {
-      this.arrowStateYellow = 2;
-    } else {
-      f = this.lastArrowYellowTimer;
-      if (paramFloat - f >= 1.0F && paramFloat - f <= 1.1F) {
-        this.arrowStateYellow = 1;
-      } else {
-        f = this.lastArrowYellowTimer;
-        if (paramFloat - f >= 0.0F && paramFloat - f <= 0.2F)
-          this.arrowStateYellow = 0; 
-      } 
-    } 
-  }
+    private int arrowStateGreen = 0;
+    private int arrowStateRed = 0;
+    private int arrowStateYellow = 0;
+    private float greenHeight;
+    private float lastArrowGreenTimer = 0.0F;
+    private float lastArrowRedTimer = 0.0F;
+    private float lastArrowYellowTimer = 0.0F;
+    private Random random = new Random(System.currentTimeMillis());
+    private float redHeight;
+    private TextureAtlas.AtlasRegion rocket;
+    private TextureAtlas.AtlasRegion[] rocketArrowGreen = new TextureAtlas.AtlasRegion[3];
+    private TextureAtlas.AtlasRegion[] rocketArrowRed = new TextureAtlas.AtlasRegion[3];
+    private TextureAtlas.AtlasRegion[] rocketArrowYellow = new TextureAtlas.AtlasRegion[3];
+    private int rocketsArrowX;
+    private int rocketsArrowYGreen;
+    private int rocketsArrowYRed;
+    private int rocketsArrowYYellow;
+    private ArrayList<Rectangle> rocketsRectangles = new ArrayList<>();
+    private ArrayList<Integer> rocketsXs = new ArrayList<>();
+    private ArrayList<Integer> rocketsYs = new ArrayList<>();
+    private float yellowHeight;
+
+
+    void initializeValues(TextureAtlas mainGameAtlas) {
+        rocket = mainGameAtlas.findRegion("rocket");
+        for (int i = 0; i < 3; i++) {
+            rocketArrowRed[i] = mainGameAtlas.findRegion("rocket_arrow", i);
+            rocketArrowYellow[i] = mainGameAtlas.findRegion("rocket_arrow", i);
+            rocketArrowGreen[i] = mainGameAtlas.findRegion("rocket_arrow", i);
+        }
+        redHeight = makeRocketArrowRed();
+        yellowHeight = makeRocketArrowYellow();
+        greenHeight = makeRocketArrowGreen();
+    }
+
+
+    void drawArrows(boolean firstArrowRed, boolean firstArrowYellow, boolean firstArrowGreen, SpriteBatch batch) {
+        if (firstArrowRed)
+            batch.draw(rocketArrowRed[arrowStateRed], rocketsArrowX, rocketsArrowYRed, worldXToScreenX(96.0F), worldYToScreenY(50.0F));
+        if (firstArrowYellow)
+            batch.draw(rocketArrowYellow[arrowStateYellow], rocketsArrowX, rocketsArrowYYellow, worldXToScreenX(96.0F), worldYToScreenY(50.0F));
+        if (firstArrowGreen)
+            batch.draw(rocketArrowGreen[arrowStateGreen], rocketsArrowX, rocketsArrowYGreen, worldXToScreenX(96.0F), worldYToScreenY(50.0F));
+    }
+
+    void drawRocket(SpriteBatch batch, boolean pause, ShapeRenderer paramShapeRenderer, float rocketSpeed) {
+        rocketsRectangles.clear();
+        for (int i = 0; i < rocketsXs.size(); i++) {
+            batch.draw(rocket, rocketsXs.get(i), rocketsYs.get(i), worldXToScreenX(145.0F), worldYToScreenY(50.0F));
+            if (!pause)
+                rocketsXs.set(i, (int) (rocketsXs.get(i) - worldXToScreenX(rocketSpeed) * Gdx.graphics.getDeltaTime() * 60.0F));
+            rocketsRectangles.add(new Rectangle(rocketsXs.get(i), rocketsYs.get(i), worldXToScreenX(145.0F), worldYToScreenY(50.0F)));
+        }
+    }
+
+
+    void makeRocket(float height) {
+        if (worldYToScreenY(50.0F) + height >= Gdx.graphics.getHeight())
+            rocketsYs.add((int) (height - worldXToScreenX(50.0F)));
+        else if (height <= worldYToScreenY(70.0F))
+            rocketsYs.add((int) worldYToScreenY(70.0F));
+        else
+            rocketsYs.add((int) height);
+        rocketsXs.add(Gdx.graphics.getWidth());
+    }
+
+
+    float makeRocketArrowRed() {
+        float height = random.nextFloat() * Gdx.graphics.getHeight();
+        if (worldYToScreenY(50.0F) + height >= Gdx.graphics.getHeight())
+            rocketsArrowYRed = (int) (height - worldXToScreenX(50.0F));
+        else if (height <= worldYToScreenY(70.0F))
+            rocketsArrowYRed = (int) worldYToScreenY(70.0F);
+        else
+            rocketsArrowYRed = (int) height;
+
+        rocketsArrowX = (int) (Gdx.graphics.getWidth() - worldXToScreenX(96.0F));
+        return height;
+    }
+
+    float makeRocketArrowYellow() {
+        float height = random.nextFloat() * Gdx.graphics.getHeight();
+        if (worldYToScreenY(50.0F) + height >= Gdx.graphics.getHeight())
+            rocketsArrowYYellow = (int) (height - worldXToScreenX(50.0F));
+        else if (height <= worldYToScreenY(70.0F))
+            rocketsArrowYYellow = (int) worldYToScreenY(70.0F);
+        else
+            rocketsArrowYYellow = (int) height;
+
+        rocketsArrowX = (int) (Gdx.graphics.getWidth() - worldXToScreenX(96.0F));
+        return height;
+    }
+
+
+    float makeRocketArrowGreen() {
+        float height = random.nextFloat() * Gdx.graphics.getHeight();
+        if (worldYToScreenY(50.0F) + height >= Gdx.graphics.getHeight())
+            rocketsArrowYGreen = (int) (height - worldXToScreenX(50.0F));
+        else if (height <= worldYToScreenY(70.0F))
+            rocketsArrowYGreen = (int) worldYToScreenY(70.0F);
+        else
+            rocketsArrowYGreen = (int) height;
+
+        rocketsArrowX = (int) (Gdx.graphics.getWidth() - worldXToScreenX(96.0F));
+        return height;
+    }
+
+
+    int rocketCollision(Rectangle paramRectangle, int gameState, Preferences prefs) {
+        for (int i = 0; i < this.rocketsRectangles.size(); i++) {
+            if (Intersector.overlaps(paramRectangle, this.rocketsRectangles.get(i))) {
+                prefs.putBoolean(Player.PLAYER_GROUND, true);
+                prefs.flush();
+                gameState = 2;
+                rocketsXs.remove(i);
+                rocketsYs.remove(i);
+                rocketsRectangles.remove(i);
+                break;
+            }
+        }
+        return gameState;
+    }
+
+
+    void resetRocketStats() {
+        rocketsXs.clear();
+        rocketsYs.clear();
+        rocketsRectangles.clear();
+        lastArrowRedTimer = 0.0F;
+        lastArrowYellowTimer = 0.0F;
+        lastArrowGreenTimer = 0.0F;
+    }
+
+
+    void redArrowState(float timerRed) {
+        if (timerRed - lastArrowRedTimer >= 1.9F && timerRed - lastArrowRedTimer <= 2.0F)
+            arrowStateRed = 2;
+        else if (timerRed - lastArrowRedTimer >= 1.0F && timerRed - lastArrowRedTimer <= 1.1F)
+            arrowStateRed = 1;
+        else if (timerRed - lastArrowRedTimer >= 0.0F && timerRed - lastArrowRedTimer <= 0.1F)
+            arrowStateRed = 0;
+    }
+
+    void yellowArrowState(float timerYellow) {
+        if (timerYellow - lastArrowYellowTimer >= 1.9F && timerYellow - lastArrowYellowTimer <= 2.0F)
+            arrowStateYellow = 2;
+        else if (timerYellow - lastArrowYellowTimer >= 1.0F && timerYellow - lastArrowYellowTimer <= 1.1F)
+            arrowStateYellow = 1;
+        else if (timerYellow - lastArrowYellowTimer >= 0.0F && timerYellow - lastArrowYellowTimer <= 0.1F)
+            arrowStateYellow = 0;
+    }
+
+    void greenArrowState(float timerGreen) {
+        if (timerGreen - lastArrowGreenTimer >= 1.9F && timerGreen - lastArrowGreenTimer <= 2.0F)
+            arrowStateGreen = 2;
+        else if (timerGreen - lastArrowGreenTimer >= 1.0F && timerGreen - lastArrowGreenTimer <= 1.1F)
+            arrowStateGreen = 1;
+        else if (timerGreen - lastArrowGreenTimer >= 0.0F && timerGreen - lastArrowGreenTimer <= 0.1F)
+            arrowStateGreen = 0;
+    }
+
+    void setGreenHeight(float paramFloat) {
+        this.greenHeight = paramFloat;
+    }
+
+    void setLastArrowGreenTimer(float paramFloat) {
+        this.lastArrowGreenTimer = paramFloat;
+    }
+
+    void setLastArrowRedTimer(float paramFloat) {
+        this.lastArrowRedTimer = paramFloat;
+    }
+
+    void setLastArrowYellowTimer(float paramFloat) {
+        this.lastArrowYellowTimer = paramFloat;
+    }
+
+    void setRedHeight(float paramFloat) {
+        this.redHeight = paramFloat;
+    }
+
+    void setYellowHeight(float paramFloat) {
+        this.yellowHeight = paramFloat;
+    }
+
+    float getGreenHeight() {
+        return this.greenHeight;
+    }
+
+    float getLastArrowGreenTimer() {
+        return this.lastArrowGreenTimer;
+    }
+
+    float getLastArrowRedTimer() {
+        return this.lastArrowRedTimer;
+    }
+
+    float getLastArrowYellowTimer() {
+        return this.lastArrowYellowTimer;
+    }
+
+    float getRedHeight() {
+        return this.redHeight;
+    }
+
+    float getYellowHeight() {
+        return this.yellowHeight;
+    }
+
+
+    private float worldXToScreenX(float paramFloat) {
+        return Gdx.graphics.getWidth() / 500.0F * paramFloat;
+    }
+
+    private float worldYToScreenY(float paramFloat) {
+        return Gdx.graphics.getHeight() / 1000.0F * paramFloat;
+    }
+
+    public void dispose() {
+    }
 }
-
-
-/* Location:              C:\Users\nikol\Desktop\dex-tools-2.1-SNAPSHOT\kiki-dex2jar.jar!\com\zappycode\coinman\game\Rocket.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       1.1.3
- */

@@ -1,31 +1,25 @@
 package com.kristijanstojanoski.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.Random;
 
@@ -35,233 +29,152 @@ import States.ChooseStageMenu;
 import States.EndGame;
 import States.GameStateManager;
 import States.MusicSounds;
+import States.Shop;
 import States.State;
 
 public class MainGame extends State {
     private static final int BLURRY_BACKGROUND = 0;
-
     private static final int CONTINUE_WITH_ADS_BUTTON = 6;
-
     private static final int CONTINUE_WITH_DIAMONDS_BUTTON = 7;
-
     private static final int END_GAME_BUTTON = 8;
-
     private static final String FIRST_TIME_END_STORY_CITY = "firstTimeEndStoryCity";
-
     private static final String FIRST_TIME_END_STORY_DESERT = "firstTimeEndStoryDesert";
-
     private static final String FIRST_TIME_START_STORY_CITY = "firstTimeStartStoryCity";
-
     private static final String FIRST_TIME_START_STORY_DESERT = "firstTimeStartStoryDesert";
-
     private static final String FIRST_TIME_TUTORIAL = "firstTimeTutorial";
-
     private static final String HEALED_FROM_STONES = "healedFromStones";
-
     private static final int MENU_BUTTON = 5;
-
     private static final int PAUSE_BUTTON = 1;
-
     private static final int PLAY_BUTTON = 3;
-
     private static final int RESTART_BUTTON = 4;
-
     public static final String REVIVED_AFTER_DEATH = "revivedAfterDeath";
-
     private static final int SOUND_BUTTON = 2;
 
     private Achievements achievementsObject;
-
     private TextureAtlas.AtlasRegion[] background = new TextureAtlas.AtlasRegion[5];
-
     private float[] bgCords;
-
     private Bomb bombObject;
-
     private boolean bombsGo = false;
-
     private TextureAtlas.AtlasRegion coin;
-
     private CoinMagnet coinMagnetObject;
-
     private Coin coinObject;
-
     private CoinRush coinRushObject;
-
     private int coinRushUpgrade;
-
     private int coinSpawnUpgrade;
-
     private float collectiblesChance;
-
     private int collectiblesChoice;
-
     private float collectiblesTimer = 0.0F;
-
     private ImageButton continueWithAdsButton;
-
     private ImageButton.ImageButtonStyle continueWithAdsButtonStyle;
-
     private ImageButton.ImageButtonStyle continueWithAdsWaitButtonStyle;
-
     private int continueWithDiamonds = 1;
-
     private float dt = Gdx.graphics.getDeltaTime();
-
     private boolean firstArrowsAppearanceGreen = false;
-
     private boolean firstArrowsAppearanceRed = false;
-
     private boolean firstArrowsAppearanceYellow = false;
-
     private boolean firstTimeArrowsGreen = true;
-
     private boolean firstTimeArrowsRed = true;
-
     private boolean firstTimeArrowsYellow = true;
-
     private int gameState = -1;
-
     private boolean greenGo = false;
-
     private AdsController mAdsController;
-
     private int magnetUpgrade;
-
     private AssetManager manager;
-
     private ImageButton musicButton;
-
     private ImageButton.ImageButtonStyle musicButtonStyle;
-
     private MusicSounds musicSoundsObject;
-
     private ImageButton.ImageButtonStyle noMusicButtonStyle;
-
     private ImageButton.ImageButtonStyle noSoundButtonStyle;
-
     private float normalChance;
-
     private boolean onceCoinRush;
-
     private boolean onceMagnet;
-
     private boolean onceShield;
-
     private boolean pauseGame;
-
     private Player playerObject;
-
     private Preferences prefs;
-
     private Random random;
-
     private Rock rockObject;
-
     private Rocket rocketObject;
-
     private boolean rocketsGo = false;
-
     private boolean rocksGo = true;
-
     private int score = 0;
-
     private TextureAtlas.AtlasRegion scoreAndCoinBackground;
-
     private BitmapFont scoreAndCoinFont;
-
     private float scoreTimer = 0.0F;
-
     private final float screenWidth = worldXToScreenX(500.0F);
-
     private ShapeRenderer shapeRenderer;
-
     private Shield shieldObject;
-
     private int shieldUpgrade;
-
     private boolean showDiamondsCount = true;
-
     private boolean showEndStory;
-
     private boolean showScoreAndCoinLabel = false;
-
     private ImageButton soundButton;
-
     private ImageButton.ImageButtonStyle soundButtonStyle;
-
     private boolean spikesGo = false;
-
     private Spikes spikesObject;
-
     private Stage stage;
-
     private int stageNumber;
-
     private int storyEndNumber = 0;
-
     private Image storyEndSecond;
-
     private int storyStartNumber = 0;
-
     private Image storyStartSecond;
-
     private float timerGame = 0.0F;
-
     private float timerObjects = 0.0F;
-
     private int twoTimesAd = 0;
-
     private Villain villainObject;
-
     private boolean yellowGo = false;
 
     public MainGame(final GameStateManager gsm, final AdsController adsController, final AssetManager manager, final int stageNumber) {
         super(gsm);
         this.manager = manager;
-        TextureAtlas textureAtlas1 = manager.get("main_menu/main_menu.atlas", TextureAtlas.class);
-        TextureAtlas textureAtlas2 = manager.get("shared/shared.atlas", TextureAtlas.class);
-        TextureAtlas textureAtlas3 = manager.get("main_game/main_game.atlas", TextureAtlas.class);
-        this.musicSoundsObject = new MusicSounds(manager);
-        if (stageNumber == 1) {
-            this.background[0] = textureAtlas3.findRegion("city_background", 1);
-            this.background[1] = textureAtlas3.findRegion("city_background", 2);
-            this.background[2] = textureAtlas3.findRegion("city_background", 3);
-            this.background[3] = textureAtlas3.findRegion("city_background", 4);
-            this.background[4] = textureAtlas3.findRegion("city_background", 1);
-        } else if (stageNumber == 2) {
-            this.background[0] = textureAtlas3.findRegion("desert_background", 1);
-            this.background[1] = textureAtlas3.findRegion("desert_background", 2);
-            this.background[2] = textureAtlas3.findRegion("desert_background", 3);
-            this.background[3] = textureAtlas3.findRegion("desert_background", 4);
-            this.background[4] = textureAtlas3.findRegion("desert_background", 1);
-        }
-        this.bgCords = new float[5];
-        for (byte b = 0; b < 5; b++)
-            this.bgCords[b] = (int) worldXToScreenX((b * 500));
-        this.stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(this.stage);
-        this.mAdsController = adsController;
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+        mAdsController = adsController;
         this.stageNumber = stageNumber;
-        Preferences preferences = Gdx.app.getPreferences("prefs");
-        this.prefs = preferences;
-        this.shieldUpgrade = 0;
-        this.magnetUpgrade = 0;
-        this.coinRushUpgrade = 0;
-        this.coinSpawnUpgrade = 0;
-        if (preferences.getInteger("costumeSelectedGame") == 1) {
-            this.shieldUpgrade = 5;
-        } else if (this.prefs.getInteger("costumeSelectedGame") == 2) {
-            this.coinRushUpgrade = 5;
-        } else if (this.prefs.getInteger("costumeSelectedGame") == 5) {
-            this.magnetUpgrade = 5;
-        } else if (this.prefs.getInteger("costumeSelectedGame") == 6) {
-            this.coinSpawnUpgrade = 5;
-        } else if (this.prefs.getInteger("costumeSelectedGame") == 7) {
-            this.shieldUpgrade = 5;
-            this.magnetUpgrade = 5;
-            this.coinRushUpgrade = 5;
+        prefs = Gdx.app.getPreferences("prefs");
+
+        TextureAtlas mainMenuAtlas = manager.get("main_menu/main_menu.atlas", TextureAtlas.class);
+        TextureAtlas sharedAtlas = manager.get("shared/shared.atlas", TextureAtlas.class);
+        TextureAtlas mainGameAtlas = manager.get("main_game/main_game.atlas", TextureAtlas.class);
+        musicSoundsObject = new MusicSounds(manager);
+
+        if (stageNumber == 1) {
+            background[0] = mainGameAtlas.findRegion("city_background", 1);
+            background[1] = mainGameAtlas.findRegion("city_background", 2);
+            background[2] = mainGameAtlas.findRegion("city_background", 3);
+            background[3] = mainGameAtlas.findRegion("city_background", 4);
+            background[4] = mainGameAtlas.findRegion("city_background", 1);
+        } else if (stageNumber == 2) {
+            background[0] = mainGameAtlas.findRegion("desert_background", 1);
+            background[1] = mainGameAtlas.findRegion("desert_background", 2);
+            background[2] = mainGameAtlas.findRegion("desert_background", 3);
+            background[3] = mainGameAtlas.findRegion("desert_background", 4);
+            background[4] = mainGameAtlas.findRegion("desert_background", 1);
         }
+
+        bgCords = new float[5];
+        for (int i = 0; i < 5; i++)
+            bgCords[i] = (int) worldXToScreenX((i * 500));
+
+        shieldUpgrade = 0;
+        magnetUpgrade = 0;
+        coinRushUpgrade = 0;
+        coinSpawnUpgrade = 0;
+
+        if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.ROBOT_NUMBER)
+            shieldUpgrade = 5;
+        else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.KNIGHT_NUMBER)
+            coinRushUpgrade = 5;
+        else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.NINJA_MALE_NUMBER)
+            magnetUpgrade = 5;
+        else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.NINJA_FEMALE_NUMBER)
+            coinSpawnUpgrade = 5;
+        else if (prefs.getInteger(Shop.COSTUME_SELECTED_GAME) == Shop.DINO_NUMBER) {
+            shieldUpgrade = 5;
+            magnetUpgrade = 5;
+            coinRushUpgrade = 5;
+        }
+
         Image image2 = new Image(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_start_first.png", Texture.class))));
         image2.setSize(worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
         image2.setPosition(worldXToScreenX(0.0F), worldYToScreenY(0.0F));
@@ -391,12 +304,12 @@ public class MainGame extends State {
                 }
             }
         });
-        Image image5 = new Image(new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_tutorial"))));
+        Image image5 = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_tutorial"))));
         image5.setSize(worldXToScreenX(450.0F), worldYToScreenY(625.0F));
         image5.setPosition(worldXToScreenX(25.0F), worldYToScreenY(187.5F));
         ImageButton.ImageButtonStyle imageButtonStyle5 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle5.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("story_continue_button_unpressed")));
-        imageButtonStyle5.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("story_continue_button_pressed")));
+        imageButtonStyle5.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_unpressed")));
+        imageButtonStyle5.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_pressed")));
         ImageButton imageButton6 = new ImageButton(imageButtonStyle5);
         imageButton6.setPosition(worldXToScreenX(380.0F), worldYToScreenY(200.0F));
         imageButton6.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
@@ -411,13 +324,13 @@ public class MainGame extends State {
                 MainGame.this.prefs.flush();
             }
         });
-        Image image6 = new Image(new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_pause_dark_background"))));
+        Image image6 = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_pause_dark_background"))));
         image6.setColor(255.0F, 255.0F, 255.0F, 0.5F);
         image6.setSize(worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
         image6.setPosition(0.0F, 0.0F);
         ImageButton.ImageButtonStyle imageButtonStyle6 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle6.up = new TextureRegionDrawable(new TextureRegion(textureAtlas1.findRegion("play_button_unpressed")));
-        imageButtonStyle6.down = new TextureRegionDrawable(new TextureRegion(textureAtlas1.findRegion("play_button_pressed")));
+        imageButtonStyle6.up = new TextureRegionDrawable(new TextureRegion(mainMenuAtlas.findRegion("play_button_unpressed")));
+        imageButtonStyle6.down = new TextureRegionDrawable(new TextureRegion(mainMenuAtlas.findRegion("play_button_pressed")));
         ImageButton imageButton2 = new ImageButton(imageButtonStyle6);
         imageButton2.setPosition(worldXToScreenX(50.0F), worldYToScreenY(525.0F));
         imageButton2.setSize(worldXToScreenX(100.0F), worldYToScreenY(100.0F));
@@ -436,8 +349,8 @@ public class MainGame extends State {
             }
         });
         imageButtonStyle6 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle6.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_restart_button_unpressed")));
-        imageButtonStyle6.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_restart_button_pressed")));
+        imageButtonStyle6.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_restart_button_unpressed")));
+        imageButtonStyle6.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_restart_button_pressed")));
         ImageButton imageButton7 = new ImageButton(imageButtonStyle6);
         imageButton7.setPosition(worldXToScreenX(200.0F), worldYToScreenY(525.0F));
         imageButton7.setSize(worldXToScreenX(100.0F), worldYToScreenY(100.0F));
@@ -458,8 +371,8 @@ public class MainGame extends State {
             }
         });
         ImageButton.ImageButtonStyle imageButtonStyle7 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle7.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_menu_button_unpressed")));
-        imageButtonStyle7.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_menu_button_pressed")));
+        imageButtonStyle7.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_menu_button_unpressed")));
+        imageButtonStyle7.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_menu_button_pressed")));
         ImageButton imageButton8 = new ImageButton(imageButtonStyle7);
         imageButton8.setPosition(worldXToScreenX(350.0F), worldYToScreenY(525.0F));
         imageButton8.setSize(worldXToScreenX(100.0F), worldYToScreenY(100.0F));
@@ -473,8 +386,8 @@ public class MainGame extends State {
             }
         });
         ImageButton.ImageButtonStyle imageButtonStyle8 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle8.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_pause_button_unpressed")));
-        imageButtonStyle8.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_pause_button_pressed")));
+        imageButtonStyle8.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_pause_button_unpressed")));
+        imageButtonStyle8.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_pause_button_pressed")));
         ImageButton imageButton9 = new ImageButton(imageButtonStyle8);
         imageButton9.setPosition(0.0F, 0.0F);
         imageButton9.setSize(worldXToScreenX(80.0F), worldYToScreenY(80.0F));
@@ -494,12 +407,12 @@ public class MainGame extends State {
         });
         ImageButton.ImageButtonStyle imageButtonStyle11 = new ImageButton.ImageButtonStyle();
         this.soundButtonStyle = imageButtonStyle11;
-        imageButtonStyle11.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_sound_button_unpressed")));
-        this.soundButtonStyle.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_sound_button_pressed")));
+        imageButtonStyle11.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_sound_button_unpressed")));
+        this.soundButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_sound_button_pressed")));
         imageButtonStyle11 = new ImageButton.ImageButtonStyle();
         this.noSoundButtonStyle = imageButtonStyle11;
-        imageButtonStyle11.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_no_sound_button_unpressed")));
-        this.noSoundButtonStyle.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_no_sound_button_pressed")));
+        imageButtonStyle11.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_no_sound_button_unpressed")));
+        this.noSoundButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_no_sound_button_pressed")));
         ImageButton imageButton12 = new ImageButton(this.soundButtonStyle);
         this.soundButton = imageButton12;
         imageButton12.setPosition(worldXToScreenX(125.0F), worldYToScreenY(375.0F));
@@ -519,12 +432,12 @@ public class MainGame extends State {
         });
         ImageButton.ImageButtonStyle imageButtonStyle10 = new ImageButton.ImageButtonStyle();
         this.musicButtonStyle = imageButtonStyle10;
-        imageButtonStyle10.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_music_button_unpressed")));
-        this.musicButtonStyle.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_music_button_pressed")));
+        imageButtonStyle10.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_music_button_unpressed")));
+        this.musicButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_music_button_pressed")));
         imageButtonStyle10 = new ImageButton.ImageButtonStyle();
         this.noMusicButtonStyle = imageButtonStyle10;
-        imageButtonStyle10.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_no_music_button_unpressed")));
-        this.noMusicButtonStyle.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("main_game_no_music_button_pressed")));
+        imageButtonStyle10.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_no_music_button_unpressed")));
+        this.noMusicButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("main_game_no_music_button_pressed")));
         ImageButton imageButton11 = new ImageButton(this.musicButtonStyle);
         this.musicButton = imageButton11;
         imageButton11.setPosition(worldXToScreenX(275.0F), worldYToScreenY(375.0F));
@@ -545,12 +458,12 @@ public class MainGame extends State {
         });
         ImageButton.ImageButtonStyle imageButtonStyle9 = new ImageButton.ImageButtonStyle();
         this.continueWithAdsButtonStyle = imageButtonStyle9;
-        imageButtonStyle9.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("continue_ad_button_unpressed")));
-        this.continueWithAdsButtonStyle.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("continue_ad_button_pressed")));
+        imageButtonStyle9.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("continue_ad_button_unpressed")));
+        this.continueWithAdsButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("continue_ad_button_pressed")));
         imageButtonStyle9 = new ImageButton.ImageButtonStyle();
         this.continueWithAdsWaitButtonStyle = imageButtonStyle9;
-        imageButtonStyle9.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("ad_wait_button")));
-        this.continueWithAdsWaitButtonStyle.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("ad_wait_button")));
+        imageButtonStyle9.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("ad_wait_button")));
+        this.continueWithAdsWaitButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("ad_wait_button")));
         ImageButton imageButton10 = new ImageButton(this.continueWithAdsButtonStyle);
         this.continueWithAdsButton = imageButton10;
         imageButton10.setPosition(worldXToScreenX(25.0F), worldYToScreenY(410.0F));
@@ -570,8 +483,8 @@ public class MainGame extends State {
         label.setPosition(worldXToScreenX(370.0F), worldYToScreenY(420.0F));
         label.setAlignment(1);
         ImageButton.ImageButtonStyle imageButtonStyle12 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle12.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("continue_diamond_button_unpressed")));
-        imageButtonStyle12.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("continue_diamond_button_pressed")));
+        imageButtonStyle12.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("continue_diamond_button_unpressed")));
+        imageButtonStyle12.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("continue_diamond_button_pressed")));
         ImageButton imageButton14 = new ImageButton(imageButtonStyle12);
         imageButton14.setPosition(worldXToScreenX(275.0F), worldYToScreenY(410.0F));
         imageButton14.setSize(worldXToScreenX(200.0F), worldYToScreenY(80.0F));
@@ -604,12 +517,12 @@ public class MainGame extends State {
                 }
             }
         });
-        Image image7 = new Image(new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("not_enough_diamonds_window"))));
+        Image image7 = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("not_enough_diamonds_window"))));
         image7.setSize(worldXToScreenX(480.0F), worldYToScreenY(200.0F));
         image7.setPosition(worldXToScreenX(10.0F), worldYToScreenY(400.0F));
         ImageButton.ImageButtonStyle imageButtonStyle13 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle13.up = new TextureRegionDrawable(new TextureRegion(textureAtlas2.findRegion("congratulations_window_x_button_unpressed")));
-        imageButtonStyle13.down = new TextureRegionDrawable(new TextureRegion(textureAtlas2.findRegion("congratulations_window_x_button_pressed")));
+        imageButtonStyle13.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_unpressed")));
+        imageButtonStyle13.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_pressed")));
         ImageButton imageButton13 = new ImageButton(imageButtonStyle13);
         imageButton13.setPosition(worldXToScreenX(420.0F), worldYToScreenY(535.0F));
         imageButton13.setSize(worldXToScreenX(50.0F), worldYToScreenY(50.0F));
@@ -627,8 +540,8 @@ public class MainGame extends State {
             }
         });
         ImageButton.ImageButtonStyle imageButtonStyle14 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle14.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("end_game_button_unpressed")));
-        imageButtonStyle14.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("end_game_button_pressed")));
+        imageButtonStyle14.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("end_game_button_unpressed")));
+        imageButtonStyle14.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("end_game_button_pressed")));
         ImageButton imageButton16 = new ImageButton(imageButtonStyle14);
         imageButton16.setPosition(worldXToScreenX(150.0F), worldYToScreenY(0.0F));
         imageButton16.setSize(worldXToScreenX(200.0F), worldYToScreenY(80.0F));
@@ -643,7 +556,7 @@ public class MainGame extends State {
                 MainGame.this.dispose();
             }
         });
-        Image image8 = new Image(new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("congratulations_story_window"))));
+        Image image8 = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("congratulations_story_window"))));
         image8.setSize(worldXToScreenX(480.0F), worldYToScreenY(250.0F));
         image8.setPosition(worldXToScreenX(10.0F), worldYToScreenY(375.0F));
         ImageButton imageButton15 = new ImageButton(imageButtonStyle13);
@@ -661,8 +574,8 @@ public class MainGame extends State {
             }
         });
         ImageButton.ImageButtonStyle imageButtonStyle1 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle1.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("story_continue_button_unpressed")));
-        imageButtonStyle1.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("story_continue_button_pressed")));
+        imageButtonStyle1.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_unpressed")));
+        imageButtonStyle1.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_pressed")));
         ImageButton imageButton1 = new ImageButton(imageButtonStyle1);
         imageButton1.setPosition(worldXToScreenX(305.0F), worldYToScreenY(385.0F));
         imageButton1.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
@@ -685,12 +598,12 @@ public class MainGame extends State {
                 MainGame.this.prefs.flush();
             }
         });
-        Image image1 = new Image(textureAtlas2.findRegion("sure_quit_window"));
+        Image image1 = new Image(sharedAtlas.findRegion("sure_quit_window"));
         image1.setSize(worldXToScreenX(480.0F), worldYToScreenY(210.0F));
         image1.setPosition(worldXToScreenX(10.0F), worldYToScreenY(395.0F));
         ImageButton.ImageButtonStyle imageButtonStyle15 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle15.up = new TextureRegionDrawable(new TextureRegion(textureAtlas2.findRegion("congratulations_window_x_button_unpressed")));
-        imageButtonStyle15.down = new TextureRegionDrawable(new TextureRegion(textureAtlas2.findRegion("congratulations_window_x_button_pressed")));
+        imageButtonStyle15.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_unpressed")));
+        imageButtonStyle15.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_pressed")));
         ImageButton imageButton17 = new ImageButton(imageButtonStyle15);
         imageButton17.setPosition(worldXToScreenX(116.0F), worldYToScreenY(405.0F));
         imageButton17.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
@@ -707,8 +620,8 @@ public class MainGame extends State {
             }
         });
         ImageButton.ImageButtonStyle imageButtonStyle16 = new ImageButton.ImageButtonStyle();
-        imageButtonStyle16.up = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("story_continue_button_unpressed")));
-        imageButtonStyle16.down = new TextureRegionDrawable(new TextureRegion(textureAtlas3.findRegion("story_continue_button_pressed")));
+        imageButtonStyle16.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_unpressed")));
+        imageButtonStyle16.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_continue_button_pressed")));
         ImageButton imageButton18 = new ImageButton(imageButtonStyle16);
         imageButton18.setPosition(worldXToScreenX(307.0F), worldYToScreenY(405.0F));
         imageButton18.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
@@ -791,22 +704,22 @@ public class MainGame extends State {
         this.playerObject = new Player();
         this.villainObject = new Villain();
         this.achievementsObject = new Achievements();
-        this.coinObject.initializeValues(textureAtlas2, manager);
-        this.rockObject.initializeValues(textureAtlas3, stageNumber, manager);
-        this.bombObject.initializeValues(textureAtlas3, manager);
-        this.spikesObject.initializeValues(textureAtlas3);
-        this.rocketObject.initializeValues(textureAtlas3);
-        this.shieldObject.initializeValues(textureAtlas3);
-        this.coinRushObject.initializeValues(textureAtlas3);
-        this.coinMagnetObject.initializeValues(textureAtlas3);
+        this.coinObject.initializeValues(sharedAtlas, manager);
+        this.rockObject.initializeValues(mainGameAtlas, stageNumber, manager);
+        this.bombObject.initializeValues(mainGameAtlas, manager);
+        this.spikesObject.initializeValues(mainGameAtlas);
+        this.rocketObject.initializeValues(mainGameAtlas);
+        this.shieldObject.initializeValues(mainGameAtlas);
+        this.coinRushObject.initializeValues(mainGameAtlas);
+        this.coinMagnetObject.initializeValues(mainGameAtlas);
         this.playerObject.initializeValues(manager, this.prefs);
-        this.villainObject.initializeValues(textureAtlas3);
+        this.villainObject.initializeValues(mainGameAtlas);
         BitmapFont bitmapFont = manager.get("font/font_scale_1.fnt", BitmapFont.class);
         this.scoreAndCoinFont = bitmapFont;
         bitmapFont.setColor(Color.BLACK);
         this.scoreAndCoinFont.getData().setScale(worldXToScreenX(1.0F), worldYToScreenY(1.0F));
-        this.scoreAndCoinBackground = textureAtlas3.findRegion("score_coin_background");
-        this.coin = textureAtlas2.findRegion("coin");
+        this.scoreAndCoinBackground = mainGameAtlas.findRegion("score_coin_background");
+        this.coin = sharedAtlas.findRegion("coin");
         this.collectiblesChoice = this.random.nextInt(3) + 1;
         this.collectiblesChance = 100.0F;
         this.normalChance = 10.0F;
