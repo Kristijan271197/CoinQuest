@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import States.EndGame;
+import States.MusicSounds;
 import States.Shop;
 
 class Shield {
@@ -95,9 +95,10 @@ class Shield {
     }
 
 
-    void shieldCollision(Rectangle paramRectangle, float shieldTimer, Preferences prefs) {
+    void shieldCollision(Rectangle paramRectangle, float shieldTimer, Preferences prefs, MusicSounds musicSoundsObject) {
         for (int i = 0; i < shieldCollectibleRectangles.size(); i++) {
             if (Intersector.overlaps(paramRectangle, shieldCollectibleRectangles.get(i))) {
+                musicSoundsObject.playCollectibleCollected();
                 prefs.putInteger(EndGame.POWER_UPS_COLLECTED, prefs.getInteger(EndGame.POWER_UPS_COLLECTED, 0) + 1);
                 prefs.flush();
                 hasShield = true;

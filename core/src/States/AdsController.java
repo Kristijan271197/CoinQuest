@@ -20,4 +20,6 @@ public interface AdsController {
     boolean getInterstitialAdClosed();
 
     boolean getInterstitialAdLoaded();
+
+    void setInterstitialAdClosed(boolean bool);
 }

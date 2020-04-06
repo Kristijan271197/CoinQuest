@@ -19,83 +19,118 @@ public class MusicSounds {
     private Sound rockHit;
     private Sound wheelReward;
     private Music wheelSpin;
+    private Sound cactusHit;
+    private Sound collectibleCollected;
+    private Sound endGameSound;
+    private Sound rocketExplosion;
+    private Sound rocketLaunch;
 
-    public MusicSounds(AssetManager paramAssetManager) {
-        buttonClick = paramAssetManager.get("music/button_click.mp3", Sound.class);
-        buttonReceiveCoins = paramAssetManager.get("music/receive_coins.mp3", Sound.class);
-        buttonBuy = paramAssetManager.get("music/button_buy.mp3", Sound.class);
-        coinCollect = paramAssetManager.get("music/coin_collect.mp3", Sound.class);
-        rockHit = paramAssetManager.get("music/rock_hit.mp3", Sound.class);
-        bombSound = paramAssetManager.get("music/bomb_explode.mp3", Sound.class);
-        playerGround = paramAssetManager.get("music/player_ground.mp3", Sound.class);
-        jump = paramAssetManager.get("music/jump.mp3", Sound.class);
-        wheelReward = paramAssetManager.get("music/wheel_reward.mp3", Sound.class);
-        wheelSpin = paramAssetManager.get("music/wheel_of_fortune.mp3", Music.class);
-        backgroundMusic = paramAssetManager.get("music/fun_adventure.ogg", Music.class);
+    public MusicSounds(AssetManager manager) {
+        buttonClick = manager.get("music/button_click.mp3", Sound.class);
+        buttonReceiveCoins = manager.get("music/receive_coins.mp3", Sound.class);
+        buttonBuy = manager.get("music/button_buy.mp3", Sound.class);
+        coinCollect = manager.get("music/coin_collect.mp3", Sound.class);
+        rockHit = manager.get("music/rock_hit.mp3", Sound.class);
+        bombSound = manager.get("music/bomb_explode.mp3", Sound.class);
+        playerGround = manager.get("music/player_ground.mp3", Sound.class);
+        jump = manager.get("music/jump.mp3", Sound.class);
+        wheelReward = manager.get("music/wheel_reward.mp3", Sound.class);
+        wheelSpin = manager.get("music/wheel_of_fortune.mp3", Music.class);
+        backgroundMusic = manager.get("music/fun_adventure.ogg", Music.class);
+        cactusHit = manager.get("music/cactus_hit.mp3", Sound.class);
+        collectibleCollected = manager.get("music/collectible_collected.mp3", Sound.class);
+        endGameSound = manager.get("music/endgame_sound.mp3", Sound.class);
+        rocketExplosion = manager.get("music/rocket_explosion.mp3", Sound.class);
+        rocketLaunch = manager.get("music/rocket_launch.mp3", Sound.class);
         prefs = Gdx.app.getPreferences("prefs");
     }
 
 
     public void playBackgroundMusic() {
-        if (this.prefs.getBoolean(Settings.MUSIC)) {
-            this.backgroundMusic.setVolume(0.2F);
-            this.backgroundMusic.play();
-            this.backgroundMusic.setLooping(true);
-        } else {
-            this.backgroundMusic.stop();
-        }
+        if (prefs.getBoolean(Settings.MUSIC)) {
+            backgroundMusic.setVolume(0.2F);
+            backgroundMusic.play();
+            backgroundMusic.setLooping(true);
+        } else
+            backgroundMusic.stop();
+
     }
 
     public void playBombSound() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.bombSound.play(1.0F);
+        if (prefs.getBoolean(Settings.SOUND))
+            bombSound.play(1.0F);
     }
 
     void playButtonBuy() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.buttonBuy.play(0.5F);
+        if (prefs.getBoolean(Settings.SOUND))
+            buttonBuy.play(0.5F);
     }
 
     public void playButtonClick() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.buttonClick.play(0.5F);
+        if (prefs.getBoolean(Settings.SOUND))
+            buttonClick.play(0.5F);
     }
 
     void playButtonReceiveCoins() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.buttonReceiveCoins.play(0.5F);
+        if (prefs.getBoolean(Settings.SOUND))
+            buttonReceiveCoins.play(0.5F);
     }
 
     public void playCoinCollect() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.coinCollect.play(0.2F);
+        if (prefs.getBoolean(Settings.SOUND))
+            coinCollect.play(0.2F);
     }
 
     public void playJump() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.jump.play(0.25F);
+        if (prefs.getBoolean(Settings.SOUND))
+            jump.play(0.25F);
     }
 
     public void playPlayerGround() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.playerGround.play(0.5F);
+        if (prefs.getBoolean(Settings.SOUND))
+            playerGround.play(0.5F);
     }
 
     public void playRockHit() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.rockHit.play(0.5F);
+        if (prefs.getBoolean(Settings.SOUND))
+            rockHit.play(0.5F);
     }
 
     void playWheelReward() {
-        if (this.prefs.getBoolean(Settings.SOUND))
-            this.wheelReward.play(0.15F);
+        if (prefs.getBoolean(Settings.SOUND))
+            wheelReward.play(0.15F);
     }
 
     void playWheelSpin() {
-        if (this.prefs.getBoolean(Settings.SOUND)) {
-            this.wheelSpin.setVolume(0.15F);
-            this.wheelSpin.play();
+        if (prefs.getBoolean(Settings.SOUND)) {
+            wheelSpin.setVolume(0.15F);
+            wheelSpin.play();
         }
+    }
+
+    public void playCactusHit() {
+        if (prefs.getBoolean(Settings.SOUND))
+            cactusHit.play(1f);
+    }
+
+    public void playCollectibleCollected() {
+        if (prefs.getBoolean(Settings.SOUND))
+            collectibleCollected.play(1f);
+    }
+
+    void playEndgameSound() {
+        if (prefs.getBoolean(Settings.SOUND))
+            endGameSound.play(1f);
+    }
+
+    public void playRocketExplosion() {
+        if (prefs.getBoolean(Settings.SOUND))
+            rocketExplosion.play(1f);
+    }
+
+    public void playRocketLaunch() {
+        if (prefs.getBoolean(Settings.SOUND))
+            rocketLaunch.play(0.3f);
     }
 
     Music getBackgroundMusic() {

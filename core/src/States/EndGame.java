@@ -46,6 +46,7 @@ public class EndGame extends State {
     private ImageButton.ImageButtonStyle tripleCoinsAdButtonTexture;
     private ImageButton.ImageButtonStyle tripleCoinsAdWaitButtonTexture;
     private BitmapFont tripleCoinsFont;
+    private boolean oneTimeSound = true;
 
     public EndGame(GameStateManager paramGameStateManager, final AdsController adsController, final AssetManager manager, int coinCount, int score, float timer, final int stageNumber) {
         super(paramGameStateManager);
@@ -53,6 +54,8 @@ public class EndGame extends State {
         this.mAdsController = adsController;
         prefs = Gdx.app.getPreferences("prefs");
         this.stageNumber = stageNumber;
+
+        adsController.showInterstitialAd();
 
         TextureAtlas mainMenuAtlas = manager.get("main_menu/main_menu.atlas", TextureAtlas.class);
         TextureAtlas sharedAtlas = manager.get("shared/shared.atlas", TextureAtlas.class);
@@ -63,6 +66,7 @@ public class EndGame extends State {
 
         Achievements achievements = new Achievements();
         musicSoundsObject = new MusicSounds(manager);
+
 
         prefs.putInteger(LIFETIME_COINS_COLLECTED, prefs.getInteger(LIFETIME_COINS_COLLECTED, 0) + coinCount);
         prefs.putInteger(STAGES_PLAYED, prefs.getInteger(STAGES_PLAYED, 0) + 1);
@@ -326,9 +330,6 @@ public class EndGame extends State {
         stage.getActors().get(9).setVisible(false);
         stage.getActors().get(10).setVisible(false);
         stage.getActors().get(11).setVisible(false);
-
-        adsController.showInterstitialAd();
-
     }
 
     public void render(SpriteBatch batch) {
@@ -339,17 +340,27 @@ public class EndGame extends State {
             stage.getActors().get(11).setVisible(true);
         }
 
-        if(mAdsController.getInterstitialAdLoaded()) {
+
+        if (mAdsController.getInterstitialAdLoaded()) {
             if (mAdsController.getInterstitialAdClosed()) {
                 stage.getActors().get(3).setTouchable(Touchable.enabled);
                 stage.getActors().get(6).setTouchable(Touchable.enabled);
                 stage.getActors().get(7).setTouchable(Touchable.enabled);
                 stage.getActors().get(8).setTouchable(Touchable.enabled);
+                if(oneTimeSound){
+                    musicSoundsObject.playEndgameSound();
+                    oneTimeSound = false;
+                }
             } else {
                 stage.getActors().get(3).setTouchable(Touchable.disabled);
                 stage.getActors().get(6).setTouchable(Touchable.disabled);
                 stage.getActors().get(7).setTouchable(Touchable.disabled);
                 stage.getActors().get(8).setTouchable(Touchable.disabled);
+            }
+        } else {
+            if(oneTimeSound){
+                musicSoundsObject.playEndgameSound();
+                oneTimeSound = false;
             }
         }
 

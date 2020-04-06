@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import States.EndGame;
+import States.MusicSounds;
 
 class CoinMagnet {
     private TextureAtlas.AtlasRegion coinMagnetCollectible;
@@ -37,9 +38,10 @@ class CoinMagnet {
         }
     }
 
-    void coinMagnetCollision(Rectangle paramRectangle, float coinMagnetTimer, Preferences prefs) {
+    void coinMagnetCollision(Rectangle paramRectangle, float coinMagnetTimer, Preferences prefs, MusicSounds musicSoundsObject) {
         for (int i = 0; i < coinMagnetCollectibleRectangles.size(); i++) {
             if (Intersector.overlaps(paramRectangle, coinMagnetCollectibleRectangles.get(i))) {
+                musicSoundsObject.playCollectibleCollected();
                 prefs.putInteger(EndGame.POWER_UPS_COLLECTED, prefs.getInteger(EndGame.POWER_UPS_COLLECTED, 0) + 1);
                 prefs.flush();
                 hasCoinMagnet = true;

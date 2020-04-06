@@ -131,6 +131,11 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
         return iAdLoaded;
     }
 
+    @Override
+    public void setInterstitialAdClosed(boolean bool) {
+        this.iAdClosed = bool;
+    }
+
     public boolean getAdLoaded() {
         return this.adLoaded;
     }
@@ -146,6 +151,8 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
     public void setRewardReceived(boolean paramBoolean) {
         this.rewardReceived = paramBoolean;
     }
+
+
 
 
     private boolean haveNetworkConnection() {

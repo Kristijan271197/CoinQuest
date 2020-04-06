@@ -111,6 +111,7 @@ public class MainGame extends State {
     private Villain villainObject;
     private boolean yellowGo = false;
     private Label label1;
+    private TextureAtlas mainGameAtlas;
 
     public MainGame(final GameStateManager gsm, final AdsController adsController, final AssetManager manager, final int stageNumber) {
         super(gsm);
@@ -123,7 +124,7 @@ public class MainGame extends State {
 
         TextureAtlas mainMenuAtlas = manager.get("main_menu/main_menu.atlas", TextureAtlas.class);
         TextureAtlas sharedAtlas = manager.get("shared/shared.atlas", TextureAtlas.class);
-        TextureAtlas mainGameAtlas = manager.get("main_game/main_game.atlas", TextureAtlas.class);
+        mainGameAtlas = manager.get("main_game/main_game.atlas", TextureAtlas.class);
         musicSoundsObject = new MusicSounds(manager);
 
         if (stageNumber == 1) {
@@ -163,15 +164,15 @@ public class MainGame extends State {
             coinRushUpgrade = 5;
         }
 
-        Image storyStartFirst = new Image(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_start_first.png", Texture.class))));
-        storyStartFirst.setSize(worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-        storyStartFirst.setPosition(worldXToScreenX(0.0F), worldYToScreenY(0.0F));
+        Image storyStartFirst = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_first"))));
+        storyStartFirst.setSize(worldXToScreenX(501.0F), worldYToScreenY(1001.0F));
+        storyStartFirst.setPosition(worldXToScreenX(-1.0F), worldYToScreenY(-1.0F));
         if (stageNumber == 2)
             storyStartFirst.setDrawable(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_start_first.png", Texture.class))));
 
-        storyStartSecond = new Image(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_start_second.png", Texture.class))));
-        storyStartSecond.setSize(worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-        storyStartSecond.setPosition(worldXToScreenX(0.0F), worldYToScreenY(0.0F));
+        storyStartSecond = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_second"))));
+        storyStartSecond.setSize(worldXToScreenX(501.0F), worldYToScreenY(1001.0F));
+        storyStartSecond.setPosition(worldXToScreenX(-1.0F), worldYToScreenY(-1.0F));
         if (stageNumber == 2)
             storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_start_second.png", Texture.class))));
 
@@ -188,12 +189,12 @@ public class MainGame extends State {
             storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_end_second.png", Texture.class))));
 
         ImageButton.ImageButtonStyle storyRightStyle = new ImageButton.ImageButtonStyle();
-        storyRightStyle.up = new TextureRegionDrawable(new TextureRegion(manager.get("arrow_story_right.png", Texture.class)));
-        storyRightStyle.down = new TextureRegionDrawable(new TextureRegion(manager.get("arrow_story_right.png", Texture.class)));
+        storyRightStyle.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_right_button_unpressed")));
+        storyRightStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_right_button_pressed")));
 
         ImageButton storyRightButton = new ImageButton(storyRightStyle);
-        storyRightButton.setPosition(worldXToScreenX(450.0F), worldYToScreenY(10.0F));
-        storyRightButton.setSize(worldXToScreenX(40.0F), worldYToScreenY(40.0F));
+        storyRightButton.setPosition(worldXToScreenX(405.0F), worldYToScreenY(20.0F));
+        storyRightButton.setSize(worldXToScreenX(75.0F), worldYToScreenY(75.0F));
         storyRightButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
@@ -233,12 +234,12 @@ public class MainGame extends State {
         });
 
         ImageButton.ImageButtonStyle storyLeftButtonStyle = new ImageButton.ImageButtonStyle();
-        storyLeftButtonStyle.up = new TextureRegionDrawable(new TextureRegion(manager.get("arrow_story_left.png", Texture.class)));
-        storyLeftButtonStyle.down = new TextureRegionDrawable(new TextureRegion(manager.get("arrow_story_left.png", Texture.class)));
+        storyLeftButtonStyle.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_unpressed")));
+        storyLeftButtonStyle.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_pressed")));
 
         ImageButton storyLeftButton = new ImageButton(storyLeftButtonStyle);
-        storyLeftButton.setPosition(worldXToScreenX(10.0F), worldYToScreenY(10.0F));
-        storyLeftButton.setSize(worldXToScreenX(40.0F), worldYToScreenY(40.0F));
+        storyLeftButton.setPosition(worldXToScreenX(20), worldYToScreenY(20));
+        storyLeftButton.setSize(worldXToScreenX(75), worldYToScreenY(75));
         storyLeftButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
@@ -251,12 +252,12 @@ public class MainGame extends State {
         });
 
         ImageButton.ImageButtonStyle skipButtonStyle = new ImageButton.ImageButtonStyle();
-        skipButtonStyle.up = new TextureRegionDrawable(new TextureRegion(manager.get("skip_button.png", Texture.class)));
-        skipButtonStyle.down = new TextureRegionDrawable(new TextureRegion(manager.get("skip_button.png", Texture.class)));
+        skipButtonStyle.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("skip_story_button_unpressed")));
+        skipButtonStyle.down = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("skip_story_button_pressed")));
 
         ImageButton skipButton = new ImageButton(skipButtonStyle);
-        skipButton.setPosition(worldXToScreenX(200.0F), worldYToScreenY(20.0F));
-        skipButton.setSize(worldXToScreenX(100.0F), worldYToScreenY(100.0F));
+        skipButton.setPosition(worldXToScreenX(155), worldYToScreenY(20));
+        skipButton.setSize(worldXToScreenX(190), worldYToScreenY(75));
         skipButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
@@ -724,7 +725,7 @@ public class MainGame extends State {
         coinObject.initializeValues(sharedAtlas, manager);
         rockObject.initializeValues(mainGameAtlas, stageNumber, manager);
         bombObject.initializeValues(mainGameAtlas, manager);
-        spikesObject.initializeValues(mainGameAtlas);
+        spikesObject.initializeValues(mainGameAtlas, manager);
         rocketObject.initializeValues(mainGameAtlas);
         shieldObject.initializeValues(mainGameAtlas);
         coinRushObject.initializeValues(mainGameAtlas);
@@ -845,19 +846,19 @@ public class MainGame extends State {
 
             if (rocketsGo) {
                 if (timerObjects - rocketObject.getLastArrowRedTimer() >= 3.0F) {
-                    rocketObject.makeRocket(rocketObject.getRedHeight());
+                    rocketObject.makeRocket(rocketObject.getRedHeight(), musicSoundsObject);
                     rocketObject.setRedHeight(rocketObject.makeRocketArrowRed());
                     rocketObject.setLastArrowRedTimer(timerObjects);
                 }
 
                 if (timerObjects - rocketObject.getLastArrowRedTimer() >= 2.0F && yellowGo && timerObjects - rocketObject.getLastArrowYellowTimer() >= 3.0F) {
-                    rocketObject.makeRocket(rocketObject.getYellowHeight());
+                    rocketObject.makeRocket(rocketObject.getYellowHeight(), musicSoundsObject);
                     rocketObject.setYellowHeight(rocketObject.makeRocketArrowYellow());
                     rocketObject.setLastArrowYellowTimer(timerObjects);
                 }
 
                 if (timerObjects - rocketObject.getLastArrowRedTimer() >= 1.0F && greenGo && timerObjects - rocketObject.getLastArrowGreenTimer() >= 3.0F) {
-                    rocketObject.makeRocket(rocketObject.getGreenHeight());
+                    rocketObject.makeRocket(rocketObject.getGreenHeight(), musicSoundsObject);
                     rocketObject.setGreenHeight(rocketObject.makeRocketArrowGreen());
                     rocketObject.setLastArrowGreenTimer(timerObjects);
                 }
@@ -1034,10 +1035,10 @@ public class MainGame extends State {
                 prefs.putInteger(EndGame.ADS_WATCHED, prefs.getInteger(EndGame.ADS_WATCHED, 0) + 1);
                 prefs.flush();
             } else {
-            stage.getActors().get(8).setVisible(true);
-            stage.getActors().get(7).setVisible(true);
-            if (showDiamondsCount)
-                stage.getActors().get(23).setVisible(true);
+                stage.getActors().get(8).setVisible(true);
+                stage.getActors().get(7).setVisible(true);
+                if (showDiamondsCount)
+                    stage.getActors().get(23).setVisible(true);
             }
         } else if (gameState == 3) {
             if (timerGame <= 100.8F)
@@ -1065,17 +1066,17 @@ public class MainGame extends State {
         if (!shieldObject.isHasShield()) {
             if (rockObject.isFirstRockHit())
                 gameState = rockObject.rockCollisionSecond(playerObject.getPlayerRectangle(), gameState, prefs);
-             else
+            else
                 rockObject.rockCollisionFirst(playerObject.getPlayerRectangle(), timerObjects);
 
             gameState = bombObject.bombCollision(playerObject.getPlayerRectangle(), gameState, prefs);
-            gameState = spikesObject.spikeDownCollision(playerObject.getPlayerRectangle(), gameState, prefs);
-            gameState = rocketObject.rocketCollision(playerObject.getPlayerRectangle(), gameState, prefs);
+            gameState = spikesObject.spikeDownCollision(playerObject.getPlayerRectangle(), gameState, prefs, musicSoundsObject);
+            gameState = rocketObject.rocketCollision(playerObject.getPlayerRectangle(), gameState, prefs, musicSoundsObject);
         }
 
-        shieldObject.shieldCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
-        coinRushObject.speedCoinCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
-        coinMagnetObject.coinMagnetCollision(playerObject.getPlayerRectangle(), timerObjects, prefs);
+        shieldObject.shieldCollision(playerObject.getPlayerRectangle(), timerObjects, prefs, musicSoundsObject);
+        coinRushObject.speedCoinCollision(playerObject.getPlayerRectangle(), timerObjects, prefs, musicSoundsObject);
+        coinMagnetObject.coinMagnetCollision(playerObject.getPlayerRectangle(), timerObjects, prefs, musicSoundsObject);
 
         if (showScoreAndCoinLabel) {
             batch.draw(scoreAndCoinBackground, worldXToScreenX(-25.0F), worldYToScreenY(950.0F), worldXToScreenX(125.0F), worldYToScreenY(50.0F));
@@ -1219,17 +1220,17 @@ public class MainGame extends State {
             stage.getActors().get(13).setVisible(true);
             stage.getActors().get(17).setVisible(true);
             if (storyPageNumber == 1)
-                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_second"))));
             else if (storyPageNumber == 2)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
         } else if (storyStartNumber == 2) {
             if (storyPageNumber == 1)
-                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_third"))));
             else if (storyPageNumber == 2)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
         } else if (storyStartNumber == 3) {
             if (storyPageNumber == 1)
-                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_fourth"))));
             else if (storyPageNumber == 2)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
         }

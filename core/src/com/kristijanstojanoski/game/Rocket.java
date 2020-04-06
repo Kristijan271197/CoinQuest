@@ -4,12 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import States.MusicSounds;
 
 class Rocket {
     private int arrowStateGreen = 0;
@@ -68,7 +69,7 @@ class Rocket {
     }
 
 
-    void makeRocket(float height) {
+    void makeRocket(float height, MusicSounds musicSoundsObject) {
         if (worldYToScreenY(50.0F) + height >= Gdx.graphics.getHeight())
             rocketsYs.add((int) (height - worldXToScreenX(50.0F)));
         else if (height <= worldYToScreenY(70.0F))
@@ -76,6 +77,7 @@ class Rocket {
         else
             rocketsYs.add((int) height);
         rocketsXs.add(Gdx.graphics.getWidth());
+        musicSoundsObject.playRocketLaunch();
     }
 
 
@@ -120,9 +122,10 @@ class Rocket {
     }
 
 
-    int rocketCollision(Rectangle paramRectangle, int gameState, Preferences prefs) {
+    int rocketCollision(Rectangle paramRectangle, int gameState, Preferences prefs, MusicSounds musicSoundsObject) {
         for (int i = 0; i < this.rocketsRectangles.size(); i++) {
             if (Intersector.overlaps(paramRectangle, this.rocketsRectangles.get(i))) {
+                musicSoundsObject.playRocketExplosion();
                 prefs.putBoolean(Player.PLAYER_GROUND, true);
                 prefs.flush();
                 gameState = 2;

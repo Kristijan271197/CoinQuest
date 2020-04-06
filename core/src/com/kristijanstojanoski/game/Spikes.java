@@ -2,6 +2,7 @@ package com.kristijanstojanoski.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import States.MusicSounds;
 
 class Spikes {
     private float lastSpikeDownTimer = 0.0F;
@@ -23,7 +26,7 @@ class Spikes {
     private ArrayList<Integer> spikesDownYs = new ArrayList<>();
 
 
-    void initializeValues(TextureAtlas mainGameAtlas) {
+    void initializeValues(TextureAtlas mainGameAtlas, AssetManager manager) {
         spikeDown = mainGameAtlas.findRegion("cactus");
         spikeDownTime = random.nextInt(6001) + 4000;
     }
@@ -58,9 +61,10 @@ class Spikes {
     }
 
 
-    int spikeDownCollision(Rectangle paramRectangle, int gameState, Preferences prefs) {
+    int spikeDownCollision(Rectangle paramRectangle, int gameState, Preferences prefs, MusicSounds musicSoundsObject) {
         for (int i = 0; i < spikesDownRectanglesFirst.size(); i++) {
             if (Intersector.overlaps(paramRectangle, spikesDownRectanglesFirst.get(i))) {
+                musicSoundsObject.playCactusHit();
                 prefs.putBoolean(Player.PLAYER_GROUND, true);
                 prefs.flush();
                 gameState = 2;
@@ -71,6 +75,7 @@ class Spikes {
                 spikesDownRectanglesThird.remove(i);
                 break;
             } else if (Intersector.overlaps(paramRectangle, spikesDownRectanglesSecond.get(i))) {
+                musicSoundsObject.playCactusHit();
                 prefs.putBoolean(Player.PLAYER_GROUND, true);
                 prefs.flush();
                 gameState = 2;
@@ -81,6 +86,7 @@ class Spikes {
                 spikesDownRectanglesThird.remove(i);
                 break;
             } else if (Intersector.overlaps(paramRectangle, spikesDownRectanglesThird.get(i))) {
+                musicSoundsObject.playCactusHit();
                 prefs.putBoolean(Player.PLAYER_GROUND, true);
                 prefs.flush();
                 gameState = 2;

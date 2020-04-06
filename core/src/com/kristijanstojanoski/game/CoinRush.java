@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import States.EndGame;
+import States.MusicSounds;
 
 class CoinRush {
     private boolean coinRush = false;
@@ -39,9 +40,10 @@ class CoinRush {
         }
     }
 
-    void speedCoinCollision(Rectangle paramRectangle, float coinRushTimer, Preferences prefs) {
+    void speedCoinCollision(Rectangle paramRectangle, float coinRushTimer, Preferences prefs, MusicSounds musicSoundsObject) {
         for (int i = 0; i < speedCoinCollectibleRectangles.size(); i++) {
             if (Intersector.overlaps(paramRectangle, speedCoinCollectibleRectangles.get(i))) {
+                musicSoundsObject.playCollectibleCollected();
                 prefs.putInteger(EndGame.POWER_UPS_COLLECTED, prefs.getInteger(EndGame.POWER_UPS_COLLECTED, 0) + 1);
                 prefs.flush();
                 coinRush = true;

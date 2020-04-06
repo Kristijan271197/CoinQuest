@@ -68,14 +68,14 @@ public class LoadingScreen extends State {
     }
 
     public void render(SpriteBatch batch) {
-        if (this.manager.update()) {
-            this.gsm.push(new MainMenu(this.gsm, this.adsController, this.manager));
+        if (manager.update()) {
+            gsm.push(new MainMenu(gsm, adsController, manager));
             dispose();
         } else {
-            if ((int) (this.manager.getProgress() * 100.0F) > this.oldProgress) {
-                if (this.prefs.getBoolean("sound", true))
-                    this.loadingBarSound.play();
-                this.oldProgress = (int) (this.manager.getProgress() * 100.0F);
+            if ((int) (manager.getProgress() * 100.0F) > oldProgress) {
+                if (prefs.getBoolean("sound", true))
+                    loadingBarSound.play();
+                oldProgress = (int) (manager.getProgress() * 100.0F);
             }
 
             batch.begin();
@@ -86,7 +86,7 @@ public class LoadingScreen extends State {
             batch.draw(greenBar, worldXToScreenX(105.0F), worldYToScreenY(206.0F), worldXToScreenX((int) (manager.getProgress() * 290.0F)), worldYToScreenY(66.0F));
             batch.draw(loadingBar, worldXToScreenX(100.0F), worldYToScreenY(200.0F), worldXToScreenX(300.0F), worldYToScreenY(80.0F));
             batch.draw(loadingBarOutline, worldXToScreenX(93.0F), worldYToScreenY(192.0F), worldXToScreenX(315.0F), worldYToScreenY(96.0F));
-            coinAndDiamondFont.draw(batch, (int) (this.manager.getProgress() * 100.0F) + "%", worldXToScreenX(235.0F), worldYToScreenY(255.0F), worldXToScreenX(30.0F), Align.center, true);
+            coinAndDiamondFont.draw(batch, (int) (manager.getProgress() * 100.0F) + "%", worldXToScreenX(235.0F), worldYToScreenY(255.0F), worldXToScreenX(30.0F), Align.center, true);
             batch.end();
         }
     }
@@ -96,51 +96,51 @@ public class LoadingScreen extends State {
 
 
     private void loadAssets() {
-        this.manager.load("main_menu/main_menu.atlas", TextureAtlas.class);
-        this.manager.load("shop/shop.atlas", TextureAtlas.class);
-        this.manager.load("choose_stage/choose_stage.atlas", TextureAtlas.class);
-        this.manager.load("spinning_wheel/spinning_wheel.atlas", TextureAtlas.class);
-        this.manager.load("main_game/main_game.atlas", TextureAtlas.class);
-        this.manager.load("story_city_start_first.png", Texture.class);
-        this.manager.load("story_city_start_second.png", Texture.class);
-        this.manager.load("story_city_start_third.png", Texture.class);
-        this.manager.load("story_city_start_fourth.png", Texture.class);
-        this.manager.load("story_city_end_first.png", Texture.class);
-        this.manager.load("story_city_end_second.png", Texture.class);
-        this.manager.load("story_city_end_third.png", Texture.class);
-        this.manager.load("story_city_end_fourth.png", Texture.class);
-        this.manager.load("arrow_story_left.png", Texture.class);
-        this.manager.load("arrow_story_right.png", Texture.class);
-        this.manager.load("skip_button.png", Texture.class);
-        this.manager.load("achievements/achievements.atlas", TextureAtlas.class);
-        this.manager.load("end_game/end_game.atlas", TextureAtlas.class);
-        this.manager.load("shared/shared.atlas", TextureAtlas.class);
-        this.manager.load("font/font_scale_15.fnt", BitmapFont.class);
-        this.manager.load("font/font_scale_1.fnt", BitmapFont.class);
-        this.manager.load("font/font_scale_gray_1.fnt", BitmapFont.class);
-        this.manager.load("font/font_scale_09.fnt", BitmapFont.class);
-        this.manager.load("font/font_scale_07.fnt", BitmapFont.class);
-        this.manager.load("font/font_scale_065.fnt", BitmapFont.class);
-        this.manager.load("font/font_end_game.fnt", BitmapFont.class);
-        this.manager.load("font/font_end_game_smaller.fnt", BitmapFont.class);
-        this.manager.load("font/score_font.fnt", BitmapFont.class);
-        this.manager.load("font/text_font.fnt", BitmapFont.class);
-        this.manager.load("font/achievements_font.fnt", BitmapFont.class);
-        this.manager.load("font/achievements_button_font.fnt", BitmapFont.class);
-        this.manager.load("settings/settings.atlas", TextureAtlas.class);
-        this.manager.load("music/bomb_explode.mp3", Sound.class);
-        this.manager.load("music/button_click.mp3", Sound.class);
-        this.manager.load("music/coin_collect.mp3", Sound.class);
-        this.manager.load("music/jump.mp3", Sound.class);
-        this.manager.load("music/player_fall.mp3", Sound.class);
-        this.manager.load("music/player_ground.mp3", Sound.class);
-        this.manager.load("music/rock_hit.mp3", Sound.class);
-        this.manager.load("music/button_buy.mp3", Sound.class);
-        this.manager.load("music/wheel_of_fortune.mp3", Music.class);
-        this.manager.load("music/wheel_reward.mp3", Sound.class);
-        this.manager.load("music/receive_coins.mp3", Sound.class);
-        this.manager.load("music/fun_adventure.ogg", Music.class);
+        manager.load("main_menu/main_menu.atlas", TextureAtlas.class);
+        manager.load("shop/shop.atlas", TextureAtlas.class);
+        manager.load("choose_stage/choose_stage.atlas", TextureAtlas.class);
+        manager.load("spinning_wheel/spinning_wheel.atlas", TextureAtlas.class);
+        manager.load("main_game/main_game.atlas", TextureAtlas.class);
+        manager.load("story_city_start_first.png", Texture.class);
+        manager.load("story_city_start_second.png", Texture.class);
+        manager.load("story_city_start_third.png", Texture.class);
+        manager.load("story_city_start_fourth.png", Texture.class);
+        manager.load("story_city_end_first.png", Texture.class);
+        manager.load("story_city_end_second.png", Texture.class);
+        manager.load("story_city_end_third.png", Texture.class);
+        manager.load("story_city_end_fourth.png", Texture.class);
+        manager.load("achievements/achievements.atlas", TextureAtlas.class);
+        manager.load("end_game/end_game.atlas", TextureAtlas.class);
+        manager.load("shared/shared.atlas", TextureAtlas.class);
+        manager.load("font/font_scale_15.fnt", BitmapFont.class);
+        manager.load("font/font_scale_1.fnt", BitmapFont.class);
+        manager.load("font/font_scale_gray_1.fnt", BitmapFont.class);
+        manager.load("font/font_scale_09.fnt", BitmapFont.class);
+        manager.load("font/font_scale_07.fnt", BitmapFont.class);
+        manager.load("font/font_scale_065.fnt", BitmapFont.class);
+        manager.load("font/font_end_game.fnt", BitmapFont.class);
+        manager.load("font/font_end_game_smaller.fnt", BitmapFont.class);
+        manager.load("font/score_font.fnt", BitmapFont.class);
+        manager.load("font/text_font.fnt", BitmapFont.class);
+        manager.load("font/achievements_font.fnt", BitmapFont.class);
+        manager.load("font/achievements_button_font.fnt", BitmapFont.class);
+        manager.load("settings/settings.atlas", TextureAtlas.class);
+        manager.load("music/bomb_explode.mp3", Sound.class);
+        manager.load("music/button_click.mp3", Sound.class);
+        manager.load("music/coin_collect.mp3", Sound.class);
+        manager.load("music/jump.mp3", Sound.class);
+        manager.load("music/player_fall.mp3", Sound.class);
+        manager.load("music/player_ground.mp3", Sound.class);
+        manager.load("music/rock_hit.mp3", Sound.class);
+        manager.load("music/button_buy.mp3", Sound.class);
+        manager.load("music/wheel_of_fortune.mp3", Music.class);
+        manager.load("music/wheel_reward.mp3", Sound.class);
+        manager.load("music/receive_coins.mp3", Sound.class);
+        manager.load("music/fun_adventure.ogg", Music.class);
+        manager.load("music/cactus_hit.mp3", Sound.class);
+        manager.load("music/collectible_collected.mp3", Sound.class);
+        manager.load("music/endgame_sound.mp3", Sound.class);
+        manager.load("music/rocket_explosion.mp3", Sound.class);
+        manager.load("music/rocket_launch.mp3", Sound.class);
     }
-
-
 }
