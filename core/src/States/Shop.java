@@ -125,6 +125,9 @@ public class Shop extends State {
 
         achievementsObject = new Achievements();
 
+        if (prefs.getInteger(Achievements.POWER_UPS_UPGRADED_ATM_ACHIEVEMENT, 0) < 12)
+            achievementsObject.checkPowerUpsUpgraded(prefs.getInteger(POWER_UPS_UPGRADED_TIMES, 0));
+
         quitWindowTexture = sharedAtlas.findRegion("sure_quit_window");
         notQuitButtonTexture = sharedAtlas.findRegion("congratulations_window_x_button_unpressed");
         quitButtonTexture = mainGameAtlas.findRegion("story_continue_button_unpressed");

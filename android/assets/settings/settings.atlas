@@ -4,24 +4,51 @@ size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-night_mode_text
+about_button_pressed
+  rotate: false
+  xy: 1327, 1429
+  size: 255, 101
+  orig: 255, 101
+  offset: 0, 0
+  index: -1
+about_button_unpressed
   rotate: false
   xy: 2, 2
+  size: 255, 101
+  orig: 255, 101
+  offset: 0, 0
+  index: -1
+night_mode_text
+  rotate: false
+  xy: 2, 105
   size: 1216, 537
   orig: 1216, 537
   offset: 0, 0
   index: -1
 sound_music_text
   rotate: false
-  xy: 2, 541
+  xy: 2, 644
   size: 1323, 886
   orig: 1323, 886
   offset: 0, 0
   index: -1
 x_sound_music
   rotate: false
-  xy: 1327, 1327
+  xy: 1220, 542
   size: 95, 100
   orig: 95, 100
+  offset: 0, 0
+  index: -1
+
+settings2.png
+size: 1024,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+about_window
+  rotate: false
+  xy: 2, 2
+  size: 844, 1261
+  orig: 844, 1261
   offset: 0, 0
   index: -1

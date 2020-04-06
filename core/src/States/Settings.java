@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -118,6 +119,51 @@ public class Settings extends State {
             }
         });
 
+        ImageButton.ImageButtonStyle aboutButtonStyle = new ImageButton.ImageButtonStyle();
+        aboutButtonStyle.up = new TextureRegionDrawable(new TextureRegion(settingsAtlas.findRegion("about_button_unpressed")));
+        aboutButtonStyle.down = new TextureRegionDrawable(new TextureRegion(settingsAtlas.findRegion("about_button_pressed")));
+
+        ImageButton aboutButton = new ImageButton(aboutButtonStyle);
+        aboutButton.setPosition(worldXToScreenX(125), worldYToScreenY(200));
+        aboutButton.setSize(worldXToScreenX(250), worldYToScreenY(100));
+        aboutButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
+                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                musicSoundsObject.playButtonClick();
+                stage.getActors().get(11).setVisible(true);
+                stage.getActors().get(12).setVisible(true);
+                stage.getActors().get(2).setTouchable(Touchable.disabled);
+                stage.getActors().get(3).setTouchable(Touchable.disabled);
+                stage.getActors().get(4).setTouchable(Touchable.disabled);
+                stage.getActors().get(9).setTouchable(Touchable.disabled);
+
+            }
+        });
+
+        Image aboutWindow = new Image(settingsAtlas.findRegion("about_window"));
+        aboutWindow.setSize(worldXToScreenX(470), worldYToScreenY(700));
+        aboutWindow.setPosition(worldXToScreenX(15), worldYToScreenY(150));
+
+        ImageButton.ImageButtonStyle xButtonWindowStyle = new ImageButton.ImageButtonStyle();
+        xButtonWindowStyle.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_unpressed")));
+        xButtonWindowStyle.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_pressed")));
+
+        ImageButton xButtonWindow = new ImageButton(xButtonWindowStyle);
+        xButtonWindow.setPosition(worldXToScreenX(400), worldYToScreenY(780));
+        xButtonWindow.setSize(worldXToScreenX(50), worldYToScreenY(50));
+        xButtonWindow.addListener(new ClickListener() {
+            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
+                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                musicSoundsObject.playButtonClick();
+                stage.getActors().get(11).setVisible(false);
+                stage.getActors().get(12).setVisible(false);
+                stage.getActors().get(2).setTouchable(Touchable.enabled);
+                stage.getActors().get(3).setTouchable(Touchable.enabled);
+                stage.getActors().get(4).setTouchable(Touchable.enabled);
+                stage.getActors().get(9).setTouchable(Touchable.enabled);
+            }
+        });
+
         ImageButton.ImageButtonStyle backButtonStyle = new ImageButton.ImageButtonStyle();
         backButtonStyle.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_unpressed")));
         backButtonStyle.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("back_button_pressed")));
@@ -180,9 +226,14 @@ public class Settings extends State {
         stage.addActor(quitButton);
         stage.addActor(nightModeText);
         stage.addActor(nightModeButton);
+        stage.addActor(aboutButton);
+        stage.addActor(aboutWindow);
+        stage.addActor(xButtonWindow);
         stage.getActors().get(5).setVisible(false);
         stage.getActors().get(6).setVisible(false);
         stage.getActors().get(7).setVisible(false);
+        stage.getActors().get(11).setVisible(false);
+        stage.getActors().get(12).setVisible(false);
     }
 
     private float worldXToScreenX(float paramFloat) {
