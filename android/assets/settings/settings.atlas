@@ -1,19 +1,26 @@
 
 settings.png
-size: 2048,1024
+size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+night_mode_text
+  rotate: false
+  xy: 2, 2
+  size: 1216, 537
+  orig: 1216, 537
+  offset: 0, 0
+  index: -1
 sound_music_text
   rotate: false
-  xy: 2, 104
+  xy: 2, 541
   size: 1323, 886
   orig: 1323, 886
   offset: 0, 0
   index: -1
 x_sound_music
   rotate: false
-  xy: 2, 2
+  xy: 1327, 1327
   size: 95, 100
   orig: 95, 100
   offset: 0, 0

@@ -128,17 +128,34 @@ public class MainGame extends State {
         musicSoundsObject = new MusicSounds(manager);
 
         if (stageNumber == 1) {
-            background[0] = mainGameAtlas.findRegion("city_background", 1);
-            background[1] = mainGameAtlas.findRegion("city_background", 2);
-            background[2] = mainGameAtlas.findRegion("city_background", 3);
-            background[3] = mainGameAtlas.findRegion("city_background", 4);
-            background[4] = mainGameAtlas.findRegion("city_background", 1);
+            if (prefs.getBoolean(Settings.NIGHT_MODE, false)) {
+                background[0] = mainGameAtlas.findRegion("city_background_night", 1);
+                background[1] = mainGameAtlas.findRegion("city_background_night", 2);
+                background[2] = mainGameAtlas.findRegion("city_background_night", 3);
+                background[3] = mainGameAtlas.findRegion("city_background_night", 4);
+                background[4] = mainGameAtlas.findRegion("city_background_night", 1);
+            } else {
+                background[0] = mainGameAtlas.findRegion("city_background", 1);
+                background[1] = mainGameAtlas.findRegion("city_background", 2);
+                background[2] = mainGameAtlas.findRegion("city_background", 3);
+                background[3] = mainGameAtlas.findRegion("city_background", 4);
+                background[4] = mainGameAtlas.findRegion("city_background", 1);
+            }
         } else if (stageNumber == 2) {
-            background[0] = mainGameAtlas.findRegion("desert_background", 1);
-            background[1] = mainGameAtlas.findRegion("desert_background", 2);
-            background[2] = mainGameAtlas.findRegion("desert_background", 3);
-            background[3] = mainGameAtlas.findRegion("desert_background", 4);
-            background[4] = mainGameAtlas.findRegion("desert_background", 1);
+            if (prefs.getBoolean(Settings.NIGHT_MODE, false)) {
+                background[0] = mainGameAtlas.findRegion("desert_background_night", 1);
+                background[1] = mainGameAtlas.findRegion("desert_background_night", 2);
+                background[2] = mainGameAtlas.findRegion("desert_background_night", 3);
+                background[3] = mainGameAtlas.findRegion("desert_background_night", 4);
+                background[4] = mainGameAtlas.findRegion("desert_background_night", 1);
+            } else {
+                background[0] = mainGameAtlas.findRegion("desert_background", 1);
+                background[1] = mainGameAtlas.findRegion("desert_background", 2);
+                background[2] = mainGameAtlas.findRegion("desert_background", 3);
+                background[3] = mainGameAtlas.findRegion("desert_background", 4);
+                background[4] = mainGameAtlas.findRegion("desert_background", 1);
+            }
+
         }
 
         bgCords = new float[5];

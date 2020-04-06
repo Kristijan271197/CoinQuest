@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class Settings extends State {
     public static final String MUSIC = "music";
     public static final String SOUND = "sound";
+    public static final String NIGHT_MODE = "nightMode";
 
     private ImageButton.ImageButtonStyle checkedMarkButtonStyle;
     private ImageButton musicButton;
@@ -25,6 +26,7 @@ public class Settings extends State {
     private ImageButton soundButton;
     private Stage stage;
     private ImageButton.ImageButtonStyle xButtonStyle;
+    private ImageButton nightModeButton;
 
     Settings(final GameStateManager gsm, final AdsController adsController, final AssetManager manager) {
         super(gsm);
@@ -46,6 +48,10 @@ public class Settings extends State {
         Image soundMusicText = new Image(settingsAtlas.findRegion("sound_music_text"));
         soundMusicText.setSize(worldXToScreenX(300.0F), worldYToScreenY(200.0F));
         soundMusicText.setPosition(worldXToScreenX(100.0F), worldYToScreenY(650.0F));
+
+        Image nightModeText = new Image(settingsAtlas.findRegion("night_mode_text"));
+        nightModeText.setSize(worldXToScreenX(285), worldYToScreenY(125));
+        nightModeText.setPosition(worldXToScreenX(115), worldYToScreenY(510));
 
         checkedMarkButtonStyle = new ImageButton.ImageButtonStyle();
         checkedMarkButtonStyle.up = new TextureRegionDrawable(new TextureRegion(achievementsAtlas.findRegion("achievement_completed")));
@@ -89,6 +95,25 @@ public class Settings extends State {
                     prefs.flush();
                     musicSoundsObject.playButtonClick();
                     musicSoundsObject.playBackgroundMusic();
+                }
+            }
+        });
+
+
+        nightModeButton = new ImageButton(xButtonStyle);
+        nightModeButton.setPosition(worldXToScreenX(330.0F), worldYToScreenY(665.0F));
+        nightModeButton.setSize(worldXToScreenX(80.0F), worldYToScreenY(63.0F));
+        nightModeButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
+                super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                if (prefs.getBoolean(NIGHT_MODE, false)) {
+                    prefs.putBoolean(NIGHT_MODE, false);
+                    prefs.flush();
+                    musicSoundsObject.playButtonClick();
+                } else {
+                    prefs.putBoolean(NIGHT_MODE, true);
+                    prefs.flush();
+                    musicSoundsObject.playButtonClick();
                 }
             }
         });
@@ -153,6 +178,8 @@ public class Settings extends State {
         stage.addActor(sureQuitWindow);
         stage.addActor(notQuitButton);
         stage.addActor(quitButton);
+        stage.addActor(nightModeText);
+        stage.addActor(nightModeButton);
         stage.getActors().get(5).setVisible(false);
         stage.getActors().get(6).setVisible(false);
         stage.getActors().get(7).setVisible(false);
@@ -193,6 +220,7 @@ public class Settings extends State {
             soundButton.setSize(worldXToScreenX(55.0F), worldYToScreenY(58.0F));
             soundButton.setStyle(xButtonStyle);
         }
+
         if (prefs.getBoolean(MUSIC, true)) {
             musicButton.setSize(worldXToScreenX(80.0F), worldYToScreenY(63.0F));
             musicButton.setPosition(worldXToScreenX(330.0F), worldYToScreenY(665.0F));
@@ -202,6 +230,18 @@ public class Settings extends State {
             musicButton.setPosition(worldXToScreenX(332.0F), worldYToScreenY(665.0F));
             musicButton.setStyle(xButtonStyle);
         }
+
+        if (prefs.getBoolean(NIGHT_MODE, false)) {
+            nightModeButton.setSize(worldXToScreenX(80.0F), worldYToScreenY(63.0F));
+            nightModeButton.setPosition(worldXToScreenX(330.0F), worldYToScreenY(548));
+            nightModeButton.setStyle(checkedMarkButtonStyle);
+        } else {
+            nightModeButton.setSize(worldXToScreenX(55.0F), worldYToScreenY(58.0F));
+            nightModeButton.setPosition(worldXToScreenX(332.0F), worldYToScreenY(548));
+            nightModeButton.setStyle(xButtonStyle);
+        }
+
+
     }
 
     public void update(float paramFloat) {
