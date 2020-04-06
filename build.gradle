@@ -59,6 +59,8 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
         implementation 'com.google.android.gms:play-services-ads:19.0.1'
+        implementation 'com.google.ads.mediation:tapjoy:12.4.2.0'
+        implementation 'com.google.ads.mediation:vungle:6.5.3.0'
     }
 }
 

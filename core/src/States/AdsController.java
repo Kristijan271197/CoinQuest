@@ -18,4 +18,6 @@ public interface AdsController {
     void showInterstitialAd();
 
     boolean getInterstitialAdClosed();
+
+    boolean getInterstitialAdLoaded();
 }

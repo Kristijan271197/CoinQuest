@@ -339,16 +339,18 @@ public class EndGame extends State {
             stage.getActors().get(11).setVisible(true);
         }
 
-        if(mAdsController.getInterstitialAdClosed()){
-            stage.getActors().get(3).setTouchable(Touchable.enabled);
-            stage.getActors().get(6).setTouchable(Touchable.enabled);
-            stage.getActors().get(7).setTouchable(Touchable.enabled);
-            stage.getActors().get(8).setTouchable(Touchable.enabled);
-        } else{
-            stage.getActors().get(3).setTouchable(Touchable.disabled);
-            stage.getActors().get(6).setTouchable(Touchable.disabled);
-            stage.getActors().get(7).setTouchable(Touchable.disabled);
-            stage.getActors().get(8).setTouchable(Touchable.disabled);
+        if(mAdsController.getInterstitialAdLoaded()) {
+            if (mAdsController.getInterstitialAdClosed()) {
+                stage.getActors().get(3).setTouchable(Touchable.enabled);
+                stage.getActors().get(6).setTouchable(Touchable.enabled);
+                stage.getActors().get(7).setTouchable(Touchable.enabled);
+                stage.getActors().get(8).setTouchable(Touchable.enabled);
+            } else {
+                stage.getActors().get(3).setTouchable(Touchable.disabled);
+                stage.getActors().get(6).setTouchable(Touchable.disabled);
+                stage.getActors().get(7).setTouchable(Touchable.disabled);
+                stage.getActors().get(8).setTouchable(Touchable.disabled);
+            }
         }
 
 

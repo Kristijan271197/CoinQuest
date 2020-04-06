@@ -28,6 +28,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
     boolean adLoaded = false;
     boolean rewardReceived = false;
     boolean iAdClosed = false;
+    boolean iAdLoaded = false;
 
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
@@ -39,7 +40,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
     }
 
     public void loadRewardedVideoAd() {
-        ad = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
+        ad = new RewardedAd(this, "ca-app-pub-4701446273186664/9376746971");
         RewardedAdLoadCallback rewardedAdLoadCallback = new RewardedAdLoadCallback() {
             public void onRewardedAdFailedToLoad(int i) {
                 super.onRewardedAdFailedToLoad(i);
@@ -73,7 +74,6 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
                         }
                     };
                     ad.show(AndroidLauncher.this, adCallback);
-                    loadRewardedVideoAd();
                 } else
                     loadRewardedVideoAd();
             }
@@ -83,7 +83,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
     @Override
     public void loadInterstitialAd() {
         iAd = new InterstitialAd(this);
-        iAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        iAd.setAdUnitId("ca-app-pub-4701446273186664/3588577131");
         iAd.setAdListener(new AdListener() {
             @Override
             public void onAdFailedToLoad(int i) {
@@ -94,7 +94,13 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
             @Override
             public void onAdClosed() {
                 super.onAdClosed();
+                iAdClosed = true;
+            }
 
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                iAdLoaded = true;
             }
         });
         iAd.loadAd(new AdRequest.Builder().build());
@@ -107,6 +113,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
             public void run() {
                 if (iAd.isLoaded()) {
                     iAd.show();
+                    iAdLoaded = false;
                     loadInterstitialAd();
                 } else
                     loadInterstitialAd();
@@ -117,6 +124,11 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
     @Override
     public boolean getInterstitialAdClosed() {
         return iAdClosed;
+    }
+
+    @Override
+    public boolean getInterstitialAdLoaded() {
+        return iAdLoaded;
     }
 
     public boolean getAdLoaded() {
@@ -137,20 +149,11 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 
     private boolean haveNetworkConnection() {
-        boolean haveConnectedWifi = false;
-        boolean haveConnectedMobile = false;
+        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
-                    haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
-                    haveConnectedMobile = true;
-        }
-        return haveConnectedWifi || haveConnectedMobile;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }
