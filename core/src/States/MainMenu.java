@@ -46,9 +46,6 @@ public class MainMenu extends State {
         TextureAtlas mainGameAtlas = manager.get("main_game/main_game.atlas", TextureAtlas.class);
 
         prefs = Gdx.app.getPreferences("prefs");
-        prefs.putInteger("coins", 10000000);
-        prefs.putInteger("ruby", 10000000);
-        prefs.flush();
         MusicSounds musicSounds = new MusicSounds(manager);
         musicSoundsObject = musicSounds;
         musicSounds.playBackgroundMusic();

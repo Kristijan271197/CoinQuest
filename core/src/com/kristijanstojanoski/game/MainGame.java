@@ -743,7 +743,7 @@ public class MainGame extends State {
         coinObject.initializeValues(sharedAtlas, manager);
         rockObject.initializeValues(mainGameAtlas, stageNumber, manager);
         bombObject.initializeValues(mainGameAtlas, manager);
-        spikesObject.initializeValues(mainGameAtlas, manager);
+        spikesObject.initializeValues(mainGameAtlas,prefs);
         rocketObject.initializeValues(mainGameAtlas);
         shieldObject.initializeValues(mainGameAtlas);
         coinRushObject.initializeValues(mainGameAtlas);

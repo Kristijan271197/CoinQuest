@@ -141,15 +141,15 @@ public class Settings extends State {
         });
 
         Image aboutWindow = new Image(settingsAtlas.findRegion("about_window"));
-        aboutWindow.setSize(worldXToScreenX(470), worldYToScreenY(700));
-        aboutWindow.setPosition(worldXToScreenX(15), worldYToScreenY(150));
+        aboutWindow.setSize(worldXToScreenX(460), worldYToScreenY(810));
+        aboutWindow.setPosition(worldXToScreenX(20), worldYToScreenY(100));
 
         ImageButton.ImageButtonStyle xButtonWindowStyle = new ImageButton.ImageButtonStyle();
         xButtonWindowStyle.up = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_unpressed")));
         xButtonWindowStyle.down = new TextureRegionDrawable(new TextureRegion(sharedAtlas.findRegion("congratulations_window_x_button_pressed")));
 
         ImageButton xButtonWindow = new ImageButton(xButtonWindowStyle);
-        xButtonWindow.setPosition(worldXToScreenX(400), worldYToScreenY(780));
+        xButtonWindow.setPosition(worldXToScreenX(390), worldYToScreenY(840));
         xButtonWindow.setSize(worldXToScreenX(50), worldYToScreenY(50));
         xButtonWindow.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {

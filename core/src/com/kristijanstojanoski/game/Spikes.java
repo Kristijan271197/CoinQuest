@@ -2,10 +2,8 @@ package com.kristijanstojanoski.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -13,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import States.MusicSounds;
+import States.Settings;
 
 class Spikes {
     private float lastSpikeDownTimer = 0.0F;
@@ -26,8 +25,11 @@ class Spikes {
     private ArrayList<Integer> spikesDownYs = new ArrayList<>();
 
 
-    void initializeValues(TextureAtlas mainGameAtlas, AssetManager manager) {
-        spikeDown = mainGameAtlas.findRegion("cactus");
+    void initializeValues(TextureAtlas mainGameAtlas, Preferences prefs) {
+        if (prefs.getBoolean(Settings.NIGHT_MODE, false))
+            spikeDown = mainGameAtlas.findRegion("cactus_night");
+        else
+            spikeDown = mainGameAtlas.findRegion("cactus");
         spikeDownTime = random.nextInt(6001) + 4000;
     }
 
