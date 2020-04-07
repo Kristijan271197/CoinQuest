@@ -11,6 +11,13 @@ green_bar
   orig: 835, 209
   offset: 0, 0
   index: -1
+invicta_logo
+  rotate: false
+  xy: 2, 610
+  size: 689, 897
+  orig: 689, 897
+  offset: 0, 0
+  index: -1
 loading_bar
   rotate: false
   xy: 2, 2
@@ -27,7 +34,7 @@ loading_bar_outline
   index: -1
 loading_screen_background
   rotate: false
-  xy: 816, 507
+  xy: 693, 507
   size: 500, 1000
   orig: 500, 1000
   offset: 0, 0
@@ -37,13 +44,6 @@ loading_text
   xy: 2, 1509
   size: 1294, 344
   orig: 1294, 344
-  offset: 0, 0
-  index: -1
-navitas_logo
-  rotate: false
-  xy: 2, 695
-  size: 812, 812
-  orig: 812, 812
   offset: 0, 0
   index: -1
 white_bar

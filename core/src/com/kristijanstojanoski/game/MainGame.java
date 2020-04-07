@@ -112,6 +112,7 @@ public class MainGame extends State {
     private boolean yellowGo = false;
     private Label label1;
     private TextureAtlas mainGameAtlas;
+    private boolean musicOnce = true;
 
     public MainGame(final GameStateManager gsm, final AdsController adsController, final AssetManager manager, final int stageNumber) {
         super(gsm);
@@ -811,6 +812,16 @@ public class MainGame extends State {
         shapeRenderer.setColor(Color.RED);
 
         if (gameState == 1) {
+
+            if (musicOnce) {
+                if (stageNumber == 1)
+                    musicSoundsObject.playCityMusic();
+                else if (stageNumber == 2)
+                    musicSoundsObject.playDesertMusic();
+                musicOnce = false;
+            }
+
+
             if (!pauseGame)
                 for (int i = 0; i < 5; i++)
                     bgCords[i] = bgCords[i] - (int) worldXToScreenX(3.0F) * dt * 60.0F;
@@ -1022,6 +1033,10 @@ public class MainGame extends State {
                 showScoreAndCoinLabel = true;
             }
         } else if (gameState == 2) {
+            if (stageNumber == 1)
+                musicSoundsObject.getCityMusic().stop();
+            else if (stageNumber == 2)
+                musicSoundsObject.getDesertMusic().stop();
             batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
             batch.draw(background[getActiveBackgroundIdx(bgCords[0]) + 1], bgCords[getActiveBackgroundIdx(bgCords[0]) + 1] - worldXToScreenX(2.0F), 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
             playerObject.drawPlayerFaint(batch, pauseGame, prefs);
@@ -1072,9 +1087,13 @@ public class MainGame extends State {
             playerObject.drawPlayerWin(batch);
             villainObject.drawVillain(batch, pauseGame);
 
-            if (timerGame >= 102.0F)
+            if (timerGame >= 102.0F) {
                 showEndStory = true;
-            else
+                if (stageNumber == 1)
+                    musicSoundsObject.getCityMusic().stop();
+                else if (stageNumber == 2)
+                    musicSoundsObject.getDesertMusic().stop();
+            } else
                 timerGame = timerGame + Gdx.graphics.getDeltaTime();
         }
 
@@ -1137,6 +1156,7 @@ public class MainGame extends State {
         firstTimeArrowsGreen = true;
         yellowGo = false;
         greenGo = false;
+        musicOnce = true;
     }
 
     private void resetStatsAndRestart() {
@@ -1172,6 +1192,7 @@ public class MainGame extends State {
         greenGo = false;
         scoreTimer = 0.0F;
         twoTimesAd = 0;
+        musicOnce = true;
     }
 
     private void rocketFirstTime() {

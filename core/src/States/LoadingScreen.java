@@ -46,7 +46,7 @@ public class LoadingScreen extends State {
         loadingBarOutline = textureAtlas.findRegion("loading_bar_outline");
         whiteBar = textureAtlas.findRegion("white_bar");
         greenBar = textureAtlas.findRegion("green_bar");
-        logo = textureAtlas.findRegion("navitas_logo");
+        logo = textureAtlas.findRegion("invicta_logo");
         loadingText = textureAtlas.findRegion("loading_text");
         loadingBarSound = manager.get("music/loading_bar_sound.mp3", Sound.class);
         loadAssets();
@@ -80,7 +80,7 @@ public class LoadingScreen extends State {
 
             batch.begin();
             batch.draw(background, 0.0F, 0.0F, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            batch.draw(logo, worldXToScreenX(50.0F), worldYToScreenY(500.0F), worldXToScreenX(400.0F), worldYToScreenY(400.0F));
+            batch.draw(logo, worldXToScreenX(75.0F), worldYToScreenY(450), worldXToScreenX(350), worldYToScreenY(455));
             batch.draw(loadingText, worldXToScreenX(150.0F), worldYToScreenY(290.0F), worldXToScreenX(200.0F), worldYToScreenY(53.0F));
             batch.draw(whiteBar, worldXToScreenX(105.0F), worldYToScreenY(206.0F), worldXToScreenX(290.0F), worldYToScreenY(66.0F));
             batch.draw(greenBar, worldXToScreenX(105.0F), worldYToScreenY(206.0F), worldXToScreenX((int) (manager.getProgress() * 290.0F)), worldYToScreenY(66.0F));
@@ -142,5 +142,7 @@ public class LoadingScreen extends State {
         manager.load("music/endgame_sound.mp3", Sound.class);
         manager.load("music/rocket_explosion.mp3", Sound.class);
         manager.load("music/rocket_launch.mp3", Sound.class);
+        manager.load("music/city_music.mp3", Music.class);
+        manager.load("music/desert_music.mp3", Music.class);
     }
 }

@@ -47,6 +47,7 @@ public class EndGame extends State {
     private ImageButton.ImageButtonStyle tripleCoinsAdWaitButtonTexture;
     private BitmapFont tripleCoinsFont;
     private boolean oneTimeSound = true;
+    private float timerGame = 0.0f;
 
     public EndGame(GameStateManager paramGameStateManager, final AdsController adsController, final AssetManager manager, int coinCount, int score, float timer, final int stageNumber) {
         super(paramGameStateManager);
@@ -340,27 +341,25 @@ public class EndGame extends State {
             stage.getActors().get(11).setVisible(true);
         }
 
+        if (oneTimeSound) {
+            musicSoundsObject.playEndgameSound();
+            oneTimeSound = false;
+        }
+
+        timerGame += Gdx.graphics.getDeltaTime();
 
         if (mAdsController.getInterstitialAdLoaded()) {
-            if (mAdsController.getInterstitialAdClosed()) {
+            if (timerGame >= 2f) {
                 stage.getActors().get(3).setTouchable(Touchable.enabled);
                 stage.getActors().get(6).setTouchable(Touchable.enabled);
                 stage.getActors().get(7).setTouchable(Touchable.enabled);
                 stage.getActors().get(8).setTouchable(Touchable.enabled);
-                if(oneTimeSound){
-                    musicSoundsObject.playEndgameSound();
-                    oneTimeSound = false;
-                }
+
             } else {
                 stage.getActors().get(3).setTouchable(Touchable.disabled);
                 stage.getActors().get(6).setTouchable(Touchable.disabled);
                 stage.getActors().get(7).setTouchable(Touchable.disabled);
                 stage.getActors().get(8).setTouchable(Touchable.disabled);
-            }
-        } else {
-            if(oneTimeSound){
-                musicSoundsObject.playEndgameSound();
-                oneTimeSound = false;
             }
         }
 

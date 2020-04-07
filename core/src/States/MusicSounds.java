@@ -24,6 +24,8 @@ public class MusicSounds {
     private Sound endGameSound;
     private Sound rocketExplosion;
     private Sound rocketLaunch;
+    private Music cityMusic;
+    private Music desertMusic;
 
     public MusicSounds(AssetManager manager) {
         buttonClick = manager.get("music/button_click.mp3", Sound.class);
@@ -42,12 +44,14 @@ public class MusicSounds {
         endGameSound = manager.get("music/endgame_sound.mp3", Sound.class);
         rocketExplosion = manager.get("music/rocket_explosion.mp3", Sound.class);
         rocketLaunch = manager.get("music/rocket_launch.mp3", Sound.class);
+        cityMusic = manager.get("music/city_music.mp3", Music.class);
+        desertMusic = manager.get("music/desert_music.mp3", Music.class);
         prefs = Gdx.app.getPreferences("prefs");
     }
 
 
     public void playBackgroundMusic() {
-        if (prefs.getBoolean(Settings.MUSIC)) {
+        if (prefs.getBoolean(Settings.MUSIC,true)) {
             backgroundMusic.setVolume(0.2F);
             backgroundMusic.play();
             backgroundMusic.setLooping(true);
@@ -57,80 +61,104 @@ public class MusicSounds {
     }
 
     public void playBombSound() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             bombSound.play(1.0F);
     }
 
     void playButtonBuy() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             buttonBuy.play(0.5F);
     }
 
     public void playButtonClick() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             buttonClick.play(0.5F);
     }
 
     void playButtonReceiveCoins() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             buttonReceiveCoins.play(0.5F);
     }
 
     public void playCoinCollect() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             coinCollect.play(0.2F);
     }
 
     public void playJump() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             jump.play(0.25F);
     }
 
     public void playPlayerGround() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             playerGround.play(0.5F);
     }
 
     public void playRockHit() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             rockHit.play(0.5F);
     }
 
     void playWheelReward() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             wheelReward.play(0.15F);
     }
 
     void playWheelSpin() {
-        if (prefs.getBoolean(Settings.SOUND)) {
+        if (prefs.getBoolean(Settings.SOUND,true)) {
             wheelSpin.setVolume(0.15F);
             wheelSpin.play();
         }
     }
 
     public void playCactusHit() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             cactusHit.play(1f);
     }
 
     public void playCollectibleCollected() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             collectibleCollected.play(1f);
     }
 
     void playEndgameSound() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             endGameSound.play(1f);
     }
 
     public void playRocketExplosion() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             rocketExplosion.play(1f);
     }
 
     public void playRocketLaunch() {
-        if (prefs.getBoolean(Settings.SOUND))
+        if (prefs.getBoolean(Settings.SOUND,true))
             rocketLaunch.play(0.3f);
+    }
+
+    public void playCityMusic() {
+        if (prefs.getBoolean(Settings.MUSIC,true)) {
+            cityMusic.setLooping(true);
+            cityMusic.setVolume(0.5f);
+            cityMusic.play();
+        }
+    }
+
+    public void playDesertMusic() {
+        if (prefs.getBoolean(Settings.MUSIC,true)){
+            desertMusic.setLooping(true);
+            desertMusic.setVolume(0.5f);
+            desertMusic.play();
+        }
+    }
+
+    public Music getDesertMusic() {
+        return desertMusic;
+    }
+
+    public Music getCityMusic() {
+        return cityMusic;
     }
 
     Music getBackgroundMusic() {
