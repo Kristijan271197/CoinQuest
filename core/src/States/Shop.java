@@ -519,17 +519,17 @@ public class Shop extends State {
                         prefs.flush();
                     }
                 } else if (prefs.getInteger(COSTUME_SELECTED) == ROBOT_NUMBER)
-                    costumeBuySelectButton(ROBOT_BOUGHT, ROBOT_NUMBER, DIAMONDS, 500);
+                    costumeBuySelectButton(ROBOT_BOUGHT, ROBOT_NUMBER, DIAMONDS, 200);
                 else if (prefs.getInteger(COSTUME_SELECTED) == KNIGHT_NUMBER)
-                    costumeBuySelectButton(KNIGHT_BOUGHT, KNIGHT_NUMBER, DIAMONDS, 500);
+                    costumeBuySelectButton(KNIGHT_BOUGHT, KNIGHT_NUMBER, DIAMONDS, 200);
                 else if (prefs.getInteger(COSTUME_SELECTED) == COWBOY_NUMBER)
                     costumeBuySelectButton(COWBOY_BOUGHT, COWBOY_NUMBER, COINS, 1000);
                 else if (prefs.getInteger(COSTUME_SELECTED) == COWGIRL_NUMBER) {
                     costumeBuySelectButton(COWGIRL_BOUGHT, COWGIRL_NUMBER, COINS, 1000);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_MALE_NUMBER) {
-                    costumeBuySelectButton(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER, DIAMONDS, 500);
+                    costumeBuySelectButton(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER, DIAMONDS, 200);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
-                    costumeBuySelectButton(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER, DIAMONDS, 500);
+                    costumeBuySelectButton(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER, DIAMONDS, 200);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
 
                 }
@@ -569,17 +569,17 @@ public class Shop extends State {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
                 musicSoundsObject.playButtonBuy();
                 if (prefs.getInteger(COSTUME_SELECTED) == ROBOT_NUMBER)
-                    costumeBuyButton(ROBOT_BOUGHT, ROBOT_NUMBER, DIAMONDS, 500);
+                    costumeBuyButton(ROBOT_BOUGHT, ROBOT_NUMBER, DIAMONDS, 200);
                 else if (prefs.getInteger(COSTUME_SELECTED) == KNIGHT_NUMBER)
-                    costumeBuyButton(KNIGHT_BOUGHT, KNIGHT_NUMBER, DIAMONDS, 500);
+                    costumeBuyButton(KNIGHT_BOUGHT, KNIGHT_NUMBER, DIAMONDS, 200);
                 else if (prefs.getInteger(COSTUME_SELECTED) == COWBOY_NUMBER)
                     costumeBuyButton(COWBOY_BOUGHT, COWBOY_NUMBER, COINS, 1000);
                 else if (prefs.getInteger(COSTUME_SELECTED) == COWGIRL_NUMBER) {
                     costumeBuyButton(COWGIRL_BOUGHT, COWGIRL_NUMBER, COINS, 1000);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_MALE_NUMBER) {
-                    costumeBuyButton(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER, DIAMONDS, 500);
+                    costumeBuyButton(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER, DIAMONDS, 200);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
-                    costumeBuyButton(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER, DIAMONDS, 500);
+                    costumeBuyButton(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER, DIAMONDS, 200);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
 
                 }

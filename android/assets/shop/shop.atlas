@@ -17,6 +17,165 @@ size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+costume_left_button_pressed
+  rotate: false
+  xy: 1931, 1044
+  size: 91, 101
+  orig: 91, 101
+  offset: 0, 0
+  index: -1
+costume_left_button_unpressed
+  rotate: false
+  xy: 1931, 1147
+  size: 91, 101
+  orig: 91, 101
+  offset: 0, 0
+  index: -1
+costume_right_button_pressed
+  rotate: false
+  xy: 1919, 387
+  size: 91, 101
+  orig: 91, 101
+  offset: 0, 0
+  index: -1
+costume_right_button_unpressed
+  rotate: false
+  xy: 1919, 284
+  size: 91, 101
+  orig: 91, 101
+  offset: 0, 0
+  index: -1
+costume_select_button_unpressed
+  rotate: false
+  xy: 1598, 490
+  size: 425, 167
+  orig: 425, 167
+  offset: 0, 0
+  index: -1
+costume_selected
+  rotate: false
+  xy: 1116, 18
+  size: 408, 120
+  orig: 408, 120
+  offset: 0, 0
+  index: -1
+costumes_button
+  rotate: false
+  xy: 2, 136
+  size: 1112, 1112
+  orig: 1112, 1112
+  offset: 0, 0
+  index: -1
+cowboy_costume
+  rotate: false
+  xy: 1598, 2
+  size: 319, 486
+  orig: 319, 486
+  offset: 0, 0
+  index: -1
+dino_costume
+  rotate: false
+  xy: 1598, 659
+  size: 435, 301
+  orig: 435, 301
+  offset: 0, 0
+  index: -1
+player_costume
+  rotate: false
+  xy: 1116, 140
+  size: 480, 820
+  orig: 480, 820
+  offset: 0, 0
+  index: -1
+player_costume_name
+  rotate: false
+  xy: 1116, 962
+  size: 813, 286
+  orig: 813, 286
+  offset: 0, 0
+  index: -1
+robot_costume_cost
+  rotate: false
+  xy: 2, 1250
+  size: 2040, 794
+  orig: 2040, 794
+  offset: 0, 0
+  index: -1
+knight_costume_cost
+  rotate: false
+  xy: 2, 1250
+  size: 2040, 794
+  orig: 2040, 794
+  offset: 0, 0
+  index: -1
+ninja_female_costume_cost
+  rotate: false
+  xy: 2, 1250
+  size: 2040, 794
+  orig: 2040, 794
+  offset: 0, 0
+  index: -1
+ninja_male_costume_cost
+  rotate: false
+  xy: 2, 1250
+  size: 2040, 794
+  orig: 2040, 794
+  offset: 0, 0
+  index: -1
+
+shop3.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ability_point_filled
+  rotate: false
+  xy: 1116, 2
+  size: 279, 1112
+  orig: 279, 1112
+  offset: 0, 0
+  index: -1
+cowgirl_hurt
+  rotate: false
+  xy: 1397, 572
+  size: 641, 542
+  orig: 641, 542
+  offset: 0, 0
+  index: 2
+cowgirl_hurt
+  rotate: false
+  xy: 1397, 28
+  size: 641, 542
+  orig: 641, 542
+  offset: 0, 0
+  index: 0
+currency_button
+  rotate: false
+  xy: 2, 2
+  size: 1112, 1112
+  orig: 1112, 1112
+  offset: 0, 0
+  index: -1
+dino_costume_cost
+  rotate: false
+  xy: 2, 1116
+  size: 1820, 794
+  orig: 1820, 794
+  offset: 0, 0
+  index: -1
+
+shop4.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ability_point_empty
+  rotate: false
+  xy: 1202, 460
+  size: 279, 1112
+  orig: 279, 1112
+  offset: 0, 0
+  index: -1
 costume_buy_sure_window
   rotate: false
   xy: 997, 9
@@ -24,44 +183,9 @@ costume_buy_sure_window
   orig: 974, 366
   offset: 0, 0
   index: -1
-costume_left_button_pressed
-  rotate: false
-  xy: 1884, 1554
-  size: 91, 101
-  orig: 91, 101
-  offset: 0, 0
-  index: -1
-costume_left_button_unpressed
-  rotate: false
-  xy: 1884, 1451
-  size: 91, 101
-  orig: 91, 101
-  offset: 0, 0
-  index: -1
-costume_right_button_pressed
-  rotate: false
-  xy: 1884, 1348
-  size: 91, 101
-  orig: 91, 101
-  offset: 0, 0
-  index: -1
-costume_right_button_unpressed
-  rotate: false
-  xy: 1884, 1657
-  size: 91, 101
-  orig: 91, 101
-  offset: 0, 0
-  index: -1
-cowboy_costume
-  rotate: false
-  xy: 1684, 443
-  size: 319, 486
-  orig: 319, 486
-  offset: 0, 0
-  index: -1
 dino_run
   rotate: false
-  xy: 1202, 1286
+  xy: 1202, 1574
   size: 680, 472
   orig: 680, 472
   offset: 0, 0
@@ -73,20 +197,6 @@ not_enough_coins_window
   orig: 993, 373
   offset: 0, 0
   index: -1
-player_costume
-  rotate: false
-  xy: 1202, 464
-  size: 480, 820
-  orig: 480, 820
-  offset: 0, 0
-  index: -1
-player_costume_name
-  rotate: false
-  xy: 1202, 1760
-  size: 813, 286
-  orig: 813, 286
-  offset: 0, 0
-  index: -1
 power_ups_window
   rotate: false
   xy: 2, 377
@@ -94,15 +204,22 @@ power_ups_window
   orig: 1198, 1669
   offset: 0, 0
   index: -1
-robot_costume
+robot_faint
   rotate: false
-  xy: 1684, 931
-  size: 342, 353
-  orig: 342, 353
+  xy: 1483, 1053
+  size: 562, 519
+  orig: 562, 519
   offset: 0, 0
-  index: -1
+  index: 0
+robot_faint
+  rotate: false
+  xy: 1483, 532
+  size: 562, 519
+  orig: 562, 519
+  offset: 0, 0
+  index: 2
 
-shop3.png
+shop5.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
@@ -114,34 +231,48 @@ costumes_window
   orig: 1198, 1669
   offset: 0, 0
   index: -1
-dino_costume
+cowboy_run
   rotate: false
-  xy: 938, 62
-  size: 435, 301
-  orig: 435, 301
-  offset: 0, 0
-  index: -1
-dino_run
-  rotate: false
-  xy: 1202, 1562
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 1
-dino_run
-  rotate: false
-  xy: 1202, 1088
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 2
-knight_run
-  rotate: false
-  xy: 1202, 379
-  size: 587, 707
-  orig: 587, 707
+  xy: 1611, 1527
+  size: 415, 507
+  orig: 415, 507
   offset: 0, 0
   index: 0
+cowboy_run
+  rotate: false
+  xy: 1611, 1018
+  size: 415, 507
+  orig: 415, 507
+  offset: 0, 0
+  index: 1
+cowgirl_faint
+  rotate: false
+  xy: 1202, 412
+  size: 605, 604
+  orig: 605, 604
+  offset: 0, 0
+  index: 0
+ninja_female_costume
+  rotate: false
+  xy: 1611, 34
+  size: 374, 376
+  orig: 374, 376
+  offset: 0, 0
+  index: -1
+ninja_female_run
+  rotate: false
+  xy: 1202, 1514
+  size: 376, 520
+  orig: 376, 520
+  offset: 0, 0
+  index: 1
+ninja_male_run
+  rotate: false
+  xy: 1202, 1054
+  size: 363, 458
+  orig: 363, 458
+  offset: 0, 0
+  index: 6
 not_enough_diamonds_window
   rotate: false
   xy: 2, 2
@@ -151,121 +282,149 @@ not_enough_diamonds_window
   index: -1
 robot_costume_name
   rotate: false
-  xy: 1375, 90
+  xy: 938, 76
   size: 671, 287
   orig: 671, 287
   offset: 0, 0
   index: -1
 
-shop4.png
+shop6.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-cowgirl_hurt
+coin_spawn_icon
   rotate: false
   xy: 2, 2
-  size: 641, 542
-  orig: 641, 542
+  size: 571, 556
+  orig: 571, 556
   offset: 0, 0
-  index: 0
-cowgirl_hurt
+  index: -1
+cowboy_costume_cost
   rotate: false
-  xy: 645, 2
-  size: 641, 542
-  orig: 641, 542
+  xy: 1144, 396
+  size: 507, 178
+  orig: 507, 178
   offset: 0, 0
-  index: 2
-cowgirl_hurt
+  index: -1
+cowgirl_costume_cost
   rotate: false
-  xy: 1288, 18
-  size: 641, 542
-  orig: 641, 542
+  xy: 1144, 396
+  size: 507, 178
+  orig: 507, 178
   offset: 0, 0
-  index: 3
+  index: -1
+cowgirl_costume_name
+  rotate: false
+  xy: 1488, 48
+  size: 543, 191
+  orig: 543, 191
+  offset: 0, 0
+  index: -1
 currency_window
   rotate: false
-  xy: 2, 546
+  xy: 2, 560
   size: 1060, 1476
   orig: 1060, 1476
   offset: 0, 0
   index: -1
 knight_faint
   rotate: false
-  xy: 1064, 1271
+  xy: 1064, 1285
   size: 944, 751
   orig: 944, 751
   offset: 0, 0
   index: 8
 knight_run
   rotate: false
-  xy: 1064, 562
+  xy: 1064, 576
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 1
+  index: 0
 ninja_female_run
   rotate: false
-  xy: 1653, 749
+  xy: 1653, 763
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
-  index: 0
+  index: 3
+ninja_female_run
+  rotate: false
+  xy: 1653, 241
+  size: 376, 520
+  orig: 376, 520
+  offset: 0, 0
+  index: 4
+robot_costume
+  rotate: false
+  xy: 1144, 41
+  size: 342, 353
+  orig: 342, 353
+  offset: 0, 0
+  index: -1
+robot_run
+  rotate: false
+  xy: 575, 2
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 7
 
-shop5.png
+shop7.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-ability_point_empty
+100_diamonds_button_pressed
   rotate: false
-  xy: 1397, 924
-  size: 279, 1112
-  orig: 279, 1112
-  offset: 0, 0
-  index: -1
-ability_point_filled
-  rotate: false
-  xy: 1116, 924
-  size: 279, 1112
-  orig: 279, 1112
+  xy: 1283, 2
+  size: 424, 167
+  orig: 424, 167
   offset: 0, 0
   index: -1
 costume_buy_button_pressed
-  rotate: false
-  xy: 1283, 2
-  size: 425, 167
-  orig: 425, 167
-  offset: 0, 0
-  index: -1
-costume_buy_button_unpressed
-  rotate: false
-  xy: 429, 2
-  size: 425, 167
-  orig: 425, 167
-  offset: 0, 0
-  index: -1
-costume_select_button_pressed
   rotate: false
   xy: 856, 2
   size: 425, 167
   orig: 425, 167
   offset: 0, 0
   index: -1
-costume_select_button_unpressed
+costume_buy_button_unpressed
   rotate: false
   xy: 2, 2
   size: 425, 167
   orig: 425, 167
   offset: 0, 0
   index: -1
-currency_button
+costume_select_button_pressed
   rotate: false
-  xy: 2, 924
-  size: 1112, 1112
-  orig: 1112, 1112
+  xy: 429, 2
+  size: 425, 167
+  orig: 425, 167
   offset: 0, 0
   index: -1
+cowgirl_costume
+  rotate: false
+  xy: 1723, 1062
+  size: 310, 500
+  orig: 310, 500
+  offset: 0, 0
+  index: -1
+cowgirl_faint
+  rotate: false
+  xy: 1116, 958
+  size: 605, 604
+  orig: 605, 604
+  offset: 0, 0
+  index: 2
+dino_run
+  rotate: false
+  xy: 1116, 1564
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 1
 knight_faint
   rotate: false
   xy: 2, 171
@@ -280,223 +439,119 @@ knight_faint
   orig: 944, 751
   offset: 0, 0
   index: 1
-ninja_male_run
-  rotate: false
-  xy: 1678, 1578
-  size: 363, 458
-  orig: 363, 458
-  offset: 0, 0
-  index: 6
-ninja_male_run
-  rotate: false
-  xy: 1678, 1118
-  size: 363, 458
-  orig: 363, 458
-  offset: 0, 0
-  index: 3
-
-shop6.png
-size: 2048,2048
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-100_diamonds_button_pressed
-  rotate: false
-  xy: 1440, 2
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-1500_diamonds_button_pressed
-  rotate: false
-  xy: 588, 10
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-500_diamonds_button_pressed
-  rotate: false
-  xy: 1014, 2
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-costumes_button
-  rotate: false
-  xy: 2, 359
-  size: 1112, 1112
-  orig: 1112, 1112
-  offset: 0, 0
-  index: -1
-cowboy_costume_cost
-  rotate: false
-  xy: 588, 179
-  size: 507, 178
-  orig: 507, 178
-  offset: 0, 0
-  index: -1
-cowgirl_costume_cost
-  rotate: false
-  xy: 588, 179
-  size: 507, 178
-  orig: 507, 178
-  offset: 0, 0
-  index: -1
-cowgirl_costume
-  rotate: false
-  xy: 1705, 378
-  size: 310, 500
-  orig: 310, 500
-  offset: 0, 0
-  index: -1
-cowgirl_costume_name
-  rotate: false
-  xy: 1503, 1354
-  size: 543, 191
-  orig: 543, 191
-  offset: 0, 0
-  index: -1
-dino_run
-  rotate: false
-  xy: 1116, 880
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 3
-knight_run
-  rotate: false
-  xy: 1116, 171
-  size: 587, 707
-  orig: 587, 707
-  offset: 0, 0
-  index: 2
-ninja_male_costume_name
-  rotate: false
-  xy: 2, 84
-  size: 584, 273
-  orig: 584, 273
-  offset: 0, 0
-  index: -1
-ninja_male_faint
-  rotate: false
-  xy: 1503, 1547
-  size: 482, 498
-  orig: 482, 498
-  offset: 0, 0
-  index: 8
-ninja_male_faint
-  rotate: false
-  xy: 1503, 1547
-  size: 482, 498
-  orig: 482, 498
-  offset: 0, 0
-  index: 7
-ninja_male_faint
-  rotate: false
-  xy: 1503, 1547
-  size: 482, 498
-  orig: 482, 498
-  offset: 0, 0
-  index: 9
-ninja_male_faint
-  rotate: false
-  xy: 1503, 1547
-  size: 482, 498
-  orig: 482, 498
-  offset: 0, 0
-  index: 6
-robot_costume_cost
-  rotate: false
-  xy: 2, 1473
-  size: 1499, 572
-  orig: 1499, 572
-  offset: 0, 0
-  index: -1
-knight_costume_cost
-  rotate: false
-  xy: 2, 1473
-  size: 1499, 572
-  orig: 1499, 572
-  offset: 0, 0
-  index: -1
-ninja_female_costume_cost
-  rotate: false
-  xy: 2, 1473
-  size: 1499, 572
-  orig: 1499, 572
-  offset: 0, 0
-  index: -1
-ninja_male_costume_cost
-  rotate: false
-  xy: 2, 1473
-  size: 1499, 572
-  orig: 1499, 572
-  offset: 0, 0
-  index: -1
-
-shop7.png
-size: 2048,2048
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-cowboy_faint
-  rotate: false
-  xy: 1304, 1424
-  size: 588, 600
-  orig: 588, 600
-  offset: 0, 0
-  index: 1
-dino_costume_cost
-  rotate: false
-  xy: 2, 1452
-  size: 1300, 572
-  orig: 1300, 572
-  offset: 0, 0
-  index: -1
-dino_costume_name
-  rotate: false
-  xy: 2, 63
-  size: 566, 273
-  orig: 566, 273
-  offset: 0, 0
-  index: -1
-dino_run
-  rotate: false
-  xy: 1116, 950
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 5
-dino_run
-  rotate: false
-  xy: 1116, 476
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 6
-dino_run
-  rotate: false
-  xy: 1116, 2
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 7
-ninja_female_costume_name
-  rotate: false
-  xy: 570, 63
-  size: 539, 273
-  orig: 539, 273
-  offset: 0, 0
-  index: -1
 power_ups_button
   rotate: false
-  xy: 2, 338
+  xy: 2, 924
   size: 1112, 1112
   orig: 1112, 1112
   offset: 0, 0
   index: -1
 
 shop8.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+1500_diamonds_button_pressed
+  rotate: false
+  xy: 380, 80
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+500_diamonds_button_pressed
+  rotate: false
+  xy: 1555, 6
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+cowboy_faint
+  rotate: false
+  xy: 948, 1428
+  size: 588, 600
+  orig: 588, 600
+  offset: 0, 0
+  index: 1
+cowgirl_faint
+  rotate: false
+  xy: 948, 69
+  size: 605, 604
+  orig: 605, 604
+  offset: 0, 0
+  index: 4
+dino_costume_name
+  rotate: false
+  xy: 380, 249
+  size: 566, 273
+  orig: 566, 273
+  offset: 0, 0
+  index: -1
+knight_faint
+  rotate: false
+  xy: 2, 1277
+  size: 944, 751
+  orig: 944, 751
+  offset: 0, 0
+  index: 2
+knight_faint
+  rotate: false
+  xy: 948, 675
+  size: 944, 751
+  orig: 944, 751
+  offset: 0, 0
+  index: 3
+knight_faint
+  rotate: false
+  xy: 2, 524
+  size: 944, 751
+  orig: 944, 751
+  offset: 0, 0
+  index: 5
+ninja_female_run
+  rotate: false
+  xy: 2, 2
+  size: 376, 520
+  orig: 376, 520
+  offset: 0, 0
+  index: 5
+ninja_male_faint
+  rotate: false
+  xy: 1538, 1530
+  size: 482, 498
+  orig: 482, 498
+  offset: 0, 0
+  index: 8
+ninja_male_faint
+  rotate: false
+  xy: 1538, 1530
+  size: 482, 498
+  orig: 482, 498
+  offset: 0, 0
+  index: 9
+ninja_male_faint
+  rotate: false
+  xy: 1538, 1530
+  size: 482, 498
+  orig: 482, 498
+  offset: 0, 0
+  index: 7
+ninja_male_faint
+  rotate: false
+  xy: 1538, 1530
+  size: 482, 498
+  orig: 482, 498
+  offset: 0, 0
+  index: 6
+ninja_male_faint
+  rotate: false
+  xy: 1555, 175
+  size: 482, 498
+  orig: 482, 498
+  offset: 0, 0
+  index: 4
+
+shop9.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
@@ -521,97 +576,21 @@ cowgirl_faint
   size: 605, 604
   orig: 605, 604
   offset: 0, 0
-  index: 0
-knight_faint
-  rotate: false
-  xy: 2, 1277
-  size: 944, 751
-  orig: 944, 751
-  offset: 0, 0
-  index: 2
-knight_faint
-  rotate: false
-  xy: 948, 675
-  size: 944, 751
-  orig: 944, 751
-  offset: 0, 0
-  index: 3
-knight_faint
-  rotate: false
-  xy: 2, 524
-  size: 944, 751
-  orig: 944, 751
-  offset: 0, 0
-  index: 4
-ninja_female_run
-  rotate: false
-  xy: 2, 2
-  size: 376, 520
-  orig: 376, 520
-  offset: 0, 0
-  index: 1
-ninja_male_faint
-  rotate: false
-  xy: 1538, 1530
-  size: 482, 498
-  orig: 482, 498
-  offset: 0, 0
-  index: 4
-ninja_male_faint
-  rotate: false
-  xy: 1555, 175
-  size: 482, 498
-  orig: 482, 498
-  offset: 0, 0
-  index: 0
-robot_faint
-  rotate: false
-  xy: 380, 3
-  size: 562, 519
-  orig: 562, 519
-  offset: 0, 0
-  index: 0
-
-shop9.png
-size: 2048,2048
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-399_button_unpressed
-  rotate: false
-  xy: 1555, 6
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-cowboy_faint
-  rotate: false
-  xy: 948, 1428
-  size: 588, 600
-  orig: 588, 600
-  offset: 0, 0
-  index: 3
-cowgirl_faint
-  rotate: false
-  xy: 948, 69
-  size: 605, 604
-  orig: 605, 604
-  offset: 0, 0
-  index: 2
-knight_faint
-  rotate: false
-  xy: 2, 1277
-  size: 944, 751
-  orig: 944, 751
-  offset: 0, 0
   index: 5
 knight_faint
   rotate: false
-  xy: 948, 675
+  xy: 2, 1277
   size: 944, 751
   orig: 944, 751
   offset: 0, 0
   index: 6
+knight_faint
+  rotate: false
+  xy: 948, 675
+  size: 944, 751
+  orig: 944, 751
+  offset: 0, 0
+  index: 7
 knight_faint
   rotate: false
   xy: 2, 524
@@ -625,123 +604,109 @@ ninja_female_run
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
-  index: 2
+  index: 6
 ninja_male_faint
   rotate: false
   xy: 1538, 1530
   size: 482, 498
   orig: 482, 498
   offset: 0, 0
-  index: 2
+  index: 0
 ninja_male_faint
   rotate: false
   xy: 1555, 175
   size: 482, 498
   orig: 482, 498
   offset: 0, 0
-  index: 3
+  index: 2
 robot_faint
   rotate: false
   xy: 380, 3
   size: 562, 519
   orig: 562, 519
   offset: 0, 0
-  index: 2
+  index: 3
 
 shop10.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-costume_selected
-  rotate: false
-  xy: 2, 9
-  size: 408, 120
-  orig: 408, 120
-  offset: 0, 0
-  index: -1
-cowboy_faint
-  rotate: false
-  xy: 948, 1424
-  size: 588, 600
-  orig: 588, 600
-  offset: 0, 0
-  index: 4
 cowboy_run
   rotate: false
-  xy: 1630, 1017
+  xy: 1630, 1529
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
-  index: 0
-dino_hurt
+  index: 2
+cowboy_run
   rotate: false
-  xy: 948, 950
-  size: 680, 472
-  orig: 680, 472
+  xy: 1630, 1020
+  size: 415, 507
+  orig: 415, 507
   offset: 0, 0
-  index: 5
-dino_hurt
+  index: 3
+cowgirl_hurt
   rotate: false
-  xy: 2, 799
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 0
-dino_hurt
-  rotate: false
-  xy: 2, 325
-  size: 680, 472
-  orig: 680, 472
+  xy: 1180, 2
+  size: 641, 542
+  orig: 641, 542
   offset: 0, 0
   index: 1
-dino_hurt
+dino_run
   rotate: false
-  xy: 1273, 476
+  xy: 948, 1564
   size: 680, 472
   orig: 680, 472
   offset: 0, 0
   index: 2
-dino_hurt
+dino_run
   rotate: false
-  xy: 1273, 2
+  xy: 948, 1090
   size: 680, 472
   orig: 680, 472
   offset: 0, 0
   index: 3
-knight_costume_name
+dino_run
   rotate: false
-  xy: 2, 131
-  size: 665, 192
-  orig: 665, 192
+  xy: 2, 811
+  size: 680, 472
+  orig: 680, 472
   offset: 0, 0
-  index: -1
+  index: 5
+dino_run
+  rotate: false
+  xy: 1270, 546
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 6
 knight_faint
   rotate: false
-  xy: 2, 1273
+  xy: 2, 1285
   size: 944, 751
   orig: 944, 751
   offset: 0, 0
-  index: 7
+  index: 4
 knight_run
   rotate: false
-  xy: 684, 241
+  xy: 2, 102
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 3
-ninja_male_faint
+  index: 1
+knight_run
   rotate: false
-  xy: 1538, 1526
-  size: 482, 498
-  orig: 482, 498
+  xy: 591, 102
+  size: 587, 707
+  orig: 587, 707
   offset: 0, 0
-  index: 5
-shop_buy_button_pressed
+  index: 2
+ninja_male_costume_name
   rotate: false
-  xy: 669, 72
-  size: 424, 167
-  orig: 424, 167
+  xy: 684, 815
+  size: 584, 273
+  orig: 584, 273
   offset: 0, 0
   index: -1
 
@@ -756,45 +721,45 @@ cowgirl_faint
   size: 605, 604
   orig: 605, 604
   offset: 0, 0
-  index: 4
-cowgirl_faint
-  rotate: false
-  xy: 609, 2
-  size: 605, 604
-  orig: 605, 604
-  offset: 0, 0
-  index: 5
-cowgirl_faint
-  rotate: false
-  xy: 1216, 4
-  size: 605, 604
-  orig: 605, 604
-  offset: 0, 0
   index: 6
 cowgirl_faint
   rotate: false
-  xy: 1216, 4
+  xy: 2, 2
+  size: 605, 604
+  orig: 605, 604
+  offset: 0, 0
+  index: 9
+cowgirl_faint
+  rotate: false
+  xy: 2, 2
   size: 605, 604
   orig: 605, 604
   offset: 0, 0
   index: 8
 cowgirl_faint
   rotate: false
+  xy: 609, 2
+  size: 605, 604
+  orig: 605, 604
+  offset: 0, 0
+  index: 7
+cowgirl_faint
+  rotate: false
   xy: 1216, 4
   size: 605, 604
   orig: 605, 604
   offset: 0, 0
-  index: 9
-dino_hurt
-  rotate: false
-  xy: 1216, 1552
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 4
+  index: 1
 dino_hurt
   rotate: false
   xy: 1216, 1078
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 5
+dino_run
+  rotate: false
+  xy: 1216, 1552
   size: 680, 472
   orig: 680, 472
   offset: 0, 0
@@ -812,215 +777,201 @@ knight_run
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 4
+  index: 3
 knight_run
   rotate: false
   xy: 2, 608
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 5
+  index: 4
 knight_run
   rotate: false
   xy: 591, 1317
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 6
+  index: 5
 knight_run
   rotate: false
   xy: 591, 608
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 7
-ninja_male_hurt
+  index: 6
+ninja_male_run
   rotate: false
   xy: 1640, 618
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
-  index: 0
+  index: 3
 
 shop12.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-1499_button_unpressed
+cowboy_faint
   rotate: false
-  xy: 1216, 462
-  size: 424, 167
-  orig: 424, 167
+  xy: 609, 10
+  size: 588, 600
+  orig: 588, 600
   offset: 0, 0
-  index: -1
+  index: 3
 cowgirl_faint
   rotate: false
-  xy: 2, 19
+  xy: 2, 6
   size: 605, 604
   orig: 605, 604
   offset: 0, 0
-  index: 7
-cowgirl_faint
-  rotate: false
-  xy: 609, 19
-  size: 605, 604
-  orig: 605, 604
-  offset: 0, 0
-  index: 1
+  index: 3
 dino_hurt
   rotate: false
-  xy: 1216, 1095
+  xy: 1199, 1556
   size: 680, 472
   orig: 680, 472
   offset: 0, 0
-  index: 6
-dino_run
+  index: 0
+dino_hurt
   rotate: false
-  xy: 1216, 1569
+  xy: 1199, 1082
   size: 680, 472
   orig: 680, 472
   offset: 0, 0
-  index: 4
+  index: 1
 knight_hurt
   rotate: false
-  xy: 591, 1334
+  xy: 591, 612
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
   index: 0
-knight_hurt
+knight_run
   rotate: false
-  xy: 591, 625
+  xy: 2, 1321
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 1
+  index: 7
 knight_run
   rotate: false
-  xy: 2, 1334
+  xy: 2, 612
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
   index: 8
 knight_run
   rotate: false
-  xy: 2, 625
+  xy: 591, 1321
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
   index: 9
 ninja_female_run
   rotate: false
-  xy: 1643, 573
+  xy: 1643, 560
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
-  index: 3
-ninja_male_hurt
-  rotate: false
-  xy: 1216, 2
-  size: 363, 458
-  orig: 363, 458
-  offset: 0, 0
-  index: 1
-ninja_male_hurt
-  rotate: false
-  xy: 1581, 2
-  size: 363, 458
-  orig: 363, 458
-  offset: 0, 0
-  index: 3
+  index: 7
 pickup_spawn_icon
   rotate: false
-  xy: 1180, 631
+  xy: 1180, 618
   size: 461, 462
   orig: 461, 462
   offset: 0, 0
   index: -1
+robot_run
+  rotate: false
+  xy: 1199, 2
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 0
 
 shop13.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-coin_spawn_icon
-  rotate: false
-  xy: 1199, 20
-  size: 571, 556
-  orig: 571, 556
-  offset: 0, 0
-  index: -1
 cowboy_faint
   rotate: false
-  xy: 609, 6
+  xy: 2, 2
+  size: 588, 600
+  orig: 588, 600
+  offset: 0, 0
+  index: 4
+cowboy_faint
+  rotate: false
+  xy: 592, 2
   size: 588, 600
   orig: 588, 600
   offset: 0, 0
   index: 5
-cowgirl_faint
+dino_hurt
   rotate: false
-  xy: 2, 2
-  size: 605, 604
-  orig: 605, 604
+  xy: 1182, 1548
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 2
+dino_hurt
+  rotate: false
+  xy: 1182, 1074
+  size: 680, 472
+  orig: 680, 472
   offset: 0, 0
   index: 3
-dino_faint
+knight_hurt
   rotate: false
-  xy: 1199, 1552
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 0
-dino_faint
-  rotate: false
-  xy: 1199, 1078
-  size: 680, 472
-  orig: 680, 472
+  xy: 2, 1313
+  size: 587, 707
+  orig: 587, 707
   offset: 0, 0
   index: 1
 knight_hurt
   rotate: false
-  xy: 2, 1317
+  xy: 2, 604
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
   index: 2
 knight_hurt
   rotate: false
-  xy: 2, 608
+  xy: 591, 1313
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
   index: 3
 knight_hurt
   rotate: false
-  xy: 591, 1317
+  xy: 591, 604
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
   index: 4
-knight_hurt
-  rotate: false
-  xy: 591, 608
-  size: 587, 707
-  orig: 587, 707
-  offset: 0, 0
-  index: 5
 ninja_male_faint
   rotate: false
-  xy: 1545, 578
+  xy: 1545, 574
   size: 482, 498
   orig: 482, 498
   offset: 0, 0
-  index: 1
+  index: 3
 ninja_male_hurt
   rotate: false
-  xy: 1180, 618
+  xy: 1180, 614
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
-  index: 6
+  index: 0
+robot_run
+  rotate: false
+  xy: 1182, 16
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 1
 
 shop14.png
 size: 2048,2048
@@ -1040,7 +991,7 @@ cowboy_faint
   size: 588, 600
   orig: 588, 600
   offset: 0, 0
-  index: 9
+  index: 7
 cowboy_faint
   rotate: false
   xy: 2, 2
@@ -1054,7 +1005,7 @@ cowboy_faint
   size: 588, 600
   orig: 588, 600
   offset: 0, 0
-  index: 7
+  index: 9
 cowboy_faint
   rotate: false
   xy: 592, 2
@@ -1062,120 +1013,182 @@ cowboy_faint
   orig: 588, 600
   offset: 0, 0
   index: 0
-cowboy_run
+dino_hurt
   rotate: false
-  xy: 1606, 425
-  size: 415, 507
-  orig: 415, 507
-  offset: 0, 0
-  index: 1
-cowboy_run
-  rotate: false
-  xy: 1182, 256
-  size: 415, 507
-  orig: 415, 507
-  offset: 0, 0
-  index: 2
-cowgirl_hurt
-  rotate: false
-  xy: 1180, 1478
-  size: 641, 542
-  orig: 641, 542
+  xy: 1182, 1548
+  size: 680, 472
+  orig: 680, 472
   offset: 0, 0
   index: 4
-cowgirl_hurt
+dino_hurt
   rotate: false
-  xy: 1180, 934
-  size: 641, 542
-  orig: 641, 542
+  xy: 1182, 1074
+  size: 680, 472
+  orig: 680, 472
   offset: 0, 0
-  index: 5
+  index: 7
 knight_hurt
   rotate: false
   xy: 2, 1313
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 6
+  index: 5
 knight_hurt
   rotate: false
   xy: 2, 604
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 7
+  index: 6
 knight_hurt
   rotate: false
   xy: 591, 1313
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 8
+  index: 7
 knight_hurt
   rotate: false
   xy: 591, 604
   size: 587, 707
   orig: 587, 707
   offset: 0, 0
-  index: 9
-ninja_female_costume
+  index: 8
+ninja_male_faint
   rotate: false
-  xy: 1599, 47
-  size: 374, 376
-  orig: 374, 376
+  xy: 1545, 574
+  size: 482, 498
+  orig: 482, 498
   offset: 0, 0
-  index: -1
-shop_buy_button_unpressed
+  index: 5
+ninja_male_hurt
   rotate: false
-  xy: 1180, 765
-  size: 424, 167
-  orig: 424, 167
+  xy: 1180, 614
+  size: 363, 458
+  orig: 363, 458
   offset: 0, 0
-  index: -1
+  index: 1
+robot_run
+  rotate: false
+  xy: 1182, 16
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 3
 
 shop15.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-099_button_pressed
+cowgirl_hurt
   rotate: false
-  xy: 634, 217
-  size: 424, 167
-  orig: 424, 167
+  xy: 591, 1494
+  size: 641, 542
+  orig: 641, 542
   offset: 0, 0
-  index: -1
-100_diamonds_button_unpressed
+  index: 3
+cowgirl_hurt
   rotate: false
-  xy: 1486, 217
-  size: 424, 167
-  orig: 424, 167
+  xy: 1234, 1494
+  size: 641, 542
+  orig: 641, 542
   offset: 0, 0
-  index: -1
-2499_button_pressed
+  index: 4
+cowgirl_hurt
   rotate: false
-  xy: 634, 48
-  size: 424, 167
-  orig: 424, 167
+  xy: 582, 476
+  size: 641, 542
+  orig: 641, 542
   offset: 0, 0
-  index: -1
-249_button_pressed
+  index: 5
+cowgirl_hurt
   rotate: false
-  xy: 1060, 48
-  size: 424, 167
-  orig: 424, 167
+  xy: 1273, 950
+  size: 641, 542
+  orig: 641, 542
   offset: 0, 0
-  index: -1
-300_diamonds_button_pressed
+  index: 6
+dino_faint
   rotate: false
-  xy: 1060, 217
-  size: 424, 167
-  orig: 424, 167
+  xy: 582, 2
+  size: 680, 472
+  orig: 680, 472
   offset: 0, 0
-  index: -1
-399_button_pressed
+  index: 0
+dino_faint
   rotate: false
-  xy: 1486, 48
+  xy: 1264, 2
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 1
+dino_hurt
+  rotate: false
+  xy: 1225, 476
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 6
+dino_run
+  rotate: false
+  xy: 591, 1020
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 4
+knight_hurt
+  rotate: false
+  xy: 2, 1329
+  size: 587, 707
+  orig: 587, 707
+  offset: 0, 0
+  index: 9
+ninja_female_faint
+  rotate: false
+  xy: 2, 728
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 1
+ninja_female_faint
+  rotate: false
+  xy: 2, 127
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 7
+ninja_female_faint
+  rotate: false
+  xy: 2, 127
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 9
+ninja_female_faint
+  rotate: false
+  xy: 2, 127
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 6
+ninja_female_faint
+  rotate: false
+  xy: 2, 127
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 8
+
+shop16.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+399_button_unpressed
+  rotate: false
+  xy: 634, 23
   size: 424, 167
   orig: 424, 167
   offset: 0, 0
@@ -1193,364 +1206,482 @@ cowgirl_hurt
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 6
-cowgirl_hurt
+  index: 7
+cowgirl_run
   rotate: false
   xy: 2, 930
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 7
-cowgirl_hurt
+  index: 2
+cowgirl_run
   rotate: false
   xy: 645, 1474
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 1
+  index: 0
 cowgirl_run
   rotate: false
   xy: 2, 386
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 2
+  index: 1
 cowgirl_run
   rotate: false
   xy: 645, 930
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 0
+  index: 3
 cowgirl_run
   rotate: false
   xy: 1288, 1474
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 1
+  index: 4
 cowgirl_run
   rotate: false
   xy: 645, 386
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 3
+  index: 5
 cowgirl_run
   rotate: false
   xy: 1288, 930
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 4
+  index: 6
 cowgirl_run
   rotate: false
   xy: 1288, 386
   size: 641, 542
   orig: 641, 542
   offset: 0, 0
-  index: 5
-
-shop16.png
-size: 2048,2048
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-099_button_unpressed
-  rotate: false
-  xy: 1434, 202
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-1499_button_pressed
-  rotate: false
-  xy: 1434, 33
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-1500_diamonds_button_unpressed
-  rotate: false
-  xy: 1008, 33
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-249_button_unpressed
-  rotate: false
-  xy: 582, 68
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-300_diamonds_button_unpressed
-  rotate: false
-  xy: 582, 237
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-500_diamonds_button_unpressed
-  rotate: false
-  xy: 1008, 202
-  size: 424, 167
-  orig: 424, 167
-  offset: 0, 0
-  index: -1
-cowboy_run
-  rotate: false
-  xy: 1366, 915
-  size: 415, 507
-  orig: 415, 507
-  offset: 0, 0
-  index: 3
-cowgirl_run
-  rotate: false
-  xy: 684, 406
-  size: 641, 542
-  orig: 641, 542
-  offset: 0, 0
-  index: 6
-cowgirl_run
-  rotate: false
-  xy: 1327, 371
-  size: 641, 542
-  orig: 641, 542
-  offset: 0, 0
   index: 7
-dino_faint
+knight_costume_name
   rotate: false
-  xy: 2, 1551
-  size: 680, 472
-  orig: 680, 472
+  xy: 634, 192
+  size: 665, 192
+  orig: 665, 192
   offset: 0, 0
-  index: 2
-dino_faint
+  index: -1
+ninja_female_costume_name
   rotate: false
-  xy: 2, 1077
-  size: 680, 472
-  orig: 680, 472
+  xy: 1301, 111
+  size: 539, 273
+  orig: 539, 273
   offset: 0, 0
-  index: 3
-dino_faint
-  rotate: false
-  xy: 684, 950
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 4
-dino_faint
-  rotate: false
-  xy: 2, 603
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 5
-dino_faint
-  rotate: false
-  xy: 2, 603
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 6
-dino_faint
-  rotate: false
-  xy: 2, 603
-  size: 680, 472
-  orig: 680, 472
-  offset: 0, 0
-  index: 7
-ninja_female_faint
-  rotate: false
-  xy: 684, 1424
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 8
-ninja_female_faint
-  rotate: false
-  xy: 684, 1424
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 9
-ninja_female_faint
-  rotate: false
-  xy: 684, 1424
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 6
-ninja_female_faint
-  rotate: false
-  xy: 684, 1424
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 7
-ninja_female_faint
-  rotate: false
-  xy: 1264, 1424
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 1
-ninja_female_faint
-  rotate: false
-  xy: 2, 2
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 2
+  index: -1
 
 shop17.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-cowboy_hurt
+099_button_pressed
   rotate: false
-  xy: 1253, 15
-  size: 415, 507
-  orig: 415, 507
+  xy: 428, 23
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+1499_button_unpressed
+  rotate: false
+  xy: 2, 23
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+2499_button_pressed
+  rotate: false
+  xy: 1527, 894
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+300_diamonds_button_pressed
+  rotate: false
+  xy: 1527, 725
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+dino_faint
+  rotate: false
+  xy: 2, 1563
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 2
+dino_faint
+  rotate: false
+  xy: 684, 1563
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 3
+dino_faint
+  rotate: false
+  xy: 1366, 1563
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 4
+dino_faint
+  rotate: false
+  xy: 854, 1089
+  size: 680, 472
+  orig: 680, 472
   offset: 0, 0
   index: 5
+dino_faint
+  rotate: false
+  xy: 854, 1089
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 7
+dino_faint
+  rotate: false
+  xy: 854, 1089
+  size: 680, 472
+  orig: 680, 472
+  offset: 0, 0
+  index: 6
+ninja_female_faint
+  rotate: false
+  xy: 2, 962
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 2
+ninja_female_faint
+  rotate: false
+  xy: 2, 361
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 3
+ninja_female_faint
+  rotate: false
+  xy: 582, 462
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 4
+ninja_female_faint
+  rotate: false
+  xy: 1219, 28
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 5
+ninja_male_faint
+  rotate: false
+  xy: 1536, 1063
+  size: 482, 498
+  orig: 482, 498
+  offset: 0, 0
+  index: 1
+ninja_male_hurt
+  rotate: false
+  xy: 1162, 629
+  size: 363, 458
+  orig: 363, 458
+  offset: 0, 0
+  index: 2
+ninja_male_hurt
+  rotate: false
+  xy: 854, 2
+  size: 363, 458
+  orig: 363, 458
+  offset: 0, 0
+  index: 3
+shop_buy_button_pressed
+  rotate: false
+  xy: 2, 192
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+shop_buy_button_unpressed
+  rotate: false
+  xy: 428, 192
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+
+shop18.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+099_button_unpressed
+  rotate: false
+  xy: 1280, 2
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+100_diamonds_button_unpressed
+  rotate: false
+  xy: 571, 171
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+249_button_pressed
+  rotate: false
+  xy: 2, 128
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+249_button_unpressed
+  rotate: false
+  xy: 854, 2
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+300_diamonds_button_unpressed
+  rotate: false
+  xy: 1423, 171
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+399_button_pressed
+  rotate: false
+  xy: 997, 171
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+500_diamonds_button_unpressed
+  rotate: false
+  xy: 428, 2
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+ninja_female_faint
+  rotate: false
+  xy: 2, 1413
+  size: 578, 599
+  orig: 578, 599
+  offset: 0, 0
+  index: 0
+robot_hurt
+  rotate: false
+  xy: 2, 297
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 0
+robot_hurt
+  rotate: false
+  xy: 1151, 1456
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 1
+robot_hurt
+  rotate: false
+  xy: 582, 898
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 2
+robot_hurt
+  rotate: false
+  xy: 1151, 898
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 3
+robot_hurt
+  rotate: false
+  xy: 571, 340
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 4
+robot_hurt
+  rotate: false
+  xy: 1140, 340
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 5
+robot_run
+  rotate: false
+  xy: 2, 855
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 2
+robot_run
+  rotate: false
+  xy: 582, 1456
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 5
+
+shop19.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+1499_button_pressed
+  rotate: false
+  xy: 428, 1722
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
+1500_diamonds_button_unpressed
+  rotate: false
+  xy: 2, 1722
+  size: 424, 167
+  orig: 424, 167
+  offset: 0, 0
+  index: -1
 cowboy_run
   rotate: false
-  xy: 1462, 524
+  xy: 367, 2
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
   index: 6
 cowboy_run
   rotate: false
-  xy: 2, 64
+  xy: 784, 2
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
   index: 7
 cowboy_run
   rotate: false
-  xy: 419, 64
+  xy: 1201, 2
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
   index: 8
 cowboy_run
   rotate: false
-  xy: 836, 64
+  xy: 1618, 2
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
   index: 9
-ninja_female_run
+ninja_male_hurt
   rotate: false
-  xy: 1670, 2
-  size: 376, 520
-  orig: 376, 520
+  xy: 854, 1431
+  size: 363, 458
+  orig: 363, 458
   offset: 0, 0
   index: 4
 ninja_male_hurt
   rotate: false
-  xy: 2, 1493
+  xy: 1219, 1431
+  size: 363, 458
+  orig: 363, 458
+  offset: 0, 0
+  index: 6
+ninja_male_hurt
+  rotate: false
+  xy: 1584, 1431
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 8
 ninja_male_hurt
   rotate: false
-  xy: 367, 1493
+  xy: 2, 1262
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 9
 ninja_male_hurt
   rotate: false
-  xy: 1462, 1493
+  xy: 2, 802
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 5
 ninja_male_hurt
   rotate: false
-  xy: 2, 1033
-  size: 363, 458
-  orig: 363, 458
-  offset: 0, 0
-  index: 2
-ninja_male_hurt
-  rotate: false
-  xy: 367, 1033
+  xy: 367, 802
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 7
-ninja_male_hurt
+ninja_male_run
   rotate: false
-  xy: 732, 1033
+  xy: 367, 1262
+  size: 363, 458
+  orig: 363, 458
+  offset: 0, 0
+  index: 8
+ninja_male_run
+  rotate: false
+  xy: 732, 971
+  size: 363, 458
+  orig: 363, 458
+  offset: 0, 0
+  index: 2
+ninja_male_run
+  rotate: false
+  xy: 1097, 971
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 4
 ninja_male_run
   rotate: false
-  xy: 732, 1493
-  size: 363, 458
-  orig: 363, 458
-  offset: 0, 0
-  index: 2
-ninja_male_run
-  rotate: false
-  xy: 1097, 1493
+  xy: 1462, 971
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 0
 ninja_male_run
   rotate: false
-  xy: 1097, 1033
+  xy: 732, 511
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 1
 ninja_male_run
   rotate: false
-  xy: 1462, 1033
+  xy: 1097, 511
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 7
 ninja_male_run
   rotate: false
-  xy: 2, 573
-  size: 363, 458
-  orig: 363, 458
-  offset: 0, 0
-  index: 4
-ninja_male_run
-  rotate: false
-  xy: 367, 573
-  size: 363, 458
-  orig: 363, 458
-  offset: 0, 0
-  index: 8
-ninja_male_run
-  rotate: false
-  xy: 732, 573
+  xy: 1462, 511
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 9
 ninja_male_run
   rotate: false
-  xy: 1097, 573
+  xy: 2, 342
   size: 363, 458
   orig: 363, 458
   offset: 0, 0
   index: 5
 
-shop18.png
+shop20.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
@@ -1568,7 +1699,7 @@ cowboy_hurt
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
-  index: 9
+  index: 0
 cowboy_hurt
   rotate: false
   xy: 1253, 1059
@@ -1589,28 +1720,28 @@ cowboy_hurt
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
-  index: 0
+  index: 2
 cowboy_hurt
   rotate: false
   xy: 1253, 550
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
-  index: 2
+  index: 3
 cowboy_hurt
   rotate: false
   xy: 2, 41
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
-  index: 3
+  index: 1
 cowboy_hurt
   rotate: false
   xy: 419, 41
   size: 415, 507
   orig: 415, 507
   offset: 0, 0
-  index: 1
+  index: 5
 cowboy_hurt
   rotate: false
   xy: 836, 41
@@ -1618,6 +1749,13 @@ cowboy_hurt
   orig: 415, 507
   offset: 0, 0
   index: 8
+cowboy_hurt
+  rotate: false
+  xy: 1253, 41
+  size: 415, 507
+  orig: 415, 507
+  offset: 0, 0
+  index: 9
 cowboy_run
   rotate: false
   xy: 836, 1059
@@ -1632,170 +1770,25 @@ cowboy_run
   orig: 415, 507
   offset: 0, 0
   index: 4
+ninja_female_hurt
+  rotate: false
+  xy: 1670, 2
+  size: 376, 520
+  orig: 376, 520
+  offset: 0, 0
+  index: 7
 ninja_female_run
   rotate: false
   xy: 1670, 1046
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
-  index: 5
+  index: 8
 ninja_female_run
   rotate: false
   xy: 1670, 524
   size: 376, 520
   orig: 376, 520
-  offset: 0, 0
-  index: 6
-ninja_female_run
-  rotate: false
-  xy: 1253, 28
-  size: 376, 520
-  orig: 376, 520
-  offset: 0, 0
-  index: 7
-ninja_female_run
-  rotate: false
-  xy: 1631, 2
-  size: 376, 520
-  orig: 376, 520
-  offset: 0, 0
-  index: 8
-
-shop19.png
-size: 2048,2048
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-ninja_female_faint
-  rotate: false
-  xy: 2, 1204
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 3
-ninja_female_faint
-  rotate: false
-  xy: 2, 603
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 4
-ninja_female_faint
-  rotate: false
-  xy: 582, 1204
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 5
-ninja_female_faint
-  rotate: false
-  xy: 2, 2
-  size: 578, 599
-  orig: 578, 599
-  offset: 0, 0
-  index: 0
-robot_run
-  rotate: false
-  xy: 582, 646
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 7
-robot_run
-  rotate: false
-  xy: 1162, 1247
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 0
-robot_run
-  rotate: false
-  xy: 582, 88
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 1
-robot_run
-  rotate: false
-  xy: 1162, 689
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 5
-robot_run
-  rotate: false
-  xy: 1151, 131
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 3
-
-shop20.png
-size: 2048,2048
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-robot_hurt
-  rotate: false
-  xy: 2, 560
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 0
-robot_hurt
-  rotate: false
-  xy: 571, 1118
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 1
-robot_hurt
-  rotate: false
-  xy: 2, 2
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 2
-robot_hurt
-  rotate: false
-  xy: 571, 560
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 3
-robot_hurt
-  rotate: false
-  xy: 1140, 1118
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 4
-robot_hurt
-  rotate: false
-  xy: 571, 2
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 5
-robot_hurt
-  rotate: false
-  xy: 1140, 560
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 6
-robot_hurt
-  rotate: false
-  xy: 1140, 2
-  size: 567, 556
-  orig: 567, 556
-  offset: 0, 0
-  index: 7
-robot_run
-  rotate: false
-  xy: 2, 1118
-  size: 567, 556
-  orig: 567, 556
   offset: 0, 0
   index: 2
 
@@ -1806,70 +1799,70 @@ filter: Nearest,Nearest
 repeat: none
 ninja_female_hurt
   rotate: false
-  xy: 566, 2
+  xy: 380, 2
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
   index: 6
 ninja_female_hurt
   rotate: false
-  xy: 571, 1118
+  xy: 571, 560
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
   index: 2
 ninja_female_hurt
   rotate: false
-  xy: 949, 1118
+  xy: 758, 38
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
   index: 0
 ninja_female_hurt
   rotate: false
-  xy: 944, 75
+  xy: 949, 560
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
   index: 1
-ninja_female_hurt
+ninja_female_run
   rotate: false
-  xy: 1327, 1118
+  xy: 2, 2
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
-  index: 3
+  index: 0
 robot_faint
   rotate: false
-  xy: 2, 3
-  size: 562, 519
-  orig: 562, 519
-  offset: 0, 0
-  index: 3
-robot_faint
-  rotate: false
-  xy: 571, 597
+  xy: 1327, 561
   size: 562, 519
   orig: 562, 519
   offset: 0, 0
   index: 4
 robot_faint
   rotate: false
-  xy: 1135, 597
+  xy: 1327, 40
   size: 562, 519
   orig: 562, 519
   offset: 0, 0
   index: 5
-robot_faint
-  rotate: false
-  xy: 1322, 76
-  size: 562, 519
-  orig: 562, 519
-  offset: 0, 0
-  index: 6
-robot_run
+robot_hurt
   rotate: false
   xy: 2, 1082
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 6
+robot_hurt
+  rotate: false
+  xy: 571, 1082
+  size: 567, 556
+  orig: 567, 556
+  offset: 0, 0
+  index: 7
+robot_run
+  rotate: false
+  xy: 1140, 1082
   size: 567, 556
   orig: 567, 556
   offset: 0, 0
@@ -1889,42 +1882,42 @@ filter: Nearest,Nearest
 repeat: none
 ninja_female_hurt
   rotate: false
-  xy: 2, 3
-  size: 376, 520
-  orig: 376, 520
-  offset: 0, 0
-  index: 4
-ninja_female_hurt
-  rotate: false
   xy: 566, 524
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
-  index: 5
+  index: 3
 ninja_female_hurt
   rotate: false
   xy: 1130, 1045
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
-  index: 7
+  index: 4
 ninja_female_hurt
   rotate: false
   xy: 1508, 1045
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
+  index: 5
+ninja_female_hurt
+  rotate: false
+  xy: 566, 2
+  size: 376, 520
+  orig: 376, 520
+  offset: 0, 0
   index: 8
 ninja_female_hurt
   rotate: false
-  xy: 380, 2
+  xy: 944, 523
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
   index: 9
 ninja_female_run
   rotate: false
-  xy: 944, 523
+  xy: 1322, 523
   size: 376, 520
   orig: 376, 520
   offset: 0, 0
@@ -1935,24 +1928,31 @@ robot_faint
   size: 562, 519
   orig: 562, 519
   offset: 0, 0
-  index: 7
+  index: 6
 robot_faint
   rotate: false
   xy: 2, 525
+  size: 562, 519
+  orig: 562, 519
+  offset: 0, 0
+  index: 7
+robot_faint
+  rotate: false
+  xy: 566, 1046
   size: 562, 519
   orig: 562, 519
   offset: 0, 0
   index: 8
 robot_faint
   rotate: false
-  xy: 2, 525
+  xy: 566, 1046
   size: 562, 519
   orig: 562, 519
   offset: 0, 0
   index: 9
 robot_faint
   rotate: false
-  xy: 566, 1046
+  xy: 2, 4
   size: 562, 519
   orig: 562, 519
   offset: 0, 0
