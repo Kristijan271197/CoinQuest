@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "650820662838",
+    "firebase_url": "https://coin-quest.firebaseio.com",
+    "project_id": "coin-quest",
+    "storage_bucket": "coin-quest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650820662838:android:10a17f29a6a6c8b9234a97",
+        "android_client_info": {
+          "package_name": "com.kristijanstojanoski.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650820662838-1cucptidpntlnd0jbtt1c4u7e0g1mfkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3qxl96-JWqHitHrScBtqwP4V7SiAzcoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650820662838-1cucptidpntlnd0jbtt1c4u7e0g1mfkr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

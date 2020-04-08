@@ -359,9 +359,9 @@ public class MainGame extends State {
                 stage.getActors().get(5).setVisible(false);
                 stage.getActors().get(21).setVisible(false);
                 if (stageNumber == 1)
-                    musicSoundsObject.getCityMusic().play();
+                    musicSoundsObject.playCityMusic();
                 else if (stageNumber == 2)
-                    musicSoundsObject.getDesertMusic().play();
+                    musicSoundsObject.playDesertMusic();
             }
         });
 
@@ -483,10 +483,18 @@ public class MainGame extends State {
                     prefs.putBoolean(Settings.MUSIC, false);
                     prefs.flush();
                     musicSoundsObject.playButtonClick();
+                    if (stageNumber == 1)
+                        musicSoundsObject.playCityMusic();
+                    else if (stageNumber == 2)
+                        musicSoundsObject.playDesertMusic();
                 } else {
                     prefs.putBoolean(Settings.MUSIC, true);
                     prefs.flush();
                     musicSoundsObject.playButtonClick();
+                    if (stageNumber == 1)
+                        musicSoundsObject.playCityMusic();
+                    else if (stageNumber == 2)
+                        musicSoundsObject.playDesertMusic();
                 }
             }
         });
