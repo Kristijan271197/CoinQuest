@@ -358,6 +358,10 @@ public class MainGame extends State {
                 stage.getActors().get(4).setVisible(false);
                 stage.getActors().get(5).setVisible(false);
                 stage.getActors().get(21).setVisible(false);
+                if (stageNumber == 1)
+                    musicSoundsObject.getCityMusic().play();
+                else if (stageNumber == 2)
+                    musicSoundsObject.getDesertMusic().play();
             }
         });
 
@@ -382,6 +386,10 @@ public class MainGame extends State {
                 stage.getActors().get(4).setVisible(false);
                 stage.getActors().get(5).setVisible(false);
                 stage.getActors().get(21).setVisible(false);
+                if (stageNumber == 1)
+                    musicSoundsObject.getCityMusic().stop();
+                else if (stageNumber == 2)
+                    musicSoundsObject.getDesertMusic().stop();
             }
         });
 
@@ -398,6 +406,10 @@ public class MainGame extends State {
                 gsm.set(new ChooseStageMenu(gsm, adsController, manager));
                 musicSoundsObject.playButtonClick();
                 musicSoundsObject.playBackgroundMusic();
+                if (stageNumber == 1)
+                    musicSoundsObject.getCityMusic().stop();
+                else if (stageNumber == 2)
+                    musicSoundsObject.getDesertMusic().stop();
                 dispose();
             }
         });
@@ -421,6 +433,10 @@ public class MainGame extends State {
                 stage.getActors().get(4).setVisible(true);
                 stage.getActors().get(5).setVisible(true);
                 stage.getActors().get(21).setVisible(true);
+                if (stageNumber == 1)
+                    musicSoundsObject.getCityMusic().pause();
+                else if (stageNumber == 2)
+                    musicSoundsObject.getDesertMusic().pause();
             }
         });
 
@@ -743,7 +759,7 @@ public class MainGame extends State {
         coinObject.initializeValues(sharedAtlas, manager);
         rockObject.initializeValues(mainGameAtlas, stageNumber, manager);
         bombObject.initializeValues(mainGameAtlas, manager);
-        spikesObject.initializeValues(mainGameAtlas,prefs);
+        spikesObject.initializeValues(mainGameAtlas, prefs);
         rocketObject.initializeValues(mainGameAtlas);
         shieldObject.initializeValues(mainGameAtlas);
         coinRushObject.initializeValues(mainGameAtlas);

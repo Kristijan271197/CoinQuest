@@ -44,7 +44,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
         RewardedAdLoadCallback rewardedAdLoadCallback = new RewardedAdLoadCallback() {
             public void onRewardedAdFailedToLoad(int i) {
                 super.onRewardedAdFailedToLoad(i);
-                Toast.makeText(AndroidLauncher.this, "Ad Failed to Load " + i, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(AndroidLauncher.this, "Ad Failed to Load " + i, Toast.LENGTH_SHORT).show();
                 setAdLoaded(false);
                 if (haveNetworkConnection())
                     loadRewardedVideoAd();
@@ -52,7 +52,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
             public void onRewardedAdLoaded() {
                 super.onRewardedAdLoaded();
-                Toast.makeText(AndroidLauncher.this, "Ad Loaded ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AndroidLauncher.this, "Ad Loaded ", Toast.LENGTH_SHORT).show();
                 setAdLoaded(true);
             }
         };
@@ -70,7 +70,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
                         public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
                             setRewardReceived(true);
                             setAdLoaded(false);
-                            Toast.makeText(AndroidLauncher.this, "Reward" + rewardItem, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AndroidLauncher.this, "Reward" + rewardItem, Toast.LENGTH_SHORT).show();
                         }
                     };
                     ad.show(AndroidLauncher.this, adCallback);
