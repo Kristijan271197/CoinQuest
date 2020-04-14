@@ -93,7 +93,6 @@ public class MainGame extends State {
     private Shield shieldObject;
     private int shieldUpgrade;
     private boolean showDiamondsCount = true;
-    private boolean showEndStory;
     private boolean showScoreAndCoinLabel = false;
     private ImageButton soundButton;
     private ImageButton.ImageButtonStyle soundButtonStyle;
@@ -101,8 +100,6 @@ public class MainGame extends State {
     private Spikes spikesObject;
     private Stage stage;
     private int stageNumber;
-    private int storyEndNumber = 0;
-    private Image storyEndSecond;
     private int storyStartNumber = 0;
     private Image storyStartSecond;
     private float timerGame = 0.0F;
@@ -186,25 +183,16 @@ public class MainGame extends State {
         storyStartFirst.setSize(worldXToScreenX(501.0F), worldYToScreenY(1001.0F));
         storyStartFirst.setPosition(worldXToScreenX(-1.0F), worldYToScreenY(-1.0F));
         if (stageNumber == 2)
-            storyStartFirst.setDrawable(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_start_first.png", Texture.class))));
+            storyStartFirst.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_desert_start_first"))));
 
         storyStartSecond = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_second"))));
         storyStartSecond.setSize(worldXToScreenX(501.0F), worldYToScreenY(1001.0F));
         storyStartSecond.setPosition(worldXToScreenX(-1.0F), worldYToScreenY(-1.0F));
         if (stageNumber == 2)
-            storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_start_second.png", Texture.class))));
+            storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_desert_start_second"))));
 
-        Image storyEndFirst = new Image(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_end_first.png", Texture.class))));
-        storyEndFirst.setSize(worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-        storyEndFirst.setPosition(worldXToScreenX(0.0F), worldYToScreenY(0.0F));
-        if (stageNumber == 2)
-            storyEndFirst.setDrawable(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_end_first.png", Texture.class))));
-
-        storyEndSecond = new Image(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_end_second.png", Texture.class))));
-        storyEndSecond.setSize(worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
-        storyEndSecond.setPosition(worldXToScreenX(0.0F), worldYToScreenY(0.0F));
-        if (stageNumber == 2)
-            storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(manager.get("story_city_end_second.png", Texture.class))));
+        Image storyEndFirst = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_first"))));
+        Image storyEndSecond = new Image(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_first"))));
 
         ImageButton.ImageButtonStyle storyRightStyle = new ImageButton.ImageButtonStyle();
         storyRightStyle.up = new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_right_button_unpressed")));
@@ -217,21 +205,7 @@ public class MainGame extends State {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
                 musicSoundsObject.playButtonClick();
-                if (showEndStory) {
-                    if (storyEndNumber == 3) {
-                        stage.getActors().get(15).setVisible(false);
-                        stage.getActors().get(16).setVisible(false);
-                        stage.getActors().get(17).setVisible(false);
-                        stage.getActors().get(18).setVisible(true);
-                        stage.getActors().get(19).setVisible(true);
-                        stage.getActors().get(20).setVisible(true);
-                        stage.getActors().get(27).setVisible(false);
-                        stage.getActors().get(0).setVisible(true);
-                        stage.getActors().get(1).setVisible(false);
-                        storyEndNumber = storyEndNumber + 1;
-                    } else
-                        storyEndNumber = storyEndNumber + 1;
-                } else if (MainGame.this.storyStartNumber == 3) {
+                if (storyStartNumber == 3) {
                     stage.getActors().get(13).setVisible(false);
                     stage.getActors().get(16).setVisible(false);
                     stage.getActors().get(17).setVisible(false);
@@ -262,10 +236,7 @@ public class MainGame extends State {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
                 musicSoundsObject.playButtonClick();
-                if (showEndStory)
-                    storyEndNumber = storyEndNumber - 1;
-                else
-                    storyStartNumber = storyStartNumber - 1;
+                storyStartNumber = storyStartNumber - 1;
             }
         });
 
@@ -280,34 +251,20 @@ public class MainGame extends State {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
                 musicSoundsObject.playButtonClick();
-                if (showEndStory) {
-                    stage.getActors().get(14).setVisible(false);
-                    stage.getActors().get(15).setVisible(false);
-                    stage.getActors().get(16).setVisible(false);
-                    stage.getActors().get(17).setVisible(false);
-                    stage.getActors().get(18).setVisible(true);
-                    stage.getActors().get(19).setVisible(true);
-                    stage.getActors().get(20).setVisible(true);
-                    stage.getActors().get(27).setVisible(false);
-                    stage.getActors().get(0).setVisible(true);
-                    stage.getActors().get(1).setVisible(false);
-                    storyEndNumber = 4;
-                } else {
-                    stage.getActors().get(12).setVisible(false);
-                    stage.getActors().get(13).setVisible(false);
-                    stage.getActors().get(16).setVisible(false);
-                    stage.getActors().get(17).setVisible(false);
-                    stage.getActors().get(27).setVisible(false);
-                    storyStartNumber = 4;
-                    if (stageNumber == 1) {
-                        if (prefs.getBoolean(FIRST_TIME_TUTORIAL, true)) {
-                            stage.getActors().get(10).setVisible(true);
-                            stage.getActors().get(11).setVisible(true);
-                        } else
-                            gameState = 0;
-                    } else if (stageNumber == 2)
+                stage.getActors().get(12).setVisible(false);
+                stage.getActors().get(13).setVisible(false);
+                stage.getActors().get(16).setVisible(false);
+                stage.getActors().get(17).setVisible(false);
+                stage.getActors().get(27).setVisible(false);
+                storyStartNumber = 4;
+                if (stageNumber == 1) {
+                    if (prefs.getBoolean(FIRST_TIME_TUTORIAL, true)) {
+                        stage.getActors().get(10).setVisible(true);
+                        stage.getActors().get(11).setVisible(true);
+                    } else
                         gameState = 0;
-                }
+                } else if (stageNumber == 2)
+                    gameState = 0;
             }
         });
 
@@ -815,17 +772,10 @@ public class MainGame extends State {
 
         batch.begin();
 
-        if (showEndStory) {
-            if (stageNumber == 1)
-                showEndStory(stageNumber);
-            else if (stageNumber == 2)
-                showEndStory(stageNumber);
-        } else {
-            if (stageNumber == 1)
-                showStartStory(stageNumber);
-            else if (stageNumber == 2)
-                showStartStory(stageNumber);
-        }
+        if (stageNumber == 1)
+            showStartStory(stageNumber);
+        else if (stageNumber == 2)
+            showStartStory(stageNumber);
 
         if (prefs.getBoolean(FIRST_TIME_TUTORIAL, true)) {
             batch.draw(background[getActiveBackgroundIdx(bgCords[0])], bgCords[getActiveBackgroundIdx(bgCords[0])], 0.0F, worldXToScreenX(500.0F), worldYToScreenY(1000.0F));
@@ -844,7 +794,6 @@ public class MainGame extends State {
                     musicSoundsObject.playDesertMusic();
                 musicOnce = false;
             }
-
 
             if (!pauseGame)
                 for (int i = 0; i < 5; i++)
@@ -1112,7 +1061,10 @@ public class MainGame extends State {
             villainObject.drawVillain(batch, pauseGame);
 
             if (timerGame >= 102.0F) {
-                showEndStory = true;
+                stage.getActors().get(0).setVisible(true);
+                stage.getActors().get(18).setVisible(true);
+                stage.getActors().get(19).setVisible(true);
+                stage.getActors().get(20).setVisible(true);
                 if (stageNumber == 1)
                     musicSoundsObject.getCityMusic().stop();
                 else if (stageNumber == 2)
@@ -1241,35 +1193,6 @@ public class MainGame extends State {
         }
     }
 
-    private void showEndStory(int storyPageNumber) {
-        if (storyEndNumber == 0) {
-            stage.getActors().get(14).setVisible(true);
-            stage.getActors().get(15).setVisible(false);
-            stage.getActors().get(16).setVisible(true);
-            stage.getActors().get(17).setVisible(false);
-            stage.getActors().get(27).setVisible(true);
-        } else if (storyEndNumber == 1) {
-            stage.getActors().get(14).setVisible(false);
-            stage.getActors().get(15).setVisible(true);
-            stage.getActors().get(17).setVisible(true);
-
-            if (storyPageNumber == 1)
-                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_second.png", Texture.class))));
-            else if (storyPageNumber == 2)
-                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_second.png", Texture.class))));
-        } else if (storyEndNumber == 2) {
-            if (storyPageNumber == 1)
-                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_third.png", Texture.class))));
-            else if (storyPageNumber == 2)
-                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_third.png", Texture.class))));
-        } else if (storyEndNumber == 3) {
-            if (storyPageNumber == 1)
-                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_fourth.png", Texture.class))));
-            else if (storyPageNumber == 2)
-                storyEndSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_end_fourth.png", Texture.class))));
-        }
-    }
-
     private void showStartStory(int storyPageNumber) {
         if (storyStartNumber == 0) {
             stage.getActors().get(12).setVisible(true);
@@ -1284,17 +1207,17 @@ public class MainGame extends State {
             if (storyPageNumber == 1)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_second"))));
             else if (storyPageNumber == 2)
-                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_second.png", Texture.class))));
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_desert_start_second"))));
         } else if (storyStartNumber == 2) {
             if (storyPageNumber == 1)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_third"))));
             else if (storyPageNumber == 2)
-                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_third.png", Texture.class))));
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_desert_start_third"))));
         } else if (storyStartNumber == 3) {
             if (storyPageNumber == 1)
                 storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_city_start_fourth"))));
             else if (storyPageNumber == 2)
-                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(this.manager.get("story_city_start_fourth.png", Texture.class))));
+                storyStartSecond.setDrawable(new TextureRegionDrawable(new TextureRegion(mainGameAtlas.findRegion("story_desert_start_fourth"))));
         }
     }
 
@@ -1328,7 +1251,7 @@ public class MainGame extends State {
     }
 
     public void dispose() {
-        this.stage.dispose();
+        stage.dispose();
     }
 
     public void handleInput() {

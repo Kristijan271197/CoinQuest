@@ -24,31 +24,31 @@ city_background
   size: 908, 2043
   orig: 908, 2043
   offset: 0, 0
-  index: 4
+  index: 3
 main_game_menu_button_unpressed
-  rotate: false
-  xy: 1822, 710
-  size: 185, 185
-  orig: 185, 185
-  offset: 0, 0
-  index: -1
-main_game_music_button_pressed
   rotate: false
   xy: 1822, 523
   size: 185, 185
   orig: 185, 185
   offset: 0, 0
   index: -1
+main_game_music_button_pressed
+  rotate: false
+  xy: 1822, 336
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
 main_game_no_music_button_pressed
   rotate: false
-  xy: 1822, 1465
+  xy: 1822, 1271
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: -1
 main_game_no_music_button_unpressed
   rotate: false
-  xy: 1822, 1271
+  xy: 1822, 1465
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
@@ -81,14 +81,14 @@ main_game_restart_button_pressed
   orig: 185, 185
   offset: 0, 0
   index: -1
-story_continue_button_pressed
+main_game_sound_button_unpressed
   rotate: false
-  xy: 1822, 336
+  xy: 1822, 710
   size: 185, 185
   orig: 185, 185
   offset: 0, 0
   index: -1
-story_continue_button_unpressed
+story_continue_button_pressed
   rotate: false
   xy: 1822, 149
   size: 185, 185
@@ -107,7 +107,7 @@ city_background
   size: 908, 2043
   orig: 908, 2043
   offset: 0, 0
-  index: 3
+  index: 4
 city_background
   rotate: false
   xy: 912, 3
@@ -138,21 +138,14 @@ main_game_pause_button_pressed
   index: -1
 main_game_restart_button_unpressed
   rotate: false
-  xy: 1821, 1673
+  xy: 1821, 1486
   size: 185, 185
   orig: 185, 185
   offset: 0, 0
   index: -1
 main_game_sound_button_pressed
   rotate: false
-  xy: 1821, 1860
-  size: 185, 185
-  orig: 185, 185
-  offset: 0, 0
-  index: -1
-main_game_sound_button_unpressed
-  rotate: false
-  xy: 1821, 1486
+  xy: 1821, 1673
   size: 185, 185
   orig: 185, 185
   offset: 0, 0
@@ -166,18 +159,11 @@ player_hurt
   index: 20
 player_hurt
   rotate: false
-  xy: 1821, 190
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 21
-player_hurt
-  rotate: false
   xy: 1821, 13
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 22
+  index: 23
 player_run
   rotate: false
   xy: 1821, 544
@@ -185,6 +171,20 @@ player_run
   orig: 113, 175
   offset: 0, 0
   index: 30
+player_run
+  rotate: false
+  xy: 1821, 190
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 35
+story_continue_button_unpressed
+  rotate: false
+  xy: 1821, 1860
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1
 story_right_button_pressed
   rotate: false
   xy: 1936, 604
@@ -333,14 +333,14 @@ player_faint
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 19
+  index: 30
 player_faint
   rotate: false
   xy: 1769, 1427
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 30
+  index: 16
 player_faint
   rotate: false
   xy: 1769, 1222
@@ -354,28 +354,28 @@ player_faint
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 11
+  index: 28
 player_faint
   rotate: false
   xy: 1769, 812
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 6
+  index: 26
 player_faint
   rotate: false
   xy: 1769, 607
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 29
+  index: 7
 player_faint
   rotate: false
   xy: 1769, 402
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 7
+  index: 23
 player_faint
   rotate: false
   xy: 1769, 197
@@ -389,189 +389,119 @@ player_faint
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 42
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 34
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 33
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 38
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 32
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 41
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 37
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 40
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 39
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 35
-player_faint
-  rotate: false
-  xy: 926, 2
-  size: 234, 203
-  orig: 234, 203
-  offset: 0, 0
-  index: 36
+  index: 27
 player_faint
   rotate: false
   xy: 1162, 2
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 27
+  index: 11
 player_faint
   rotate: false
   xy: 1398, 2
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 2
+  index: 12
 player_hurt
   rotate: false
   xy: 470, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 23
+  index: 24
 player_hurt
   rotate: false
   xy: 585, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 24
+  index: 26
 player_hurt
   rotate: false
   xy: 700, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 26
+  index: 28
 player_hurt
   rotate: false
   xy: 815, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 28
+  index: 0
 player_hurt
   rotate: false
   xy: 930, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 27
+  index: 1
 player_hurt
   rotate: false
   xy: 1045, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 0
+  index: 3
 player_hurt
   rotate: false
   xy: 1160, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 1
-player_hurt
-  rotate: false
-  xy: 1275, 207
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
   index: 4
 player_hurt
   rotate: false
-  xy: 1505, 207
+  xy: 1390, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 9
 player_hurt
   rotate: false
-  xy: 1620, 207
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 38
-player_hurt
-  rotate: false
-  xy: 1634, 30
+  xy: 1505, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 30
 player_hurt
   rotate: false
-  xy: 1749, 20
+  xy: 1620, 207
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 31
 player_hurt
   rotate: false
-  xy: 1864, 20
+  xy: 1634, 30
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 32
-player_run
+player_hurt
   rotate: false
-  xy: 1390, 207
+  xy: 1749, 20
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 41
+  index: 35
+player_hurt
+  rotate: false
+  xy: 1864, 20
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 37
+player_run
+  rotate: false
+  xy: 1275, 207
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 31
 score_coin_background
   rotate: false
   xy: 470, 5
@@ -626,84 +556,84 @@ player_faint
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 12
+  index: 13
 player_faint
   rotate: false
   xy: 1711, 4
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 13
+  index: 14
 player_hurt
   rotate: false
   xy: 1872, 1871
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 33
+  index: 34
 player_hurt
   rotate: false
   xy: 1872, 1694
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 34
-player_hurt
-  rotate: false
-  xy: 1872, 1517
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 35
-player_hurt
-  rotate: false
-  xy: 1872, 1340
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 36
+  index: 39
 player_hurt
   rotate: false
   xy: 1872, 1163
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 39
+  index: 11
+player_hurt
+  rotate: false
+  xy: 1872, 809
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 21
 player_hurt
   rotate: false
   xy: 1872, 455
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 16
+  index: 41
 player_run
   rotate: false
-  xy: 1872, 986
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 15
-player_run
-  rotate: false
-  xy: 1872, 809
+  xy: 1872, 1517
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 36
 player_run
   rotate: false
-  xy: 1872, 632
+  xy: 1872, 1340
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 4
 player_run
   rotate: false
-  xy: 1858, 278
+  xy: 1872, 986
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 10
+player_run
+  rotate: false
+  xy: 1872, 632
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 9
+player_run
+  rotate: false
+  xy: 1858, 278
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 7
 rocket
   rotate: false
   xy: 2, 78
@@ -765,35 +695,35 @@ player_faint
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 14
+  index: 22
 player_faint
   rotate: false
   xy: 1666, 1617
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 15
+  index: 17
 player_faint
   rotate: false
   xy: 1666, 1412
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 16
+  index: 18
 player_faint
   rotate: false
   xy: 1666, 1207
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 17
+  index: 19
 player_faint
   rotate: false
   xy: 1666, 1002
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 18
+  index: 5
 player_faint
   rotate: false
   xy: 1666, 797
@@ -814,70 +744,70 @@ player_faint
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 22
+  index: 2
 player_faint
   rotate: false
   xy: 1354, 207
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 23
+  index: 3
 player_faint
   rotate: false
   xy: 1354, 2
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 24
+  index: 4
 player_hurt
   rotate: false
   xy: 1902, 1850
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 41
+  index: 5
 player_hurt
   rotate: false
   xy: 1902, 1673
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 42
+  index: 7
 player_hurt
   rotate: false
   xy: 1902, 1496
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 37
+  index: 29
 player_hurt
   rotate: false
   xy: 1902, 1142
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 5
-player_hurt
-  rotate: false
-  xy: 1902, 965
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 7
-player_hurt
-  rotate: false
-  xy: 1902, 788
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 29
+  index: 40
 player_run
   rotate: false
   xy: 1902, 1319
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 7
+  index: 40
+player_run
+  rotate: false
+  xy: 1902, 965
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 20
+player_run
+  rotate: false
+  xy: 1902, 788
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 37
 shield_collectible
   rotate: false
   xy: 1590, 274
@@ -918,14 +848,14 @@ player_faint
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 5
+  index: 25
 player_faint
   rotate: false
   xy: 1410, 597
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 26
+  index: 6
 player_faint
   rotate: false
   xy: 1666, 1597
@@ -939,161 +869,231 @@ player_faint
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 28
+  index: 29
 player_faint
   rotate: false
   xy: 1666, 1187
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 31
+  index: 15
 player_faint
   rotate: false
   xy: 1666, 982
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 4
+  index: 39
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 36
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 40
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 34
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 42
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 33
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 38
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 32
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 35
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 41
+player_faint
+  rotate: false
+  xy: 1666, 982
+  size: 234, 203
+  orig: 234, 203
+  offset: 0, 0
+  index: 37
 player_faint
   rotate: false
   xy: 1666, 777
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 25
+  index: 31
 player_faint
   rotate: false
   xy: 1646, 572
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 3
+  index: 10
 player_faint
   rotate: false
   xy: 1410, 392
   size: 234, 203
   orig: 234, 203
   offset: 0, 0
-  index: 10
+  index: 24
 player_hurt
   rotate: false
   xy: 1646, 395
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 40
+  index: 2
 player_hurt
   rotate: false
-  xy: 1902, 1299
+  xy: 1753, 46
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 2
+  index: 38
 player_run
   rotate: false
   xy: 1902, 1830
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 40
+  index: 11
 player_run
   rotate: false
   xy: 1902, 1653
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 25
+  index: 14
 player_run
   rotate: false
   xy: 1761, 395
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 20
+  index: 15
 player_run
   rotate: false
   xy: 1902, 1476
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 10
+  index: 16
+player_run
+  rotate: false
+  xy: 1902, 1299
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 17
 player_run
   rotate: false
   xy: 1902, 1122
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 14
+  index: 18
 player_run
   rotate: false
   xy: 1902, 945
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 16
+  index: 19
 player_run
   rotate: false
   xy: 1902, 768
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 18
+  index: 13
 player_run
   rotate: false
   xy: 1882, 591
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 19
+  index: 8
 player_run
   rotate: false
   xy: 1408, 46
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 13
+  index: 0
 player_run
   rotate: false
   xy: 1523, 46
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 8
+  index: 26
 player_run
   rotate: false
   xy: 1638, 46
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 0
-player_run
-  rotate: false
-  xy: 1753, 46
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 26
+  index: 22
 player_run
   rotate: false
   xy: 1876, 395
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 21
+  index: 24
 player_run
   rotate: false
   xy: 1868, 218
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 22
+  index: 25
 player_run
   rotate: false
   xy: 1868, 41
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 38
+  index: 27
 rocket_arrow
   rotate: false
   xy: 755, 464
@@ -1130,88 +1130,116 @@ coin_magnet
   index: -1
 player_hurt
   rotate: false
-  xy: 577, 256
+  xy: 117, 256
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 16
+player_hurt
+  rotate: false
+  xy: 347, 256
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 42
+player_hurt
+  rotate: false
+  xy: 462, 256
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 8
 player_hurt
   rotate: false
-  xy: 692, 433
+  xy: 577, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 25
 player_hurt
   rotate: false
-  xy: 922, 433
+  xy: 692, 256
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 3
+  index: 22
 player_hurt
   rotate: false
-  xy: 807, 79
+  xy: 807, 433
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 33
+player_hurt
+  rotate: false
+  xy: 807, 256
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 10
 player_hurt
   rotate: false
-  xy: 922, 256
+  xy: 922, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 11
+  index: 36
 player_hurt
   rotate: false
-  xy: 1037, 433
+  xy: 807, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 12
 player_hurt
   rotate: false
-  xy: 922, 79
+  xy: 922, 256
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 13
 player_hurt
   rotate: false
-  xy: 1037, 256
+  xy: 1037, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 14
 player_hurt
   rotate: false
-  xy: 1152, 433
+  xy: 922, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 15
 player_hurt
   rotate: false
-  xy: 1037, 79
+  xy: 1037, 256
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 17
 player_hurt
   rotate: false
-  xy: 1152, 256
+  xy: 1152, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 18
 player_hurt
   rotate: false
-  xy: 1267, 433
+  xy: 1037, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 19
+player_hurt
+  rotate: false
+  xy: 1152, 256
+  size: 113, 175
+  orig: 113, 175
+  offset: 0, 0
+  index: 27
 player_hurt
   rotate: false
   xy: 1152, 79
@@ -1225,42 +1253,35 @@ player_run
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 24
+  index: 28
 player_run
   rotate: false
   xy: 2, 256
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 11
+  index: 29
 player_run
   rotate: false
   xy: 117, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 27
+  index: 1
 player_run
   rotate: false
   xy: 2, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 28
-player_run
-  rotate: false
-  xy: 117, 256
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 29
+  index: 2
 player_run
   rotate: false
   xy: 232, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 1
+  index: 5
 player_run
   rotate: false
   xy: 117, 79
@@ -1274,98 +1295,77 @@ player_run
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 5
+  index: 32
 player_run
   rotate: false
   xy: 347, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 31
+  index: 33
 player_run
   rotate: false
   xy: 232, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 32
-player_run
-  rotate: false
-  xy: 347, 256
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 33
+  index: 34
 player_run
   rotate: false
   xy: 462, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 34
+  index: 39
 player_run
   rotate: false
   xy: 347, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 35
-player_run
-  rotate: false
-  xy: 462, 256
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 37
-player_run
-  rotate: false
-  xy: 577, 433
-  size: 113, 175
-  orig: 113, 175
-  offset: 0, 0
-  index: 39
+  index: 6
 player_run
   rotate: false
   xy: 462, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 6
+  index: 41
 player_run
   rotate: false
-  xy: 577, 79
+  xy: 577, 256
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
   index: 42
 player_run
   rotate: false
-  xy: 692, 256
+  xy: 692, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 12
+  index: 23
 player_run
   rotate: false
-  xy: 807, 433
+  xy: 577, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 2
+  index: 21
 player_run
   rotate: false
   xy: 692, 79
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 17
+  index: 12
 player_run
   rotate: false
-  xy: 807, 256
+  xy: 1267, 433
   size: 113, 175
   orig: 113, 175
   offset: 0, 0
-  index: 23
+  index: 38
 story_city_start_first
   rotate: false
   xy: 1413, 1004
@@ -1373,7 +1373,7 @@ story_city_start_first
   orig: 577, 1025
   offset: 0, 0
   index: -1
-story_city_start_fourth
+story_desert_start_fourth
   rotate: false
   xy: 1413, 2
   size: 500, 1000
@@ -1386,29 +1386,70 @@ size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-cactus
-  rotate: false
-  xy: 1393, 2
-  size: 401, 893
-  orig: 401, 893
-  offset: 0, 0
-  index: -1
 shield
   rotate: false
-  xy: 2, 532
+  xy: 2, 639
   size: 1389, 1390
   orig: 1389, 1390
   offset: 0, 0
   index: -1
-story_city_start_second
+story_city_start_fourth
   rotate: false
-  xy: 1393, 897
+  xy: 1393, 2
+  size: 500, 1000
+  orig: 500, 1000
+  offset: 0, 0
+  index: -1
+story_desert_start_first
+  rotate: false
+  xy: 1393, 1004
   size: 577, 1025
   orig: 577, 1025
   offset: 0, 0
   index: -1
 
 main_game13.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cactus
+  rotate: false
+  xy: 2, 1029
+  size: 401, 893
+  orig: 401, 893
+  offset: 0, 0
+  index: -1
+cactus_night
+  rotate: false
+  xy: 405, 1029
+  size: 401, 893
+  orig: 401, 893
+  offset: 0, 0
+  index: -1
+story_city_start_second
+  rotate: false
+  xy: 808, 897
+  size: 577, 1025
+  orig: 577, 1025
+  offset: 0, 0
+  index: -1
+story_city_start_third
+  rotate: false
+  xy: 1387, 897
+  size: 577, 1025
+  orig: 577, 1025
+  offset: 0, 0
+  index: -1
+story_desert_start_third
+  rotate: false
+  xy: 2, 2
+  size: 577, 1025
+  orig: 577, 1025
+  offset: 0, 0
+  index: -1
+
+main_game14.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
@@ -1428,35 +1469,28 @@ tap_to_start_finger
   offset: 0, 0
   index: -1
 
-main_game14.png
+main_game15.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-cactus_night
-  rotate: false
-  xy: 1340, 2
-  size: 401, 893
-  orig: 401, 893
-  offset: 0, 0
-  index: -1
 city_background_night
   rotate: false
-  xy: 2, 421
+  xy: 2, 2
   size: 667, 1501
   orig: 667, 1501
   offset: 0, 0
   index: 2
 city_background_night
   rotate: false
-  xy: 671, 421
+  xy: 671, 2
   size: 667, 1501
   orig: 667, 1501
   offset: 0, 0
   index: 3
-story_city_start_third
+story_desert_start_second
   rotate: false
-  xy: 1340, 897
+  xy: 1340, 478
   size: 577, 1025
   orig: 577, 1025
   offset: 0, 0

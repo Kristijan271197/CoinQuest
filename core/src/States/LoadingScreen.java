@@ -94,21 +94,12 @@ public class LoadingScreen extends State {
     public void update(float paramFloat) {
     }
 
-
     private void loadAssets() {
         manager.load("main_menu/main_menu.atlas", TextureAtlas.class);
         manager.load("shop/shop.atlas", TextureAtlas.class);
         manager.load("choose_stage/choose_stage.atlas", TextureAtlas.class);
         manager.load("spinning_wheel/spinning_wheel.atlas", TextureAtlas.class);
         manager.load("main_game/main_game.atlas", TextureAtlas.class);
-        manager.load("story_city_start_first.png", Texture.class);
-        manager.load("story_city_start_second.png", Texture.class);
-        manager.load("story_city_start_third.png", Texture.class);
-        manager.load("story_city_start_fourth.png", Texture.class);
-        manager.load("story_city_end_first.png", Texture.class);
-        manager.load("story_city_end_second.png", Texture.class);
-        manager.load("story_city_end_third.png", Texture.class);
-        manager.load("story_city_end_fourth.png", Texture.class);
         manager.load("achievements/achievements.atlas", TextureAtlas.class);
         manager.load("end_game/end_game.atlas", TextureAtlas.class);
         manager.load("shared/shared.atlas", TextureAtlas.class);
