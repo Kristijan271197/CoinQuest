@@ -56,7 +56,7 @@ public class EndGame extends State {
         prefs = Gdx.app.getPreferences("prefs");
         this.stageNumber = stageNumber;
 
-        if(!prefs.getBoolean(Shop.REMOVE_ADS_PURCHASED,false))
+        if (!prefs.getBoolean(Shop.REMOVE_ADS_PURCHASED, false))
             adsController.showInterstitialAd();
 
         TextureAtlas mainMenuAtlas = manager.get("main_menu/main_menu.atlas", TextureAtlas.class);
@@ -348,7 +348,7 @@ public class EndGame extends State {
 
         timerGame += Gdx.graphics.getDeltaTime();
 
-        if(!prefs.getBoolean(Shop.REMOVE_ADS_PURCHASED,false)) {
+        if (!prefs.getBoolean(Shop.REMOVE_ADS_PURCHASED, false)) {
             if (mAdsController.getInterstitialAdLoaded()) {
                 if (timerGame >= 2f) {
                     stage.getActors().get(3).setTouchable(Touchable.enabled);
@@ -363,7 +363,6 @@ public class EndGame extends State {
                 }
             }
         }
-
 
         boolean adLoaded = mAdsController.getAdLoaded();
         boolean rewardReceived = mAdsController.getRewardReceived();

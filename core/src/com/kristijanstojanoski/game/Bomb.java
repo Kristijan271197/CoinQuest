@@ -55,8 +55,8 @@ class Bomb {
 
     int bombCollision(Rectangle paramRectangle, int gameState, Preferences prefs) {
         for (int i = 0; i < bombCircles.size(); i++) {
-            if (Intersector.overlaps(this.bombCircles.get(i), paramRectangle)) {
-                this.musicSoundsObject.playBombSound();
+            if (Intersector.overlaps(bombCircles.get(i), paramRectangle)) {
+                musicSoundsObject.playBombSound();
                 prefs.putBoolean(Player.PLAYER_GROUND, true);
                 prefs.flush();
                 gameState = 2;

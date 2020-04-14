@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -66,7 +65,6 @@ public class MainGame extends State {
     private boolean greenGo = false;
     private AdsController mAdsController;
     private int magnetUpgrade;
-    private AssetManager manager;
     private ImageButton musicButton;
     private ImageButton.ImageButtonStyle musicButtonStyle;
     private MusicSounds musicSoundsObject;
@@ -113,7 +111,6 @@ public class MainGame extends State {
 
     public MainGame(final GameStateManager gsm, final AdsController adsController, final AssetManager manager, final int stageNumber) {
         super(gsm);
-        this.manager = manager;
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         mAdsController = adsController;

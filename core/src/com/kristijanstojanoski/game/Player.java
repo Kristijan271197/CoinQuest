@@ -83,7 +83,7 @@ class Player {
             for (int i = 0; i < 10; i++)
                 playerFaint[i] = shopAtlas.findRegion("cowgirl_faint", i);
 
-            for (int i = 0; i < 8; i++)  {
+            for (int i = 0; i < 8; i++) {
                 playerRun[i] = shopAtlas.findRegion("cowgirl_run", i);
                 playerHurt[i] = shopAtlas.findRegion("cowgirl_hurt", i);
             }
@@ -92,7 +92,7 @@ class Player {
             playerRun = new AtlasRegion[10];
             playerFaint = new AtlasRegion[10];
             playerHurt = new AtlasRegion[10];
-            for (int i = 0; i < 10; i++)  {
+            for (int i = 0; i < 10; i++) {
                 playerFaint[i] = shopAtlas.findRegion("ninja_male_faint", i);
                 playerRun[i] = shopAtlas.findRegion("ninja_male_run", i);
                 playerHurt[i] = shopAtlas.findRegion("ninja_male_hurt", i);
@@ -102,7 +102,7 @@ class Player {
             playerRun = new AtlasRegion[10];
             playerFaint = new AtlasRegion[10];
             playerHurt = new AtlasRegion[10];
-            for (int i = 0; i < 10; i++)  {
+            for (int i = 0; i < 10; i++) {
                 playerFaint[i] = shopAtlas.findRegion("ninja_female_faint", i);
                 playerRun[i] = shopAtlas.findRegion("ninja_female_run", i);
                 playerHurt[i] = shopAtlas.findRegion("ninja_female_hurt", i);
@@ -112,7 +112,7 @@ class Player {
             playerRun = new AtlasRegion[10];
             playerFaint = new AtlasRegion[10];
             playerHurt = new AtlasRegion[10];
-            for (int i = 0; i < 8; i++)  {
+            for (int i = 0; i < 8; i++) {
                 playerFaint[i] = shopAtlas.findRegion("dino_faint", i);
                 playerRun[i] = shopAtlas.findRegion("dino_run", i);
                 playerHurt[i] = shopAtlas.findRegion("dino_hurt", i);
@@ -293,7 +293,6 @@ class Player {
         if (playerY + playerHeight >= ((float) Gdx.graphics.getHeight()))
             playerY = ((float) Gdx.graphics.getHeight()) - playerHeight;
     }
-
 
 
     void resetPlayerStats(Preferences prefs) {

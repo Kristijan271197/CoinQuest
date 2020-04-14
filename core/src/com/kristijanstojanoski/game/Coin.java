@@ -47,14 +47,14 @@ class Coin {
         coinRectangles.clear();
         playerWidth = playerWidth / 2.0F - playerHeight / 2.0F;
         playerHeight = coinWidth / 2.0F - coinHeight / 2.0F;
-        for (int i = 0; i < this.coinXs.size(); i++) {
+        for (int i = 0; i < coinXs.size(); i++) {
             float f1 = playerX - playerWidth - coinXs.get(i) + playerHeight;
             float f2 = playerY - playerWidth - coinYs.get(i) + playerHeight;
             double d = f1;
             float f3 = f2 * f2;
             f1 = (float) (d / Math.sqrt((f1 * f1 + f3)));
             f2 = (float) (f2 / Math.sqrt((f1 * f1 + f3)));
-            f3 = this.coinSpeed;
+            f3 = coinSpeed;
             if (!pause) {
                 coinXs.set(i, coinXs.get(i) + f1 * f3);
                 coinYs.set(i, coinYs.get(i) + f2 * f3);

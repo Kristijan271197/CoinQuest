@@ -51,5 +51,9 @@ public interface AdsController {
 
     void setThousandDiamonds(boolean thousandDiamonds);
 
+    void tRexBuy();
 
+    boolean getTRexBought();
+
+    void setTRexBought(boolean tRexBought);
 }

@@ -38,6 +38,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
     private String ITEM_SKU_HUNDRED_DIAMONDS = "hundred_diamonds";
     private String ITEM_SKU_FIVE_HUNDRED_DIAMONDS = "five_hundred_diamonds";
     private String ITEM_SKU_THOUSAND_DIAMONDS = "thousand_diamonds";
+    private String ITEM_SKU_T_REX = "t_rex";
     BillingClient billingClient;
 
     RewardedAd ad;
@@ -46,14 +47,13 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
     boolean rewardReceived = false;
     boolean iAdClosed = false;
     boolean iAdLoaded = false;
-    List<SkuDetails> skuDetailsList;
     boolean adsRemoved = false;
     boolean diamondsReceived = false;
     boolean fiftyDiamonds = false;
     boolean hundredDiamonds = false;
     boolean fiveHundredDiamonds = false;
     boolean thousandDiamonds = false;
-
+    boolean tRexBought = false;
 
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
@@ -70,16 +70,16 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(BillingResult billingResult) {
-                if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
-                    Toast.makeText(AndroidLauncher.this,"Successfully connected to client",Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(AndroidLauncher.this,"Failed to connect to the client",Toast.LENGTH_SHORT).show();
+//                if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
+//                    Toast.makeText(AndroidLauncher.this,"Successfully connected to client",Toast.LENGTH_SHORT).show();
+//                else
+//                    Toast.makeText(AndroidLauncher.this,"Failed to connect to the client",Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onBillingServiceDisconnected() {
-                Toast.makeText(AndroidLauncher.this,"Disconnected from the client",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AndroidLauncher.this,"Disconnected from the client",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -90,13 +90,12 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
         billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
             @Override
             public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
-                if(list != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
-                    skuDetailsList = list;
-                    for(SkuDetails skuDetails : list){
-                        String sku = skuDetails.getSku();
-                        String price = skuDetails.getPrice();
-                    }
-                }
+//                if(list != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
+////                    for(SkuDetails skuDetails : list){
+////                        String sku = skuDetails.getSku();
+////                        String price = skuDetails.getPrice();
+////                    }
+//                }
             }
         });
 
@@ -180,6 +179,21 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
     @Override
     public void setThousandDiamonds(boolean thousandDiamonds) {
         this.thousandDiamonds = thousandDiamonds;
+    }
+
+    @Override
+    public void tRexBuy() {
+        purchaseItem(ITEM_SKU_T_REX);
+    }
+
+    @Override
+    public boolean getTRexBought() {
+        return tRexBought;
+    }
+
+    @Override
+    public void setTRexBought(boolean tRexBought) {
+        this.tRexBought = tRexBought;
     }
 
     public void loadRewardedVideoAd() {
@@ -323,6 +337,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
         } else if (purchase.getSku().equals(ITEM_SKU_THOUSAND_DIAMONDS)){
             Toast.makeText(AndroidLauncher.this, "Item Purchased", Toast.LENGTH_SHORT).show();
             thousandDiamonds = true;
+        } else if (purchase.getSku().equals(ITEM_SKU_T_REX)){
+            Toast.makeText(AndroidLauncher.this, "Item Purchased", Toast.LENGTH_SHORT).show();
+            tRexBought = true;
         }
 
     }
@@ -339,11 +356,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
                     BillingFlowParams flowParams = BillingFlowParams.newBuilder()
                             .setSkuDetails(list.get(0))
                             .build();
-                    BillingResult responseCode = billingClient.launchBillingFlow(AndroidLauncher.this,flowParams);
-                    for(SkuDetails skuDetails : list){
-                        String sku = skuDetails.getSku();
-                        String price = skuDetails.getPrice();
-                    }
+                     billingClient.launchBillingFlow(AndroidLauncher.this,flowParams);
                 }
             }
         });

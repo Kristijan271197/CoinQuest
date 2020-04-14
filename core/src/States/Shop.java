@@ -535,6 +535,11 @@ public class Shop extends State {
                 } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
                     costumeBuySelectButton(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER, DIAMONDS, 200);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
+                    if (prefs.getBoolean(DINO_BOUGHT, false)) {
+                        prefs.putInteger(COSTUME_SELECTED_GAME, DINO_NUMBER);
+                        prefs.flush();
+                    } else
+                        adsController.tRexBuy();
 
                 }
             }
@@ -584,9 +589,10 @@ public class Shop extends State {
                     costumeBuyButton(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER, DIAMONDS, 200);
                 } else if (prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
                     costumeBuyButton(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER, DIAMONDS, 200);
-                } else if (prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
-
                 }
+//                else if (prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
+//
+//                }
                 stage.getActors().get(21).setVisible(false);
                 stage.getActors().get(22).setVisible(false);
                 stage.getActors().get(23).setVisible(false);
@@ -977,39 +983,46 @@ public class Shop extends State {
             prefs.flush();
         }
 
-        if(mAdsController.getDiamondsReceived()){
+        if (prefs.getBoolean(REMOVE_ADS_PURCHASED, false))
+            stage.getActors().get(29).setVisible(false);
+
+        if (mAdsController.getDiamondsReceived()) {
             prefs.putInteger(DIAMONDS, 10);
             prefs.flush();
             mAdsController.setDiamondsReceived(false);
         }
 
 
-        if(mAdsController.getFiftyDiamonds()){
+        if (mAdsController.getFiftyDiamonds()) {
             prefs.putInteger(DIAMONDS, 50);
             prefs.flush();
             mAdsController.setFiftyDiamonds(false);
         }
 
-        if(mAdsController.getHundredDiamonds()){
+        if (mAdsController.getHundredDiamonds()) {
             prefs.putInteger(DIAMONDS, 100);
             prefs.flush();
             mAdsController.setHundredDiamonds(false);
         }
 
-        if(mAdsController.getFiveHundredDiamonds()){
+        if (mAdsController.getFiveHundredDiamonds()) {
             prefs.putInteger(DIAMONDS, 500);
             prefs.flush();
             mAdsController.setFiveHundredDiamonds(false);
         }
 
-        if(mAdsController.getThousandDiamonds()){
+        if (mAdsController.getThousandDiamonds()) {
             prefs.putInteger(DIAMONDS, 1000);
             prefs.flush();
             mAdsController.setThousandDiamonds(false);
         }
 
-        if(prefs.getBoolean(REMOVE_ADS_PURCHASED,false))
-            stage.getActors().get(29).setVisible(false);
+        if (mAdsController.getTRexBought()) {
+            prefs.putBoolean(DINO_BOUGHT, true);
+            prefs.putInteger(COSTUME_SELECTED_GAME, DINO_NUMBER);
+            prefs.flush();
+            mAdsController.setTRexBought(false);
+        }
 
         Gdx.input.setCatchKey(4, true);
         if (Gdx.input.isKeyPressed(4)) {
