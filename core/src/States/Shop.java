@@ -57,6 +57,8 @@ public class Shop extends State {
     public static final String DOUBLE_COINS = "doubleCoins";
     private static final String POWER_UPS_UPGRADED_TIMES = "powerUpsUpgradedTimes";
 
+    static final String REMOVE_ADS_PURCHASED = "removeAdsPurchased";
+
 
     private int abilityCoinRushCost;
     private int abilityMagnetCost;
@@ -111,12 +113,14 @@ public class Shop extends State {
     private BitmapFont textFont;
     private Achievements achievementsObject;
     private TextureAtlas.AtlasRegion xNotEnoughMoneyButton;
+    private AdsController mAdsController;
 
     Shop(final GameStateManager gsm, final AdsController adsController, final AssetManager manager) {
         super(gsm);
         stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(this.stage);
+        Gdx.input.setInputProcessor(stage);
         prefs = Gdx.app.getPreferences("prefs");
+        mAdsController = adsController;
 
         TextureAtlas sharedAtlas = manager.get("shared/shared.atlas", TextureAtlas.class);
         TextureAtlas mainGameAtlas = manager.get("main_game/main_game.atlas", TextureAtlas.class);
@@ -215,8 +219,8 @@ public class Shop extends State {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
                 drawAbilities = true;
                 drawCurrency = false;
-                Shop.this.drawAbilityElements();
-                Shop.this.musicSoundsObject.playButtonClick();
+                drawAbilityElements();
+                musicSoundsObject.playButtonClick();
             }
         });
 
@@ -243,8 +247,8 @@ public class Shop extends State {
         });
 
         ImageButton.ImageButtonStyle buyButtonStyle = new ImageButton.ImageButtonStyle();
-        buyButtonStyle.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("shop_buy_button_unpressed")));
-        buyButtonStyle.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("shop_buy_button_pressed")));
+        buyButtonStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("shop_buy_button_unpressed")));
+        buyButtonStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("shop_buy_button_pressed")));
 
         shield = mainGameAtlas.findRegion("shield_collectible");
         abilityPointsShield = new ArrayList<>();
@@ -270,7 +274,7 @@ public class Shop extends State {
                     coinGlobal = prefs.getInteger(COINS);
                     shieldUpgraded = prefs.getInteger(SHIELD_UPGRADED, 0);
                     abilityShieldCost = prefs.getInteger(ABILITY_SHIELD_COST, 500);
-                    for (int i = 0; i < Shop.this.shieldUpgraded; i++)
+                    for (int i = 0; i < shieldUpgraded; i++)
                         abilityPointsShield.get(i).setFilled();
                     drawAbilityElements();
                 } else {
@@ -289,7 +293,7 @@ public class Shop extends State {
         for (int i = 0; i < 10; i++)
             abilityPointsMagnet.add(new AbilityPoint(shopAtlas));
 
-        for (int i = 0; i < this.magnetUpgraded; i++)
+        for (int i = 0; i < magnetUpgraded; i++)
             abilityPointsMagnet.get(i).setFilled();
 
         ImageButton buyMagnetButton = new ImageButton(buyButtonStyle);
@@ -327,7 +331,7 @@ public class Shop extends State {
         for (int i = 0; i < 10; i++)
             abilityPointsCoinRush.add(new AbilityPoint(shopAtlas));
 
-        for (int i = 0; i < this.coinRushUpgraded; i++)
+        for (int i = 0; i < coinRushUpgraded; i++)
             abilityPointsCoinRush.get(i).setFilled();
 
         ImageButton buyCoinRushButton = new ImageButton(buyButtonStyle);
@@ -364,7 +368,7 @@ public class Shop extends State {
         for (int i = 0; i < 10; i++)
             abilityPointsSpawnRate.add(new AbilityPoint(shopAtlas));
 
-        for (int i = 0; i < this.spawnRateUpgraded; i++)
+        for (int i = 0; i < spawnRateUpgraded; i++)
             abilityPointsSpawnRate.get(i).setFilled();
 
         ImageButton buySpawnRateButton = new ImageButton(buyButtonStyle);
@@ -433,13 +437,13 @@ public class Shop extends State {
             }
         });
 
-        Image costumesWindow = new Image(this.shopAtlas.findRegion("costumes_window"));
+        Image costumesWindow = new Image(shopAtlas.findRegion("costumes_window"));
         costumesWindow.setSize(worldXToScreenX(480.0F), worldYToScreenY(700.0F));
         costumesWindow.setPosition(worldXToScreenX(10.0F), worldYToScreenY(100.0F));
 
         ImageButton.ImageButtonStyle costumesButtonStyle = new ImageButton.ImageButtonStyle();
-        costumesButtonStyle.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("costumes_button")));
-        costumesButtonStyle.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("costumes_button")));
+        costumesButtonStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("costumes_button")));
+        costumesButtonStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("costumes_button")));
 
         ImageButton costumesButton = new ImageButton(costumesButtonStyle);
         costumesButton.setPosition(worldXToScreenX(190.0F), worldYToScreenY(790.0F));
@@ -595,8 +599,8 @@ public class Shop extends State {
         currencyWindow.setPosition(worldXToScreenX(10.0F), worldYToScreenY(100.0F));
 
         ImageButton.ImageButtonStyle currencyButtonStyle = new ImageButton.ImageButtonStyle();
-        currencyButtonStyle.up = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("currency_button")));
-        currencyButtonStyle.down = new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("currency_button")));
+        currencyButtonStyle.up = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("currency_button")));
+        currencyButtonStyle.down = new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("currency_button")));
 
         ImageButton currencyButton = new ImageButton(currencyButtonStyle);
         currencyButton.setPosition(worldXToScreenX(320.0F), worldYToScreenY(790.0F));
@@ -705,6 +709,8 @@ public class Shop extends State {
         removeAdsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                musicSoundsObject.playButtonClick();
+                adsController.removeAdsBuy();
             }
         });
 
@@ -714,6 +720,8 @@ public class Shop extends State {
         buy50DiamondsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                musicSoundsObject.playButtonClick();
+                adsController.fiftyDiamondsBuy();
             }
         });
 
@@ -723,6 +731,8 @@ public class Shop extends State {
         buy100DiamondsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                musicSoundsObject.playButtonClick();
+                adsController.hundredDiamondsBuy();
             }
         });
 
@@ -732,6 +742,8 @@ public class Shop extends State {
         buy500DiamondsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                musicSoundsObject.playButtonClick();
+                adsController.fiveHundredDiamondsBuy();
             }
         });
 
@@ -741,6 +753,8 @@ public class Shop extends State {
         buy1000DiamondsButton.addListener(new ClickListener() {
             public void touchUp(InputEvent param1InputEvent, float param1Float1, float param1Float2, int param1Int1, int param1Int2) {
                 super.touchUp(param1InputEvent, param1Float1, param1Float2, param1Int1, param1Int2);
+                musicSoundsObject.playButtonClick();
+                adsController.thousandDiamondsBuy();
             }
         });
 
@@ -905,6 +919,7 @@ public class Shop extends State {
         stage.addActor(sureQuitWindow);
         stage.addActor(notQuitButton);
         stage.addActor(quitButton);
+
         stage.getActors().get(15).setVisible(false);
         stage.getActors().get(16).setVisible(false);
         stage.getActors().get(17).setVisible(false);
@@ -947,7 +962,7 @@ public class Shop extends State {
     }
 
     public void dispose() {
-        this.stage.dispose();
+        stage.dispose();
     }
 
     public void handleInput() {
@@ -956,6 +971,45 @@ public class Shop extends State {
     public void render(SpriteBatch batch) {
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
+        if (mAdsController.getRemoveAdsPurchased()) {
+            prefs.putBoolean(REMOVE_ADS_PURCHASED, true);
+            prefs.flush();
+        }
+
+        if(mAdsController.getDiamondsReceived()){
+            prefs.putInteger(DIAMONDS, 10);
+            prefs.flush();
+            mAdsController.setDiamondsReceived(false);
+        }
+
+
+        if(mAdsController.getFiftyDiamonds()){
+            prefs.putInteger(DIAMONDS, 50);
+            prefs.flush();
+            mAdsController.setFiftyDiamonds(false);
+        }
+
+        if(mAdsController.getHundredDiamonds()){
+            prefs.putInteger(DIAMONDS, 100);
+            prefs.flush();
+            mAdsController.setHundredDiamonds(false);
+        }
+
+        if(mAdsController.getFiveHundredDiamonds()){
+            prefs.putInteger(DIAMONDS, 500);
+            prefs.flush();
+            mAdsController.setFiveHundredDiamonds(false);
+        }
+
+        if(mAdsController.getThousandDiamonds()){
+            prefs.putInteger(DIAMONDS, 1000);
+            prefs.flush();
+            mAdsController.setThousandDiamonds(false);
+        }
+
+        if(prefs.getBoolean(REMOVE_ADS_PURCHASED,false))
+            stage.getActors().get(29).setVisible(false);
 
         Gdx.input.setCatchKey(4, true);
         if (Gdx.input.isKeyPressed(4)) {
@@ -971,51 +1025,51 @@ public class Shop extends State {
                 setCostumeParameters(0, 210, 145, 120, 190, 120, 190);
                 costumeSelected(PLAYER_BOUGHT, PLAYER_NUMBER);
             } else
-                this.stage.getActors().get(15).setVisible(true);
+                stage.getActors().get(15).setVisible(true);
 
             if (prefs.getInteger(COSTUME_SELECTED) == ROBOT_NUMBER) {
                 setCostumeParameters(1, 175, 162, 130, 185, 206, 147);
                 costumeSelected(ROBOT_BOUGHT, ROBOT_NUMBER);
             }
 
-            if (this.prefs.getInteger(COSTUME_SELECTED) == KNIGHT_NUMBER) {
+            if (prefs.getInteger(COSTUME_SELECTED) == KNIGHT_NUMBER) {
                 setCostumeParameters(2, 255, 123, 130, 185, 196, 152);
                 costumeSelected(KNIGHT_BOUGHT, KNIGHT_NUMBER);
             }
 
-            if (this.prefs.getInteger(COSTUME_SELECTED) == COWBOY_NUMBER) {
+            if (prefs.getInteger(COSTUME_SELECTED) == COWBOY_NUMBER) {
                 setCostumeParameters(3, 123, 188, 135, 182, 130, 185);
                 costumeSelected(COWBOY_BOUGHT, COWBOY_NUMBER);
             }
 
-            if (this.prefs.getInteger(COSTUME_SELECTED) == COWGIRL_NUMBER) {
+            if (prefs.getInteger(COSTUME_SELECTED) == COWGIRL_NUMBER) {
                 setCostumeParameters(4, 213, 143, 135, 182, 124, 188);
                 costumeSelected(COWGIRL_BOUGHT, COWGIRL_NUMBER);
             }
 
-            if (this.prefs.getInteger(COSTUME_SELECTED) == NINJA_MALE_NUMBER) {
+            if (prefs.getInteger(COSTUME_SELECTED) == NINJA_MALE_NUMBER) {
                 setCostumeParameters(5, 160, 170, 130, 185, 193, 153);
                 costumeSelected(NINJA_MALE_BOUGHT, NINJA_MALE_NUMBER);
             }
 
-            if (this.prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
+            if (prefs.getInteger(COSTUME_SELECTED) == NINJA_FEMALE_NUMBER) {
                 setCostumeParameters(6, 150, 185, 130, 185, 198, 151);
                 costumeSelected(NINJA_FEMALE_BOUGHT, NINJA_FEMALE_NUMBER);
             }
 
-            if (this.prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
-                this.stage.getActors().get(16).setVisible(false);
+            if (prefs.getInteger(COSTUME_SELECTED) == DINO_NUMBER) {
+                stage.getActors().get(16).setVisible(false);
                 setCostumeParameters(7, 155, 172, 114, 193, 289, 105);
                 costumeSelected(DINO_BOUGHT, DINO_NUMBER);
             } else
-                this.stage.getActors().get(16).setVisible(true);
+                stage.getActors().get(16).setVisible(true);
 
         }
         batch.begin();
         batch.draw(coin, worldXToScreenX(10.0F), worldYToScreenY(960.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
-        coinAndDiamondFont.draw(batch, String.valueOf(this.coinGlobal), worldXToScreenX(40.0F), worldYToScreenY(980.0F));
+        coinAndDiamondFont.draw(batch, String.valueOf(coinGlobal), worldXToScreenX(40.0F), worldYToScreenY(980.0F));
         batch.draw(diamond, worldXToScreenX(10.0F), worldYToScreenY(930.0F), worldXToScreenX(25.0F), worldYToScreenY(25.0F));
-        coinAndDiamondFont.draw(batch, String.valueOf(this.rubyGlobal), worldXToScreenX(40.0F), worldYToScreenY(950.0F));
+        coinAndDiamondFont.draw(batch, String.valueOf(rubyGlobal), worldXToScreenX(40.0F), worldYToScreenY(950.0F));
 
         if (drawAbilities) {
             batch.draw(shield, worldXToScreenX(50.0F), worldYToScreenY(672.5F), worldXToScreenX(75.0F), worldYToScreenY(85.0F));
@@ -1137,7 +1191,7 @@ public class Shop extends State {
             else
                 stage.getActors().get(10).setVisible(false);
 
-            if (this.spawnRateCoinsUpgraded != 10)
+            if (spawnRateCoinsUpgraded != 10)
                 stage.getActors().get(11).setVisible(true);
             else
                 stage.getActors().get(11).setVisible(false);
@@ -1208,8 +1262,8 @@ public class Shop extends State {
         prefs.putInteger(DIAMONDS, prefs.getInteger(DIAMONDS) - diamonds);
         prefs.putInteger(COINS, prefs.getInteger(COINS) + coins);
         prefs.flush();
-        coinGlobal = this.prefs.getInteger(COINS);
-        rubyGlobal = this.prefs.getInteger(DIAMONDS);
+        coinGlobal = prefs.getInteger(COINS);
+        rubyGlobal = prefs.getInteger(DIAMONDS);
         disableButtonsWindow();
     }
 
@@ -1220,9 +1274,9 @@ public class Shop extends State {
             stage.getActors().get(37).setVisible(true);
             currencySelected = currency;
         } else {
-            this.notEnoughCoinsDiamondsWindow.setDrawable(new TextureRegionDrawable(new TextureRegion(this.shopAtlas.findRegion("not_enough_diamonds_window"))));
-            this.stage.getActors().get(38).setVisible(true);
-            this.stage.getActors().get(39).setVisible(true);
+            notEnoughCoinsDiamondsWindow.setDrawable(new TextureRegionDrawable(new TextureRegion(shopAtlas.findRegion("not_enough_diamonds_window"))));
+            stage.getActors().get(38).setVisible(true);
+            stage.getActors().get(39).setVisible(true);
         }
         disableButtonsWindow();
     }
@@ -1232,8 +1286,8 @@ public class Shop extends State {
         prefs.putInteger(COSTUME_SELECTED_GAME, characterNumber);
         prefs.putInteger(coinsRubies, prefs.getInteger(coinsRubies) - cost);
         prefs.flush();
-        coinGlobal = this.prefs.getInteger("coins");
-        rubyGlobal = this.prefs.getInteger("ruby");
+        coinGlobal = prefs.getInteger("coins");
+        rubyGlobal = prefs.getInteger("ruby");
     }
 
     private void costumeBuySelectButton(String characterBought, int characterNumber, String coinsRubies, int cost) {

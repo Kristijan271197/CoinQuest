@@ -17,9 +17,39 @@ public interface AdsController {
 
     void showInterstitialAd();
 
-    boolean getInterstitialAdClosed();
-
     boolean getInterstitialAdLoaded();
 
-    void setInterstitialAdClosed(boolean bool);
+    void removeAdsBuy();
+
+    boolean getRemoveAdsPurchased();
+
+    boolean getDiamondsReceived();
+
+    void setDiamondsReceived(boolean diamondsReceived);
+
+    void fiftyDiamondsBuy();
+
+    boolean getFiftyDiamonds();
+
+    void setFiftyDiamonds(boolean fiftyDiamonds);
+
+    void hundredDiamondsBuy();
+
+    boolean getHundredDiamonds();
+
+    void setHundredDiamonds(boolean hundredDiamonds);
+
+    void fiveHundredDiamondsBuy();
+
+    boolean getFiveHundredDiamonds();
+
+    void setFiveHundredDiamonds(boolean fiveHundredDiamonds);
+
+    void thousandDiamondsBuy();
+
+    boolean getThousandDiamonds();
+
+    void setThousandDiamonds(boolean thousandDiamonds);
+
+
 }

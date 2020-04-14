@@ -56,7 +56,8 @@ public class EndGame extends State {
         prefs = Gdx.app.getPreferences("prefs");
         this.stageNumber = stageNumber;
 
-        adsController.showInterstitialAd();
+        if(!prefs.getBoolean(Shop.REMOVE_ADS_PURCHASED,false))
+            adsController.showInterstitialAd();
 
         TextureAtlas mainMenuAtlas = manager.get("main_menu/main_menu.atlas", TextureAtlas.class);
         TextureAtlas sharedAtlas = manager.get("shared/shared.atlas", TextureAtlas.class);
@@ -67,7 +68,6 @@ public class EndGame extends State {
 
         Achievements achievements = new Achievements();
         musicSoundsObject = new MusicSounds(manager);
-
 
         prefs.putInteger(LIFETIME_COINS_COLLECTED, prefs.getInteger(LIFETIME_COINS_COLLECTED, 0) + coinCount);
         prefs.putInteger(STAGES_PLAYED, prefs.getInteger(STAGES_PLAYED, 0) + 1);
@@ -348,18 +348,19 @@ public class EndGame extends State {
 
         timerGame += Gdx.graphics.getDeltaTime();
 
-        if (mAdsController.getInterstitialAdLoaded()) {
-            if (timerGame >= 2f) {
-                stage.getActors().get(3).setTouchable(Touchable.enabled);
-                stage.getActors().get(6).setTouchable(Touchable.enabled);
-                stage.getActors().get(7).setTouchable(Touchable.enabled);
-                stage.getActors().get(8).setTouchable(Touchable.enabled);
-
-            } else {
-                stage.getActors().get(3).setTouchable(Touchable.disabled);
-                stage.getActors().get(6).setTouchable(Touchable.disabled);
-                stage.getActors().get(7).setTouchable(Touchable.disabled);
-                stage.getActors().get(8).setTouchable(Touchable.disabled);
+        if(!prefs.getBoolean(Shop.REMOVE_ADS_PURCHASED,false)) {
+            if (mAdsController.getInterstitialAdLoaded()) {
+                if (timerGame >= 2f) {
+                    stage.getActors().get(3).setTouchable(Touchable.enabled);
+                    stage.getActors().get(6).setTouchable(Touchable.enabled);
+                    stage.getActors().get(7).setTouchable(Touchable.enabled);
+                    stage.getActors().get(8).setTouchable(Touchable.enabled);
+                } else {
+                    stage.getActors().get(3).setTouchable(Touchable.disabled);
+                    stage.getActors().get(6).setTouchable(Touchable.disabled);
+                    stage.getActors().get(7).setTouchable(Touchable.disabled);
+                    stage.getActors().get(8).setTouchable(Touchable.disabled);
+                }
             }
         }
 

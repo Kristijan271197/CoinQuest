@@ -1,12 +1,20 @@
 package com.kristijanstojanoski.game;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.android.gms.ads.AdListener;
@@ -18,16 +26,34 @@ import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import States.AdsController;
 import States.MainClass;
 
-public class AndroidLauncher extends AndroidApplication implements AdsController {
+public class AndroidLauncher extends AndroidApplication implements AdsController, PurchasesUpdatedListener {
+    private String ITEM_SKU_AD_REMOVAL = "remove_ads";
+    private String ITEM_SKU_FIFTY_DIAMONDS = "fifty_diamonds";
+    private String ITEM_SKU_HUNDRED_DIAMONDS = "hundred_diamonds";
+    private String ITEM_SKU_FIVE_HUNDRED_DIAMONDS = "five_hundred_diamonds";
+    private String ITEM_SKU_THOUSAND_DIAMONDS = "thousand_diamonds";
+    BillingClient billingClient;
+
     RewardedAd ad;
     InterstitialAd iAd;
     boolean adLoaded = false;
     boolean rewardReceived = false;
     boolean iAdClosed = false;
     boolean iAdLoaded = false;
+    List<SkuDetails> skuDetailsList;
+    boolean adsRemoved = false;
+    boolean diamondsReceived = false;
+    boolean fiftyDiamonds = false;
+    boolean hundredDiamonds = false;
+    boolean fiveHundredDiamonds = false;
+    boolean thousandDiamonds = false;
+
 
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
@@ -36,6 +62,124 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
         MobileAds.initialize(this, "ca-app-pub-4701446273186664~4690368835");
         loadRewardedVideoAd();
         loadInterstitialAd();
+
+        billingClient = BillingClient.newBuilder(AndroidLauncher.this)
+                .enablePendingPurchases()
+                .setListener(this)
+                .build();
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(BillingResult billingResult) {
+                if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
+                    Toast.makeText(AndroidLauncher.this,"Successfully connected to client",Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(AndroidLauncher.this,"Failed to connect to the client",Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onBillingServiceDisconnected() {
+                Toast.makeText(AndroidLauncher.this,"Disconnected from the client",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        List<String> skuList = new ArrayList<>();
+        skuList.add(ITEM_SKU_AD_REMOVAL);
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
+            @Override
+            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
+                if(list != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
+                    skuDetailsList = list;
+                    for(SkuDetails skuDetails : list){
+                        String sku = skuDetails.getSku();
+                        String price = skuDetails.getPrice();
+                    }
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void removeAdsBuy() {
+        purchaseItem(ITEM_SKU_AD_REMOVAL);
+    }
+
+    @Override
+    public boolean getRemoveAdsPurchased() {
+        return adsRemoved;
+    }
+
+    @Override
+    public boolean getDiamondsReceived() {
+        return diamondsReceived;
+    }
+
+    @Override
+    public void setDiamondsReceived(boolean diamondsReceived) {
+        this.diamondsReceived = diamondsReceived;
+    }
+
+    @Override
+    public void fiftyDiamondsBuy() {
+        purchaseItem(ITEM_SKU_FIFTY_DIAMONDS);
+    }
+
+    @Override
+    public boolean getFiftyDiamonds() {
+        return fiftyDiamonds;
+    }
+
+    @Override
+    public void setFiftyDiamonds(boolean fiftyDiamonds) {
+       this.fiftyDiamonds = fiftyDiamonds;
+    }
+
+    @Override
+    public void hundredDiamondsBuy() {
+        purchaseItem(ITEM_SKU_HUNDRED_DIAMONDS);
+    }
+
+    @Override
+    public boolean getHundredDiamonds() {
+        return hundredDiamonds;
+    }
+
+    @Override
+    public void setHundredDiamonds(boolean hundredDiamonds) {
+        this.hundredDiamonds = hundredDiamonds;
+    }
+
+    @Override
+    public void fiveHundredDiamondsBuy() {
+        purchaseItem(ITEM_SKU_FIVE_HUNDRED_DIAMONDS);
+    }
+
+    @Override
+    public boolean getFiveHundredDiamonds() {
+        return fiveHundredDiamonds;
+    }
+
+    @Override
+    public void setFiveHundredDiamonds(boolean fiveHundredDiamonds) {
+        this.fiveHundredDiamonds = fiveHundredDiamonds;
+    }
+
+    @Override
+    public void thousandDiamondsBuy() {
+        purchaseItem(ITEM_SKU_THOUSAND_DIAMONDS);
+    }
+
+    @Override
+    public boolean getThousandDiamonds() {
+        return thousandDiamonds;
+    }
+
+    @Override
+    public void setThousandDiamonds(boolean thousandDiamonds) {
+        this.thousandDiamonds = thousandDiamonds;
     }
 
     public void loadRewardedVideoAd() {
@@ -45,8 +189,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
                 super.onRewardedAdFailedToLoad(i);
                 // Toast.makeText(AndroidLauncher.this, "Ad Failed to Load " + i, Toast.LENGTH_SHORT).show();
                 setAdLoaded(false);
-                if (haveNetworkConnection())
-                    loadRewardedVideoAd();
+                loadRewardedVideoAd();
             }
 
             public void onRewardedAdLoaded() {
@@ -79,6 +222,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
             }
         });
     }
+
 
     @Override
     public void loadInterstitialAd() {
@@ -121,19 +265,10 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
         });
     }
 
-    @Override
-    public boolean getInterstitialAdClosed() {
-        return iAdClosed;
-    }
 
     @Override
     public boolean getInterstitialAdLoaded() {
         return iAdLoaded;
-    }
-
-    @Override
-    public void setInterstitialAdClosed(boolean bool) {
-        this.iAdClosed = bool;
     }
 
     public boolean getAdLoaded() {
@@ -152,13 +287,65 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
         this.rewardReceived = paramBoolean;
     }
 
+    @Override
+    public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> list) {
+        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null) {
+            for (Purchase purchase : list)
+                handlePurchase(purchase);
+        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED)
+            Toast.makeText(AndroidLauncher.this,"You did not not purchase the item",Toast.LENGTH_SHORT).show();
+        else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED && list != null){
+            for (Purchase purchase : list){
+                if(purchase.getSku().equals(ITEM_SKU_AD_REMOVAL)){
+                    adsRemoved = true;
+                    diamondsReceived = true;
+                }
+            }
 
-    private boolean haveNetworkConnection() {
-        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
 
-        assert cm != null;
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+    }
 
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    private void handlePurchase(Purchase purchase){
+        if(purchase.getSku().equals(ITEM_SKU_AD_REMOVAL)) {
+            Toast.makeText(AndroidLauncher.this, "Item Purchased", Toast.LENGTH_SHORT).show();
+            adsRemoved = true;
+            diamondsReceived = true;
+        } else if(purchase.getSku().equals(ITEM_SKU_FIFTY_DIAMONDS)){
+            Toast.makeText(AndroidLauncher.this, "Item Purchased", Toast.LENGTH_SHORT).show();
+            fiftyDiamonds = true;
+        } else if(purchase.getSku().equals(ITEM_SKU_HUNDRED_DIAMONDS)) {
+            Toast.makeText(AndroidLauncher.this, "Item Purchased", Toast.LENGTH_SHORT).show();
+            hundredDiamonds = true;
+        } else if(purchase.getSku().equals(ITEM_SKU_FIVE_HUNDRED_DIAMONDS)){
+            Toast.makeText(AndroidLauncher.this, "Item Purchased", Toast.LENGTH_SHORT).show();
+            fiveHundredDiamonds = true;
+        } else if (purchase.getSku().equals(ITEM_SKU_THOUSAND_DIAMONDS)){
+            Toast.makeText(AndroidLauncher.this, "Item Purchased", Toast.LENGTH_SHORT).show();
+            thousandDiamonds = true;
+        }
+
+    }
+
+    private void purchaseItem(String item){
+        List<String> skuList = new ArrayList<>();
+        skuList.add(item);
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
+            @Override
+            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
+                if(list != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
+                    BillingFlowParams flowParams = BillingFlowParams.newBuilder()
+                            .setSkuDetails(list.get(0))
+                            .build();
+                    BillingResult responseCode = billingClient.launchBillingFlow(AndroidLauncher.this,flowParams);
+                    for(SkuDetails skuDetails : list){
+                        String sku = skuDetails.getSku();
+                        String price = skuDetails.getPrice();
+                    }
+                }
+            }
+        });
     }
 }
